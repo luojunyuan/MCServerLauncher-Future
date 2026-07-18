@@ -65,7 +65,7 @@ MCServerLauncher Future, codename `mcsl-future`, is a server management suite fo
 - Source generator: `dotnet build generators/MCServerLauncher.Daemon.Generators/MCServerLauncher.Daemon.Generators.csproj /m:1`.
 - Protocol behavior: `dotnet test tests/MCServerLauncher.ProtocolTests/MCServerLauncher.ProtocolTests.csproj /m:1`.
 - Performance: `dotnet run --project benchmarks/MCServerLauncher.Benchmarks/MCServerLauncher.Benchmarks.csproj -c Release`.
-- Full solution: `dotnet build MCServerLauncher.sln /m:1`.
+- Full solution: `dotnet build MCServerLauncher.slnx /m:1`.
 
 ## Milestones
 

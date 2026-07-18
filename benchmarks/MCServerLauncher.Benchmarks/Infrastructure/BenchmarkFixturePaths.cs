@@ -12,7 +12,7 @@ internal static class BenchmarkFixturePaths
     {
         var dir = AppDomain.CurrentDomain.BaseDirectory;
 
-        while (dir is not null && !File.Exists(Path.Combine(dir, "MCServerLauncher.sln")))
+        while (dir is not null && !File.Exists(Path.Combine(dir, "MCServerLauncher.slnx")))
         {
             dir = Directory.GetParent(dir)?.FullName;
         }
