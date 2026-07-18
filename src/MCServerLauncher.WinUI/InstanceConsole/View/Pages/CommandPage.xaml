@@ -1,0 +1,34 @@
+<UserControl
+    x:Class="MCServerLauncher.WinUI.InstanceConsole.View.Pages.CommandPage"
+    x:Name="PageRoot"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Padding="24" RowSpacing="12">
+        <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+        <Grid ColumnSpacing="8">
+            <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+            <TextBlock Text="{x:Bind Texts['ConsoleCommand_FeedbackTip'], Mode=OneWay}" TextWrapping="Wrap" VerticalAlignment="Center" />
+            <Button Grid.Column="1" Content="{x:Bind FullscreenText, Mode=OneWay}" Click="ToggleFullscreen_Click" AutomationProperties.AutomationId="ConsoleFullscreenButton" />
+            <Button Grid.Column="2" Content="{x:Bind Texts['More'], Mode=OneWay}" AutomationProperties.AutomationId="ConsoleActionsButton">
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="{x:Bind Texts['Start'], Mode=OneWay}" IsEnabled="{x:Bind CanStart, Mode=OneWay}" Click="Start_Click" />
+                        <MenuFlyoutSeparator />
+                        <MenuFlyoutItem Text="{x:Bind Texts['Stop'], Mode=OneWay}" IsEnabled="{x:Bind CanStop, Mode=OneWay}" Click="Stop_Click" />
+                        <MenuFlyoutItem Text="{x:Bind Texts['Restart'], Mode=OneWay}" IsEnabled="{x:Bind CanRestart, Mode=OneWay}" Click="Restart_Click" />
+                        <MenuFlyoutSeparator />
+                        <MenuFlyoutItem Text="{x:Bind Texts['Kill'], Mode=OneWay}" IsEnabled="{x:Bind CanKill, Mode=OneWay}" Click="Kill_Click" />
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+        </Grid>
+        <ScrollViewer x:Name="LogScrollViewer" Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,10,0,0">
+            <TextBlock x:Name="LogOutput" FontFamily="Consolas" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
+        </ScrollViewer>
+        <Grid Grid.Row="2" ColumnSpacing="10" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+            <TextBox x:Name="CommandTextBox" PlaceholderText="{x:Bind Texts['ConsoleCommand_EnterCommandTip'], Mode=OneWay}" KeyDown="CommandTextBox_KeyDown" />
+            <Button Grid.Column="1" Content="{x:Bind Texts['ConsoleCommand_EventTrigger_SendCommand'], Mode=OneWay}" IsEnabled="{x:Bind CanSendCommand, Mode=OneWay}" Click="SendCommand_Click" AutomationProperties.AutomationId="ConsoleSendCommandButton" />
+        </Grid>
+    </Grid>
+</UserControl>

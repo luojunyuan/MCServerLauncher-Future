@@ -1,0 +1,29 @@
+<UserControl
+    x:Class="MCServerLauncher.WinUI.InstanceConsole.View.Dialogs.DebugEditorView"
+    x:Name="PageRoot"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:editor="using:WinUIEditor">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid x:Name="EditorTitleBar" Height="48" Padding="16,0,148,0" Background="{ThemeResource SystemControlAcrylicWindowBrush}">
+            <TextBlock Text="{x:Bind FileName, Mode=OneTime}" VerticalAlignment="Center" FontWeight="SemiBold" />
+        </Grid>
+        <editor:CodeEditorControl x:Name="Editor" Grid.Row="1" HighlightingLanguage="text" />
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="8" Padding="12">
+            <Button Content="{x:Bind SaveText, Mode=OneTime}" Click="Save_Click" />
+            <Button Content="{x:Bind UndoText, Mode=OneTime}" Click="Undo_Click" />
+            <Button Content="{x:Bind RedoText, Mode=OneTime}" Click="Redo_Click" />
+            <Button Content="{x:Bind CopyText, Mode=OneTime}" Click="Copy_Click" />
+            <Button Content="{x:Bind PasteText, Mode=OneTime}" Click="Paste_Click" />
+            <Button Content="{x:Bind SelectAllText, Mode=OneTime}" Click="SelectAll_Click" />
+            <Button Content="{x:Bind ZoomOutText, Mode=OneTime}" Click="ZoomOut_Click" />
+            <Button Content="{x:Bind ZoomInText, Mode=OneTime}" Click="ZoomIn_Click" />
+            <TextBlock x:Name="StateText" VerticalAlignment="Center" />
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,165 @@
+<Page
+    x:Class="MCServerLauncher.WinUI.MainPage"
+    x:Name="PageRoot"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:models="using:MCServerLauncher.WinUI.Models"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <Grid
+        x:Name="AppTitleBar"
+        Height="48"
+        Padding="16,0,148,0"
+        Background="{ThemeResource SystemControlAcrylicWindowBrush}">
+      <Grid ColumnSpacing="12">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+          <TextBlock Text="{x:Bind ProductName, Mode=OneTime}" FontWeight="SemiBold" />
+        </StackPanel>
+        <Button
+            x:Name="DownloadHistoryButton"
+            Grid.Column="1"
+            Visibility="Collapsed"
+            Background="Transparent"
+            BorderThickness="0"
+            AutomationProperties.AutomationId="DownloadHistoryButton"
+            Click="DownloadHistoryButton_Click">
+          <SymbolIcon Symbol="Download" />
+          <Button.Flyout>
+            <Flyout Placement="Bottom">
+              <Grid Width="360" MaxHeight="600" RowSpacing="12">
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Text="{x:Bind Texts['Main_DownloadHistoryNavMenu'], Mode=OneWay}"
+                    Style="{StaticResource SectionHeaderTextBlockStyle}" />
+                <ListView
+                    Grid.Row="1"
+                    MaxHeight="520"
+                    ItemsSource="{x:Bind DownloadHistoryViewModel.History, Mode=OneWay}">
+                  <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:DownloadHistoryItem">
+                      <Grid Padding="0,6" RowSpacing="4">
+                        <Grid.RowDefinitions>
+                          <RowDefinition Height="Auto" />
+                          <RowDefinition Height="Auto" />
+                          <RowDefinition Height="Auto" />
+                          <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{x:Bind FileName, Mode=OneTime}" FontWeight="SemiBold" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Text="{x:Bind Url, Mode=OneTime}"
+                            Opacity="0.72"
+                            TextTrimming="CharacterEllipsis" />
+                        <TextBlock
+                            Grid.Row="2"
+                            Text="{x:Bind CompletedAt, Mode=OneTime}"
+                            Opacity="0.62" />
+                        <Button
+                            Grid.Row="3"
+                            Content="{x:Bind Texts['Retry'], Mode=OneWay}"
+                            Tag="{x:Bind Mode=OneTime}"
+                            Click="RetryDownload_Click"
+                            HorizontalAlignment="Left" />
+                      </Grid>
+                    </DataTemplate>
+                  </ListView.ItemTemplate>
+                </ListView>
+              </Grid>
+            </Flyout>
+          </Button.Flyout>
+        </Button>
+      </Grid>
+    </Grid>
+
+    <Grid Grid.Row="1">
+      <Frame x:Name="FullScreenFrame" />
+
+      <muxc:NavigationView
+          x:Name="NavView"
+          Visibility="Collapsed"
+          IsBackEnabled="False"
+          IsSettingsVisible="False"
+          PaneDisplayMode="Auto"
+          ItemInvoked="NavigationView_ItemInvoked">
+        <muxc:NavigationView.MenuItems>
+          <muxc:NavigationViewItem x:Name="HomeNavigationItem" Content="{x:Bind Texts['Main_HomeNavMenu'], Mode=OneWay}" Tag="Home">
+            <muxc:NavigationViewItem.Icon><SymbolIcon Symbol="Home" /></muxc:NavigationViewItem.Icon>
+          </muxc:NavigationViewItem>
+          <muxc:NavigationViewItem x:Name="CreateNavigationItem" Content="{x:Bind Texts['Main_CreateInstanceNavMenu'], Mode=OneWay}" Tag="Create">
+            <muxc:NavigationViewItem.Icon><SymbolIcon Symbol="Add" /></muxc:NavigationViewItem.Icon>
+          </muxc:NavigationViewItem>
+          <muxc:NavigationViewItem x:Name="InstanceManagerNavigationItem" Content="{x:Bind Texts['Main_InstanceManagerNavMenu'], Mode=OneWay}" Tag="Instances">
+            <muxc:NavigationViewItem.Icon><SymbolIcon Symbol="List" /></muxc:NavigationViewItem.Icon>
+          </muxc:NavigationViewItem>
+          <muxc:NavigationViewItem x:Name="DaemonManagerNavigationItem" Content="{x:Bind Texts['Main_DaemonManagerNavMenu'], Mode=OneWay}" Tag="Daemons">
+            <muxc:NavigationViewItem.Icon><SymbolIcon Symbol="Globe" /></muxc:NavigationViewItem.Icon>
+          </muxc:NavigationViewItem>
+          <muxc:NavigationViewItem x:Name="ResourceDownloadNavigationItem" Content="{x:Bind Texts['Main_ResDownloadNavMenu'], Mode=OneWay}" Tag="Resources">
+            <muxc:NavigationViewItem.Icon><SymbolIcon Symbol="Download" /></muxc:NavigationViewItem.Icon>
+          </muxc:NavigationViewItem>
+          <muxc:NavigationViewItem x:Name="HelpNavigationItem" Content="{x:Bind Texts['Main_HelpCenterNavMenu'], Mode=OneWay}" Tag="Help">
+            <muxc:NavigationViewItem.Icon><SymbolIcon Symbol="Help" /></muxc:NavigationViewItem.Icon>
+          </muxc:NavigationViewItem>
+        </muxc:NavigationView.MenuItems>
+        <muxc:NavigationView.FooterMenuItems>
+          <muxc:NavigationViewItem
+              x:Name="DebugItem"
+              Content="{x:Bind Texts['Main_DebugNavMenu'], Mode=OneWay}"
+              Tag="Debug"
+              Visibility="Collapsed">
+            <muxc:NavigationViewItem.Icon><SymbolIcon Symbol="Repair" /></muxc:NavigationViewItem.Icon>
+          </muxc:NavigationViewItem>
+          <muxc:NavigationViewItem x:Name="SettingsNavigationItem" Content="{x:Bind Texts['Main_SettingsNavMenu'], Mode=OneWay}" Tag="Settings">
+            <muxc:NavigationViewItem.Icon><SymbolIcon Symbol="Setting" /></muxc:NavigationViewItem.Icon>
+          </muxc:NavigationViewItem>
+        </muxc:NavigationView.FooterMenuItems>
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
+          <muxc:InfoBar
+              x:Name="NotificationBar"
+              Grid.Row="0"
+              Margin="16,12,16,0"
+              IsOpen="False"
+              IsClosable="True" />
+          <Frame x:Name="ContentFrame" Grid.Row="1" />
+        </Grid>
+      </muxc:NavigationView>
+    </Grid>
+
+    <Grid
+        x:Name="LoadingOverlay"
+        Grid.RowSpan="2"
+        Canvas.ZIndex="100"
+        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+      <StackPanel
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Spacing="24">
+        <Image
+            Width="128"
+            Height="128"
+            Source="Resources/MCServerLauncherFuture.png"
+            Stretch="Uniform" />
+        <muxc:ProgressRing
+            HorizontalAlignment="Center"
+            IsActive="True" />
+      </StackPanel>
+    </Grid>
+  </Grid>
+</Page>

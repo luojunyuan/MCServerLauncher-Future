@@ -1,0 +1,83 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
+    <RootNamespace>MCServerLauncher.WinUI</RootNamespace>
+    <AssemblyName>MCServerLauncher.WinUI</AssemblyName>
+    <ApplicationTitle>MCServerLauncher Future</ApplicationTitle>
+    <Description>MCServerLauncher Future CoreIsland client</Description>
+    <Company>MCSLTeam</Company>
+    <Authors>MCSLTeam</Authors>
+    <Copyright>Copyright © 2022-2026 MCSLTeam. All rights reserved.</Copyright>
+    <Product>MCServerLauncher Future</Product>
+    <Version>0.1.0.1</Version>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <UseUwp>true</UseUwp>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <CoreIslandPackaging>false</CoreIslandPackaging>
+    <WindowsPackageType>None</WindowsPackageType>
+    <EnableMsixTooling>false</EnableMsixTooling>
+    <Platforms>x64;ARM64</Platforms>
+    <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
+    <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == '' And '$(Platform)' == 'ARM64'">win-arm64</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == '' And '$(Platform)' != 'ARM64'">win-x64</RuntimeIdentifier>
+    <UseAppHost>true</UseAppHost>
+    <PublishSingleFile>false</PublishSingleFile>
+    <PublishAot>false</PublishAot>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>14</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DisableRuntimeMarshalling>true</DisableRuntimeMarshalling>
+    <NoWarn>$(NoWarn);NETSDK1206</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\**\*" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\MCServerLauncher.WPF\Translations\Lang.*.resx"
+                      Link="Translations\%(Filename)%(Extension)" />
+    <EmbeddedResource Include="..\MCServerLauncher.WPF\Resources\BuildInfo"
+                      Link="Resources\BuildInfo">
+      <LogicalName>MCServerLauncher.WinUI.Resources.BuildInfo</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MCServerLauncher.Common\MCServerLauncher.Common.csproj" />
+    <ProjectReference Include="..\MCServerLauncher.DaemonClient\MCServerLauncher.DaemonClient.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CoreIsland" Version="1.0.2" />
+    <PackageReference Include="Microsoft.UI.Xaml" Version="2.8.7" />
+    <PackageReference Include="WinUIEdit.Uwp" Version="0.0.5-prerelease" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4" />
+    <PackageReference Include="Downloader" Version="4.0.3" />
+    <PackageReference Include="Serilog" Version="4.3.0" />
+    <PackageReference Include="Serilog.Sinks.Async" Version="2.1.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <CoreIslandMuxPackageRoot>$(NuGetPackageRoot)microsoft.ui.xaml\2.8.7</CoreIslandMuxPackageRoot>
+    <CoreIslandMuxStageScript>$(MSBuildProjectDirectory)\..\..\scripts\Stage-WinUI2Runtime.ps1</CoreIslandMuxStageScript>
+  </PropertyGroup>
+
+  <Target Name="StageWinUI2RuntimeAfterBuild" AfterTargets="Build" Condition="('$(Platform)' == 'x64' Or '$(Platform)' == 'ARM64') And '$(SkipWinUI2RuntimeStage)' != 'true'">
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(CoreIslandMuxStageScript)&quot; -Platform &quot;$(Platform)&quot; -PackageRoot &quot;$(CoreIslandMuxPackageRoot)&quot; -Destination &quot;$(OutputPath)&quot;" />
+  </Target>
+
+  <Target Name="StageWinUI2RuntimeAfterPublish" AfterTargets="Publish" Condition="('$(Platform)' == 'x64' Or '$(Platform)' == 'ARM64') And '$(SkipWinUI2RuntimeStage)' != 'true'">
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(CoreIslandMuxStageScript)&quot; -Platform &quot;$(Platform)&quot; -PackageRoot &quot;$(CoreIslandMuxPackageRoot)&quot; -Destination &quot;$(PublishDir)&quot;" />
+  </Target>
+
+  <Target Name="StageCoreIslandAppResourcesAfterPublish" AfterTargets="Publish" Condition="Exists('$(OutputPath)resources.pri')">
+    <Copy SourceFiles="$(OutputPath)resources.pri" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true" />
+  </Target>
+</Project>

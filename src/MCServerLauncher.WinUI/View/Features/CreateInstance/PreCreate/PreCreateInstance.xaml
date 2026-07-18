@@ -1,0 +1,24 @@
+<UserControl
+    x:Class="MCServerLauncher.WinUI.View.Features.CreateInstance.PreCreate.PreCreateInstance"
+    x:Name="PageRoot"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Spacing="10" Padding="0,8,8,24">
+            <Button Content="{x:Bind Texts['CreateMinecraftInstanceCategory'], Mode=OneWay}" Click="Minecraft_Click" HorizontalContentAlignment="Left" Padding="20,13" />
+            <muxc:Expander Header="{x:Bind Texts['CreateFrpcInstanceCategory'], Mode=OneWay}">
+                <StackPanel Spacing="8" Padding="0,8,0,0">
+                    <Button Content="{x:Bind Texts['CreateUniversalFastReverseProxyClientInstance'], Mode=OneWay}" IsEnabled="False" />
+                    <Button Content="ME Frp" IsEnabled="False" />
+                    <Button Content="LoCyanFrp" IsEnabled="False" />
+                    <Button Content="OpenFrp" IsEnabled="False" />
+                    <Button Content="MossFrp" IsEnabled="False" />
+                </StackPanel>
+            </muxc:Expander>
+            <Button Content="{x:Bind Texts['CreateTerrariaServerInstance'], Mode=OneWay}" Click="Terraria_Click" HorizontalContentAlignment="Left" Padding="20,13" />
+            <Button Content="{x:Bind Texts['CreateOtherExecutableInstance'], Mode=OneWay}" Click="Other_Click" HorizontalContentAlignment="Left" Padding="20,13" />
+            <Button Content="{x:Bind Texts['ImportExistsInstance'], Mode=OneWay}" IsEnabled="False" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

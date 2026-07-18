@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="MCServerLauncher.WinUI.Views.Pages.HelpPage"
+    x:Name="PageRoot"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls">
+    <ScrollViewer>
+        <StackPanel Padding="32" Spacing="18">
+            <TextBlock Text="{x:Bind Texts['Main_HelpCenterNavMenu'], Mode=OneWay}" Style="{StaticResource PageTitleTextBlockStyle}" />
+            <TextBlock Text="{x:Bind Texts['HelpCenterTip'], Mode=OneWay}" Style="{StaticResource PageSubtitleTextBlockStyle}" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

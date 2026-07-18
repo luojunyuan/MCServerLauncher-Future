@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="MCServerLauncher.WinUI.Views.Pages.DaemonManagerPage"
+    x:Name="PageRoot"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:models="using:MCServerLauncher.WinUI.Models">
+  <Grid Padding="32" RowSpacing="14">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <TextBlock Text="{x:Bind Texts['Main_DaemonManagerNavMenu'], Mode=OneWay}" Style="{StaticResource PageTitleTextBlockStyle}" />
+    <TextBlock Grid.Row="1" Text="{x:Bind Texts['DaemonManagerTip'], Mode=OneWay}" Style="{StaticResource PageSubtitleTextBlockStyle}" />
+
+    <Grid Grid.Row="2" ColumnSpacing="8">
+      <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+      <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+        <ToggleSwitch
+            IsOn="{x:Bind ViewModel.AutoRefreshEnabled, Mode=TwoWay}"
+            OnContent="{x:Bind Texts['AutoRefresh_On'], Mode=OneWay}"
+            OffContent="{x:Bind Texts['AutoRefresh_Off'], Mode=OneWay}"
+            AutomationProperties.AutomationId="DaemonAutoRefreshSwitch" />
+        <ComboBox
+            Width="120"
+            ItemsSource="{x:Bind ViewModel.RefreshIntervals, Mode=OneWay}"
+            DisplayMemberPath="Display"
+            SelectedValuePath="Seconds"
+            SelectedValue="{x:Bind ViewModel.RefreshIntervalSeconds, Mode=TwoWay}"
+            AutomationProperties.AutomationId="DaemonRefreshIntervalComboBox" />
+        <TextBox
+            Width="220"
+            PlaceholderText="{x:Bind Texts['Search'], Mode=OneWay}"
+            Text="{x:Bind ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            AutomationProperties.AutomationId="DaemonSearchTextBox" />
+        <Button
+            Content="{x:Bind Texts['Refresh'], Mode=OneWay}"
+            Command="{x:Bind ViewModel.RefreshCommand, Mode=OneTime}"
+            AutomationProperties.AutomationId="DaemonRefreshButton" />
+        <Button
+            Content="{x:Bind Texts['ConnectDaemon'], Mode=OneWay}"
+            Click="AddConnection_Click"
+            AutomationProperties.AutomationId="DaemonAddButton" />
+      </StackPanel>
+    </Grid>
+
+    <Grid Grid.Row="3">
+      <muxc:ProgressBar
+          IsIndeterminate="True"
+          Visibility="{x:Bind BoolToVisibility(ViewModel.IsBusy), Mode=OneWay}"
+          VerticalAlignment="Top" />
+      <ScrollViewer Margin="0,10,0,0">
+        <muxc:ItemsRepeater ItemsSource="{x:Bind ViewModel.FilteredDaemons, Mode=OneWay}">
+          <muxc:ItemsRepeater.Layout>
+            <muxc:UniformGridLayout MinItemWidth="390" MinItemHeight="300" MinColumnSpacing="10" MinRowSpacing="10" />
+          </muxc:ItemsRepeater.Layout>
+          <muxc:ItemsRepeater.ItemTemplate>
+            <DataTemplate x:DataType="models:DaemonCardModel">
+              <Border Style="{StaticResource CardBorderStyle}" Margin="0,0,10,10">
+                <Grid RowSpacing="10">
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                  </Grid.RowDefinitions>
+                  <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBlock Text="{x:Bind SystemType, Mode=OneWay}" Opacity="0.62" VerticalAlignment="Center" />
+                    <TextBlock Text="{x:Bind FriendlyName, Mode=OneWay}" FontSize="18" FontWeight="SemiBold" />
+                  </StackPanel>
+
+                  <Grid Grid.Row="1" RowSpacing="6" ColumnSpacing="12">
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                    <TextBlock Text="{x:Bind Texts['Daemon_RemoteUri'], Mode=OneWay}" />
+                    <TextBlock Grid.Row="1" Text="{x:Bind Texts['Daemon_ConnectionStatus'], Mode=OneWay}" />
+                    <TextBlock Grid.Row="2" Text="{x:Bind Texts['Daemon_SystemVersion'], Mode=OneWay}" />
+                    <TextBlock Grid.Row="3" Text="{x:Bind Texts['Daemon_DaemonVersion'], Mode=OneWay}" />
+                    <TextBlock Grid.Column="1" Text="{x:Bind Address, Mode=OneWay}" TextTrimming="CharacterEllipsis" />
+                    <Button Grid.Row="1" Grid.Column="1" Content="{x:Bind StatusText, Mode=OneWay}" IsEnabled="{x:Bind HasError, Mode=OneWay}" Tag="{x:Bind Mode=OneTime}" Click="ShowDaemonError_Click" HorizontalAlignment="Left" Padding="0" Background="Transparent" BorderThickness="0" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind SystemVersion, Mode=OneWay}" TextTrimming="CharacterEllipsis" />
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{x:Bind DaemonVersion, Mode=OneWay}" TextTrimming="CharacterEllipsis" />
+                  </Grid>
+
+                  <Grid Grid.Row="2" RowSpacing="6" ColumnSpacing="8">
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="64" /><ColumnDefinition Width="116" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                    <TextBlock Text="{x:Bind Texts['Daemon_CpuUsage'], Mode=OneWay}" />
+                    <TextBlock Grid.Row="1" Text="{x:Bind Texts['Daemon_MemoryUsage'], Mode=OneWay}" />
+                    <TextBlock Grid.Row="2" Text="{x:Bind Texts['Daemon_DriveUsage'], Mode=OneWay}" />
+                    <ProgressBar Grid.Column="1" Maximum="100" Value="{x:Bind CpuUsage, Mode=OneWay}" VerticalAlignment="Center" />
+                    <ProgressBar Grid.Row="1" Grid.Column="1" Maximum="100" Value="{x:Bind MemoryUsage, Mode=OneWay}" VerticalAlignment="Center" />
+                    <ProgressBar Grid.Row="2" Grid.Column="1" Maximum="100" Value="{x:Bind DriveUsage, Mode=OneWay}" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="2" Text="{x:Bind CpuUsageText, Mode=OneWay}" HorizontalAlignment="Right" />
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{x:Bind MemoryUsageText, Mode=OneWay}" HorizontalAlignment="Right" />
+                    <TextBlock Grid.Row="2" Grid.Column="2" Text="{x:Bind DriveUsageText, Mode=OneWay}" HorizontalAlignment="Right" />
+                  </Grid>
+
+                  <Button Grid.Row="3" Content="{x:Bind Texts['More'], Mode=OneWay}" HorizontalAlignment="Right">
+                    <Button.Flyout>
+                      <MenuFlyout>
+                        <MenuFlyoutItem Text="{x:Bind Texts['Edit'], Mode=OneWay}" Tag="{x:Bind Mode=OneTime}" Click="EditDaemon_Click" />
+                        <MenuFlyoutItem Text="{x:Bind Texts['Delete'], Mode=OneWay}" Tag="{x:Bind Mode=OneTime}" Click="DeleteDaemon_Click" />
+                      </MenuFlyout>
+                    </Button.Flyout>
+                  </Button>
+                </Grid>
+              </Border>
+            </DataTemplate>
+          </muxc:ItemsRepeater.ItemTemplate>
+        </muxc:ItemsRepeater>
+      </ScrollViewer>
+    </Grid>
+  </Grid>
+</Page>

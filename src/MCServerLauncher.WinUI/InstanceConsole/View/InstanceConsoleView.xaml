@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<UserControl
+    x:Class="MCServerLauncher.WinUI.InstanceConsole.InstanceConsoleView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:editor="using:WinUIEditor"
+    xmlns:models="using:MCServerLauncher.WinUI.Models"
+    xmlns:pages="using:MCServerLauncher.WinUI.InstanceConsole.View.Pages">
+    <Grid>
+        <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
+        <Grid x:Name="TitleBarHost" Height="48" Padding="16,0,148,0" Background="{ThemeResource SystemControlAcrylicWindowBrush}">
+        <TextBlock x:Name="WindowTitleText" VerticalAlignment="Center" FontWeight="SemiBold" Text="{x:Bind WindowTitle, Mode=OneTime}" />
+        </Grid>
+        <muxc:TabView Grid.Row="1" x:Name="ConsoleTabs" IsAddTabButtonVisible="False" CanReorderTabs="False">
+            <muxc:TabViewItem Header="{x:Bind Texts['Console_BoardNavMenu'], Mode=OneWay}"><pages:BoardPage x:Name="BoardPageControl" /></muxc:TabViewItem>
+            <muxc:TabViewItem Header="{x:Bind Texts['Console_CommandNavMenu'], Mode=OneWay}"><pages:CommandPage x:Name="CommandPageControl" /></muxc:TabViewItem>
+            <muxc:TabViewItem Header="{x:Bind Texts['Console_FileManagerNavMenu'], Mode=OneWay}"><pages:FileManagerPage x:Name="FileManagerPageControl" /></muxc:TabViewItem>
+            <muxc:TabViewItem Header="{x:Bind Texts['Console_ComponentManagerNavMenu'], Mode=OneWay}"><pages:ComponentManagerPage x:Name="ComponentManagerPageControl" /></muxc:TabViewItem>
+            <muxc:TabViewItem Header="{x:Bind Texts['Console_InstanceSettingsNavMenu'], Mode=OneWay}"><pages:InstanceSettingsPage x:Name="InstanceSettingsPageControl" /></muxc:TabViewItem>
+            <muxc:TabViewItem Header="{x:Bind Texts['Console_EventTriggerNavMenu'], Mode=OneWay}"><pages:EventTriggerPage x:Name="EventTriggerPageControl" /></muxc:TabViewItem>
+        </muxc:TabView>
+    </Grid>
+</UserControl>

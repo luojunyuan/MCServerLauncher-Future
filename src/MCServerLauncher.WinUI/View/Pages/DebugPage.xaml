@@ -1,0 +1,88 @@
+<Page
+    x:Class="MCServerLauncher.WinUI.Views.Pages.DebugPage"
+    x:Name="PageRoot"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Padding="32" Spacing="18">
+            <TextBlock Text="{x:Bind DebugTitle, Mode=OneWay}" Style="{StaticResource PageTitleTextBlockStyle}" />
+
+            <Border Style="{StaticResource CardBorderStyle}">
+                <StackPanel Spacing="12">
+                    <TextBlock Text="{x:Bind WindowTestsTitle, Mode=OneWay}" Style="{StaticResource SectionHeaderTextBlockStyle}" />
+                    <StackPanel Orientation="Horizontal" Spacing="4">
+                        <Button Margin="0,0,10,10" Content="{x:Bind ShowConsoleText, Mode=OneWay}" Click="ShowConsoleWindow" />
+                        <Button Margin="0,0,10,10" Content="{x:Bind ShowExceptionText, Mode=OneWay}" Click="ShowExceptionWindow" />
+                        <Button Margin="0,0,10,10" Content="{x:Bind ShowFirstSetupText, Mode=OneWay}" Click="ShowFirstSetup" />
+                        <Button Margin="0,0,10,10" Content="{x:Bind InformationalText, Mode=OneWay}" Click="PushSimpleNotification" />
+                        <Button Margin="0,0,10,10" Content="{x:Bind WarningText, Mode=OneWay}" Click="PushSimpleNotification" />
+                        <Button Margin="0,0,10,10" Content="{x:Bind ErrorText, Mode=OneWay}" Click="PushSimpleNotification" />
+                        <Button Margin="0,0,10,10" Content="{x:Bind SuccessText, Mode=OneWay}" Click="PushSimpleNotification" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource CardBorderStyle}">
+                <StackPanel Spacing="12">
+                    <TextBlock Text="{x:Bind FileEditorTestsTitle, Mode=OneWay}" Style="{StaticResource SectionHeaderTextBlockStyle}" />
+                    <StackPanel Orientation="Horizontal" Spacing="4">
+                        <Button Margin="0,0,10,10" Content="{x:Bind LogText, Mode=OneWay}" Click="OpenFileEditor_Log" />
+                        <Button Margin="0,0,10,10" Content="{x:Bind IniText, Mode=OneWay}" Click="OpenFileEditor_Ini" />
+                        <Button Margin="0,0,10,10" Content="{x:Bind YamlText, Mode=OneWay}" Click="OpenFileEditor_Yaml" />
+                        <Button Margin="0,0,10,10" Content="{x:Bind TomlText, Mode=OneWay}" Click="OpenFileEditor_Toml" />
+                        <Button Margin="0,0,10,10" Content="{x:Bind BatText, Mode=OneWay}" Click="OpenFileEditor_Bat" />
+                        <Button Margin="0,0,10,10" Content="{x:Bind ShellText, Mode=OneWay}" Click="OpenFileEditor_Shell" />
+                        <Button Margin="0,0,10,10" Content="{x:Bind CsvText, Mode=OneWay}" Click="OpenFileEditor_Csv" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource CardBorderStyle}">
+                <StackPanel Spacing="12">
+                    <TextBlock Text="{x:Bind DownloadApiTestsTitle, Mode=OneWay}" Style="{StaticResource SectionHeaderTextBlockStyle}" />
+
+                    <TextBlock Text="{x:Bind FastMirrorText, Mode=OneWay}" Style="{StaticResource PageSubtitleTextBlockStyle}" />
+                    <StackPanel Orientation="Horizontal" Spacing="4">
+                        <Button Margin="0,0,10,10" Content="{x:Bind TestFastMirrorEndpointText, Mode=OneWay}" Click="TestFastMirrorEndPoint" />
+                        <Button Margin="0,0,10,10" Content="{x:Bind TestFastMirrorCoreText, Mode=OneWay}" Click="TestFastMirrorCore" />
+                    </StackPanel>
+
+                    <TextBlock Text="{x:Bind AListText, Mode=OneWay}" Style="{StaticResource PageSubtitleTextBlockStyle}" />
+                    <StackPanel Orientation="Horizontal" Spacing="4">
+                        <Button Margin="0,0,10,10" Content="{x:Bind TestAListHostText, Mode=OneWay}" Click="TestRianYunAList" />
+                        <Button Margin="0,0,10,10" Content="{x:Bind TestAListFileText, Mode=OneWay}" Click="TestRianYunAListFile" />
+                    </StackPanel>
+
+                    <TextBlock Text="{x:Bind PolarsText, Mode=OneWay}" Style="{StaticResource PageSubtitleTextBlockStyle}" />
+                    <StackPanel Orientation="Horizontal" Spacing="4">
+                        <Button Margin="0,0,10,10" Content="{x:Bind TestPolarsEndpointText, Mode=OneWay}" Click="TestPolars" />
+                        <Button Margin="0,0,10,10" Content="{x:Bind TestPolarsCoreText, Mode=OneWay}" Click="TestPolarsCore" />
+                    </StackPanel>
+
+                    <TextBlock Text="{x:Bind MslText, Mode=OneWay}" Style="{StaticResource PageSubtitleTextBlockStyle}" />
+                    <StackPanel Orientation="Horizontal" Spacing="4">
+                        <Button Margin="0,0,10,10" Content="{x:Bind TestMslEndpointText, Mode=OneWay}" Click="TestMSL" />
+                        <Button Margin="0,0,10,10" Content="{x:Bind TestMslCoreText, Mode=OneWay}" Click="TestMSLCore" />
+                        <Button Margin="0,0,10,10" Content="{x:Bind TestMslDownloadText, Mode=OneWay}" Click="TestMSLDownloadUrl" />
+                    </StackPanel>
+
+                    <TextBlock Text="{x:Bind McslSyncText, Mode=OneWay}" Style="{StaticResource PageSubtitleTextBlockStyle}" />
+                    <StackPanel Orientation="Horizontal" Spacing="4">
+                        <Button Margin="0,0,10,10" Content="{x:Bind TestMcslSyncEndpointText, Mode=OneWay}" Click="TestMCSLSync" />
+                        <Button Margin="0,0,10,10" Content="{x:Bind TestMcslSyncCoreText, Mode=OneWay}" Click="TestMCSLSyncCore" />
+                        <Button Margin="0,0,10,10" Content="{x:Bind TestMcslSyncVersionText, Mode=OneWay}" Click="TestMCSLSyncCoreVersion" />
+                        <Button Margin="0,0,10,10" Content="{x:Bind TestMcslSyncDetailText, Mode=OneWay}" Click="TestMCSLSyncCoreDetail" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource CardBorderStyle}">
+                <StackPanel Spacing="12">
+                    <TextBox Text="{x:Bind DiagnosticsText, Mode=OneWay}" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="180" />
+                    <Button Content="{x:Bind Texts['DebugCopyConfig'], Mode=OneWay}" Click="CopyDiagnostics_Click" HorizontalAlignment="Left" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

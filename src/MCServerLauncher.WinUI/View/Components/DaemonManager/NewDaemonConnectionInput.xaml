@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="MCServerLauncher.WinUI.Views.Components.DaemonManager.NewDaemonConnectionInput"
+    x:Name="ControlRoot"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <StackPanel Spacing="8" MinWidth="420">
+    <TextBlock Text="{x:Bind UrlLabel, Mode=OneTime}" />
+    <Grid ColumnSpacing="6">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="100" />
+      </Grid.ColumnDefinitions>
+      <ComboBox x:Name="WebSocketScheme" SelectedIndex="0" AutomationProperties.AutomationId="DaemonSchemeComboBox">
+        <ComboBoxItem Content="ws://" />
+        <ComboBoxItem Content="wss://" />
+      </ComboBox>
+      <TextBox Grid.Column="1" x:Name="EndpointTextBox" PlaceholderText="{x:Bind Texts['DaemonWsAddress'], Mode=OneWay}" AutomationProperties.AutomationId="DaemonEndpointTextBox" />
+      <TextBlock Grid.Column="2" Text="{x:Bind Colon, Mode=OneTime}" VerticalAlignment="Center" />
+      <TextBox Grid.Column="3" x:Name="PortTextBox" PlaceholderText="{x:Bind Texts['Port'], Mode=OneWay}" AutomationProperties.AutomationId="DaemonPortTextBox" />
+    </Grid>
+    <TextBlock Text="{x:Bind Texts['Token'], Mode=OneWay}" Margin="0,4,0,0" />
+    <PasswordBox x:Name="TokenBox" PlaceholderText="{x:Bind Texts['Token'], Mode=OneWay}" AutomationProperties.AutomationId="DaemonTokenBox" />
+    <TextBlock Text="{x:Bind Texts['DaemonFriendlyName'], Mode=OneWay}" Margin="0,4,0,0" />
+    <TextBox x:Name="FriendlyNameTextBox" PlaceholderText="{x:Bind Texts['DaemonFriendlyName'], Mode=OneWay}" AutomationProperties.AutomationId="DaemonFriendlyNameTextBox" />
+    <TextBlock x:Name="ValidationText" Foreground="{ThemeResource SystemFillColorCriticalBrush}" TextWrapping="Wrap" />
+  </StackPanel>
+</UserControl>
