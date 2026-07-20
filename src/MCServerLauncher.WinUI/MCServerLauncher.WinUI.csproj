@@ -6,7 +6,7 @@
     <RootNamespace>MCServerLauncher.WinUI</RootNamespace>
     <AssemblyName>MCServerLauncher.WinUI</AssemblyName>
     <ApplicationTitle>MCServerLauncher Future</ApplicationTitle>
-    <Description>MCServerLauncher Future CoreIsland client</Description>
+    <Description>MCServerLauncher Future WinUIIslands client</Description>
     <Company>MCSLTeam</Company>
     <Authors>MCSLTeam</Authors>
     <Copyright>Copyright © 2022-2026 MCSLTeam. All rights reserved.</Copyright>
@@ -15,7 +15,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <UseUwp>true</UseUwp>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <CoreIslandPackaging>false</CoreIslandPackaging>
+    <WinUIIslandsPackaging>false</WinUIIslandsPackaging>
     <WindowsPackageType>None</WindowsPackageType>
     <EnableMsixTooling>false</EnableMsixTooling>
     <Platforms>x64;ARM64</Platforms>
@@ -52,7 +52,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CoreIsland" Version="1.0.2" />
+    <PackageReference Include="WinUIIslands" Version="1.1.0" />
     <PackageReference Include="Microsoft.UI.Xaml" Version="2.8.7" />
     <PackageReference Include="WinUIEdit.Uwp" Version="0.0.5-prerelease" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
@@ -64,20 +64,4 @@
     <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <CoreIslandMuxPackageRoot>$(NuGetPackageRoot)microsoft.ui.xaml\2.8.7</CoreIslandMuxPackageRoot>
-    <CoreIslandMuxStageScript>$(MSBuildProjectDirectory)\..\..\scripts\Stage-WinUI2Runtime.ps1</CoreIslandMuxStageScript>
-  </PropertyGroup>
-
-  <Target Name="StageWinUI2RuntimeAfterBuild" AfterTargets="Build" Condition="('$(Platform)' == 'x64' Or '$(Platform)' == 'ARM64') And '$(SkipWinUI2RuntimeStage)' != 'true'">
-    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(CoreIslandMuxStageScript)&quot; -Platform &quot;$(Platform)&quot; -PackageRoot &quot;$(CoreIslandMuxPackageRoot)&quot; -Destination &quot;$(OutputPath)&quot;" />
-  </Target>
-
-  <Target Name="StageWinUI2RuntimeAfterPublish" AfterTargets="Publish" Condition="('$(Platform)' == 'x64' Or '$(Platform)' == 'ARM64') And '$(SkipWinUI2RuntimeStage)' != 'true'">
-    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(CoreIslandMuxStageScript)&quot; -Platform &quot;$(Platform)&quot; -PackageRoot &quot;$(CoreIslandMuxPackageRoot)&quot; -Destination &quot;$(PublishDir)&quot;" />
-  </Target>
-
-  <Target Name="StageCoreIslandAppResourcesAfterPublish" AfterTargets="Publish" Condition="Exists('$(OutputPath)resources.pri')">
-    <Copy SourceFiles="$(OutputPath)resources.pri" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true" />
-  </Target>
 </Project>

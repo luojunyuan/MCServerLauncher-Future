@@ -262,7 +262,7 @@ public partial class SettingsViewModel : ObservableObject
         Replace(Components,
         [
             Component("System.Text.Json", "High-performance JSON framework built into .NET.", "https://learn.microsoft.com/dotnet/standard/serialization/system-text-json", more),
-            Component("CoreIsland", "Hosts WinUI 2 XAML in an unpackaged desktop process.", "https://www.nuget.org/packages/CoreIsland", more),
+            Component("WinUIIslands", "Hosts WinUI 2 XAML in an unpackaged desktop process.", "https://www.nuget.org/packages/WinUIIslands", more),
             Component("Microsoft.UI.Xaml", "WinUI 2 controls and Fluent resources.", "https://www.nuget.org/packages/Microsoft.UI.Xaml", more),
             Component("WinUIEdit.Uwp", "Scintilla-based text editor for WinUI 2.", "https://www.nuget.org/packages/WinUIEdit.Uwp", more),
             Component("CommunityToolkit.Mvvm", "MVVM source generators and observable infrastructure.", "https://www.nuget.org/packages/CommunityToolkit.Mvvm", more),

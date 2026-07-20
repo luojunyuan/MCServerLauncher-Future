@@ -2,7 +2,7 @@ using MCServerLauncher.WinUI.Models;
 
 namespace MCServerLauncher.WinUI.InstanceConsole;
 
-public sealed class InstanceConsoleWindow : CoreIsland.Window
+public sealed class InstanceConsoleWindow : WinUIIslands.Window
 {
     private const int MinimumWidth = 330;
     private const int MinimumHeight = 600;
@@ -23,12 +23,12 @@ public sealed class InstanceConsoleWindow : CoreIsland.Window
         Content = view;
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(view.TitleBarElement);
-        SystemBackdrop = new CoreIsland.MicaBackdrop();
+        SystemBackdrop = new WinUIIslands.MicaBackdrop();
         Title = "MCServerLauncher Future";
         if (AppWindow is { } appWindow)
         {
             appWindow.Resize(new Windows.Graphics.SizeInt32(1000, 700));
-            if (appWindow.Presenter is CoreIsland.Windowing.OverlappedPresenter presenter)
+            if (appWindow.Presenter is WinUIIslands.Windowing.OverlappedPresenter presenter)
             {
                 presenter.PreferredMinimumWidth = MinimumWidth;
                 presenter.PreferredMinimumHeight = MinimumHeight;

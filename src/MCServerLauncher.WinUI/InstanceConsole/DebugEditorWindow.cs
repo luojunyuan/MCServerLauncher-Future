@@ -2,7 +2,7 @@ using MCServerLauncher.WinUI.InstanceConsole.View.Dialogs;
 
 namespace MCServerLauncher.WinUI.InstanceConsole;
 
-public sealed class DebugEditorWindow : CoreIsland.Window
+public sealed class DebugEditorWindow : WinUIIslands.Window
 {
     public DebugEditorWindow(string path, string fileName)
     {
@@ -10,7 +10,7 @@ public sealed class DebugEditorWindow : CoreIsland.Window
         Content = view;
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(view.TitleBarElement);
-        SystemBackdrop = new CoreIsland.MicaBackdrop();
+        SystemBackdrop = new WinUIIslands.MicaBackdrop();
         Title = fileName;
         Closed += (_, _) => App.UnregisterSecondaryWindow(this);
     }

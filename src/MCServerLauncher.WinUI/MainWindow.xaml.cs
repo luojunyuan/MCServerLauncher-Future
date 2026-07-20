@@ -1,6 +1,6 @@
 namespace MCServerLauncher.WinUI;
 
-public sealed partial class MainWindow : CoreIsland.Window
+public sealed partial class MainWindow : WinUIIslands.Window
 {
     private const int MinimumWidth = 480;
     private const int MinimumHeight = 600;
@@ -9,7 +9,7 @@ public sealed partial class MainWindow : CoreIsland.Window
     {
         InitializeComponent();
         ExtendsContentIntoTitleBar = true;
-        SystemBackdrop = new CoreIsland.MicaBackdrop();
+        SystemBackdrop = new WinUIIslands.MicaBackdrop();
         RootPage = new MainPage(startupError);
         WindowRoot.Children.Add(RootPage);
         SetTitleBar(RootPage.TitleBarElement);
@@ -17,7 +17,7 @@ public sealed partial class MainWindow : CoreIsland.Window
         if (AppWindow is { } appWindow)
         {
             appWindow.Resize(new Windows.Graphics.SizeInt32(1138, 750));
-            if (appWindow.Presenter is CoreIsland.Windowing.OverlappedPresenter presenter)
+            if (appWindow.Presenter is WinUIIslands.Windowing.OverlappedPresenter presenter)
             {
                 presenter.PreferredMinimumWidth = MinimumWidth;
                 presenter.PreferredMinimumHeight = MinimumHeight;

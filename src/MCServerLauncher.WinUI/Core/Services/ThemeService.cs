@@ -15,7 +15,7 @@ public sealed class ThemeService : IThemeService
         };
 
         root.RequestedTheme = requestedTheme;
-        CoreIsland.Application.Current.RequestedTheme = requestedTheme == ElementTheme.Dark
+        WinUIIslands.Application.Current.RequestedTheme = requestedTheme == ElementTheme.Dark
             ? ApplicationTheme.Dark
             : requestedTheme == ElementTheme.Light
                 ? ApplicationTheme.Light

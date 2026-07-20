@@ -5,10 +5,10 @@ using Serilog;
 
 namespace MCServerLauncher.WinUI;
 
-public sealed partial class App : CoreIsland.Application
+public sealed partial class App : WinUIIslands.Application
 {
     private static Mutex? _instanceMutex;
-    private static readonly List<CoreIsland.Window> SecondaryWindows = [];
+    private static readonly List<WinUIIslands.Window> SecondaryWindows = [];
     private static bool _mainWindowClosed;
     private static int _servicesDisposed;
 
@@ -16,7 +16,7 @@ public sealed partial class App : CoreIsland.Application
     public static Windows.System.DispatcherQueue DispatcherQueue { get; private set; } = null!;
     public static AppServices Services { get; private set; } = null!;
     public static Version AppVersion => Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 1);
-    public static nint WindowHandle => CoreIsland.Windowing.WindowNative.GetWindowHandle(Window);
+    public static nint WindowHandle => WinUIIslands.Windowing.WindowNative.GetWindowHandle(Window);
 
     public App()
     {
@@ -26,7 +26,7 @@ public sealed partial class App : CoreIsland.Application
         TaskScheduler.UnobservedTaskException += OnUnobservedTaskException;
     }
 
-    internal static void RegisterSecondaryWindow(CoreIsland.Window window)
+    internal static void RegisterSecondaryWindow(WinUIIslands.Window window)
     {
         lock (SecondaryWindows)
         {
@@ -34,7 +34,7 @@ public sealed partial class App : CoreIsland.Application
         }
     }
 
-    internal static void UnregisterSecondaryWindow(CoreIsland.Window window)
+    internal static void UnregisterSecondaryWindow(WinUIIslands.Window window)
     {
         lock (SecondaryWindows) SecondaryWindows.Remove(window);
         _ = DisposeServicesIfReadyAsync();

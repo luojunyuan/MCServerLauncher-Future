@@ -1,9 +1,9 @@
 # MCServerLauncher.WinUI
 
-The optional CoreIsland desktop client for MCServerLauncher Future.
+The optional WinUIIslands desktop client for MCServerLauncher Future.
 
 This project is an independent client. It hosts WinUI 2 XAML through
-CoreIsland and keeps the WPF client as the behavioral reference. The WPF
+WinUIIslands and keeps the WPF client as the behavioral reference. The WPF
 project is deliberately not referenced and must remain unchanged.
 
 ## Fixed platform constraints
@@ -13,12 +13,12 @@ project is deliberately not referenced and must remain unchanged.
 - Runtime identifiers: `win-x64` and `win-arm64` only.
 - Deployment: self-contained, unpackaged file-system folders (`.exe`), with
   no package identity, MSIX bundle, or `Package.appxmanifest`.
-- UI host: `CoreIsland` + `Microsoft.UI.Xaml` 2.8.7 (WinUI 2).
+- UI host: `WinUIIslands` + `Microsoft.UI.Xaml` 2.8.7 (WinUI 2).
 - Editor: `WinUIEdit.Uwp` `0.0.5-prerelease`; do not reintroduce AvalonEdit.
 - Do not add Windows App SDK/WinUI 3 references, WPF references, or WPF
   assemblies.
 
-`UseUwp=true` is required by the CoreIsland XAML build. The Windows SDK may
+`UseUwp=true` is required by the WinUIIslands XAML build. The Windows SDK may
 restore build-time PRI/XAML tooling packages, but they are not runtime
 dependencies and no package artifacts are published.
 
@@ -29,13 +29,13 @@ The only project references are:
 - `../MCServerLauncher.Common/MCServerLauncher.Common.csproj`
 - `../MCServerLauncher.DaemonClient/MCServerLauncher.DaemonClient.csproj`
 
-Important packages include `CoreIsland`, `Microsoft.UI.Xaml`,
+Important packages include `WinUIIslands`, `Microsoft.UI.Xaml`,
 `WinUIEdit.Uwp`, `CommunityToolkit.Mvvm`, `Serilog`, `Downloader`, and
 `Microsoft.Extensions.DependencyInjection`.
 
 ## Shell and folders
 
-`MainWindow` is intentionally only the native CoreIsland window shell. It
+`MainWindow` is intentionally only the native WinUIIslands window shell. It
 creates the window, applies the backdrop and minimum size, hosts `MainPage`,
 and wires the title bar. The real application root belongs in `MainPage`:
 
@@ -141,7 +141,7 @@ the in-app `InfoBar` is always the fallback.
 
 ## Instance console and editor
 
-The console is a separate CoreIsland window with Board, Command, File Manager,
+The console is a separate WinUIIslands window with Board, Command, File Manager,
 Component Manager, Instance Settings, and Event Trigger views.
 
 `IEditorAdapter` is the only place that knows the WinUIEdit API. It exposes
@@ -157,7 +157,7 @@ numbers, theme changes, and daemon upload/download.
 
 ## Build, run, and publish
 
-CoreIsland XAML must be built with Visual Studio `MSBuild.exe`; plain
+WinUIIslands XAML must be built with Visual Studio `MSBuild.exe`; plain
 `dotnet build` is not the authoritative build path for this project.
 
 From the repository root:
@@ -170,7 +170,7 @@ From the repository root:
 & scripts\Test-WinUIFirstSetup.ps1
 ```
 
-The publish script restores each RID, stages the CoreIsland/WinUI 2 and
+The publish script restores each RID, stages the WinUIIslands/WinUI 2 and
 WinUIEdit native runtime, copies the application `resources.pri`, and fails
 if required runtime files are missing or a package manifest is present.
 

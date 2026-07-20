@@ -19,7 +19,7 @@ using MCServerLauncher.WinUI.Models;
 using MCServerLauncher.WinUI.View.Features.CreateInstance.Components;
 using Serilog;
 using Windows.Storage.Streams;
-using CoreIsland;
+using WinUIIslands;
 using WinUIEditor;
 
 namespace MCServerLauncher.WinUI.InstanceConsole;
@@ -353,7 +353,7 @@ public sealed partial class InstanceConsoleView : UserControl
 
     private void ToggleFullscreen()
     {
-        var handle = CoreIsland.Windowing.WindowNative.GetWindowHandle(_hostWindow);
+        var handle = WinUIIslands.Windowing.WindowNative.GetWindowHandle(_hostWindow);
         if (handle == 0) return;
 
         if (!_isFullscreen)
@@ -537,7 +537,7 @@ public sealed partial class InstanceConsoleView : UserControl
 
     private unsafe void InstallCloseHook()
     {
-        var handle = CoreIsland.Windowing.WindowNative.GetWindowHandle(_hostWindow);
+        var handle = WinUIIslands.Windowing.WindowNative.GetWindowHandle(_hostWindow);
         _closeHookHandle = GCHandle.Alloc(this);
         _closeHookId = (nuint)GCHandle.ToIntPtr(_closeHookHandle);
         if (SetWindowSubclass(handle, &WindowSubclassProc, _closeHookId, _closeHookId) != 0) return;
@@ -690,7 +690,7 @@ public sealed partial class InstanceConsoleView : UserControl
     private async Task UploadFileAsync()
     {
         if (_daemon is null) return;
-        var file = await App.Services.Files.PickFileAsync(CoreIsland.Windowing.WindowNative.GetWindowHandle(_hostWindow));
+        var file = await App.Services.Files.PickFileAsync(WinUIIslands.Windowing.WindowNative.GetWindowHandle(_hostWindow));
         if (file is null) return;
         try
         {
@@ -706,7 +706,7 @@ public sealed partial class InstanceConsoleView : UserControl
     private async Task DownloadSelectedFileAsync()
     {
         if (_daemon is null || FileManagerPageControl.SelectedFile is not { IsDirectory: false } item) return;
-        var file = await App.Services.Files.PickSaveFileAsync(CoreIsland.Windowing.WindowNative.GetWindowHandle(_hostWindow), item.Name);
+        var file = await App.Services.Files.PickSaveFileAsync(WinUIIslands.Windowing.WindowNative.GetWindowHandle(_hostWindow), item.Name);
         if (file is null) return;
         try
         {
@@ -937,7 +937,7 @@ public sealed partial class InstanceConsoleView : UserControl
     private async void AddComponent_Click(object sender, RoutedEventArgs e)
     {
         if (_daemon is null) return;
-        var files = await App.Services.Files.PickFilesAsync(CoreIsland.Windowing.WindowNative.GetWindowHandle(_hostWindow));
+        var files = await App.Services.Files.PickFilesAsync(WinUIIslands.Windowing.WindowNative.GetWindowHandle(_hostWindow));
         await UploadComponentsAsync(files);
     }
 
@@ -1246,7 +1246,7 @@ public sealed partial class InstanceConsoleView : UserControl
 
     private async Task SelectReplacementCoreAsync()
     {
-        var file = await App.Services.Files.PickFileAsync(CoreIsland.Windowing.WindowNative.GetWindowHandle(_hostWindow));
+        var file = await App.Services.Files.PickFileAsync(WinUIIslands.Windowing.WindowNative.GetWindowHandle(_hostWindow));
         if (file is not null) InstanceSettingsPageControl.SetReplacementCore(file.Path);
     }
 
@@ -1324,7 +1324,7 @@ public sealed partial class InstanceConsoleView : UserControl
                 unsafe
                 {
                     RemoveWindowSubclass(
-                        CoreIsland.Windowing.WindowNative.GetWindowHandle(_hostWindow),
+                        WinUIIslands.Windowing.WindowNative.GetWindowHandle(_hostWindow),
                         &WindowSubclassProc,
                         _closeHookId);
                 }
