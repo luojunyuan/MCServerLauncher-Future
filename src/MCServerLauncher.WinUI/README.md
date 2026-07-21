@@ -157,9 +157,6 @@ numbers, theme changes, and daemon upload/download.
 
 ## Build, run, and publish
 
-WinUIIslands XAML must be built with Visual Studio `MSBuild.exe`; plain
-`dotnet build` is not the authoritative build path for this project.
-
 From the repository root:
 
 ```powershell
