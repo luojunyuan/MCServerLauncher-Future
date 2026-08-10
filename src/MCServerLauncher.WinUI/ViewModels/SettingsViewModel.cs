@@ -66,7 +66,7 @@ public partial class SettingsViewModel : ObservableObject
         DownloadSourceIndex = IndexOf(DownloadSourceKeys, current.Download.DownloadSource, "FastMirror");
         DownloadThreadCount = Math.Clamp(current.Download.ThreadCnt, 1, 256);
         ActionWhenDownloadErrorIndex = IndexOf(DownloadErrorKeys, current.Download.ActionWhenDownloadError, "stop");
-        AutoRefreshInterval = Math.Clamp(current.Instance.AutoRefreshInterval, 0, 60);
+        AutoRefreshInterval = Math.Clamp(current.Instance.AutoRefreshInterval, 0, 5);
         ActionOnDoubleClickIndex = IndexOf(DoubleClickKeys, current.Instance.ActionOnDoubleClick, "Console");
         LauncherThemeIndex = IndexOf(ThemeKeys, current.App.Theme, "auto");
         LauncherLanguageIndex = Math.Max(0, IndexOf(
@@ -170,7 +170,7 @@ public partial class SettingsViewModel : ObservableObject
 
     partial void OnAutoRefreshIntervalChanged(int value)
     {
-        var normalized = Math.Clamp(value, 0, 60);
+        var normalized = Math.Clamp(value, 0, 5);
         if (value != normalized)
         {
             AutoRefreshInterval = normalized;
@@ -233,21 +233,24 @@ public partial class SettingsViewModel : ObservableObject
                 Title = "bangbang93",
                 Description = _localization.Get("Settings_Acknowledgments_BMCLAPI_Description"),
                 ActionText = _localization.Get("Donate"),
-                Uri = "https://afdian.com/a/bangbang93/"
+                Uri = "https://afdian.com/a/bangbang93/",
+                ImageSource = "Resources/bangbang93.jpg"
             },
             new SettingsLinkItem
             {
                 Title = "iNKORE Studios",
                 Description = _localization.Get("Settings_Acknowledgments_iNKORE_Description"),
                 ActionText = _localization.Get("Donate"),
-                Uri = "https://inkore.net/"
+                Uri = "https://inkore.net/",
+                ImageSource = "Resources/iNKORE.png"
             },
             new SettingsLinkItem
             {
                 Title = "BakaXL",
                 Description = _localization.Get("Settings_Acknowledgments_BakaXL_Description"),
                 ActionText = _localization.Get("Donate"),
-                Uri = "https://afdian.com/a/TT702/"
+                Uri = "https://afdian.com/a/TT702/",
+                ImageSource = "Resources/BakaXL.png"
             },
             new SettingsLinkItem
             {

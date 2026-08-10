@@ -132,7 +132,7 @@
           SettingTitle="{x:Bind Texts['Settings_Instance_AutoRefreshInterval'], Mode=OneWay}"
           SettingDescription="{x:Bind Texts['Settings_Instance_AutoRefreshInterval_Description'], Mode=OneWay}"
           SettingMinimum="0"
-          SettingMaximum="60"
+          SettingMaximum="5"
           SettingValue="{x:Bind ViewModel.AutoRefreshInterval, Mode=TwoWay}" />
 
       <sc:ComboSettingCard
@@ -239,8 +239,13 @@
               <Border Style="{StaticResource CardBorderStyle}">
                 <Grid ColumnSpacing="16">
                   <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
-                  <StackPanel Spacing="4">
-                    <TextBlock Text="{x:Bind Title, Mode=OneTime}" FontWeight="SemiBold" />
+                  <StackPanel Grid.Column="0" Spacing="4">
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                      <Border Width="40" Height="40" CornerRadius="8" VerticalAlignment="Center" Visibility="{x:Bind ImageVisibility, Mode=OneTime}">
+                        <Image Source="{x:Bind ImageSource, Mode=OneTime}" Stretch="UniformToFill" />
+                      </Border>
+                      <TextBlock Text="{x:Bind Title, Mode=OneTime}" FontWeight="SemiBold" VerticalAlignment="Center" />
+                    </StackPanel>
                     <TextBlock Text="{x:Bind Description, Mode=OneTime}" Opacity="0.62" TextWrapping="Wrap" />
                   </StackPanel>
                   <Button Grid.Column="1" Content="{x:Bind ActionText, Mode=OneTime}" Tag="{x:Bind Uri, Mode=OneTime}" Click="OpenUri_Click" />
