@@ -34,7 +34,7 @@
                         Maximum="{x:Bind SettingMaximum, Mode=OneWay}"
                         Value="{x:Bind SettingValue, Mode=TwoWay}"
                         IsEnabled="{x:Bind SettingEnabled, Mode=OneWay}" />
-                <TextBlock VerticalAlignment="Center" Text="{x:Bind SettingValueText, Mode=OneWay}" />
+                <TextBlock x:Name="SettingValueTextBlock" VerticalAlignment="Center" />
             </StackPanel>
         </Grid>
     </Border>

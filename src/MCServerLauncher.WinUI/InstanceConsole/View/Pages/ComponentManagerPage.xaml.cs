@@ -4,7 +4,6 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage;
-using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using MCServerLauncher.WinUI.Core.Localization;
@@ -14,7 +13,7 @@ namespace MCServerLauncher.WinUI.InstanceConsole.View.Pages;
 
 public sealed partial class ComponentManagerPage : UserControl, INotifyPropertyChanged
 {
-    private readonly DispatcherTimer? _loadingTimer;
+    private readonly DispatcherTimer _loadingTimer;
     private bool _isLoaded;
 
     public ComponentManagerPage()
@@ -121,14 +120,14 @@ public sealed partial class ComponentManagerPage : UserControl, INotifyPropertyC
     private void ShowLoading()
     {
         ComponentLoadingLayer.Visibility = Visibility.Visible;
-        _loadingTimer?.Stop();
-        _loadingTimer?.Start();
+        _loadingTimer.Stop();
+        _loadingTimer.Start();
     }
 
     private void HideLoading()
     {
         ComponentLoadingLayer.Visibility = Visibility.Collapsed;
-        _loadingTimer?.Stop();
+        _loadingTimer.Stop();
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)

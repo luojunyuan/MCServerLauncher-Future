@@ -59,7 +59,7 @@ public sealed partial class ResourceDownloadPage : Page
         string.IsNullOrWhiteSpace(value) ? Visibility.Collapsed : Visibility.Visible;
 
     /// <summary>
-    ///     x:Bind helper: localized "open home page" text, reusing the WPF resource key.
+    ///     x:Bind helper: localized "open home page" text, reusing the shared resource key.
     /// </summary>
     public static string OpenHomePageText() => App.Services.Localization.Texts["ResDownload_OpenHomePage"];
 }

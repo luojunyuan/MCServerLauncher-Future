@@ -11,7 +11,7 @@ using MCServerLauncher.WinUI.Views.Components.DaemonManager;
 namespace MCServerLauncher.WinUI.Views.Pages;
 
 /// <summary>
-/// The first-run flow intentionally follows the WPF client's four-step state
+/// The first-run flow intentionally follows the shared four-step state
 /// machine. Only the current navigation item is enabled, so a user cannot
 /// bypass the language, EULA, or daemon steps accidentally.
 /// </summary>

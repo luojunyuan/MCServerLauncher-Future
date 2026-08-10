@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Controls;
 namespace MCServerLauncher.WinUI.Views.Components.Generic;
 
 /// <summary>
-/// StopTipLayer.xaml 的交互逻辑 (WinUI parity of WPF View/Components/Generic/StopTipLayer).
+/// StopTipLayer.xaml 的交互逻辑 (WinUI port of the shared StopTipLayer component).
 /// </summary>
 public sealed partial class StopTipLayer : UserControl
 {

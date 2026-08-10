@@ -30,7 +30,7 @@ public sealed partial class RangeSettingCard : UserControl
 
     public static readonly DependencyProperty SettingValueProperty =
         DependencyProperty.Register(nameof(SettingValue), typeof(double), typeof(RangeSettingCard),
-            new PropertyMetadata(0d));
+            new PropertyMetadata(0d, OnSettingValueChanged));
 
     public static readonly DependencyProperty SettingValueTextProperty =
         DependencyProperty.Register(nameof(SettingValueText), typeof(string), typeof(RangeSettingCard),
@@ -92,4 +92,16 @@ public sealed partial class RangeSettingCard : UserControl
         get => (bool)GetValue(SettingEnabledProperty);
         set => SetValue(SettingEnabledProperty, value);
     }
+
+    private static void OnSettingValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not RangeSettingCard control || control.SettingValueTextBlock is null) return;
+        var value = e.NewValue is double v ? v : 0d;
+        control.SettingValueTextBlock.Text = string.IsNullOrEmpty(control.SettingValueText)
+            ? FormatValue(value)
+            : control.SettingValueText;
+    }
+
+    private static string FormatValue(double value) =>
+        value == Math.Floor(value) ? ((long)value).ToString() : value.ToString("0.##");
 }

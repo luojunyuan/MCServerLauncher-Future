@@ -268,7 +268,7 @@ public sealed partial class MainPage : Page
     private void ShowToast(NotificationMessage message)
     {
         // The event payload carries no position field and the interface does
-        // not expose one, so toasts use the default Top slot (matching the WPF
+        // not expose one, so toasts use the default Top slot (matching the shared
         // default). The other three panels are wired up and ready to receive
         // toasts if a position is introduced later.
         var panel = ToastPanelTop;
