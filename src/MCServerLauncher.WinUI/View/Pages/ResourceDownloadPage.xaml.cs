@@ -43,4 +43,22 @@ public sealed partial class ResourceDownloadPage : Page
         if ((sender as Button)?.Tag is ResourceVersionItem item && XamlRoot is not null)
             await ViewModel.DownloadItemAsync(item, XamlRoot);
     }
+
+    private async void HomePage_Click(object sender, RoutedEventArgs e)
+    {
+        if ((sender as Button)?.Tag is string url &&
+            Uri.TryCreate(url, UriKind.Absolute, out var uri))
+            await Windows.System.Launcher.LaunchUriAsync(uri);
+    }
+
+    /// <summary>
+    ///     x:Bind helper: collapses a core-card line/button while its homepage URL is empty.
+    /// </summary>
+    public static Visibility StringToVisibility(string? value) =>
+        string.IsNullOrWhiteSpace(value) ? Visibility.Collapsed : Visibility.Visible;
+
+    /// <summary>
+    ///     x:Bind helper: localized "open home page" text, reusing the WPF resource key.
+    /// </summary>
+    public static string OpenHomePageText() => App.Services.Localization.Texts["ResDownload_OpenHomePage"];
 }

@@ -149,6 +149,27 @@ public sealed partial class MainPage : Page
             await DownloadHistoryViewModel.RetryCommand.ExecuteAsync(item);
     }
 
+    private void CopyDownloadUrl_Click(object sender, RoutedEventArgs e)
+    {
+        if ((sender as FrameworkElement)?.Tag is DownloadProgressEntry entry)
+            DownloadHistoryViewModel.CopyUrl(entry);
+    }
+
+    private void PauseResumeDownload_Click(object sender, RoutedEventArgs e)
+    {
+        if ((sender as FrameworkElement)?.Tag is not DownloadProgressEntry entry) return;
+        if (entry.IsPaused)
+            DownloadHistoryViewModel.ResumeDownload(entry);
+        else
+            DownloadHistoryViewModel.PauseDownload(entry);
+    }
+
+    private void CancelDownload_Click(object sender, RoutedEventArgs e)
+    {
+        if ((sender as FrameworkElement)?.Tag is DownloadProgressEntry entry)
+            DownloadHistoryViewModel.CancelDownload(entry);
+    }
+
     private void OnUnloaded(object sender, RoutedEventArgs e)
     {
         if (_notificationsSubscribed)

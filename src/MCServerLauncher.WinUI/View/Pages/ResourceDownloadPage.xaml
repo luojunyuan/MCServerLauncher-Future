@@ -5,7 +5,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    xmlns:models="using:MCServerLauncher.WinUI.Models">
+    xmlns:models="using:MCServerLauncher.WinUI.Models"
+    xmlns:local="using:MCServerLauncher.WinUI.Views.Pages">
     <Grid Padding="32" RowSpacing="12">
         <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
         <Grid ColumnSpacing="12">
@@ -26,8 +27,17 @@
                             <DataTemplate x:DataType="models:ResourceCoreItem">
                                 <Grid Padding="8" ColumnSpacing="10">
                                     <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
-                                    <StackPanel><TextBlock Text="{x:Bind Name, Mode=OneTime}" FontWeight="SemiBold" /><TextBlock Text="{x:Bind Description, Mode=OneTime}" TextWrapping="Wrap" Opacity="0.7" /></StackPanel>
-                                    <TextBlock Grid.Column="1" Text="{x:Bind Tag, Mode=OneTime}" Opacity="0.7" />
+                                    <StackPanel>
+                                        <TextBlock Text="{x:Bind Name, Mode=OneTime}" FontWeight="SemiBold" />
+                                        <TextBlock Text="{x:Bind HomePage, Mode=OneTime}" TextWrapping="Wrap" Opacity="0.5" FontSize="11" Visibility="{x:Bind local:ResourceDownloadPage.StringToVisibility(HomePage), Mode=OneTime}" />
+                                        <TextBlock Text="{x:Bind Description, Mode=OneTime}" TextWrapping="Wrap" Opacity="0.7" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                                        <TextBlock Text="{x:Bind Tag, Mode=OneTime}" Opacity="0.7" VerticalAlignment="Center" />
+                                        <Button Click="HomePage_Click" Tag="{x:Bind HomePage, Mode=OneTime}" Visibility="{x:Bind local:ResourceDownloadPage.StringToVisibility(HomePage), Mode=OneTime}" ToolTipService.ToolTip="{x:Bind local:ResourceDownloadPage.OpenHomePageText(), Mode=OneTime}" Padding="6" MinWidth="32" MinHeight="32" VerticalAlignment="Center">
+                                            <FontIcon Glyph="&#xE8A7;" FontSize="14" />
+                                        </Button>
+                                    </StackPanel>
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>

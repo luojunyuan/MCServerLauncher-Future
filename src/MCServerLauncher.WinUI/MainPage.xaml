@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:models="using:MCServerLauncher.WinUI.Models"
+    xmlns:vm="using:MCServerLauncher.WinUI.ViewModels"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
   <Grid>
     <Grid.RowDefinitions>
@@ -55,39 +56,92 @@
                 <TextBlock
                     Text="{x:Bind Texts['Main_DownloadHistoryNavMenu'], Mode=OneWay}"
                     Style="{StaticResource SectionHeaderTextBlockStyle}" />
-                <ListView
-                    Grid.Row="1"
-                    MaxHeight="520"
-                    ItemsSource="{x:Bind DownloadHistoryViewModel.History, Mode=OneWay}">
-                  <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="models:DownloadHistoryItem">
-                      <Grid Padding="0,6" RowSpacing="4">
-                        <Grid.RowDefinitions>
-                          <RowDefinition Height="Auto" />
-                          <RowDefinition Height="Auto" />
-                          <RowDefinition Height="Auto" />
-                          <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <TextBlock Text="{x:Bind FileName, Mode=OneTime}" FontWeight="SemiBold" />
-                        <TextBlock
-                            Grid.Row="1"
-                            Text="{x:Bind Url, Mode=OneTime}"
-                            Opacity="0.72"
-                            TextTrimming="CharacterEllipsis" />
-                        <TextBlock
-                            Grid.Row="2"
-                            Text="{x:Bind CompletedAt, Mode=OneTime}"
-                            Opacity="0.62" />
-                        <Button
-                            Grid.Row="3"
-                            Content="{x:Bind Texts['Retry'], Mode=OneWay}"
-                            Tag="{x:Bind Mode=OneTime}"
-                            Click="RetryDownload_Click"
-                            HorizontalAlignment="Left" />
-                      </Grid>
-                    </DataTemplate>
-                  </ListView.ItemTemplate>
-                </ListView>
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" VerticalScrollMode="Enabled">
+                  <StackPanel Spacing="10">
+                    <ListView
+                        ItemsSource="{x:Bind DownloadHistoryViewModel.ActiveDownloads, Mode=OneWay}"
+                        Visibility="{x:Bind DownloadHistoryViewModel.ActiveDownloadsVisibility, Mode=OneWay}"
+                        MaxHeight="240">
+                      <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="vm:DownloadProgressEntry">
+                          <Grid Padding="0,6" RowSpacing="4">
+                            <Grid.RowDefinitions>
+                              <RowDefinition Height="Auto" />
+                              <RowDefinition Height="Auto" />
+                              <RowDefinition Height="Auto" />
+                              <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{x:Bind FileName, Mode=OneWay}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                            <Grid Grid.Row="1" ColumnSpacing="8">
+                              <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                              </Grid.ColumnDefinitions>
+                              <ProgressBar Grid.Column="0" Maximum="100" Value="{x:Bind Progress, Mode=OneWay}" />
+                              <TextBlock Grid.Column="1" Text="{x:Bind PercentText, Mode=OneWay}" VerticalAlignment="Center" />
+                            </Grid>
+                            <TextBlock Grid.Row="2" Text="{x:Bind Caption, Mode=OneWay}" Opacity="0.62" />
+                            <StackPanel Grid.Row="3" Orientation="Horizontal" Spacing="8">
+                              <Button
+                                  Tag="{x:Bind Mode=OneTime}"
+                                  Click="CopyDownloadUrl_Click"
+                                  AutomationProperties.Name="{x:Bind Texts['CopyUrl'], Mode=OneWay}">
+                                <FontIcon Glyph="&#xE71B;" />
+                              </Button>
+                              <Button
+                                  Tag="{x:Bind Mode=OneTime}"
+                                  Click="PauseResumeDownload_Click"
+                                  AutomationProperties.Name="{x:Bind PauseContinueText, Mode=OneWay}">
+                                <StackPanel Orientation="Horizontal" Spacing="4">
+                                  <FontIcon Glyph="&#xE769;" Visibility="{x:Bind PauseIconVisibility, Mode=OneWay}" />
+                                  <FontIcon Glyph="&#xE768;" Visibility="{x:Bind ContinueIconVisibility, Mode=OneWay}" />
+                                </StackPanel>
+                              </Button>
+                              <Button
+                                  Tag="{x:Bind Mode=OneTime}"
+                                  Click="CancelDownload_Click"
+                                  AutomationProperties.Name="{x:Bind Texts['Cancel'], Mode=OneWay}">
+                                <FontIcon Glyph="&#xE711;" />
+                              </Button>
+                            </StackPanel>
+                          </Grid>
+                        </DataTemplate>
+                      </ListView.ItemTemplate>
+                    </ListView>
+                    <ListView
+                        ItemsSource="{x:Bind DownloadHistoryViewModel.History, Mode=OneWay}"
+                        MaxHeight="520">
+                      <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="models:DownloadHistoryItem">
+                          <Grid Padding="0,6" RowSpacing="4">
+                            <Grid.RowDefinitions>
+                              <RowDefinition Height="Auto" />
+                              <RowDefinition Height="Auto" />
+                              <RowDefinition Height="Auto" />
+                              <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{x:Bind FileName, Mode=OneTime}" FontWeight="SemiBold" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Text="{x:Bind Url, Mode=OneTime}"
+                                Opacity="0.72"
+                                TextTrimming="CharacterEllipsis" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Text="{x:Bind CompletedAt, Mode=OneTime}"
+                                Opacity="0.62" />
+                            <Button
+                                Grid.Row="3"
+                                Content="{x:Bind Texts['Retry'], Mode=OneWay}"
+                                Tag="{x:Bind Mode=OneTime}"
+                                Click="RetryDownload_Click"
+                                HorizontalAlignment="Left" />
+                          </Grid>
+                        </DataTemplate>
+                      </ListView.ItemTemplate>
+                    </ListView>
+                  </StackPanel>
+                </ScrollViewer>
               </Grid>
             </Flyout>
           </Button.Flyout>
