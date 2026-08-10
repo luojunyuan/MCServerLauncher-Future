@@ -10,12 +10,44 @@
         <muxc:XamlControlsResources ControlsResourcesVersion="Version2" />
       </ResourceDictionary.MergedDictionaries>
       <FontFamily x:Key="Montserrat">ms-appx:///Resources/Montserrat.ttf#Montserrat</FontFamily>
+      <Style x:Key="DisplayTextBlock" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="68" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+      </Style>
+      <Style x:Key="LargeTitleTextBlock" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="40" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+      </Style>
+      <Style x:Key="TitleTextBlock" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+      </Style>
+      <Style x:Key="SubtitleTextBlock" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="Medium" />
+      </Style>
+      <Style x:Key="MinititleTextBlock" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontWeight" Value="Medium" />
+      </Style>
+      <Style x:Key="StrongBodyTextBlock" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+      </Style>
+      <Style x:Key="BodyTextBlock" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Regular" />
+      </Style>
+      <Style x:Key="CaptionTextBlock" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Regular" />
+      </Style>
       <Style x:Key="PageTitleTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="28" />
+        <Setter Property="FontSize" Value="26" />
         <Setter Property="FontWeight" Value="SemiBold" />
       </Style>
       <Style x:Key="PageSubtitleTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontSize" Value="15" />
         <Setter Property="Opacity" Value="0.72" />
       </Style>
       <Style x:Key="SectionHeaderTextBlockStyle" TargetType="TextBlock">
@@ -26,9 +58,25 @@
         <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
         <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="CornerRadius" Value="4" />
         <Setter Property="Padding" Value="16" />
       </Style>
-    </ResourceDictionary>
+      <Style x:Key="SettingsCardBorderStyle" TargetType="Border">
+        <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
+        <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="Padding" Value="15,0,20,0" />
+      </Style>
+      <Style TargetType="ToggleSwitch">
+        <Setter Property="MinWidth" Value="0" />
+      </Style>
+      <SolidColorBrush x:Key="StatusRunningBrush" Color="#FF107C10" />
+      <SolidColorBrush x:Key="StatusStoppedBrush" Color="#FF999999" />
+      <SolidColorBrush x:Key="StatusCrashedBrush" Color="#FFE81123" />
+      <SolidColorBrush x:Key="StatusEnabledDotBrush" Color="#FF4CAF50" />
+      <SolidColorBrush x:Key="StatusDisabledDotBrush" Color="#FF9E9E9E" />
+      <SolidColorBrush x:Key="ClientSideBadgeBrush" Color="#FFD83B01" />
+                          </ResourceDictionary>
   </Application.Resources>
 </island:Application>
