@@ -269,6 +269,20 @@ public partial class SettingsViewModel : ObservableObject
             Component("Serilog", "Structured application logging.", "https://serilog.net/", more),
             Component("Downloader", "Multipart download support.", "https://github.com/bezzad/Downloader", more)
         ]);
+
+        // In-place item-text replacement above can reset the selection of the bound
+        // ComboBox / RadioButtons controls: they drop SelectedIndex to -1 and the
+        // TwoWay bindings push that -1 back into the ViewModel, leaving the controls
+        // blank. Re-assert each selected index from the stored settings so the
+        // selection is preserved with the newly localized item text.
+        DownloadSourceIndex = IndexOf(DownloadSourceKeys, _settings.Current.Download.DownloadSource, "FastMirror");
+        ActionWhenDownloadErrorIndex = IndexOf(DownloadErrorKeys, _settings.Current.Download.ActionWhenDownloadError, "stop");
+        ActionOnDoubleClickIndex = IndexOf(DoubleClickKeys, _settings.Current.Instance.ActionOnDoubleClick, "Console");
+        LauncherThemeIndex = IndexOf(ThemeKeys, _settings.Current.App.Theme, "auto");
+        LauncherLanguageIndex = Math.Max(0, IndexOf(
+            _localization.LanguageCodes,
+            _settings.Current.App.Language,
+            "zh-CN"));
     }
 
     private void LoadBuildInfo()

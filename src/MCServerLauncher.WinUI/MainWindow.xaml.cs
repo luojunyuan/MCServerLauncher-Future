@@ -23,8 +23,6 @@ public sealed partial class MainWindow : WinUIIslands.Window
         if (AppWindow is { } appWindow
             && appWindow.Presenter is WinUIIslands.Windowing.OverlappedPresenter presenter)
         {
-            // Remove the system title bar and caption buttons; we render our own.
-            presenter.SetBorderAndTitleBar(true, false);
             presenter.PreferredMinimumWidth = MinimumWidth;
             presenter.PreferredMinimumHeight = MinimumHeight;
         }

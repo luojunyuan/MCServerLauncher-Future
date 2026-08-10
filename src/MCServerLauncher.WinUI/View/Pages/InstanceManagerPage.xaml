@@ -161,7 +161,7 @@
       <Grid
           x:Name="LoadingLayer"
           Visibility="{x:Bind BoolToVisibility(ViewModel.IsLoading), Mode=OneWay}"
-          Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+          Background="Transparent"
           Opacity="0.92">
         <muxc:ProgressRing IsActive="True" Width="64" Height="64" />
       </Grid>
