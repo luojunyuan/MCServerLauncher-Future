@@ -172,9 +172,8 @@ public partial class ResourceDownloadViewModel : ObservableObject
             if (core.Provider is "FastMirror")
             {
                 foreach (var version in core.MinecraftVersions) MinecraftVersions.Add(version);
-                return;
             }
-            if (core.Provider is "PolarsMirror")
+            else if (core.Provider is "PolarsMirror")
             {
                 foreach (var detail in await PolarsMirror.GetCoreDetail(core.Id) ?? [])
                     VersionItems.Add(new ResourceVersionItem
@@ -184,15 +183,22 @@ public partial class ResourceDownloadViewModel : ObservableObject
                     });
                 return;
             }
-            foreach (var version in Sequence(core.Provider switch
+            else
             {
-                "MCSLSync" => await MCSLSync.GetMinecraftVersions(core.ApiName),
-                "MSLAPI" => await MSLAPI.GetMinecraftVersions(core.ApiName),
-                _ => (await AList.GetFileList("https://mirrors.rainyun.com", $"服务端合集/{core.ApiName}") ?? [])
-                    .Where(file => !file.IsDirectory && !string.IsNullOrWhiteSpace(file.FileName))
-                    .Select(file => file.FileName!)
-                    .ToList()
-            })) MinecraftVersions.Add(version);
+                foreach (var version in Sequence(core.Provider switch
+                {
+                    "MCSLSync" => await MCSLSync.GetMinecraftVersions(core.ApiName),
+                    "MSLAPI" => await MSLAPI.GetMinecraftVersions(core.ApiName),
+                    _ => (await AList.GetFileList("https://mirrors.rainyun.com", $"服务端合集/{core.ApiName}") ?? [])
+                        .Where(file => !file.IsDirectory && !string.IsNullOrWhiteSpace(file.FileName))
+                        .Select(file => file.FileName!)
+                        .ToList()
+                })) MinecraftVersions.Add(version);
+            }
+
+            // Like WPF, auto-select the first (latest) Minecraft version.
+            if (MinecraftVersions.Count > 0)
+                await SelectVersionAsync(MinecraftVersions[0]);
         }
         catch (Exception ex)
         {

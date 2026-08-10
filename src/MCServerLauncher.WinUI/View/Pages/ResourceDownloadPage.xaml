@@ -38,7 +38,7 @@
             </Border>
             <Border Grid.Column="1" Style="{StaticResource CardBorderStyle}">
                 <Grid RowSpacing="8">
-                    <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                    <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Spacing="8">
                         <Grid ColumnSpacing="10">
                             <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
@@ -58,7 +58,6 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="8"><ProgressBar Width="220" Maximum="100" Value="{x:Bind ViewModel.Progress, Mode=OneWay}" /><TextBlock Text="{x:Bind ViewModel.StatusText, Mode=OneWay}" VerticalAlignment="Center" /><Button Content="{x:Bind Texts['Cancel'], Mode=OneWay}" Command="{x:Bind ViewModel.CancelCommand, Mode=OneWay}" /></StackPanel>
                 </Grid>
             </Border>
         </Grid>
