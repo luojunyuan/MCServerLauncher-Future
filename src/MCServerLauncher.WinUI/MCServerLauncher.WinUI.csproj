@@ -12,6 +12,7 @@
     <Copyright>Copyright © 2022-2026 MCSLTeam. All rights reserved.</Copyright>
     <Product>MCServerLauncher Future</Product>
     <Version>0.1.0.1</Version>
+    <ApplicationIcon>Resources\MCServerLauncherFuture.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <UseUwp>true</UseUwp>
     <DefaultLanguage>en-US</DefaultLanguage>
