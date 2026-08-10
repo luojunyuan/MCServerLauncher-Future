@@ -1,4 +1,6 @@
 using System.ComponentModel;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -156,49 +158,44 @@ public sealed partial class InstanceManagerPage : Page
             isDestructive);
     }
 
-    private async void ErrorAction_Click(object sender, RoutedEventArgs e)
-    {
-        switch (ViewModel.ErrorState)
-        {
-            case "no_daemon":
-                App.Window.RootPage.Navigate(typeof(DaemonManagerPage), DaemonManagerPage.OpenConnectionParameter);
-                break;
-            case "load_error":
-                await ViewModel.RefreshAsync();
-                break;
-        }
-    }
+    private ICommand? _connectDaemonCommand;
+    private ICommand? _createInstanceCommand;
+
+    private ICommand ConnectDaemonCommand => _connectDaemonCommand ??= new RelayCommand(() =>
+        App.Window.RootPage.Navigate(typeof(DaemonManagerPage), DaemonManagerPage.OpenConnectionParameter));
+
+    private ICommand CreateInstanceCommand => _createInstanceCommand ??= new RelayCommand(() =>
+        App.Window.RootPage.Navigate(typeof(CreateInstancePage)));
 
     private void UpdateErrorState()
     {
-        ErrorLayer.Visibility = Visibility.Collapsed;
+        TipLayer.Visibility = Visibility.Collapsed;
         InstanceScrollViewer.Visibility = Visibility.Visible;
         FilterBar.Visibility = Visibility.Visible;
-        ErrorActionButton.IsEnabled = true;
 
         switch (ViewModel.ErrorState)
         {
             case "no_daemon":
                 FilterBar.Visibility = Visibility.Collapsed;
-                ShowError("❌", Texts["FuncDisabled"], Texts["FuncDisabledReason_NoDaemon"], Texts["ConnectDaemon"]);
+                ShowTip("❌", Texts["FuncDisabled"], Texts["FuncDisabledReason_NoDaemon"], Texts["ConnectDaemon"], ConnectDaemonCommand);
                 break;
             case "no_instance":
-                ErrorActionButton.IsEnabled = false;
-                ShowError("🤔", Texts["NothingHere"], Texts["TryAddSomething"], Texts["Main_CreateInstanceNavMenu"]);
+                ShowTip("🤔", Texts["NothingHere"], Texts["TryAddSomething"], Texts["Main_CreateInstanceNavMenu"], CreateInstanceCommand);
                 break;
             case "load_error":
-                ShowError("❌", Texts["ConnectDaemonFailedTip"], Texts["ConnectDaemonFailedSubTip"], Texts["Refresh"]);
+                ShowTip("❌", Texts["ConnectDaemonFailedTip"], Texts["ConnectDaemonFailedSubTip"], Texts["Refresh"], ViewModel.RefreshCommand);
                 break;
         }
     }
 
-    private void ShowError(string symbol, string title, string description, string action)
+    private void ShowTip(string symbol, string title, string description, string buttonText, ICommand? command)
     {
         InstanceScrollViewer.Visibility = Visibility.Collapsed;
-        ErrorSymbol.Text = symbol;
-        ErrorTitle.Text = title;
-        ErrorDescription.Text = description;
-        ErrorActionButton.Content = action;
-        ErrorLayer.Visibility = Visibility.Visible;
+        TipLayer.Symbol = symbol;
+        TipLayer.StopTip = title;
+        TipLayer.StopDescription = description;
+        TipLayer.ButtonText = buttonText;
+        TipLayer.ButtonCommand = command;
+        TipLayer.Visibility = Visibility.Visible;
     }
 }
