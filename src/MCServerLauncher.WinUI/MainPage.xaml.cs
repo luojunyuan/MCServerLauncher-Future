@@ -41,7 +41,7 @@ public sealed partial class MainPage : Page
     public string ProductName => "MCServerLauncher Future";
     public LocalizedStrings Texts => App.Services.Localization.Texts;
     public ResourceDownloadViewModel DownloadHistoryViewModel { get; }
-    public FrameworkElement TitleBarElement => AppTitleBar;
+    public FrameworkElement TitleBarElement => AppTitleText;
 
     public bool IsDebugItemVisible => DebugItem.Visibility == Visibility.Visible;
 

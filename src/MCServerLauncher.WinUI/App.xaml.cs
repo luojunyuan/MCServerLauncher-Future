@@ -78,6 +78,7 @@ public sealed partial class App : WinUIIslands.Application
             _ = DisposeServicesIfReadyAsync();
         };
         Window.Activate();
+        MCServerLauncher.WinUI.MainWindow.ApplyWindowIcon(App.Window);
     }
 
     private static void OnUnhandledException(object sender, System.UnhandledExceptionEventArgs args)

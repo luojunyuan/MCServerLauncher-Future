@@ -305,8 +305,14 @@ public partial class SettingsViewModel : ObservableObject
 
     private static void Replace<T>(ObservableCollection<T> target, IEnumerable<T> values)
     {
-        target.Clear();
-        foreach (var value in values) target.Add(value);
+        var list = values.ToList();
+        for (var i = 0; i < target.Count && i < list.Count; i++)
+        {
+            if (!Equals(target[i], list[i])) target[i] = list[i];
+        }
+
+        while (target.Count > list.Count) target.RemoveAt(target.Count - 1);
+        while (target.Count < list.Count) target.Add(list[target.Count]);
     }
 
     private static int IndexOf(IReadOnlyList<string> values, string? selectedValue, string defaultValue)
