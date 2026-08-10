@@ -47,7 +47,8 @@ public sealed partial class ResourceDownloadPage : Page
     private async void HomePage_Click(object sender, RoutedEventArgs e)
     {
         if ((sender as Button)?.Tag is string url &&
-            Uri.TryCreate(url, UriKind.Absolute, out var uri))
+            Uri.TryCreate(url, UriKind.Absolute, out var uri) &&
+            uri.Scheme is "http" or "https")
             await Windows.System.Launcher.LaunchUriAsync(uri);
     }
 

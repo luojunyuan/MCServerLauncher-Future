@@ -88,8 +88,15 @@ public sealed partial class ActionSettingCard : UserControl
     {
         if (d is not ActionSettingCard control) return;
         if (e.NewValue is not bool isAccent) return;
-        control.SettingButton.Style = isAccent
-            ? (Style)Application.Current.Resources["AccentButtonStyle"]
-            : null;
+        if (isAccent
+            && Application.Current.Resources.TryGetValue("AccentButtonStyle", out var value)
+            && value is Style accentStyle)
+        {
+            control.SettingButton.Style = accentStyle;
+        }
+        else
+        {
+            control.SettingButton.Style = null;
+        }
     }
 }

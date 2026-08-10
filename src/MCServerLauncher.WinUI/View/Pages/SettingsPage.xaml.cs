@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -17,6 +18,7 @@ public sealed partial class SettingsPage : Page
         Serilog.Log.Debug("[WinUI] Settings page created");
         ViewModel = new SettingsViewModel(App.Services.Settings, App.Services.Localization);
         InitializeComponent();
+        ViewModel.PropertyChanged += ViewModel_PropertyChanged;
         Loaded += (_, _) => ViewModel.Attach();
         Unloaded += (_, _) => ViewModel.Detach();
     }
@@ -26,7 +28,13 @@ public sealed partial class SettingsPage : Page
     public string CopyrightText => "Copyright © 2022-2026 MCSLTeam. All rights reserved.";
     public string GitHubLabel => "GitHub";
 
-    private void Theme_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void ViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(SettingsViewModel.LauncherThemeIndex))
+            ApplyTheme();
+    }
+
+    private void ApplyTheme()
     {
         if (ViewModel.LauncherThemeIndex < 0) return;
         App.Services.Themes.Apply(App.Window.RootPage, ViewModel.SelectedTheme);

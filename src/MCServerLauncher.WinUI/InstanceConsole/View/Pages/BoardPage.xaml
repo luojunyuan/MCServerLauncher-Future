@@ -12,7 +12,7 @@
                     <Grid ColumnSpacing="12">
                         <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
                         <TextBlock Text="{x:Bind Texts['ConsoleBoard_Universal_RAM'], Mode=OneWay}" VerticalAlignment="Center" />
-                        <TextBlock x:Name="MemoryStatusTextBlock" Grid.Column="2" Text="0 MB / 0 MB" TextAlignment="Right" />
+                        <TextBlock x:Name="MemoryStatusTextBlock" Grid.Column="2" Text="0 MB" TextAlignment="Right" />
                     </Grid>
                     <ProgressBar x:Name="MemoryStatusProgressBar" Grid.Row="1" Maximum="100" Value="0" />
                 </Grid>
@@ -60,9 +60,6 @@
                                     <TextBlock x:Name="PlayerIpText" Grid.Column="1" VerticalAlignment="Center" Visibility="Collapsed" />
                                     <Button Grid.Column="2" Click="TogglePlayerIp_Click" Padding="10,4" VerticalAlignment="Center">
                                         <FontIcon x:Name="TogglePlayerIpIcon" Glyph="&#xE890;" FontSize="14" />
-                                    </Button>
-                                    <Button Grid.Column="3" Padding="10,4" VerticalAlignment="Center">
-                                        <FontIcon Glyph="&#xE712;" FontSize="14" />
                                     </Button>
                                 </Grid>
                             </DataTemplate>

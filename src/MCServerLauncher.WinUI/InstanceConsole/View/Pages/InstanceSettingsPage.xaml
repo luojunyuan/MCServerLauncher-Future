@@ -73,9 +73,6 @@
                     <Button x:Name="AddArgumentButton" Grid.Column="1" Content="{x:Bind Texts['Add'], Mode=OneWay}" Click="AddArgument_Click" />
                     <Button Grid.Column="2" Content="{x:Bind Texts['JvmArgHelper'], Mode=OneWay}" Click="Helper_Click" />
                 </Grid>
-                <muxc:InfoBar IsOpen="True" IsClosable="False" Severity="Warning"
-                              Title="{x:Bind Texts['Warning'], Mode=OneWay}"
-                              Message="{x:Bind Texts['NoJarFileJvmArgument'], Mode=OneWay}" />
                 <ListView x:Name="JvmArgumentsList" ItemsSource="{x:Bind Arguments, Mode=OneWay}" SelectionMode="None">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="models:JvmArgumentItemModel">
