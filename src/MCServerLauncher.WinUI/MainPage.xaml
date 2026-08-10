@@ -43,13 +43,13 @@
             Visibility="Collapsed"
             Background="Transparent"
             BorderThickness="0"
-            Width="48"
-            Height="48"
+            Width="46"
+            Height="32"
             Padding="0"
             VerticalAlignment="Center"
             AutomationProperties.AutomationId="DownloadHistoryButton"
             Click="DownloadHistoryButton_Click">
-          <FontIcon Glyph="&#xE896;" FontSize="16" />
+          <FontIcon Glyph="&#xE896;" FontSize="14" />
           <Button.Flyout>
             <Flyout Placement="Bottom">
               <Grid Width="350" RowSpacing="12">
@@ -160,6 +160,7 @@
           x:Name="NavView"
           Visibility="Collapsed"
           IsBackEnabled="False"
+          IsBackButtonVisible="Collapsed"
           IsSettingsVisible="False"
           PaneDisplayMode="Auto"
           ItemInvoked="NavigationView_ItemInvoked">

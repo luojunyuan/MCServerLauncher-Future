@@ -22,15 +22,11 @@ public sealed partial class MainWindow : WinUIIslands.Window
         Activated += (_, _) => ApplyWindowIcon(this);
         if (AppWindow is { } appWindow)
         {
-            var dpi = GetDpiForSystem();
-            var scale = dpi / 96.0;
-            appWindow.Resize(new Windows.Graphics.SizeInt32(
-                (int)Math.Round(1138 * scale),
-                (int)Math.Round(750 * scale)));
+            appWindow.Resize(new Windows.Graphics.SizeInt32(1138, 750));
             if (appWindow.Presenter is WinUIIslands.Windowing.OverlappedPresenter presenter)
             {
-                presenter.PreferredMinimumWidth = (int)Math.Round(MinimumWidth * scale);
-                presenter.PreferredMinimumHeight = (int)Math.Round(MinimumHeight * scale);
+                presenter.PreferredMinimumWidth = MinimumWidth;
+                presenter.PreferredMinimumHeight = MinimumHeight;
             }
         }
     }
@@ -64,7 +60,4 @@ public sealed partial class MainWindow : WinUIIslands.Window
 
     [DllImport("user32.dll")]
     private static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
-
-    [DllImport("user32.dll")]
-    private static extern uint GetDpiForSystem();
 }

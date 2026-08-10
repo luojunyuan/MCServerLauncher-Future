@@ -25,19 +25,12 @@
                     <ListView Grid.Row="1" x:Name="CoreList" ItemsSource="{x:Bind ViewModel.CoreItems, Mode=OneWay}" SelectionChanged="Core_SelectionChanged">
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="models:ResourceCoreItem">
-                                <Grid Padding="8" ColumnSpacing="10">
+                                <Grid Padding="8,4" ColumnSpacing="8">
                                     <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
-                                    <StackPanel>
-                                        <TextBlock Text="{x:Bind Name, Mode=OneTime}" FontWeight="SemiBold" />
-                                        <TextBlock Text="{x:Bind HomePage, Mode=OneTime}" TextWrapping="Wrap" Opacity="0.5" FontSize="11" Visibility="{x:Bind local:ResourceDownloadPage.StringToVisibility(HomePage), Mode=OneTime}" />
-                                        <TextBlock Text="{x:Bind Description, Mode=OneTime}" TextWrapping="Wrap" Opacity="0.7" />
-                                    </StackPanel>
-                                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
-                                        <TextBlock Text="{x:Bind Tag, Mode=OneTime}" Opacity="0.7" VerticalAlignment="Center" />
-                                        <Button Click="HomePage_Click" Tag="{x:Bind HomePage, Mode=OneTime}" Visibility="{x:Bind local:ResourceDownloadPage.StringToVisibility(HomePage), Mode=OneTime}" ToolTipService.ToolTip="{x:Bind local:ResourceDownloadPage.OpenHomePageText(), Mode=OneTime}" Padding="6" MinWidth="32" MinHeight="32" VerticalAlignment="Center">
-                                            <FontIcon Glyph="&#xE8A7;" FontSize="14" />
-                                        </Button>
-                                    </StackPanel>
+                                    <TextBlock Text="{x:Bind Name, Mode=OneTime}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+                                    <Border Grid.Column="1" Background="{ThemeResource SystemAccentColor}" CornerRadius="10" Padding="8,2" VerticalAlignment="Center" Visibility="{x:Bind local:ResourceDownloadPage.StringToVisibility(Tag), Mode=OneTime}">
+                                        <TextBlock Text="{x:Bind Tag, Mode=OneTime}" Foreground="White" FontSize="12" />
+                                    </Border>
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
