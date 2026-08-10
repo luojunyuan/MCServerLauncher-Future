@@ -19,27 +19,35 @@ public sealed partial class MainWindow : WinUIIslands.Window
         WindowRoot.Children.Add(RootPage);
         SetTitleBar(RootPage.TitleBarElement);
         Title = RootPage.ProductName;
-        Activated += (_, _) => ApplyWindowIcon(this);
-        if (AppWindow is { } appWindow)
+        Activated += (_, _) => ApplyWindowSetup(this);
+        if (AppWindow is { } appWindow
+            && appWindow.Presenter is WinUIIslands.Windowing.OverlappedPresenter presenter)
         {
-            appWindow.Resize(new Windows.Graphics.SizeInt32(1138, 750));
-            if (appWindow.Presenter is WinUIIslands.Windowing.OverlappedPresenter presenter)
-            {
-                presenter.PreferredMinimumWidth = MinimumWidth;
-                presenter.PreferredMinimumHeight = MinimumHeight;
-            }
+            // Remove the system title bar and caption buttons; we render our own.
+            presenter.SetBorderAndTitleBar(true, false);
+            presenter.PreferredMinimumWidth = MinimumWidth;
+            presenter.PreferredMinimumHeight = MinimumHeight;
         }
     }
 
     public MainPage RootPage { get; }
 
     /// <summary>
-    ///     Applies the application icon to the window's taskbar and title bar via Win32.
+    ///     Applies the DPI-scaled initial size and the application icon to the window.
     /// </summary>
-    public static unsafe void ApplyWindowIcon(WinUIIslands.Window window)
+    public static unsafe void ApplyWindowSetup(WinUIIslands.Window window)
     {
         var hwnd = WinUIIslands.Windowing.WindowNative.GetWindowHandle(window);
         if (hwnd == IntPtr.Zero) return;
+
+        var dpi = GetDpiForWindow(hwnd);
+        var scale = dpi / 96.0;
+        if (window.AppWindow is { } appWindow)
+        {
+            appWindow.Resize(new Windows.Graphics.SizeInt32(
+                (int)Math.Round(1138 * scale),
+                (int)Math.Round(750 * scale)));
+        }
 
         var iconPath = Path.Combine(AppContext.BaseDirectory, "Resources", "MCServerLauncherFuture.ico");
         if (!File.Exists(iconPath)) return;
@@ -60,4 +68,7 @@ public sealed partial class MainWindow : WinUIIslands.Window
 
     [DllImport("user32.dll")]
     private static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
+
+    [DllImport("user32.dll")]
+    private static extern uint GetDpiForWindow(IntPtr hWnd);
 }

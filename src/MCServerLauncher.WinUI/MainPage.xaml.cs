@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using Windows.System;
 using Windows.UI;
 using Windows.UI.Text;
@@ -23,6 +24,7 @@ public sealed partial class MainPage : Page
     private bool _themeInitialized;
     private bool _viewInitialized;
     private bool _notificationsSubscribed;
+    private bool _windowEventsSubscribed;
 
     public MainPage(Exception? startupError = null)
     {
@@ -122,6 +124,14 @@ public sealed partial class MainPage : Page
             _notificationsSubscribed = true;
         }
 
+        if (!_windowEventsSubscribed)
+        {
+            App.Window.Activated += (_, _) => RefreshMaximizeIcon();
+            App.Window.SizeChanged += (_, _) => RefreshMaximizeIcon();
+            _windowEventsSubscribed = true;
+            RefreshMaximizeIcon();
+        }
+
         if (_viewInitialized) return;
         _viewInitialized = true;
 
@@ -147,6 +157,30 @@ public sealed partial class MainPage : Page
 
     private void DownloadHistoryButton_Click(object sender, RoutedEventArgs e) =>
         DownloadHistoryViewModel.ReloadHistory();
+
+    [DllImport("user32.dll")]
+    private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+    private const int SwMinimize = 6;
+    private const int SwMaximize = 3;
+    private const int SwRestore = 9;
+
+    private void MinimizeButton_Click(object sender, RoutedEventArgs e) => ShowWindow(App.WindowHandle, SwMinimize);
+
+    private void MaximizeButton_Click(object sender, RoutedEventArgs e)
+    {
+        ShowWindow(App.WindowHandle, App.Window.IsMaximized ? SwRestore : SwMaximize);
+        RefreshMaximizeIcon();
+    }
+
+    private void CloseButton_Click(object sender, RoutedEventArgs e) => App.Window.Close();
+
+    private void RefreshMaximizeIcon()
+    {
+        if (MaximizeIcon is null) return;
+        var maximized = App.Window is { } window && window.IsMaximized;
+        MaximizeIcon.Glyph = maximized ? "" : "";
+        AutomationProperties.SetName(MaximizeButton, maximized ? "Restore" : "Maximize");
+    }
 
     private async void RetryDownload_Click(object sender, RoutedEventArgs e)
     {
