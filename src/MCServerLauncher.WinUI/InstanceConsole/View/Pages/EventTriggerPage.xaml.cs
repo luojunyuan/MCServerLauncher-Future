@@ -1,5 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Text.Json;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using MCServerLauncher.Common.ProtoType.EventTrigger;
@@ -57,7 +59,10 @@ public sealed partial class EventTriggerPage : UserControl
 
     public List<EventRule> GetRules() => Rules.Select(item => item.Rule).ToList();
 
-    private void Add_Click(object sender, RoutedEventArgs e)
+    private RelayCommand? _addRuleCommand;
+    public ICommand AddRuleCommand => _addRuleCommand ??= new RelayCommand(AddRule);
+
+    private void AddRule()
     {
         Rules.Add(new EventRuleModel(new EventRule
         {
@@ -65,6 +70,8 @@ public sealed partial class EventTriggerPage : UserControl
             Description = Texts["EventTrigger_NewRuleDescription"]
         }));
     }
+
+    private void Add_Click(object sender, RoutedEventArgs e) => AddRule();
 
     private async void Edit_Click(object sender, RoutedEventArgs e)
     {

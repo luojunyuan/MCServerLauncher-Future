@@ -4,6 +4,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using MCServerLauncher.Common.ProtoType.Instance;
 using MCServerLauncher.WinUI.Core.Localization;
+using MCServerLauncher.WinUI.Core.Services;
 
 namespace MCServerLauncher.WinUI.InstanceConsole.View.Pages;
 
@@ -65,6 +66,14 @@ public sealed partial class CommandPage : UserControl, INotifyPropertyChanged
     private void Restart_Click(object sender, RoutedEventArgs e) => RestartRequested?.Invoke(this, EventArgs.Empty);
     private void Kill_Click(object sender, RoutedEventArgs e) => KillRequested?.Invoke(this, EventArgs.Empty);
     private void ToggleFullscreen_Click(object sender, RoutedEventArgs e) => FullscreenRequested?.Invoke(this, EventArgs.Empty);
+
+    private void CopyLog_Click(object sender, RoutedEventArgs e)
+    {
+        if (string.IsNullOrEmpty(LogOutput.SelectedText)) return;
+        App.Services.Clipboard.SetText(LogOutput.SelectedText);
+    }
+
+    private void SelectAllLog_Click(object sender, RoutedEventArgs e) => LogOutput.SelectAll();
 
     private void CommandTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
     {
