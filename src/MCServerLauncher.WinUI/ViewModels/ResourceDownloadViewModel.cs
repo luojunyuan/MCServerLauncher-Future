@@ -66,7 +66,15 @@ public partial class ResourceDownloadViewModel : ObservableObject
     public IReadOnlyList<DaemonConfigModel> DaemonConfigs => _daemons.Items;
 
     [ObservableProperty] public partial int SelectedProviderIndex { get; set; }
-    [ObservableProperty] public partial ResourceCoreItem? SelectedCore { get; set; }
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(SelectedCoreHomePage))]
+    public partial ResourceCoreItem? SelectedCore { get; set; }
+
+    /// <summary>
+    ///     Home page URL of the selected core, or an empty string when no core is selected.
+    ///     Always non-null so x:Bind function bindings can be evaluated safely.
+    /// </summary>
+    public string SelectedCoreHomePage => SelectedCore?.HomePage ?? string.Empty;
     [ObservableProperty] public partial string? SelectedMinecraftVersion { get; set; }
     [ObservableProperty] public partial bool IsBusy { get; set; }
     [ObservableProperty] public partial double Progress { get; set; }

@@ -10,14 +10,13 @@
     <Grid Padding="32" RowSpacing="12">
         <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
         <Grid ColumnSpacing="12">
-            <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
             <TextBlock Text="{x:Bind Texts['Main_ResDownloadNavMenu'], Mode=OneWay}" Style="{StaticResource PageTitleTextBlockStyle}" />
-            <ComboBox Grid.Column="1" Width="260" ItemsSource="{x:Bind ViewModel.ProviderItems, Mode=OneWay}" SelectedIndex="{x:Bind ViewModel.SelectedProviderIndex, Mode=TwoWay}" SelectionChanged="Provider_SelectionChanged" />
-            <Button Grid.Column="2" Content="{x:Bind Texts['Refresh'], Mode=OneWay}" Click="Refresh_Click" />
+            <Button Grid.Column="1" Content="{x:Bind Texts['Refresh'], Mode=OneWay}" Click="Refresh_Click" />
         </Grid>
         <TextBlock Grid.Row="1" Text="{x:Bind ViewModel.Subtitle, Mode=OneWay}" Style="{StaticResource PageSubtitleTextBlockStyle}" />
         <Grid Grid.Row="2" ColumnSpacing="14">
-            <Grid.ColumnDefinitions><ColumnDefinition Width="1.2*" /><ColumnDefinition Width="1*" /><ColumnDefinition Width="1.4*" /></Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions><ColumnDefinition Width="200" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
             <Border Style="{StaticResource CardBorderStyle}">
                 <Grid RowSpacing="8">
                     <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
@@ -28,8 +27,8 @@
                                 <Grid Padding="8,4" ColumnSpacing="8">
                                     <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
                                     <TextBlock Text="{x:Bind Name, Mode=OneTime}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
-                                    <Border Grid.Column="1" Background="{ThemeResource SystemAccentColor}" CornerRadius="10" Padding="8,2" VerticalAlignment="Center" Visibility="{x:Bind local:ResourceDownloadPage.StringToVisibility(Tag), Mode=OneTime}">
-                                        <TextBlock Text="{x:Bind Tag, Mode=OneTime}" Foreground="White" FontSize="12" />
+                                    <Border Grid.Column="1" Background="{ThemeResource SystemAccentColor}" CornerRadius="4" Padding="6,1" VerticalAlignment="Center" Visibility="{x:Bind local:ResourceDownloadPage.StringToVisibility(Tag), Mode=OneTime}">
+                                        <TextBlock Text="{x:Bind Tag, Mode=OneTime}" Foreground="White" FontSize="11" />
                                     </Border>
                                 </Grid>
                             </DataTemplate>
@@ -38,16 +37,16 @@
                 </Grid>
             </Border>
             <Border Grid.Column="1" Style="{StaticResource CardBorderStyle}">
-                <StackPanel Spacing="8">
-                    <TextBlock Text="{x:Bind Texts['MinecraftVersion'], Mode=OneWay}" Style="{StaticResource SectionHeaderTextBlockStyle}" />
-                    <ComboBox x:Name="MinecraftVersionBox" ItemsSource="{x:Bind ViewModel.MinecraftVersions, Mode=OneWay}" SelectionChanged="MinecraftVersion_SelectionChanged" />
-                    <TextBlock Text="{x:Bind ViewModel.ErrorText, Mode=OneWay}" Foreground="{ThemeResource SystemFillColorCriticalBrush}" TextWrapping="Wrap" />
-                </StackPanel>
-            </Border>
-            <Border Grid.Column="2" Style="{StaticResource CardBorderStyle}">
                 <Grid RowSpacing="8">
                     <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
-                    <TextBlock Text="{x:Bind Texts['BuildVersion'], Mode=OneWay}" Style="{StaticResource SectionHeaderTextBlockStyle}" />
+                    <StackPanel Grid.Row="0" Spacing="8">
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                            <ComboBox Grid.Column="0" x:Name="MinecraftVersionBox" ItemsSource="{x:Bind ViewModel.MinecraftVersions, Mode=OneWay}" SelectedItem="{x:Bind ViewModel.SelectedMinecraftVersion, Mode=TwoWay}" PlaceholderText="{x:Bind Texts['MinecraftVersion'], Mode=OneWay}" SelectionChanged="MinecraftVersion_SelectionChanged" />
+                            <Button Grid.Column="1" Content="{x:Bind local:ResourceDownloadPage.OpenHomePageText(), Mode=OneTime}" Tag="{x:Bind ViewModel.SelectedCoreHomePage, Mode=OneWay}" Visibility="{x:Bind local:ResourceDownloadPage.StringToVisibility(ViewModel.SelectedCoreHomePage), Mode=OneWay}" Click="HomePage_Click" />
+                        </Grid>
+                        <TextBlock Text="{x:Bind ViewModel.ErrorText, Mode=OneWay}" Foreground="{ThemeResource SystemFillColorCriticalBrush}" TextWrapping="Wrap" />
+                    </StackPanel>
                     <ListView Grid.Row="1" ItemsSource="{x:Bind ViewModel.VersionItems, Mode=OneWay}">
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="models:ResourceVersionItem">

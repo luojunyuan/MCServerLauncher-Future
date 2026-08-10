@@ -23,13 +23,6 @@ public sealed partial class ResourceDownloadPage : Page
     public ResourceDownloadViewModel ViewModel { get; }
     public LocalizedStrings Texts => App.Services.Localization.Texts;
 
-    private async void Provider_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        if (ViewModel.SelectedProviderIndex < 0) return;
-        await ViewModel.SelectProviderAsync(ViewModel.SelectedProviderIndex);
-        await ViewModel.RefreshAsync();
-    }
-
     private async void Refresh_Click(object sender, RoutedEventArgs e) => await ViewModel.RefreshAsync();
 
     private async void Core_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
