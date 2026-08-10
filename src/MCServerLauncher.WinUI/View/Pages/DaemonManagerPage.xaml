@@ -5,7 +5,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    xmlns:models="using:MCServerLauncher.WinUI.Models">
+    xmlns:models="using:MCServerLauncher.WinUI.Models"
+    xmlns:generic="using:MCServerLauncher.WinUI.Views.Components.Generic">
   <Grid Padding="32" RowSpacing="14">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
@@ -69,8 +70,8 @@
                     <RowDefinition Height="Auto" />
                   </Grid.RowDefinitions>
                   <StackPanel Orientation="Horizontal" Spacing="8">
-                    <TextBlock Text="{x:Bind SystemType, Mode=OneWay}" Opacity="0.62" VerticalAlignment="Center" />
-                    <TextBlock Text="{x:Bind FriendlyName, Mode=OneWay}" FontSize="18" FontWeight="SemiBold" />
+                    <generic:OsLogo SystemType="{x:Bind SystemType, Mode=OneWay}" VerticalAlignment="Center" />
+                    <TextBlock Text="{x:Bind FriendlyName, Mode=OneWay}" FontSize="18" FontWeight="SemiBold" VerticalAlignment="Center" />
                   </StackPanel>
 
                   <Grid Grid.Row="1" RowSpacing="6" ColumnSpacing="12">

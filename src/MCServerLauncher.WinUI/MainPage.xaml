@@ -23,7 +23,18 @@
           <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-          <TextBlock Text="{x:Bind ProductName, Mode=OneTime}" FontWeight="SemiBold" />
+          <Image Source="Resources/MCServerLauncherFuture.png" Width="30" Height="30" Stretch="Uniform" />
+          <StackPanel VerticalAlignment="Center" Spacing="0">
+            <StackPanel Orientation="Horizontal" Spacing="4">
+              <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="Medium" Text="MCServerLauncher" />
+              <TextBlock FontFamily="{StaticResource Montserrat}" FontWeight="SemiBold" Foreground="#00E396" Text="Future" />
+            </StackPanel>
+            <TextBlock
+                FontFamily="{StaticResource Montserrat}"
+                FontSize="10"
+                Opacity="0.515"
+                Text="{x:Bind Texts['OnlyForWindows'], Mode=OneWay}" />
+          </StackPanel>
         </StackPanel>
         <Button
             x:Name="DownloadHistoryButton"
@@ -33,7 +44,7 @@
             BorderThickness="0"
             AutomationProperties.AutomationId="DownloadHistoryButton"
             Click="DownloadHistoryButton_Click">
-          <SymbolIcon Symbol="Download" />
+          <FontIcon Glyph="&#xE896;" />
           <Button.Flyout>
             <Flyout Placement="Bottom">
               <Grid Width="360" MaxHeight="600" RowSpacing="12">
@@ -96,22 +107,22 @@
           ItemInvoked="NavigationView_ItemInvoked">
         <muxc:NavigationView.MenuItems>
           <muxc:NavigationViewItem x:Name="HomeNavigationItem" Content="{x:Bind Texts['Main_HomeNavMenu'], Mode=OneWay}" Tag="Home">
-            <muxc:NavigationViewItem.Icon><SymbolIcon Symbol="Home" /></muxc:NavigationViewItem.Icon>
+            <muxc:NavigationViewItem.Icon><FontIcon Glyph="&#xE80F;" /></muxc:NavigationViewItem.Icon>
           </muxc:NavigationViewItem>
           <muxc:NavigationViewItem x:Name="CreateNavigationItem" Content="{x:Bind Texts['Main_CreateInstanceNavMenu'], Mode=OneWay}" Tag="Create">
-            <muxc:NavigationViewItem.Icon><SymbolIcon Symbol="Add" /></muxc:NavigationViewItem.Icon>
+            <muxc:NavigationViewItem.Icon><FontIcon Glyph="&#xECC8;" /></muxc:NavigationViewItem.Icon>
           </muxc:NavigationViewItem>
           <muxc:NavigationViewItem x:Name="InstanceManagerNavigationItem" Content="{x:Bind Texts['Main_InstanceManagerNavMenu'], Mode=OneWay}" Tag="Instances">
-            <muxc:NavigationViewItem.Icon><SymbolIcon Symbol="List" /></muxc:NavigationViewItem.Icon>
+            <muxc:NavigationViewItem.Icon><FontIcon Glyph="&#xE7B8;" /></muxc:NavigationViewItem.Icon>
           </muxc:NavigationViewItem>
           <muxc:NavigationViewItem x:Name="DaemonManagerNavigationItem" Content="{x:Bind Texts['Main_DaemonManagerNavMenu'], Mode=OneWay}" Tag="Daemons">
-            <muxc:NavigationViewItem.Icon><SymbolIcon Symbol="Globe" /></muxc:NavigationViewItem.Icon>
+            <muxc:NavigationViewItem.Icon><FontIcon Glyph="&#xEC4E;" /></muxc:NavigationViewItem.Icon>
           </muxc:NavigationViewItem>
           <muxc:NavigationViewItem x:Name="ResourceDownloadNavigationItem" Content="{x:Bind Texts['Main_ResDownloadNavMenu'], Mode=OneWay}" Tag="Resources">
-            <muxc:NavigationViewItem.Icon><SymbolIcon Symbol="Download" /></muxc:NavigationViewItem.Icon>
+            <muxc:NavigationViewItem.Icon><FontIcon Glyph="&#xE896;" /></muxc:NavigationViewItem.Icon>
           </muxc:NavigationViewItem>
-          <muxc:NavigationViewItem x:Name="HelpNavigationItem" Content="{x:Bind Texts['Main_HelpCenterNavMenu'], Mode=OneWay}" Tag="Help">
-            <muxc:NavigationViewItem.Icon><SymbolIcon Symbol="Help" /></muxc:NavigationViewItem.Icon>
+          <muxc:NavigationViewItem x:Name="HelpNavigationItem" Content="{x:Bind Texts['Main_HelpCenterNavMenu'], Mode=OneWay}" Tag="Help" IsEnabled="False">
+            <muxc:NavigationViewItem.Icon><FontIcon Glyph="&#xED15;" /></muxc:NavigationViewItem.Icon>
           </muxc:NavigationViewItem>
         </muxc:NavigationView.MenuItems>
         <muxc:NavigationView.FooterMenuItems>
@@ -120,10 +131,10 @@
               Content="{x:Bind Texts['Main_DebugNavMenu'], Mode=OneWay}"
               Tag="Debug"
               Visibility="Collapsed">
-            <muxc:NavigationViewItem.Icon><SymbolIcon Symbol="Repair" /></muxc:NavigationViewItem.Icon>
+            <muxc:NavigationViewItem.Icon><FontIcon Glyph="&#xEC7A;" /></muxc:NavigationViewItem.Icon>
           </muxc:NavigationViewItem>
           <muxc:NavigationViewItem x:Name="SettingsNavigationItem" Content="{x:Bind Texts['Main_SettingsNavMenu'], Mode=OneWay}" Tag="Settings">
-            <muxc:NavigationViewItem.Icon><SymbolIcon Symbol="Setting" /></muxc:NavigationViewItem.Icon>
+            <muxc:NavigationViewItem.Icon><FontIcon Glyph="&#xE713;" /></muxc:NavigationViewItem.Icon>
           </muxc:NavigationViewItem>
         </muxc:NavigationView.FooterMenuItems>
         <Grid>
