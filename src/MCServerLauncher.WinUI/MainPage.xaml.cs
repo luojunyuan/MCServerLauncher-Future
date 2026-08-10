@@ -1,6 +1,10 @@
 using Windows.System;
+using Windows.UI;
+using Windows.UI.Text;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Automation;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using MCServerLauncher.WinUI.Core.Localization;
 using MCServerLauncher.WinUI.Core.Services;
@@ -15,6 +19,7 @@ public sealed partial class MainPage : Page
     private readonly NavigationService _navigation = new();
     private readonly Exception? _startupError;
     private DispatcherQueueTimer? _notificationTimer;
+    private readonly List<DispatcherQueueTimer> _toastTimers = new();
     private bool _themeInitialized;
     private bool _viewInitialized;
     private bool _notificationsSubscribed;
@@ -178,6 +183,11 @@ public sealed partial class MainPage : Page
             _notificationsSubscribed = false;
         }
         _notificationTimer?.Stop();
+        foreach (var timer in _toastTimers)
+        {
+            timer.Stop();
+        }
+        _toastTimers.Clear();
     }
 
     private void NavigationView_ItemInvoked(
@@ -219,25 +229,230 @@ public sealed partial class MainPage : Page
     {
         App.DispatcherQueue.TryEnqueue(() =>
         {
-            NotificationBar.Title = message.Title;
-            NotificationBar.Message = message.Message;
-            NotificationBar.IsClosable = message.IsClosable;
-            NotificationBar.Severity = message.Severity switch
+            // Informational messages keep the single top InfoBar ("bar"
+            // severity); the more actionable severities surface as in-window
+            // toast cards in the 4-position host.
+            if (message.Severity == NotificationSeverity.Informational)
             {
-                NotificationSeverity.Success => Microsoft.UI.Xaml.Controls.InfoBarSeverity.Success,
-                NotificationSeverity.Warning => Microsoft.UI.Xaml.Controls.InfoBarSeverity.Warning,
-                NotificationSeverity.Error => Microsoft.UI.Xaml.Controls.InfoBarSeverity.Error,
-                _ => Microsoft.UI.Xaml.Controls.InfoBarSeverity.Informational
-            };
-            NotificationBar.IsOpen = true;
-
-            _notificationTimer?.Stop();
-            _notificationTimer = App.DispatcherQueue.CreateTimer();
-            _notificationTimer.Interval = TimeSpan.FromMilliseconds(Math.Max(500, message.DurationMs));
-            _notificationTimer.IsRepeating = false;
-            _notificationTimer.Tick += (_, _) => NotificationBar.IsOpen = false;
-            _notificationTimer.Start();
+                ShowInfoBarNotification(message);
+            }
+            else
+            {
+                ShowToast(message);
+            }
         });
+    }
+
+    private void ShowInfoBarNotification(NotificationMessage message)
+    {
+        NotificationBar.Title = message.Title;
+        NotificationBar.Message = message.Message;
+        NotificationBar.IsClosable = message.IsClosable;
+        NotificationBar.Severity = message.Severity switch
+        {
+            NotificationSeverity.Success => Microsoft.UI.Xaml.Controls.InfoBarSeverity.Success,
+            NotificationSeverity.Warning => Microsoft.UI.Xaml.Controls.InfoBarSeverity.Warning,
+            NotificationSeverity.Error => Microsoft.UI.Xaml.Controls.InfoBarSeverity.Error,
+            _ => Microsoft.UI.Xaml.Controls.InfoBarSeverity.Informational
+        };
+        NotificationBar.IsOpen = true;
+
+        _notificationTimer?.Stop();
+        _notificationTimer = App.DispatcherQueue.CreateTimer();
+        _notificationTimer.Interval = TimeSpan.FromMilliseconds(Math.Max(500, message.DurationMs));
+        _notificationTimer.IsRepeating = false;
+        _notificationTimer.Tick += (_, _) => NotificationBar.IsOpen = false;
+        _notificationTimer.Start();
+    }
+
+    private void ShowToast(NotificationMessage message)
+    {
+        // The event payload carries no position field and the interface does
+        // not expose one, so toasts use the default Top slot (matching the WPF
+        // default). The other three panels are wired up and ready to receive
+        // toasts if a position is introduced later.
+        var panel = ToastPanelTop;
+        var card = CreateToastCard(message);
+
+        panel.Children.Add(card);
+        card.Opacity = 0;
+        AnimateOpacity(card, 0, 1, 200);
+
+        var timer = App.DispatcherQueue.CreateTimer();
+        timer.Interval = TimeSpan.FromMilliseconds(Math.Max(4000, message.DurationMs));
+        timer.IsRepeating = false;
+        timer.Tick += (_, _) =>
+        {
+            timer.Stop();
+            _toastTimers.Remove(timer);
+            DismissToast(card);
+        };
+        timer.Start();
+        _toastTimers.Add(timer);
+    }
+
+    private Border CreateToastCard(NotificationMessage message)
+    {
+        var accent = GetSeverityBrush(message.Severity);
+
+        var accentBar = new Border
+        {
+            Width = 4,
+            Background = accent,
+            CornerRadius = new CornerRadius(2),
+            VerticalAlignment = VerticalAlignment.Stretch
+        };
+
+        var title = new TextBlock
+        {
+            Text = message.Title,
+            FontWeight = FontWeights.SemiBold,
+            TextTrimming = TextTrimming.CharacterEllipsis
+        };
+
+        var textStack = new StackPanel { Spacing = 2 };
+        textStack.Children.Add(title);
+        if (!string.IsNullOrEmpty(message.Message))
+        {
+            textStack.Children.Add(new TextBlock
+            {
+                Text = message.Message,
+                TextWrapping = TextWrapping.Wrap,
+                Opacity = 0.8
+            });
+        }
+
+        var grid = new Grid { ColumnSpacing = 12 };
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+        Grid.SetColumn(accentBar, 0);
+        Grid.SetColumn(textStack, 1);
+        grid.Children.Add(accentBar);
+        grid.Children.Add(textStack);
+
+        Border card = null!;
+
+        if (message.IsClosable)
+        {
+            var closeButton = new Button
+            {
+                Content = new FontIcon { Glyph = "", FontSize = 12 },
+                VerticalAlignment = VerticalAlignment.Top,
+                Padding = new Thickness(4),
+                Background = new SolidColorBrush(Colors.Transparent),
+                BorderThickness = new Thickness(0)
+            };
+            AutomationProperties.SetName(closeButton, Texts["Close"]);
+            closeButton.Click += (_, _) => DismissToast(card);
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            Grid.SetColumn(closeButton, 2);
+            grid.Children.Add(closeButton);
+        }
+
+        card = new Border
+        {
+            Style = GetCardStyle(),
+            Padding = new Thickness(12, 10, 12, 10),
+            MaxWidth = 360,
+            IsHitTestVisible = true
+        };
+        if (card.Style is null)
+        {
+            // CardBorderStyle unavailable - fall back to a solid theme surface.
+            card.Background = TryResolveBrush("CardBackgroundFillColorDefaultBrush")
+                              ?? new SolidColorBrush(Colors.White);
+            card.BorderBrush = TryResolveBrush("CardStrokeColorDefaultBrush");
+            card.BorderThickness = new Thickness(1);
+            card.CornerRadius = new CornerRadius(4);
+        }
+        card.Child = grid;
+
+        // ThemeShadow needs a composition target; XAML Islands may not provide
+        // one, so fall back to a flat card rather than failing to show it.
+        try
+        {
+            card.Shadow = new ThemeShadow();
+        }
+        catch
+        {
+            // Drop shadow unsupported in this host - flat card is fine.
+        }
+
+        return card;
+    }
+
+    private static Style? GetCardStyle()
+    {
+        try
+        {
+            return Application.Current.Resources["CardBorderStyle"] as Style;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static Brush? TryResolveBrush(string key)
+    {
+        try
+        {
+            return Application.Current.Resources[key] as Brush;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static SolidColorBrush GetSeverityBrush(NotificationSeverity severity) => severity switch
+    {
+        NotificationSeverity.Success => new SolidColorBrush(Color.FromArgb(255, 16, 124, 16)),
+        NotificationSeverity.Warning => new SolidColorBrush(Color.FromArgb(255, 200, 150, 0)),
+        NotificationSeverity.Error => new SolidColorBrush(Color.FromArgb(255, 196, 43, 28)),
+        _ => new SolidColorBrush(Color.FromArgb(255, 0, 120, 212))
+    };
+
+    private static void DismissToast(Border card)
+    {
+        if (card.Tag is true) return;
+        card.Tag = true;
+        if (card.Parent is not StackPanel panel) return;
+
+        var animation = new DoubleAnimation
+        {
+            From = 1,
+            To = 0,
+            Duration = new Duration(TimeSpan.FromMilliseconds(200)),
+            EnableDependentAnimation = true
+        };
+        Storyboard.SetTarget(animation, card);
+        Storyboard.SetTargetProperty(animation, "Opacity");
+
+        var storyboard = new Storyboard();
+        storyboard.Children.Add(animation);
+        storyboard.Completed += (_, _) =>
+        {
+            if (card.Parent == panel) panel.Children.Remove(card);
+        };
+        storyboard.Begin();
+    }
+
+    private static void AnimateOpacity(UIElement element, double from, double to, int durationMs)
+    {
+        var animation = new DoubleAnimation
+        {
+            From = from,
+            To = to,
+            Duration = new Duration(TimeSpan.FromMilliseconds(durationMs)),
+            EnableDependentAnimation = true
+        };
+        Storyboard.SetTarget(animation, element);
+        Storyboard.SetTargetProperty(animation, "Opacity");
+
+        var storyboard = new Storyboard();
+        storyboard.Children.Add(animation);
+        storyboard.Begin();
     }
 
     private static Task AnimateOpacityAsync(UIElement element, double from, double to, int durationMs)

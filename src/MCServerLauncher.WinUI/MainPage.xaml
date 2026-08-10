@@ -207,6 +207,45 @@
       </muxc:NavigationView>
     </Grid>
 
+    <!-- In-window toast host: four overlay panels anchored over the content
+         area (layered above ContentFrame/NavView, like LoadingOverlay).
+         The panels have no Background, so empty areas stay transparent to
+         hit-testing; only the toast cards themselves intercept pointer input. -->
+    <Grid
+        x:Name="ToastHost"
+        Grid.RowSpan="2"
+        Canvas.ZIndex="200"
+        IsHitTestVisible="True">
+      <StackPanel
+          x:Name="ToastPanelTop"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Top"
+          Margin="24,64,24,0"
+          MaxWidth="360"
+          Spacing="8" />
+      <StackPanel
+          x:Name="ToastPanelTopRight"
+          HorizontalAlignment="Right"
+          VerticalAlignment="Top"
+          Margin="0,64,16,0"
+          MaxWidth="360"
+          Spacing="8" />
+      <StackPanel
+          x:Name="ToastPanelBottom"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Bottom"
+          Margin="24,0,24,24"
+          MaxWidth="360"
+          Spacing="8" />
+      <StackPanel
+          x:Name="ToastPanelBottomRight"
+          HorizontalAlignment="Right"
+          VerticalAlignment="Bottom"
+          Margin="0,0,16,24"
+          MaxWidth="360"
+          Spacing="8" />
+    </Grid>
+
     <Grid
         x:Name="LoadingOverlay"
         Grid.RowSpan="2"

@@ -1,3 +1,6 @@
+using System.Windows.Input;
+using System.Text.Json;
+using CommunityToolkit.Mvvm.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using MCServerLauncher.WinUI.Core.Localization;
@@ -7,7 +10,6 @@ using MCServerLauncher.WinUI.View.Features.CreateInstance.PreCreate;
 using MCServerLauncher.WinUI.View.Features.CreateInstance.Providers;
 using MCServerLauncher.Common.ProtoType.Instance;
 using MCServerLauncher.DaemonClient.Serialization;
-using System.Text.Json;
 
 namespace MCServerLauncher.WinUI.Views.Pages;
 
@@ -32,8 +34,6 @@ public sealed partial class CreateInstancePage : Page
         Session = null;
         _returnToMinecraftTypes = false;
         UpdateAvailability();
-        AvailabilityBar.Title = Texts["FuncDisabled"];
-        AvailabilityBar.Message = Texts["FuncDisabledReason_NoDaemon"];
         WizardFrame.Content = new PreCreateInstance(this);
     }
 
@@ -98,7 +98,7 @@ public sealed partial class CreateInstancePage : Page
             var daemon = await App.Services.DaemonConnections.GetAsync(selected);
             if (daemon is not null)
             {
-                AvailabilityBar.IsOpen = false;
+                AvailabilityTip.Visibility = Visibility.Collapsed;
                 WizardFrame.Visibility = Visibility.Visible;
                 return new CreateInstanceSession(selected, daemon);
             }
@@ -194,15 +194,24 @@ public sealed partial class CreateInstancePage : Page
         UpdateAvailability();
     }
 
+    private ICommand? _connectDaemonCommand;
+    private ICommand ConnectDaemonCommand => _connectDaemonCommand ??= new RelayCommand(() =>
+        App.Window.RootPage.Navigate(typeof(DaemonManagerPage), DaemonManagerPage.OpenConnectionParameter));
+
     private void UpdateAvailability()
     {
         var unavailable = App.Services.Daemons.Items.Count == 0;
-        AvailabilityBar.IsOpen = unavailable;
+        if (unavailable)
+        {
+            AvailabilityTip.Symbol = "❌";
+            AvailabilityTip.StopTip = Texts["FuncDisabled"];
+            AvailabilityTip.StopDescription = Texts["FuncDisabledReason_NoDaemon"];
+            AvailabilityTip.ButtonText = Texts["ConnectDaemon"];
+            AvailabilityTip.ButtonCommand = ConnectDaemonCommand;
+        }
+        AvailabilityTip.Visibility = unavailable ? Visibility.Visible : Visibility.Collapsed;
         WizardFrame.Visibility = unavailable ? Visibility.Collapsed : Visibility.Visible;
     }
-
-    private void ConnectDaemon_Click(object sender, RoutedEventArgs e) =>
-        App.Window.RootPage.Navigate(typeof(DaemonManagerPage), DaemonManagerPage.OpenConnectionParameter);
 
     public void Push(
         string title,

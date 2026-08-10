@@ -20,16 +20,16 @@
         SelectionChanged="StepNavigation_SelectionChanged">
       <NavigationView.MenuItems>
         <NavigationViewItem x:Name="LanguageNavigationItem" Tag="0" Content="{x:Bind Texts['FirstSetup_TimeLanguageMenu'], Mode=OneWay}">
-          <NavigationViewItem.Icon><SymbolIcon Symbol="World" /></NavigationViewItem.Icon>
+          <NavigationViewItem.Icon><FontIcon Glyph="&#xE775;" FontSize="16" /></NavigationViewItem.Icon>
         </NavigationViewItem>
         <NavigationViewItem x:Name="EulaNavigationItem" Tag="1" Content="{x:Bind Texts['FirstSetup_EulaMenu'], Mode=OneWay}">
-          <NavigationViewItem.Icon><SymbolIcon Symbol="Document" /></NavigationViewItem.Icon>
+          <NavigationViewItem.Icon><FontIcon Glyph="&#xE946;" FontSize="16" /></NavigationViewItem.Icon>
         </NavigationViewItem>
         <NavigationViewItem x:Name="DaemonNavigationItem" Tag="2" Content="{x:Bind Texts['FirstSetup_ConnectDaemonMenu'], Mode=OneWay}">
-          <NavigationViewItem.Icon><SymbolIcon Symbol="Link" /></NavigationViewItem.Icon>
+          <NavigationViewItem.Icon><FontIcon Glyph="&#xE753;" FontSize="16" /></NavigationViewItem.Icon>
         </NavigationViewItem>
         <NavigationViewItem x:Name="WelcomeNavigationItem" Tag="3" Content="{x:Bind Texts['FirstSetup_WelcomeMenu'], Mode=OneWay}">
-          <NavigationViewItem.Icon><SymbolIcon Symbol="Home" /></NavigationViewItem.Icon>
+          <NavigationViewItem.Icon><FontIcon Glyph="&#xE977;" FontSize="16" /></NavigationViewItem.Icon>
         </NavigationViewItem>
       </NavigationView.MenuItems>
     </NavigationView>
@@ -67,8 +67,18 @@
           <StackPanel x:Name="LocalChoicePanel" Spacing="12">
             <TextBlock Text="{x:Bind Texts['FirstSetup_DaemonLocalQuestion'], Mode=OneWay}" FontSize="20" FontWeight="SemiBold" TextWrapping="Wrap" />
             <TextBlock Text="{x:Bind Texts['FirstSetup_DaemonLocalQuestionTip'], Mode=OneWay}" TextWrapping="Wrap" />
-            <Button x:Name="UseLocalDaemonButton" Content="{x:Bind Texts['FirstSetup_DaemonUseLocal'], Mode=OneWay}" Click="UseLocalDaemon" />
-            <Button x:Name="UseRemoteDaemonButton" Content="{x:Bind Texts['FirstSetup_DaemonSkipLocalUseRemote'], Mode=OneWay}" Click="UseRemoteDaemon" />
+            <Button x:Name="UseLocalDaemonButton" Click="UseLocalDaemon">
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <FontIcon Glyph="&#xE977;" FontSize="16" />
+                <TextBlock Text="{x:Bind Texts['FirstSetup_DaemonUseLocal'], Mode=OneWay}" />
+              </StackPanel>
+            </Button>
+            <Button x:Name="UseRemoteDaemonButton" Click="UseRemoteDaemon">
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <FontIcon Glyph="&#xE753;" FontSize="16" />
+                <TextBlock Text="{x:Bind Texts['FirstSetup_DaemonSkipLocalUseRemote'], Mode=OneWay}" />
+              </StackPanel>
+            </Button>
           </StackPanel>
           <StackPanel x:Name="RemoteSetupPanel" Visibility="Collapsed" Spacing="12">
             <Button x:Name="DaemonActionButton" Content="{x:Bind Texts['ConnectDaemon'], Mode=OneWay}" Click="AddDaemonConnection" />
