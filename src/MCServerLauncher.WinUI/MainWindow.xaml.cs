@@ -19,7 +19,7 @@ public sealed partial class MainWindow : WinUIIslands.Window
         WindowRoot.Children.Add(RootPage);
         SetTitleBar(RootPage.TitleBarElement);
         Title = RootPage.ProductName;
-        Activated += (_, _) => ApplyWindowSetup(this);
+        Activated += OnActivated;
         if (AppWindow is { } appWindow
             && appWindow.Presenter is WinUIIslands.Windowing.OverlappedPresenter presenter)
         {
@@ -29,6 +29,12 @@ public sealed partial class MainWindow : WinUIIslands.Window
     }
 
     public MainPage RootPage { get; }
+
+    private void OnActivated(object sender, WinUIIslands.WindowActivatedEventArgs e)
+    {
+        ApplyWindowSetup(this);
+        RootPage.SetDownloadHistoryButtonDimmed(!e.IsActive);
+    }
 
     /// <summary>
     ///     Applies the DPI-scaled initial size and the application icon to the window.

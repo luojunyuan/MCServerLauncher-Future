@@ -1,0 +1,1834 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:schema id="root">
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ErrorDialogTitle" xml:space="preserve">
+    <value>MCServerLauncher WinUI 遇到错误</value>
+  </data>
+  <data name="OnlyForWindows" xml:space="preserve">
+    <value>WinUI 客户端 ( 仅 Windows )</value>
+  </data>
+  <data name="FirstSetup_TimeLanguageMenu" xml:space="preserve">
+    <value>语言 / Language</value>
+  </data>
+  <data name="FirstSetup_EulaMenu" xml:space="preserve">
+    <value>用户协议</value>
+  </data>
+  <data name="FirstSetup_ConnectDaemonMenu" xml:space="preserve">
+    <value>连接远程主机</value>
+  </data>
+  <data name="FirstSetup_WelcomeMenu" xml:space="preserve">
+    <value>开始使用</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>继续</value>
+  </data>
+  <data name="FirstSetup_SetLanguageHint" xml:space="preserve">
+    <value> 设置语言</value>
+  </data>
+  <data name="FirstSetup_SetLanguageHintReverse" xml:space="preserve">
+    <value> Language</value>
+  </data>
+  <data name="Main_HomeNavMenu" xml:space="preserve">
+    <value>主页</value>
+  </data>
+  <data name="Main_CreateInstanceNavMenu" xml:space="preserve">
+    <value>新建实例</value>
+  </data>
+  <data name="Main_InstanceManagerNavMenu" xml:space="preserve">
+    <value>实例管理</value>
+  </data>
+  <data name="Main_ResDownloadNavMenu" xml:space="preserve">
+    <value>资源下载</value>
+  </data>
+  <data name="Main_HelpCenterNavMenu" xml:space="preserve">
+    <value>帮助中心</value>
+  </data>
+  <data name="Main_NotificationCenterNavMenu" xml:space="preserve">
+    <value>通知中心</value>
+  </data>
+  <data name="Main_DebugNavMenu" xml:space="preserve">
+    <value>调试页面</value>
+  </data>
+  <data name="Main_SettingsNavMenu" xml:space="preserve">
+    <value>程序设置</value>
+  </data>
+  <data name="Tip" xml:space="preserve">
+    <value>提示</value>
+  </data>
+  <data name="NotAllowedMultipleProcess" xml:space="preserve">
+    <value>MCServerLauncher WinUI 不支持重复运行。</value>
+  </data>
+  <data name="DownloadModule_FastMirrorProxyType" xml:space="preserve">
+    <value>代理</value>
+  </data>
+  <data name="DownloadModule_FastMirrorVanillaType" xml:space="preserve">
+    <value>原版</value>
+  </data>
+  <data name="DownloadModule_FastMirrorPureType" xml:space="preserve">
+    <value>纯净</value>
+  </data>
+  <data name="DownloadModule_FastMirrorModType" xml:space="preserve">
+    <value>模组</value>
+  </data>
+  <data name="DownloadModule_FastMirrorBedrockType" xml:space="preserve">
+    <value>基岩</value>
+  </data>
+  <data name="DownloadModule_MSLAPIGetCoreDescriptionFailed" xml:space="preserve">
+    <value>获取核心介绍失败！</value>
+  </data>
+  <data name="CreateInstance_MinecraftBedrockArchive_Title" xml:space="preserve">
+    <value>Minecraft 基岩版压缩包</value>
+  </data>
+  <data name="CreateInstance_Archive_Description" xml:space="preserve">
+    <value>请在此处导入下载的压缩包。如果不知道在哪里下载，可点击右侧按钮跳转。</value>
+  </data>
+  <data name="Archive" xml:space="preserve">
+    <value>压缩包</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>浏览</value>
+  </data>
+  <data name="CreateInstance_MinecraftJavaCore_Title" xml:space="preserve">
+    <value>Minecraft 服务器核心</value>
+  </data>
+  <data name="CreateInstance_MinecraftJavaCore_Description" xml:space="preserve">
+    <value>请选择该服务器将使用的核心文件。如果不知道在哪里下载，可点击右侧按钮跳转。</value>
+  </data>
+  <data name="MinecraftCoreFileName" xml:space="preserve">
+    <value>核心文件名</value>
+  </data>
+  <data name="CreateInstance_MinecraftJavaJvm_Title" xml:space="preserve">
+    <value>Java 运行时</value>
+  </data>
+  <data name="CreateInstance_MinecraftJavaJvm_Description" xml:space="preserve">
+    <value>Java 运行时是 Minecraft Java 服务器的必需环境。请务必选择合适的版本，防止启动失败。</value>
+  </data>
+  <data name="JavaPath" xml:space="preserve">
+    <value>Java 路径</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>安装</value>
+  </data>
+  <data name="ScanJavaAtDaemon" xml:space="preserve">
+    <value>自动搜索</value>
+  </data>
+  <data name="SelectFromResult" xml:space="preserve">
+    <value>从现有结果中选取</value>
+  </data>
+  <data name="MinecraftJavaRequirementTip" xml:space="preserve">
+    <value>1.12+ 要求 Java 8\n1.17+ 要求 Java 16\n1.18+ 要求 Java 17\n1.20.5+ 要求 Java 21\n26.1+ 要求 Java 25</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>文件名</value>
+  </data>
+  <data name="CreateInstance_OtherExecutableInstanceDependency_Description" xml:space="preserve">
+    <value>请选择该实例所需的文件/文件夹/压缩包。压缩包仅支持 ZIP 格式。</value>
+  </data>
+  <data name="CreateInstance_OtherExecutableInstanceDependency_Title" xml:space="preserve">
+    <value>部署依赖</value>
+  </data>
+  <data name="CreateInstance_OtherExecutableInstanceRunCommand_Title" xml:space="preserve">
+    <value>运行命令</value>
+  </data>
+  <data name="CreateInstance_OtherExecutableInstanceRunCommand_Description" xml:space="preserve">
+    <value>在此处输入运行命令。</value>
+  </data>
+  <data name="RunCommandArgumentTip" xml:space="preserve">
+    <value>如果需要附带参数，\n直接附在后面即可。</value>
+  </data>
+  <data name="CreateInstance_InstanceName_Description" xml:space="preserve">
+    <value>请勿包含特殊符号或使用非法名称。</value>
+  </data>
+  <data name="CreateInstance_InstanceName_Title" xml:space="preserve">
+    <value>实例名称</value>
+  </data>
+  <data name="CreateInstance_MinecraftJavaJvmArgument_Description" xml:space="preserve">
+    <value>(可选) 可在此处添加其他 JVM 参数，一行一个。</value>
+  </data>
+  <data name="CreateInstance_MinecraftJavaJvmArgument_AddArgument" xml:space="preserve">
+    <value>添加参数</value>
+  </data>
+  <data name="CreateInstance_MinecraftJavaJvmArgument_Title" xml:space="preserve">
+    <value>JVM 参数</value>
+  </data>
+  <data name="MaximumMemory" xml:space="preserve">
+    <value>最大内存</value>
+  </data>
+  <data name="MinimumMemory" xml:space="preserve">
+    <value>最小内存</value>
+  </data>
+  <data name="CreateInstance_MinecraftJvmRam_Description" xml:space="preserve">
+    <value>这决定了您的 Minecraft Java 服务器将能使用多少内存。</value>
+  </data>
+  <data name="CreateInstance_MinecraftJvmRam_Title" xml:space="preserve">
+    <value>JVM 内存堆</value>
+  </data>
+  <data name="CreateInstance_MinecraftJvmRam_Tip" xml:space="preserve">
+    <value>最小内存 ≤ 最大内存即可</value>
+  </data>
+  <data name="CopyUrl" xml:space="preserve">
+    <value>复制链接</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>暂停</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="FileSize" xml:space="preserve">
+    <value>文件大小</value>
+  </data>
+  <data name="MinecraftVersion" xml:space="preserve">
+    <value>Minecraft 版本</value>
+  </data>
+  <data name="BuildVersion" xml:space="preserve">
+    <value>构建版本</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>关</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>开</value>
+  </data>
+  <data name="CreateTime" xml:space="preserve">
+    <value>创建时间</value>
+  </data>
+  <data name="InstanceType" xml:space="preserve">
+    <value>实例类型</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>版本</value>
+  </data>
+  <data name="More" xml:space="preserve">
+    <value>更多</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>启动</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>返回</value>
+  </data>
+  <data name="PreFinishCreateInstanceTip" xml:space="preserve">
+    <value>完成以下配置后，单击 “继续”。</value>
+  </data>
+  <data name="CreateInstance_MinecraftVersionTip" xml:space="preserve">
+    <value>请选择该服务器将运行的 Minecraft 版本。</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="CreateInstance_BmclapiMayBeFailedTip" xml:space="preserve">
+    <value>如果加载不出来，请稍后再试。\n镜像服务由 BMCLAPI 提供支持</value>
+  </data>
+  <data name="ForgeVersion" xml:space="preserve">
+    <value>Forge 版本</value>
+  </data>
+  <data name="NeoForgeVersion" xml:space="preserve">
+    <value>NeoForge 版本</value>
+  </data>
+  <data name="FabricVersion" xml:space="preserve">
+    <value>Fabric 版本</value>
+  </data>
+  <data name="QuiltVersion" xml:space="preserve">
+    <value>Quilt 版本</value>
+  </data>
+  <data name="CreateInstance_ForgeVersion_Description" xml:space="preserve">
+    <value>请选择该服务器将运行的 Forge 加载器的版本。</value>
+  </data>
+  <data name="CreateInstance_NeoForgeVersion_Description" xml:space="preserve">
+    <value>请选择该服务器将运行的 NeoForge 加载器的版本。</value>
+  </data>
+  <data name="CreateInstance_FabricVersion_Description" xml:space="preserve">
+    <value>请选择该服务器将运行的 Fabric 加载器的版本。</value>
+  </data>
+  <data name="CreateInstance_QuiltVersion_Description" xml:space="preserve">
+    <value>请选择该服务器将运行的 Quilt 加载器的版本。</value>
+  </data>
+  <data name="OnlyShowReleaseVersion" xml:space="preserve">
+    <value>仅显示正式版</value>
+  </data>
+  <data name="ResDownload_InstanceCore" xml:space="preserve">
+    <value>服务器核心</value>
+  </data>
+  <data name="ResDownload_OpenHomePage" xml:space="preserve">
+    <value>打开官网</value>
+  </data>
+  <data name="FirstSetup_SetupFinishedWelcome" xml:space="preserve">
+    <value>欢迎使用</value>
+  </data>
+  <data name="TempSkip" xml:space="preserve">
+    <value>暂时跳过</value>
+  </data>
+  <data name="Agree" xml:space="preserve">
+    <value>同意</value>
+  </data>
+  <data name="Disagree" xml:space="preserve">
+    <value>拒绝</value>
+  </data>
+  <data name="Eula1" xml:space="preserve">
+    <value>欢迎使用 MCSL开发组 提供的 MCServerLauncher（以下简称“本软件”）的软件与服务。为了保障用户权益，在使用本软件前，请详细阅读本协议的所有内容。我们可能随时更新本协议，一旦公布即有效代替原用户协议书。\n请您仔细阅读以下内容，当您使用本软件时，即代表您已经详细阅读并同意本协议的全部内容，且同意遵守本协议的规定。</value>
+  </data>
+  <data name="Eula2" xml:space="preserve">
+    <value>使用须知</value>
+  </data>
+  <data name="Eula3" xml:space="preserve">
+    <value>用户应自行配备本软件和本软件功能（包括但不限于 新建实例 等）所需要的硬件和软件配置。\n用户应自行负担连接互联网后所需支付的相关电话、宽带使用等费用。\n用户应为其使用本软件产生的行为、事件、结果承担法律责任。\n用户与其他未授权的非官方个人之间产生的任何交易与纠纷，与开发者无关。\n用户应遵守中华人民共和国相关法律法规（如果用户是中华人民共和国境外的使用者，还应遵守所属国家或地区的法律法规）。\n用户不得使用本软件（或本软件的一些特性功能）从事非法行为，不得使用与本软件有关联的相关进程和服务从事非法行为，其任何行为造成的后果，与开发者无关。\n用户应当自行承担其所发布的信息内容所涉及的法律责任。用户不得在本软件内、本软件运行的相关进程与服务内输入、发表和传播下列任何内容，不得以任何形式发布下列任何内容：\n\n反对中华人民共和国宪法所确定的基本原则的；\n危害国家安全，泄露国家机密，颠覆国家政权，破坏国家统一的；\n损害国家荣誉和利益的；\n煽动民族仇恨、民族歧视，破坏民族团结的；\n破坏国家宗教政策，宣扬邪教和封建迷信的；\n散布谣言，扰乱社会秩序，破坏社会稳定的；\n散布淫秽、色情、赌博、暴力、凶杀、恐怖或者教唆犯罪的；\n侮辱或者诽谤他人，侵害他人合法权益的；\n含有中华人民共和国法律、行政法规禁止的其他内容的。\n除非法律允许或开发者书面许可，用户不得从事下列任何行为：\n不合法、不恰当地使用本软件及服务；\n破坏本软件系统或网站的正常运行，故意传播计算机病毒等破坏性程序；\n采取任何可能影响本软件网络服务的非正常使用行为（包括但不限于损害、攻击服务器或使服务器过度负荷等）；\n删除本软件及其副本上关于著作权的信息。\n\n若用户做出违法违规或违反本协议规定的行为，开发者有权视情节严重程度，依据本协议及法律法规，对用户做出包括但不限于终止服务等处理措施；情节严重的，将移交有关行政管理机关给予行政处罚，或追究其刑事责任。</value>
+  </data>
+  <data name="Eula4" xml:space="preserve">
+    <value>数据收集与使用</value>
+  </data>
+  <data name="Eula5" xml:space="preserve">
+    <value>若您同意本使用协议且使用本软件的在线服务，我们会收集以下信息：\n本软件所运行设备的IP地址（可能并非正确地址）；\n本软件所运行设备的部分系统信息；\n本软件崩溃时，可能会在经用户同意的情况下，上传软件在系统运行的日志（含有部分系统信息），以帮助解决问题和改善软件；\n其他会在经用户同意情况下上传的部分信息（软件中会具体说明）。</value>
+  </data>
+  <data name="Eula6" xml:space="preserve">
+    <value>用户支持和反馈</value>
+  </data>
+  <data name="Eula7" xml:space="preserve">
+    <value>用户在使用过程中如遇到任何问题，可以通过官方电子邮件或在本软件源码仓库提交 Issue 的方式进行反馈。我们会认真考虑用户的反馈以改进服务。</value>
+  </data>
+  <data name="Eula8" xml:space="preserve">
+    <value>服务的变更或中止</value>
+  </data>
+  <data name="Eula9" xml:space="preserve">
+    <value>1. 对用户服务的中止与终止\n\n用户有发布违法信息、严重违背社会公德、以及其他违反法律禁止性规定的行为，开发者应终止对用户提供服务；\n用户在接受本软件服务时实施不正当行为的，开发者有权终止对用户提供服务（该不正当行为的具体情形在本协议中有明确约定）；\n用户使用本软件的第三方修改版本的，用户应自行承担风险与法律责任。\n\n2. 对本软件及服务的中断、中止与终止：\n\n发生下列情形之一时，开发者有权终止或中断本软件全部或部分服务，对因此造成的不便及损害，开发者对用户或第三人均不承担任何责任：\n\na. 因本软件及服务自身的需要；\nb. 因服务器遭受损害、无法正常工作；\nc. 因突发性的软硬件设备与电子通信设备故障；\nd. 因网络提供商线路或其他故障；\ne. 因政策因素；\nf. 第三方原因或其他不可抗力的情形。\n\n开发者保留在其认为有必要的情况下终止或部分终止本软件及服务的权利，开发者可以采取公告的形式通知用户，但开发者不承担对用户造成的任何损失。</value>
+  </data>
+  <data name="Eula10" xml:space="preserve">
+    <value>免责声明</value>
+  </data>
+  <data name="Eula11" xml:space="preserve">
+    <value>用户理解并同意，在法律许可范围内，开发者不对本软件提供任何保证。 用户使用本软件所造成的的风险均由用户自行承担。\n用户理解并同意，开发者不保证本软件及服务一定能满足用户需求，也不保证服务不会被中断，并且对本软件及服务的正确性、安全性等方面不提供任何担保。\n用户理解并同意，开发者无法完全保证本软件在线服务所下载的第三方文件的的正确性、安全性、合法性，也不对本软件内存在的第三方服务（包括但不限于 资源下载 等服务）的正确性、安全性、合法性等负责。因此，前面提到的内容与开发者和本软件无关，不代表开发者及本软件的立场。相关争议应由第三方服务提供方承担。\n用户理解并同意，若以错误或非法的手段使用本软件在线服务以及本软件所下载的相关文件，其造成的后果由用户自行承担，若导致财产损毁、版权或知识产权被侵犯等问题，开发者概不负责，不会也不能承担任何法律责任。\n用户理解并同意，本软件不对第三方服务内容提供担保。 若用户使用第三方服务导致财产损毁、版权或知识产权被侵犯等问题，开发者概不负责，不会也不能承担任何法律责任。\n用户理解并同意，开发者对本软件功能不提供任何保证和法律支持，若用户使用本软件功能从事违法犯罪或其他不正当的行为，所造成的风险和法律后果均由用户自行承担。</value>
+  </data>
+  <data name="Eula12" xml:space="preserve">
+    <value>知识产权</value>
+  </data>
+  <data name="Eula13" xml:space="preserve">
+    <value>本软件著作权、专利权及其他知识产权，均为开发者或者指定版权方所有。\n\n本软件所使用的第三方服务归相关版权方所有，包括但不限于：\n本软件为 Minecraft（其最终解释权归 Microsoft 公司 和 Mojang AB 所有）的服务器管理和游戏联机工具。用户应当遵守其最终用户许可协议（EULA）和 中国区代理公司 网易 在中国大陆实行的相关政策，不得将游戏本体内容用于商业用途，或实施其他被最终用户许可协议所禁止的行为。\n本软件为 Terraria（其最终解释权归 Re-Logic 和其发行商所有）的服务器管理和游戏联机工具。用户应当遵守其最终用户许可协议（EULA）及相关政策。用户不得将游戏本体内容用于未经许可的商业用途，或实施其他被最终用户许可协议所禁止的行为。\n本软件提供的部分在线文件资源（服务端核心、游戏/服务器模组和插件等内容）下载服务由相应 官方/第三方 等提供，版权依照第三方平台规定处理。\n本软件使用的其他第三方服务，版权归服务提供商所有。\n本软件是开源软件，用户或其他非本软件的软件开发者应当遵守本软件的开源协议。\n用户理解并同意，除用户创建的资源外，本软件提供的所有在线服务数据均归开发者所有。开发者有权决定保留或不保留服务器上的全部或部分数据。</value>
+  </data>
+  <data name="Eula14" xml:space="preserve">
+    <value>条款变更</value>
+  </data>
+  <data name="Eula15" xml:space="preserve">
+    <value>开发者有权在必要的时候修改本协议。本协议一旦发生变动，开发者将在重要页面展示修改内容。若用户不同意本协议的修订或更新，可以主动停止使用本软件及服务。若用户在本协议修订后仍继续使用本软件及服务，即表示用户同意本协议所做的所有修订或更新。 若用户在本协议修订后因未熟悉变更而引起的损失，开发者不承担任何责任。</value>
+  </data>
+  <data name="Eula16" xml:space="preserve">
+    <value>其他规定</value>
+  </data>
+  <data name="Eula17" xml:space="preserve">
+    <value>本协议适用于中华人民共和国法律，并且排除一切冲突法规规定地适用；\n开发者不行使、未能及时行使或者充分行使本协议或者依照法律规定所享有的权利，不应被视为放弃行使该权利，也不得影响开发者在将来行使该等权利；\n在法律许可范围内，开发者享有对本协议条款的解释权；\n用户可以通过电子邮件投诉、举报各类违法违规行为，邮件请发送至邮箱 services@mcsl.com.cn 。</value>
+  </data>
+  <data name="Eula18" xml:space="preserve">
+    <value>条款可分性</value>
+  </data>
+  <data name="Eula19" xml:space="preserve">
+    <value>如果本协议的任何条款被认定为无效，或不可执行，其余条款仍应完全有效。</value>
+  </data>
+  <data name="PreCreateInstanceTip" xml:space="preserve">
+    <value>请选择欲操作的方式：</value>
+  </data>
+  <data name="CreateUniversalMinecraftJavaInstance" xml:space="preserve">
+    <value>通用 Minecraft Java 版服务器</value>
+  </data>
+  <data name="CreateMinecraftForgeInstance" xml:space="preserve">
+    <value>Minecraft Forge 服务器</value>
+  </data>
+  <data name="CreateMinecraftNeoForgeInstance" xml:space="preserve">
+    <value>Minecraft NeoForge 服务器</value>
+  </data>
+  <data name="CreateMinecraftFabricInstance" xml:space="preserve">
+    <value>Minecraft Fabric 服务器</value>
+  </data>
+  <data name="CreateMinecraftQuiltInstance" xml:space="preserve">
+    <value>Minecraft Quilt 服务器</value>
+  </data>
+  <data name="CreateMinecraftBedrockInstance" xml:space="preserve">
+    <value>Minecraft 基岩版服务器</value>
+  </data>
+  <data name="CreateMinecraftGeyserStandaloneInstance" xml:space="preserve">
+    <value>Minecraft Geyser互通 独立端</value>
+  </data>
+  <data name="CreateMinecraftBungeeCordInstance" xml:space="preserve">
+    <value>Minecraft BungeeCord 群组端</value>
+  </data>
+  <data name="CreateMinecraftWaterfallInstance" xml:space="preserve">
+    <value>Minecraft Waterfall 群组端</value>
+  </data>
+  <data name="CreateMinecraftVelocityInstance" xml:space="preserve">
+    <value>Minecraft Velocity 群组端</value>
+  </data>
+  <data name="CreateMinecraftTravertineInstance" xml:space="preserve">
+    <value>Minecraft Travertine 群组端</value>
+  </data>
+  <data name="CreateUniversalFastReverseProxyClientInstance" xml:space="preserve">
+    <value>通用 Frp 客户端程序 (Frpc)</value>
+  </data>
+  <data name="CreateTerrariaServerInstance" xml:space="preserve">
+    <value>Terraria 游戏服务器</value>
+  </data>
+  <data name="CreateOtherExecutableInstance" xml:space="preserve">
+    <value>其他控制台程序</value>
+  </data>
+  <data name="ImportExistsInstance" xml:space="preserve">
+    <value>导入现有实例</value>
+  </data>
+  <data name="HomeTip" xml:space="preserve">
+    <value>新征程，新体验。</value>
+  </data>
+  <data name="InstanceManagerTip" xml:space="preserve">
+    <value>纵览全局，以观天下。</value>
+  </data>
+  <data name="Main_DownloadHistoryNavMenu" xml:space="preserve">
+    <value>下载历史</value>
+  </data>
+  <data name="ResDownloadTipPrefix" xml:space="preserve">
+    <value>你想要的，这里都有。 (当前正在使用</value>
+  </data>
+  <data name="HelpCenterTip" xml:space="preserve">
+    <value>尽其所能，答其所问。</value>
+  </data>
+  <data name="SettingsTip" xml:space="preserve">
+    <value>你的 MCSL，你的选择。</value>
+  </data>
+  <data name="Settings_ActionWhenDownloadError_Stop" xml:space="preserve">
+    <value>直接停止下载</value>
+  </data>
+  <data name="Settings_ActionWhenDownloadError_Retry1" xml:space="preserve">
+    <value>重试下载 1 次</value>
+  </data>
+  <data name="Settings_ActionWhenDownloadError_Retry3" xml:space="preserve">
+    <value>重试下载 3 次</value>
+  </data>
+  <data name="Settings_ActionWhenDeleteConfirm_TypeName" xml:space="preserve">
+    <value>实例名称输入验证</value>
+  </data>
+  <data name="Settings_ActionWhenDeleteConfirm_TypeKey" xml:space="preserve">
+    <value>Daemon Secret</value>
+  </data>
+  <data name="Settings_Instance_AutoRefreshInterval" xml:space="preserve">
+    <value>实例状态自动刷新间隔</value>
+  </data>
+  <data name="Settings_Instance_AutoRefreshInterval_Description" xml:space="preserve">
+    <value>自动刷新实例状态的间隔时间（秒）。设置为 0 以禁用。</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick" xml:space="preserve">
+    <value>双击实例卡片的操作</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_Description" xml:space="preserve">
+    <value>双击实例卡片时执行的操作。</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_Console" xml:space="preserve">
+    <value>打开控制台</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_Start" xml:space="preserve">
+    <value>启动实例</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_Stop" xml:space="preserve">
+    <value>停止实例</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_Restart" xml:space="preserve">
+    <value>重启实例</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_Kill" xml:space="preserve">
+    <value>强制关闭实例</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_Settings" xml:space="preserve">
+    <value>打开设置</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_None" xml:space="preserve">
+    <value>无</value>
+  </data>
+  <data name="Settings_AppTheme_Auto" xml:space="preserve">
+    <value>跟随系统</value>
+  </data>
+  <data name="Settings_AppTheme_Light" xml:space="preserve">
+    <value>浅色</value>
+  </data>
+  <data name="Settings_AppTheme_Dark" xml:space="preserve">
+    <value>深色</value>
+  </data>
+  <data name="Settings_AutoAcceptMinecraftJavaEula_Title" xml:space="preserve">
+    <value>自动同意 EULA (Minecraft Java 版服务器实例)</value>
+  </data>
+  <data name="Settings_AutoAcceptMinecraftJavaEula_Description" xml:space="preserve">
+    <value>自动同意即代表您遵守 Minecraft 最终用户许可协议，且认同 MCSL 不承担任何连带责任。</value>
+  </data>
+  <data name="Settings_AutoDisableMinecraftJavaOnlineMode_Title" xml:space="preserve">
+    <value>自动禁用正版验证 (Minecraft Java 版服务器实例)</value>
+  </data>
+  <data name="Settings_AutoDisableMinecraftJavaOnlineMode_Description" xml:space="preserve">
+    <value>启用此选项后，此类实例将会自动禁用来自 Mojang/Microsoft 的身份验证，从而允许非正版 Minecraft Java 版客户端连接到服务器。</value>
+  </data>
+  <data name="Settings_AutoDisableMinecraftBedrockOnlineMode_Description" xml:space="preserve">
+    <value>启用此选项后，此类实例将会自动禁用来自 Mojang/Microsoft 的身份验证，从而允许非正版 Minecraft 基岩版客户端连接到服务器。</value>
+  </data>
+  <data name="Settings_AutoDisableMinecraftBedrockOnlineMode_Title" xml:space="preserve">
+    <value>自动禁用正版验证 (Minecraft 基岩版服务器实例)</value>
+  </data>
+  <data name="Settings_UseMirrorForMinecraftForgeInstall_Title" xml:space="preserve">
+    <value>使用镜像源进行部署 (Minecraft Forge 服务器实例)</value>
+  </data>
+  <data name="Settings_UseMirrorForMinecraftNeoForgeInstall_Title" xml:space="preserve">
+    <value>使用镜像源进行部署 (Minecraft NeoForge 服务器实例)</value>
+  </data>
+  <data name="Settings_UseMirrorForMinecraftFabricInstall_Title" xml:space="preserve">
+    <value>使用镜像源进行部署 (Minecraft Fabric 服务器实例)</value>
+  </data>
+  <data name="Settings_UseMirrorForMinecraftQuiltInstall_Title" xml:space="preserve">
+    <value>使用镜像源进行部署 (Minecraft Quilt 服务器实例)</value>
+  </data>
+  <data name="Settings_UseMirrorForMinecraftLoadersInstall_Description" xml:space="preserve">
+    <value>启用后将使用 BMCLAPI 进行下载资源，建议中国用户开启。</value>
+  </data>
+  <data name="Settings_ResDownloadProvider_Title" xml:space="preserve">
+    <value>下载源</value>
+  </data>
+  <data name="Settings_ResDownloadProvider_Description" xml:space="preserve">
+    <value>选择在 “资源下载” 页面使用的下载提供方。</value>
+  </data>
+  <data name="Settings_FastMirrorName" xml:space="preserve">
+    <value>无极镜像 FastMirror (由物语云计算提供)</value>
+  </data>
+  <data name="Settings_PolarsMirrorName" xml:space="preserve">
+    <value>极星云镜像 (由极星网络提供)</value>
+  </data>
+  <data name="Settings_RainYunName" xml:space="preserve">
+    <value>雨云镜像站</value>
+  </data>
+  <data name="Settings_MSLAPIName" xml:space="preserve">
+    <value>MSL下载源 (由 MSL 开服器提供)</value>
+  </data>
+  <data name="Settings_MCSLSyncName" xml:space="preserve">
+    <value>MCSL-Sync 同步镜像</value>
+  </data>
+  <data name="Settings_DownloadThreadCnt_Title" xml:space="preserve">
+    <value>下载引擎线程数</value>
+  </data>
+  <data name="Settings_DownloadThreadCnt_Description" xml:space="preserve">
+    <value>在计算机性能足够的情况下，线程数越高，文件的理论下载速度越快。一般来说，设置为 16 线程即可满足需求。</value>
+  </data>
+  <data name="Settings_ActionWhenDownloadError_Title" xml:space="preserve">
+    <value>下载失败处理方式</value>
+  </data>
+  <data name="Settings_ActionWhenDownloadError_Description" xml:space="preserve">
+    <value>当文件下载失败时，应当进行的操作。</value>
+  </data>
+  <data name="Settings_ActionWhenDeleteConfirm_Title" xml:space="preserve">
+    <value>删除实例确认方式</value>
+  </data>
+  <data name="Settings_ActionWhenDeleteConfirm_Description" xml:space="preserve">
+    <value>此功能可防止误操作导致实例被删除。</value>
+  </data>
+  <data name="Settings_AppTheme_Title" xml:space="preserve">
+    <value>应用主题</value>
+  </data>
+  <data name="Settings_AppTheme_Description" xml:space="preserve">
+    <value>默认跟随系统变化，当然也可以自己设置。</value>
+  </data>
+  <data name="Settings_FollowStartupForLauncher_Title" xml:space="preserve">
+    <value>开机自启动 (MCServerLauncher.WinUI)</value>
+  </data>
+  <data name="Settings_FollowStartupForLauncher_Description" xml:space="preserve">
+    <value>在系统启动时，自动启动本图形化程序。启用时可能触及系统敏感操作，请在杀毒软件中放行。</value>
+  </data>
+  <data name="Settings_CheckUpdateForLauncher_Title" xml:space="preserve">
+    <value>检查更新 (MCServerLauncher.WinUI)</value>
+  </data>
+  <data name="Settings_CheckUpdateForLauncher_Description" xml:space="preserve">
+    <value>检查本图形化程序的更新。</value>
+  </data>
+  <data name="CheckUpdate" xml:space="preserve">
+    <value>检查更新</value>
+  </data>
+  <data name="Settings_AutoCheckUpdateForLauncher_Description" xml:space="preserve">
+    <value>在每次启动时，检查本图形化程序的更新。</value>
+  </data>
+  <data name="Settings_AutoCheckUpdateForLauncher_Title" xml:space="preserve">
+    <value>自动检查更新 (MCServerLauncher.WinUI)</value>
+  </data>
+  <data name="Settings_CheckUpdateForDaemon_Title" xml:space="preserve">
+    <value>检查更新 (MCServerLauncher.Daemon)</value>
+  </data>
+  <data name="Settings_CheckUpdateForDaemon_Description" xml:space="preserve">
+    <value>检查远程主机的更新。</value>
+  </data>
+  <data name="Settings_About_Title" xml:space="preserve">
+    <value>关于 MCServerLauncher Future (WinUI)</value>
+  </data>
+  <data name="Settings_About_LegalProtected" xml:space="preserve">
+    <value>此项目受《中华人民共和国著作权法》和国际条约保护，如未经授权而擅自复制或传播本程序或其中任何部分，将受到严厉的民事和刑事制裁，并将在法律许可的最大限度内受到起诉。</value>
+  </data>
+  <data name="Settings_About_OpenSourceLicenseProtected" xml:space="preserve">
+    <value>此项目受开源协议 GNU General Public License Version 3.0 保护，源代码托管至</value>
+  </data>
+  <data name="PeriodSymbol" xml:space="preserve">
+    <value>。</value>
+  </data>
+  <data name="Settings_About_CertProtected" xml:space="preserve">
+    <value>MCServerLauncher Future 使用的数字签名证书保证该程序不被仿冒篡改。序列号：59cbf9b5207eeabb45417d148120ac9a。如有不同，请勿使用，并向 services@mcsl.com.cn 反馈。</value>
+  </data>
+  <data name="ResDownloadPage_ProviderName_FastMirror" xml:space="preserve">
+    <value>无极镜像</value>
+  </data>
+  <data name="ResDownloadPage_ProviderName_PolarsMirror" xml:space="preserve">
+    <value>极星云镜像</value>
+  </data>
+  <data name="ResDownloadPage_ProviderName_MCSLSync" xml:space="preserve">
+    <value>MCSL-Sync 同步镜像</value>
+  </data>
+  <data name="Announcement" xml:space="preserve">
+    <value>公告</value>
+  </data>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>你确定吗？</value>
+  </data>
+  <data name="FirstSetup_EulaDisagreeTip" xml:space="preserve">
+    <value>若您拒绝用户协议，本软件将退出。</value>
+  </data>
+  <data name="FirstSetup_FakeEulaAgreeTip" xml:space="preserve">
+    <value>请确保您已完整阅读后再点击同意。您至少要把协议滚动到底吧。</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>好的</value>
+  </data>
+  <data name="NotNow" xml:space="preserve">
+    <value>不是现在</value>
+  </data>
+  <data name="FirstSetup_EulaAgreeTip" xml:space="preserve">
+    <value>这代表您同意本协议的所有内容。</value>
+  </data>
+  <data name="ResDownloadTipSuffix" xml:space="preserve">
+    <value>下载源）</value>
+  </data>
+  <data name="Settings_AppLanguage_Description" xml:space="preserve">
+    <value>选择本程序使用的语言。</value>
+  </data>
+  <data name="FirstSetup_SkipConnectDaemonTip" xml:space="preserve">
+    <value>若不链接任何远程主机，本软件大部分功能都将受限。\n您稍后仍可链接远程主机。</value>
+  </data>
+  <data name="ConnectDaemon" xml:space="preserve">
+    <value>新建连接</value>
+  </data>
+  <data name="EditDaemon" xml:space="preserve">
+    <value>编辑连接</value>
+  </data>
+  <data name="FirstSetup_ConnectDaemonTip" xml:space="preserve">
+    <value>MCServerLauncher 的所有实例均移交给远程主机管理。请在此处链接已部署好的远程主机。</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="Daemon_RemoteUri" xml:space="preserve">
+    <value>远端地址:</value>
+  </data>
+  <data name="Daemon_ConnectionStatus" xml:space="preserve">
+    <value>链接状态:</value>
+  </data>
+  <data name="Status_OK" xml:space="preserve">
+    <value>正常</value>
+  </data>
+  <data name="Status_Error" xml:space="preserve">
+    <value>异常</value>
+  </data>
+  <data name="Status_NotLoaded" xml:space="preserve">
+    <value>未加载</value>
+  </data>
+  <data name="Status_LoadFailed" xml:space="preserve">
+    <value>加载失败</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>断连</value>
+  </data>
+  <data name="Connect" xml:space="preserve">
+    <value>连接</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>重试</value>
+  </data>
+  <data name="Settings_Components_Title" xml:space="preserve">
+    <value>开源项目引用列表</value>
+  </data>
+  <data name="Settings_Components_Description" xml:space="preserve">
+    <value>由衷感谢他们的付出，为 MCSL Future 的前进提供了持续的动力。</value>
+  </data>
+  <data name="Settings_Acknowledgments_Title" xml:space="preserve">
+    <value>鸣谢列表</value>
+  </data>
+  <data name="Settings_Acknowledgments_Description" xml:space="preserve">
+    <value>为 MCSL 做出了巨大贡献！</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>赞助一下</value>
+  </data>
+  <data name="Settings_Acknowledgments_BMCLAPI_Description" xml:space="preserve">
+    <value>提供了性能强大的 BMCLAPI 镜像！</value>
+  </data>
+  <data name="Settings_Acknowledgments_PCL2_Description" xml:space="preserve">
+    <value>提供了 Minecraft 加载器的获取思路！</value>
+  </data>
+  <data name="Settings_Acknowledgments_BakaXL_Description" xml:space="preserve">
+    <value>提供了 Quilt 加载器的部署思路！</value>
+  </data>
+  <data name="Settings_Acknowledgments_iNKORE_Description" xml:space="preserve">
+    <value>在开发过程中给予了大量技术支持！</value>
+  </data>
+  <data name="Settings_Acknowledgments_MCSLQQ_Title" xml:space="preserve">
+    <value>MCSL QQ 交流群的各位群友</value>
+  </data>
+  <data name="Settings_Acknowledgments_MCSLQQ_Description" xml:space="preserve">
+    <value>一直陪伴着我们，还给予了很多建议！</value>
+  </data>
+  <data name="JoinGroup" xml:space="preserve">
+    <value>加入群聊</value>
+  </data>
+  <data name="DaemonWsAddress" xml:space="preserve">
+    <value>远程主机 WebSocket 地址</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="Connecting" xml:space="preserve">
+    <value>连接中</value>
+  </data>
+  <data name="ConsoleBoard_Universal_RAM" xml:space="preserve">
+    <value>通用：实例 RAM 占用</value>
+  </data>
+  <data name="ConsoleBoard_Universal_CPU" xml:space="preserve">
+    <value>通用：实例 CPU 占用</value>
+  </data>
+  <data name="ConsoleBoard_Universal_WebSocketLatency" xml:space="preserve">
+    <value>通用：当前 WebSocket 延迟</value>
+  </data>
+  <data name="ConsoleCommand_FeedbackTip" xml:space="preserve">
+    <value>反馈错误请带上详细错误日志，否则一切行为无异于闭眼开车。</value>
+  </data>
+  <data name="ConsoleCommand_EnterFullScreenConsole" xml:space="preserve">
+    <value>进入全屏终端</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Kill" xml:space="preserve">
+    <value>强制关闭</value>
+  </data>
+  <data name="Restart" xml:space="preserve">
+    <value>重启</value>
+  </data>
+  <data name="Mods" xml:space="preserve">
+    <value>模组</value>
+  </data>
+  <data name="Plugins" xml:space="preserve">
+    <value>插件</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>添加</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Trigger" xml:space="preserve">
+    <value>触发器</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Event" xml:space="preserve">
+    <value>事件</value>
+  </data>
+  <data name="ClickToView" xml:space="preserve">
+    <value>点击查看</value>
+  </data>
+  <data name="ViewIPAddress" xml:space="preserve">
+    <value>查看 IP 地址</value>
+  </data>
+  <data name="ConsoleBoard_Minecraft_ServerIP_Title" xml:space="preserve">
+    <value>Minecraft 服务器：连接地址</value>
+  </data>
+  <data name="ConsoleBoard_Minecraft_ServerPlayersList_Title" xml:space="preserve">
+    <value>Minecraft 服务器：在线玩家列表</value>
+  </data>
+  <data name="ConsoleTitle" xml:space="preserve">
+    <value>控制台</value>
+  </data>
+  <data name="InstanceConsole_InstanceTitlePart" xml:space="preserve">
+    <value>实例 [{0}]</value>
+  </data>
+  <data name="InstanceConsole_NodeTitlePart" xml:space="preserve">
+    <value>节点 [{0}]</value>
+  </data>
+  <data name="Console_BoardNavMenu" xml:space="preserve">
+    <value>实例看板</value>
+  </data>
+  <data name="Console_CommandNavMenu" xml:space="preserve">
+    <value>实时终端</value>
+  </data>
+  <data name="Console_FileManagerNavMenu" xml:space="preserve">
+    <value>文件管理</value>
+  </data>
+  <data name="Console_EventTriggerNavMenu" xml:space="preserve">
+    <value>触发事件</value>
+  </data>
+  <data name="Console_ComponentManagerNavMenu" xml:space="preserve">
+    <value>组件管理</value>
+  </data>
+  <data name="Console_OthersNavMenu" xml:space="preserve">
+    <value>其他功能</value>
+  </data>
+  <data name="Console_InstanceSettingsNavMenu" xml:space="preserve">
+    <value>实例设置</value>
+  </data>
+  <data name="CreateMinecraftInstanceCategory" xml:space="preserve">
+    <value>Minecraft 服务器</value>
+  </data>
+  <data name="CreateFrpcInstanceCategory" xml:space="preserve">
+    <value>快速反向代理客户端 Frpc</value>
+  </data>
+  <data name="CreateInstance_TerrariaArchive_Title" xml:space="preserve">
+    <value>Terraria 服务器压缩包</value>
+  </data>
+  <data name="Thread" xml:space="preserve">
+    <value>线程</value>
+  </data>
+  <data name="DownloadFinished" xml:space="preserve">
+    <value>下载完毕</value>
+  </data>
+  <data name="DownloadFailed" xml:space="preserve">
+    <value>下载失败</value>
+  </data>
+  <data name="DownloadCancelled" xml:space="preserve">
+    <value>下载已取消</value>
+  </data>
+  <data name="ClickToHide" xml:space="preserve">
+    <value>点击隐藏</value>
+  </data>
+  <data name="ErrorDialogTip" xml:space="preserve">
+    <value>我们遇到了意料之外的异常，但获得了如下关键的错误信息。您可以选择继续运行本程序，或进行重启、关闭应用等操作。</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>退出</value>
+  </data>
+  <data name="FeedbackViaGitHub" xml:space="preserve">
+    <value>在 GitHub 进行反馈</value>
+  </data>
+  <data name="DaemonFriendlyName" xml:space="preserve">
+    <value>备注名</value>
+  </data>
+  <data name="Main_DaemonManagerNavMenu" xml:space="preserve">
+    <value>远程主机</value>
+  </data>
+  <data name="DaemonManagerTip" xml:space="preserve">
+    <value>安全护航，只在指掌。</value>
+  </data>
+  <data name="Port" xml:space="preserve">
+    <value>端口</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>用户名</value>
+  </data>
+  <data name="ConnectDaemonFailedTip" xml:space="preserve">
+    <value>无法连接远程主机，请检查配置</value>
+  </data>
+  <data name="Token" xml:space="preserve">
+    <value>访问密钥</value>
+  </data>
+  <data name="JvmArgHelper" xml:space="preserve">
+    <value>参数助手</value>
+  </data>
+  <data name="Insert" xml:space="preserve">
+    <value>插入</value>
+  </data>
+  <data name="NoJarFileJvmArgument" xml:space="preserve">
+    <value>核心启动参数（-jar xxx.jar）将由程序生成，请勿在此处写入。</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="Encoding" xml:space="preserve">
+    <value>编码</value>
+  </data>
+  <data name="Decoding" xml:space="preserve">
+    <value>解码</value>
+  </data>
+  <data name="PreventGarbageTextTip" xml:space="preserve">
+    <value>本选项可防止产生乱码，请视具体情况指定。</value>
+  </data>
+  <data name="Codecs" xml:space="preserve">
+    <value>编解码</value>
+  </data>
+  <data name="Optimization" xml:space="preserve">
+    <value>优化</value>
+  </data>
+  <data name="JvmOptimizationArgsTip" xml:space="preserve">
+    <value>以下是为 Minecraft 服务端进行优化的预置参数，您可选择其一应用。</value>
+  </data>
+  <data name="DeadProcessTip" xml:space="preserve">
+    <value>我们遇到了意料之外的异常，但已将关键的错误信息复制到剪贴板。程序已无法继续运行，即将关闭。</value>
+  </data>
+  <data name="GoBackLostTip" xml:space="preserve">
+    <value>如果现在返回，一切修改都将丢失。请慎重。</value>
+  </data>
+  <data name="SelectMinecraftJavaCore" xml:space="preserve">
+    <value>选择 Minecraft Java 版核心</value>
+  </data>
+  <data name="SelectMinecraftJavaCoreGoResDownloadMessage" xml:space="preserve">
+    <value>下载完成后，点击下方按钮即可返回。</value>
+  </data>
+  <data name="JvmArgTemplateSameMemTip" xml:space="preserve">
+    <value>选用下方模板时，请将上方的 JVM 内存堆数值设至相同，否则实例可能无法启动。</value>
+  </data>
+  <data name="JvmArgBasicTemplate" xml:space="preserve">
+    <value>基础（仅适用于 Java 11 及以下）</value>
+  </data>
+  <data name="JvmArgAdvancedTemplate" xml:space="preserve">
+    <value>Aikar Flag（请勿将内存堆设至高于 20 G）</value>
+  </data>
+  <data name="Unused" xml:space="preserve">
+    <value>不使用</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="Jump" xml:space="preserve">
+    <value>跳转</value>
+  </data>
+  <data name="ShowRealtimeLog" xml:space="preserve">
+    <value>显示实时日志</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="AllDaemon" xml:space="preserve">
+    <value>所有远程主机</value>
+  </data>
+  <data name="Running" xml:space="preserve">
+    <value>运行中</value>
+  </data>
+  <data name="AllRunningStatus" xml:space="preserve">
+    <value>所有状态</value>
+  </data>
+  <data name="Stopped" xml:space="preserve">
+    <value>已停止</value>
+  </data>
+  <data name="Crashed" xml:space="preserve">
+    <value>已崩溃</value>
+  </data>
+  <data name="Stopping" xml:space="preserve">
+    <value>关闭中</value>
+  </data>
+  <data name="Starting" xml:space="preserve">
+    <value>启动中</value>
+  </data>
+  <data name="ResDownloadPage_ProviderName_RainYun" xml:space="preserve">
+    <value>雨云镜像站</value>
+  </data>
+  <data name="PleaseSelectDaemon" xml:space="preserve">
+    <value>请选择将要运行此实例的远程主机。</value>
+  </data>
+  <data name="PleaseSelectJvm" xml:space="preserve">
+    <value>请选择将要使用的 Java 运行时。</value>
+  </data>
+  <data name="PleaseWait" xml:space="preserve">
+    <value>请稍等</value>
+  </data>
+  <data name="SearchingJvmTip" xml:space="preserve">
+    <value>正在搜索 Java 运行时…</value>
+  </data>
+  <data name="ConnectDaemonFailedSubTip" xml:space="preserve">
+    <value>请检查网络并重试。若您的计算机网络正常，则您的远程主机极大可能出现了异常，或远端防火墙未放行。</value>
+  </data>
+  <data name="SelectOtherDaemon" xml:space="preserve">
+    <value>选择其他……</value>
+  </data>
+  <data name="NothingHere" xml:space="preserve">
+    <value>这里空空如也</value>
+  </data>
+  <data name="TryAddSomething" xml:space="preserve">
+    <value>试着往这里面放点东西</value>
+  </data>
+  <data name="ConsoleCommand_ExitFullScreenConsole" xml:space="preserve">
+    <value>退出全屏终端</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>选择全部</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>选择</value>
+  </data>
+  <data name="Players" xml:space="preserve">
+    <value>玩家</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>查看</value>
+  </data>
+  <data name="ConsoleCommand_EnterCommandTip" xml:space="preserve">
+    <value>在此输入命令...</value>
+  </data>
+  <data name="FuncDisabled" xml:space="preserve">
+    <value>功能已禁用</value>
+  </data>
+  <data name="FuncDisabledReason_NoDaemon" xml:space="preserve">
+    <value>由于没有链接任何远程主机，此功能已被禁用</value>
+  </data>
+  <data name="SelectedCount" xml:space="preserve">
+    <value>已选择 {0} 个实例</value>
+  </data>
+  <data name="BatchStartConfirmTitle" xml:space="preserve">
+    <value>确认批量启动</value>
+  </data>
+  <data name="BatchStartConfirmContent" xml:space="preserve">
+    <value>确定要启动这 {0} 个实例吗？</value>
+  </data>
+  <data name="BatchStopConfirmTitle" xml:space="preserve">
+    <value>确认批量停止</value>
+  </data>
+  <data name="BatchStopConfirmContent" xml:space="preserve">
+    <value>确定要停止这 {0} 个实例吗？</value>
+  </data>
+  <data name="BatchDeleteConfirmTitle" xml:space="preserve">
+    <value>确认批量删除</value>
+  </data>
+  <data name="BatchDeleteConfirmContent" xml:space="preserve">
+    <value>确定要删除这 {0} 个实例吗？\n此操作不可撤销！</value>
+  </data>
+  <data name="BatchStartComplete" xml:space="preserve">
+    <value>批量启动完成</value>
+  </data>
+  <data name="BatchStopComplete" xml:space="preserve">
+    <value>批量停止完成</value>
+  </data>
+  <data name="BatchDeleteComplete" xml:space="preserve">
+    <value>批量删除完成</value>
+  </data>
+  <data name="BatchOperationResult" xml:space="preserve">
+    <value>成功：{0}，失败：{1}</value>
+  </data>
+  <data name="InstanceCard_NoDaemonConfig" xml:space="preserve">
+    <value>未设置此实例的远程主机配置</value>
+  </data>
+  <data name="InstanceCard_StartingInstance" xml:space="preserve">
+    <value>正在启动实例：{0}</value>
+  </data>
+  <data name="InstanceCard_StartConfirmTitle" xml:space="preserve">
+    <value>启动实例</value>
+  </data>
+  <data name="InstanceCard_StartConfirmContent" xml:space="preserve">
+    <value>您确定要启动实例 "{0}" 吗？</value>
+  </data>
+  <data name="InstanceCard_StartUnavailable" xml:space="preserve">
+    <value>实例 "{0}" 当前状态不允许启动。</value>
+  </data>
+  <data name="InstanceCard_StopUnavailable" xml:space="preserve">
+    <value>实例 "{0}" 当前状态不允许停止。</value>
+  </data>
+  <data name="InstanceCard_RestartUnavailable" xml:space="preserve">
+    <value>实例 "{0}" 当前状态不允许重启。</value>
+  </data>
+  <data name="InstanceCard_KillUnavailable" xml:space="preserve">
+    <value>实例 "{0}" 当前状态不允许强制关闭。</value>
+  </data>
+  <data name="InstanceCard_DeleteUnavailable" xml:space="preserve">
+    <value>实例 "{0}" 只有在关闭状态下才能删除。</value>
+  </data>
+  <data name="InstanceCard_StoppingInstance" xml:space="preserve">
+    <value>正在停止实例：{0}</value>
+  </data>
+  <data name="InstanceCard_RestartingInstance" xml:space="preserve">
+    <value>正在重启实例：{0}</value>
+  </data>
+  <data name="InstanceCard_KillingInstance" xml:space="preserve">
+    <value>已强制关闭实例：{0}</value>
+  </data>
+  <data name="InstanceCard_DeletedInstance" xml:space="preserve">
+    <value>已删除实例：{0}</value>
+  </data>
+  <data name="InstanceCard_DeleteConfirmTitle" xml:space="preserve">
+    <value>删除实例</value>
+  </data>
+  <data name="InstanceCard_StopConfirmTitle" xml:space="preserve">
+    <value>停止实例</value>
+  </data>
+  <data name="InstanceCard_StopConfirmContent" xml:space="preserve">
+    <value>您确定要停止实例 "{0}" 吗？</value>
+  </data>
+  <data name="InstanceCard_RestartConfirmTitle" xml:space="preserve">
+    <value>重启实例</value>
+  </data>
+  <data name="InstanceCard_RestartConfirmContent" xml:space="preserve">
+    <value>您确定要重启实例 "{0}" 吗？</value>
+  </data>
+  <data name="InstanceCard_KillConfirmTitle" xml:space="preserve">
+    <value>强制关闭实例</value>
+  </data>
+  <data name="InstanceCard_KillConfirmContent" xml:space="preserve">
+    <value>您确定要强制关闭实例 "{0}" 吗？这可能会导致数据丢失。</value>
+  </data>
+  <data name="InstanceCard_DeleteConfirmContent" xml:space="preserve">
+    <value>确定要删除实例“{0}”吗？
+此操作不可撤销。</value>
+  </data>
+  <data name="InstanceCard_StartFailed" xml:space="preserve">
+    <value>启动实例失败：{0}</value>
+  </data>
+  <data name="InstanceCard_StopFailed" xml:space="preserve">
+    <value>停止实例失败：{0}</value>
+  </data>
+  <data name="InstanceCard_RestartFailed" xml:space="preserve">
+    <value>重启实例失败：{0}</value>
+  </data>
+  <data name="InstanceCard_KillFailed" xml:space="preserve">
+    <value>强制关闭实例失败：{0}</value>
+  </data>
+  <data name="InstanceCard_DeleteFailed" xml:space="preserve">
+    <value>删除实例失败：{0}</value>
+  </data>
+  <data name="Universal" xml:space="preserve">
+    <value>通用</value>
+  </data>
+  <data name="SteamServer" xml:space="preserve">
+    <value>Steam 游戏服务器</value>
+  </data>
+  <data name="MCJava" xml:space="preserve">
+    <value>Minecraft Java 版</value>
+  </data>
+  <data name="MCFabric" xml:space="preserve">
+    <value>Minecraft Fabric</value>
+  </data>
+  <data name="MCForge" xml:space="preserve">
+    <value>Minecraft Forge</value>
+  </data>
+  <data name="MCNeoForge" xml:space="preserve">
+    <value>Minecraft NeoForge</value>
+  </data>
+  <data name="MCQuilt" xml:space="preserve">
+    <value>Minecraft Quilt</value>
+  </data>
+  <data name="MCCleanroom" xml:space="preserve">
+    <value>Minecraft Cleanroom</value>
+  </data>
+  <data name="MCSpongeVanilla" xml:space="preserve">
+    <value>Minecraft SpongeVanilla</value>
+  </data>
+  <data name="MCSpongeForge" xml:space="preserve">
+    <value>Minecraft SpongeForge</value>
+  </data>
+  <data name="MCVanilla" xml:space="preserve">
+    <value>Minecraft 原版</value>
+  </data>
+  <data name="MCCraftBukkit" xml:space="preserve">
+    <value>Minecraft CraftBukkit</value>
+  </data>
+  <data name="MCSpigot" xml:space="preserve">
+    <value>Minecraft Spigot</value>
+  </data>
+  <data name="MCPaper" xml:space="preserve">
+    <value>Minecraft Paper</value>
+  </data>
+  <data name="MCLeaf" xml:space="preserve">
+    <value>Minecraft Leaf</value>
+  </data>
+  <data name="MCLeaves" xml:space="preserve">
+    <value>Minecraft Leaves</value>
+  </data>
+  <data name="MCFolia" xml:space="preserve">
+    <value>Minecraft Folia</value>
+  </data>
+  <data name="MCPufferfish" xml:space="preserve">
+    <value>Minecraft Pufferfish</value>
+  </data>
+  <data name="MCPurpur" xml:space="preserve">
+    <value>Minecraft Purpur</value>
+  </data>
+  <data name="MCMohist" xml:space="preserve">
+    <value>Minecraft Mohist</value>
+  </data>
+  <data name="MCBanner" xml:space="preserve">
+    <value>Minecraft Banner</value>
+  </data>
+  <data name="MCYouer" xml:space="preserve">
+    <value>Minecraft Youer</value>
+  </data>
+  <data name="MCThermos" xml:space="preserve">
+    <value>Minecraft Thermos</value>
+  </data>
+  <data name="MCCrucible" xml:space="preserve">
+    <value>Minecraft Crucible</value>
+  </data>
+  <data name="MCTaiyitist" xml:space="preserve">
+    <value>Minecraft Taiyitist</value>
+  </data>
+  <data name="MCCatServer" xml:space="preserve">
+    <value>Minecraft CatServer</value>
+  </data>
+  <data name="MCArclight" xml:space="preserve">
+    <value>Minecraft Arclight</value>
+  </data>
+  <data name="MCBungeeCord" xml:space="preserve">
+    <value>Minecraft BungeeCord</value>
+  </data>
+  <data name="MCVelocity" xml:space="preserve">
+    <value>Minecraft Velocity</value>
+  </data>
+  <data name="MCWaterfall" xml:space="preserve">
+    <value>Minecraft Waterfall</value>
+  </data>
+  <data name="MCTravertine" xml:space="preserve">
+    <value>Minecraft Travertine</value>
+  </data>
+  <data name="MCViaVersion" xml:space="preserve">
+    <value>Minecraft ViaVersion</value>
+  </data>
+  <data name="MCGeyser" xml:space="preserve">
+    <value>Minecraft Geyser</value>
+  </data>
+  <data name="MCDReforged" xml:space="preserve">
+    <value>Minecraft MCDReforged</value>
+  </data>
+  <data name="MCBedrock" xml:space="preserve">
+    <value>Minecraft 基岩版</value>
+  </data>
+  <data name="MCNukkit" xml:space="preserve">
+    <value>Minecraft Nukkit</value>
+  </data>
+  <data name="MCBDS" xml:space="preserve">
+    <value>Minecraft BDS</value>
+  </data>
+  <data name="MCCloudburst" xml:space="preserve">
+    <value>Minecraft Cloudburst</value>
+  </data>
+  <data name="MCPocketMine" xml:space="preserve">
+    <value>Minecraft PocketMine</value>
+  </data>
+  <data name="Terraria" xml:space="preserve">
+    <value>Terraria</value>
+  </data>
+  <data name="TShock" xml:space="preserve">
+    <value>Terraria TShock</value>
+  </data>
+  <data name="TDSM" xml:space="preserve">
+    <value>Terraria TDSM</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>确认删除</value>
+  </data>
+  <data name="ConfirmDeleteDaemonMessage" xml:space="preserve">
+    <value>确定要删除远程主机“{0}”吗？</value>
+  </data>
+  <data name="Daemon_ResourceUsage" xml:space="preserve">
+    <value>资源占用</value>
+  </data>
+  <data name="Daemon_CpuUsage" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Daemon_MemoryUsage" xml:space="preserve">
+    <value>内存</value>
+  </data>
+  <data name="Daemon_DriveUsage" xml:space="preserve">
+    <value>磁盘</value>
+  </data>
+  <data name="DaemonDeleted" xml:space="preserve">
+    <value>已删除远程主机</value>
+  </data>
+  <data name="DaemonDeleteFailed" xml:space="preserve">
+    <value>删除远程主机失败：{0}</value>
+  </data>
+  <data name="Daemon_AutoRefresh" xml:space="preserve">
+    <value>自动刷新</value>
+  </data>
+  <data name="AutoRefresh_On" xml:space="preserve">
+    <value>自动刷新: 开</value>
+  </data>
+  <data name="AutoRefresh_Off" xml:space="preserve">
+    <value>自动刷新: 关</value>
+  </data>
+  <data name="RefreshInterval_5Seconds" xml:space="preserve">
+    <value>5 秒</value>
+  </data>
+  <data name="RefreshInterval_20Seconds" xml:space="preserve">
+    <value>20 秒</value>
+  </data>
+  <data name="RefreshInterval_30Seconds" xml:space="preserve">
+    <value>30 秒</value>
+  </data>
+  <data name="RefreshInterval_45Seconds" xml:space="preserve">
+    <value>45 秒</value>
+  </data>
+  <data name="RefreshInterval_1Minute" xml:space="preserve">
+    <value>1 分钟</value>
+  </data>
+  <data name="Daemon_SystemVersion" xml:space="preserve">
+    <value>操作系统:</value>
+  </data>
+  <data name="Daemon_DaemonVersion" xml:space="preserve">
+    <value>节点版本:</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_ConsoleOutputTrigger" xml:space="preserve">
+    <value>控制台输出触发器</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_SendNotification" xml:space="preserve">
+    <value>发送通知</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_IsRegex" xml:space="preserve">
+    <value>使用正则表达式</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_ChangeInstanceStatus" xml:space="preserve">
+    <value>更改实例状态</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Title" xml:space="preserve">
+    <value>标题</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_SendCommandAction" xml:space="preserve">
+    <value>发送命令操作</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_InstanceStatus" xml:space="preserve">
+    <value>实例状态</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_ConsoleOutput" xml:space="preserve">
+    <value>控制台输出</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_SendCommand" xml:space="preserve">
+    <value>发送命令</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Condition" xml:space="preserve">
+    <value>条件:</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Info" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_SendNotificationAction" xml:space="preserve">
+    <value>发送通知操作</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Schedule" xml:space="preserve">
+    <value>计划任务</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Any" xml:space="preserve">
+    <value>满足任意条件</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_CronExpression" xml:space="preserve">
+    <value>Cron 表达式</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_TargetStatus" xml:space="preserve">
+    <value>目标状态</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Pattern" xml:space="preserve">
+    <value>匹配模式</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Action" xml:space="preserve">
+    <value>操作</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Severity" xml:space="preserve">
+    <value>严重程度</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Command" xml:space="preserve">
+    <value>命令</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_ChangeInstanceStatusAction" xml:space="preserve">
+    <value>更改实例状态操作</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_All" xml:space="preserve">
+    <value>满足所有条件</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_InstanceStatusTrigger" xml:space="preserve">
+    <value>实例状态触发器</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_ScheduleTrigger" xml:space="preserve">
+    <value>计划任务触发器</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Message" xml:space="preserve">
+    <value>消息</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>描述</value>
+  </data>
+  <data name="Status_Running" xml:space="preserve">
+    <value>运行中</value>
+  </data>
+  <data name="Status_Stopped" xml:space="preserve">
+    <value>已停止</value>
+  </data>
+  <data name="Status_Crashed" xml:space="preserve">
+    <value>已崩溃</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="EventTrigger_LoadRulesFailed" xml:space="preserve">
+    <value>加载事件规则失败：{0}</value>
+  </data>
+  <data name="EventTrigger_SaveRulesSuccess" xml:space="preserve">
+    <value>事件规则保存成功</value>
+  </data>
+  <data name="EventTrigger_SaveRulesFailed" xml:space="preserve">
+    <value>保存事件规则失败：{0}</value>
+  </data>
+  <data name="EventTrigger_NewRuleName" xml:space="preserve">
+    <value>新规则</value>
+  </data>
+  <data name="EventTrigger_NewRuleDescription" xml:space="preserve">
+    <value>新规则的描述</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>导入</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>导出</value>
+  </data>
+  <data name="ModifiedDate" xml:space="preserve">
+    <value>修改日期</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>类型</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>大小</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>下载</value>
+  </data>
+  <data name="UploadFile" xml:space="preserve">
+    <value>上传文件</value>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>重命名</value>
+  </data>
+  <data name="CreateDirectory" xml:space="preserve">
+    <value>新建文件夹</value>
+  </data>
+  <data name="MultiSelectTip" xml:space="preserve">
+    <value>按住 Ctrl 键点击可多选，按住 Shift 键点击可连选。</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>复制</value>
+  </data>
+  <data name="FileEditor" xml:space="preserve">
+    <value>文件编辑器</value>
+  </data>
+  <data name="SaveWithShortcut" xml:space="preserve">
+    <value>保存 (Ctrl+S)</value>
+  </data>
+  <data name="SyntaxHighlighting" xml:space="preserve">
+    <value>语法高亮:</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>加载中...</value>
+  </data>
+  <data name="Ready" xml:space="preserve">
+    <value>就绪</value>
+  </data>
+  <data name="Modified" xml:space="preserve">
+    <value>已修改</value>
+  </data>
+  <data name="FileModifiedSavePrompt" xml:space="preserve">
+    <value>文件已修改，是否保存？</value>
+  </data>
+  <data name="Prompt" xml:space="preserve">
+    <value>提示</value>
+  </data>
+  <data name="LargeFileWarningPrompt" xml:space="preserve">
+    <value>文件较大 ({0} MB)，加载可能需要较长时间并占用大量内存。是否继续？</value>
+  </data>
+  <data name="LargeFileWarning" xml:space="preserve">
+    <value>大文件警告</value>
+  </data>
+  <data name="DownloadingFile" xml:space="preserve">
+    <value>正在下载文件...</value>
+  </data>
+  <data name="ReadingFile" xml:space="preserve">
+    <value>正在读取文件...</value>
+  </data>
+  <data name="LoadFileFailed" xml:space="preserve">
+    <value>加载文件失败</value>
+  </data>
+  <data name="LoadFailed" xml:space="preserve">
+    <value>加载失败</value>
+  </data>
+  <data name="SavingFile" xml:space="preserve">
+    <value>正在保存文件...</value>
+  </data>
+  <data name="Saving" xml:space="preserve">
+    <value>保存中...</value>
+  </data>
+  <data name="Saved" xml:space="preserve">
+    <value>已保存</value>
+  </data>
+  <data name="SaveFileFailed" xml:space="preserve">
+    <value>保存文件失败</value>
+  </data>
+  <data name="SaveFailed" xml:space="preserve">
+    <value>保存失败</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>是</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>否</value>
+  </data>
+  <data name="StartCommandSentSuccess" xml:space="preserve">
+    <value>启动命令发送成功</value>
+  </data>
+  <data name="StopCommandSentSuccess" xml:space="preserve">
+    <value>停止命令发送成功</value>
+  </data>
+  <data name="KillCommandSentSuccess" xml:space="preserve">
+    <value>强制关闭命令发送成功</value>
+  </data>
+  <data name="RestartCommandSentSuccess" xml:space="preserve">
+    <value>重启命令发送成功</value>
+  </data>
+  <data name="SendCommandFailed" xml:space="preserve">
+    <value>发送命令失败：{0}</value>
+  </data>
+  <data name="ConsoleCommand_SendUnavailable" xml:space="preserve">
+    <value>实例 {0} 当前状态下不能发送命令。</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>文件</value>
+  </data>
+  <data name="Format" xml:space="preserve">
+    <value>格式</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>帮助</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>撤销</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>重做</value>
+  </data>
+  <data name="Cut" xml:space="preserve">
+    <value>剪切</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>粘贴</value>
+  </data>
+  <data name="TimeDate" xml:space="preserve">
+    <value>时间/日期</value>
+  </data>
+  <data name="WordWrap" xml:space="preserve">
+    <value>自动换行</value>
+  </data>
+  <data name="Font" xml:space="preserve">
+    <value>字体</value>
+  </data>
+  <data name="Zoom" xml:space="preserve">
+    <value>缩放</value>
+  </data>
+  <data name="ZoomIn" xml:space="preserve">
+    <value>放大</value>
+  </data>
+  <data name="ZoomOut" xml:space="preserve">
+    <value>缩小</value>
+  </data>
+  <data name="RestoreDefaultZoom" xml:space="preserve">
+    <value>恢复默认缩放</value>
+  </data>
+  <data name="StatusBar" xml:space="preserve">
+    <value>状态栏</value>
+  </data>
+  <data name="ShowLineNumbers" xml:space="preserve">
+    <value>显示行号</value>
+  </data>
+  <data name="Reload" xml:space="preserve">
+    <value>重新加载</value>
+  </data>
+  <data name="CreateInstanceMissingDataError" xml:space="preserve">
+    <value>缺少必填数据</value>
+  </data>
+  <data name="CreateInstanceConfirmationMessage" xml:space="preserve">
+    <value>您确定要创建以下实例吗？</value>
+  </data>
+  <data name="CorePath" xml:space="preserve">
+    <value>核心路径</value>
+  </data>
+  <data name="JvmArguments" xml:space="preserve">
+    <value>JVM 参数</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>无</value>
+  </data>
+  <data name="CreateInstanceConfirmationTitle" xml:space="preserve">
+    <value>确认创建实例</value>
+  </data>
+  <data name="DaemonConnectionError" xml:space="preserve">
+    <value>无法连接到远程主机</value>
+  </data>
+  <data name="CreatingInstance" xml:space="preserve">
+    <value>正在创建实例...</value>
+  </data>
+  <data name="InstanceCreatedSuccess" xml:space="preserve">
+    <value>实例创建成功</value>
+  </data>
+  <data name="CreateInstanceError" xml:space="preserve">
+    <value>创建实例失败</value>
+  </data>
+  <data name="NoJavaFound" xml:space="preserve">
+    <value>未找到 Java 运行时</value>
+  </data>
+  <data name="SearchJavaError" xml:space="preserve">
+    <value>搜索 Java 失败</value>
+  </data>
+  <data name="InstanceName" xml:space="preserve">
+    <value>实例名称</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="UploadingFile" xml:space="preserve">
+    <value>正在上传文件</value>
+  </data>
+  <data name="FileUploadFailed" xml:space="preserve">
+    <value>文件上传失败</value>
+  </data>
+  <data name="ComponentManager_Add" xml:space="preserve">
+    <value>添加组件</value>
+  </data>
+  <data name="ComponentManager_Enable" xml:space="preserve">
+    <value>启用</value>
+  </data>
+  <data name="ComponentManager_Disable" xml:space="preserve">
+    <value>禁用</value>
+  </data>
+  <data name="ComponentManager_Locate" xml:space="preserve">
+    <value>定位文件</value>
+  </data>
+  <data name="ComponentManager_Enabled" xml:space="preserve">
+    <value>组件已启用</value>
+  </data>
+  <data name="ComponentManager_Disabled" xml:space="preserve">
+    <value>组件已禁用</value>
+  </data>
+  <data name="ComponentManager_Deleted" xml:space="preserve">
+    <value>组件已删除</value>
+  </data>
+  <data name="ComponentManager_ConfirmDeleteMessage" xml:space="preserve">
+    <value>确定要删除"{0}"吗？</value>
+  </data>
+  <data name="ComponentManager_PathCopied" xml:space="preserve">
+    <value>路径已复制</value>
+  </data>
+  <data name="ComponentManager_DaemonUnavailable" xml:space="preserve">
+    <value>Daemon 连接不可用</value>
+  </data>
+  <data name="ComponentManager_NoTargetFolder" xml:space="preserve">
+    <value>没有可用的目标文件夹</value>
+  </data>
+  <data name="ComponentManager_NoJarFiles" xml:space="preserve">
+    <value>拖放的文件中未找到 JAR 文件</value>
+  </data>
+  <data name="ComponentManager_AddedCount" xml:space="preserve">
+    <value>已成功添加 {0}/{1} 个组件</value>
+  </data>
+  <data name="SettingsSaveSuccess" xml:space="preserve">
+    <value>设置已保存</value>
+  </data>
+  <data name="Replace" xml:space="preserve">
+    <value>替换</value>
+  </data>
+  <data name="Installer" xml:space="preserve">
+    <value>安装器</value>
+  </data>
+  <data name="ForceRerunInstaller" xml:space="preserve">
+    <value>强制重新运行安装器</value>
+  </data>
+  <data name="InstanceSettingsInstallerNotice" xml:space="preserve">
+    <value>替换核心时会保留旧文件，并在支持的类型上清理旧安装产物后重建启动目标。</value>
+  </data>
+  <data name="InstanceSettingsBasicModeNotice" xml:space="preserve">
+    <value>当前实例类型暂时仅支持基础信息编辑；高级运行时和核心替换仅对 Java 家族实例开放。</value>
+  </data>
+  <data name="ComponentManager_ClientSideModBlocked" xml:space="preserve">
+    <value>已拦截纯客户端模组：{0}</value>
+  </data>
+  <data name="ComponentManager_ClientSideBadge" xml:space="preserve">
+    <value>客户端</value>
+  </data>
+  <data name="MinecraftVersionLabel" xml:space="preserve">
+    <value>Minecraft</value>
+  </data>
+  <data name="ForgeVersionLabel" xml:space="preserve">
+    <value>Forge</value>
+  </data>
+  <data name="FabricLoaderVersionLabel" xml:space="preserve">
+    <value>Fabric Loader</value>
+  </data>
+  <data name="NeoForgeVersionLabel" xml:space="preserve">
+    <value>NeoForge</value>
+  </data>
+  <data name="InstanceType_MCForge" xml:space="preserve">
+    <value>Minecraft Forge</value>
+  </data>
+  <data name="InstanceType_MCFabric" xml:space="preserve">
+    <value>Minecraft Fabric</value>
+  </data>
+  <data name="InstanceType_MCNeoForge" xml:space="preserve">
+    <value>Minecraft NeoForge</value>
+  </data>
+  <data name="DebugCopyConfig" xml:space="preserve">
+    <value>调试：复制配置</value>
+  </data>
+  <data name="InstanceConfigCopied" xml:space="preserve">
+    <value>实例配置已复制到剪贴板</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_ActionExecutionMode" xml:space="preserve">
+    <value>执行方式</value>
+  </data>
+  <data name="FeatureNotReadyTip" xml:space="preserve">
+    <value>该功能尚未完成。</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_ParallelSeparator" xml:space="preserve">
+    <value>同时</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_SequentialSeparator" xml:space="preserve">
+    <value>然后</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_AlwaysFalseRuleset" xml:space="preserve">
+    <value>总是为假</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_RulesetConditionHint" xml:space="preserve">
+    <value>满足以下条件时执行行动</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_AlwaysTrueRulesetDescription" xml:space="preserve">
+    <value>无论在什么情况下，该规则都会返回真。</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Parallel" xml:space="preserve">
+    <value>并行</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_AlwaysFalseRulesetDescription" xml:space="preserve">
+    <value>无论在什么情况下，该规则都会返回假。</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Sequential" xml:space="preserve">
+    <value>顺序</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Ruleset" xml:space="preserve">
+    <value>规则集</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_AlwaysTrueRuleset" xml:space="preserve">
+    <value>总是为真</value>
+  </data>
+  <data name="ComponentManager_AddMod" xml:space="preserve">
+    <value>添加模组</value>
+  </data>
+  <data name="ComponentManager_AddPlugin" xml:space="preserve">
+    <value>添加插件</value>
+  </data>
+  <data name="ComponentManager_EmptyMods" xml:space="preserve">
+    <value>此实例还没有安装任何模组。</value>
+  </data>
+  <data name="ComponentManager_EmptyPlugins" xml:space="preserve">
+    <value>此实例还没有安装任何插件。</value>
+  </data>
+  <data name="ComponentManager_Unsupported" xml:space="preserve">
+    <value>请先安装或切换到支持模组/插件的加载器，然后再使用组件管理。</value>
+  </data>
+  <data name="ComponentManager_ClientSideModsFound" xml:space="preserve">
+    <value>检测到客户端模组</value>
+  </data>
+  <data name="ComponentManager_ClientSideModsWarning" xml:space="preserve">
+    <value>检测到 {0} 个已启用的纯客户端模组。它们通常无法在服务端运行，可能导致实例启动失败。你可以立即禁用它们，或忽略此警告。</value>
+  </data>
+  <data name="ComponentManager_DisableClientSideMods" xml:space="preserve">
+    <value>禁用</value>
+  </data>
+  <data name="ComponentManager_DisabledClientSideMods" xml:space="preserve">
+    <value>已禁用 {0} 个客户端模组。</value>
+  </data>
+  <data name="EventTrigger_EmptyRules" xml:space="preserve">
+    <value>此实例还没有配置任何触发规则。</value>
+  </data>
+  <data name="Ignore" xml:space="preserve">
+    <value>忽略</value>
+  </data>
+  <data name="FirstSetup_EulaOnlineTip" xml:space="preserve">
+    <value>请在浏览器中阅读 MCSL Future 用户协议。继续前需要等待 15 秒，以确保你有时间打开并查看协议内容。</value>
+  </data>
+  <data name="FirstSetup_EulaOpenInBrowser" xml:space="preserve">
+    <value>打开用户协议</value>
+  </data>
+  <data name="FirstSetup_EulaContinueCountdown" xml:space="preserve">
+    <value>同意（{0}s）</value>
+  </data>
+  <data name="FirstSetup_EulaUrlLabel" xml:space="preserve">
+    <value>协议地址</value>
+  </data>
+  <data name="FirstSetup_DaemonRemoteHost" xml:space="preserve">
+    <value>远程主机</value>
+  </data>
+  <data name="FirstSetup_DaemonLocalHost" xml:space="preserve">
+    <value>在本机运行</value>
+  </data>
+  <data name="FirstSetup_DaemonLocalQuestion" xml:space="preserve">
+    <value>是否要在本机运行守护进程？</value>
+  </data>
+  <data name="FirstSetup_DaemonLocalQuestionTip" xml:space="preserve">
+    <value>如果这台电脑会直接托管实例，请选择在本机运行；否则可以直接添加远程节点。</value>
+  </data>
+  <data name="FirstSetup_DaemonUseLocal" xml:space="preserve">
+    <value>在本机运行</value>
+  </data>
+  <data name="FirstSetup_DaemonSkipLocalUseRemote" xml:space="preserve">
+    <value>添加远程节点</value>
+  </data>
+  <data name="FirstSetup_DaemonLocalDownload" xml:space="preserve">
+    <value>下载守护进程</value>
+  </data>
+  <data name="FirstSetup_DaemonLocalDownloadUnavailable" xml:space="preserve">
+    <value>本机守护进程下载地址暂未配置，请先添加远程主机，或稍后在此处配置直链后重试。</value>
+  </data>
+  <data name="FirstSetup_DaemonAddAnotherHostTitle" xml:space="preserve">
+    <value>继续添加主机？</value>
+  </data>
+  <data name="FirstSetup_DaemonAddAnotherHostTip" xml:space="preserve">
+    <value>当前主机已添加。你可以继续添加其他主机，或完成首次设置。</value>
+  </data>
+  <data name="FirstSetup_DaemonAddAnotherHost" xml:space="preserve">
+    <value>继续添加</value>
+  </data>
+  <data name="FirstSetup_DaemonFinishAdding" xml:space="preserve">
+    <value>完成</value>
+  </data>
+</root>

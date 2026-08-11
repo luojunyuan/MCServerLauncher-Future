@@ -1,0 +1,1905 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:schema id="root">
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0,
+      Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0,
+      Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ErrorDialogTitle" xml:space="preserve">
+    <value>MCServerLauncher WinUI でエラーが発生しました</value>
+  </data>
+  <data name="OnlyForWindows" xml:space="preserve">
+    <value>WinUI Client (Windows のみ)</value>
+  </data>
+  <data name="FirstSetup_TimeLanguageMenu" xml:space="preserve">
+    <value>言語 / Language</value>
+  </data>
+  <data name="FirstSetup_EulaMenu" xml:space="preserve">
+    <value>ユーザー同意書</value>
+  </data>
+  <data name="FirstSetup_ConnectDaemonMenu" xml:space="preserve">
+    <value>リモートホストを接続する</value>
+  </data>
+  <data name="FirstSetup_WelcomeMenu" xml:space="preserve">
+    <value>はじめに</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>続けます</value>
+  </data>
+  <data name="FirstSetup_SetLanguageHint" xml:space="preserve">
+    <value> 言語を設定する</value>
+  </data>
+  <data name="FirstSetup_SetLanguageHintReverse" xml:space="preserve">
+    <value> Language</value>
+  </data>
+  <data name="Main_HomeNavMenu" xml:space="preserve">
+    <value>ホーム</value>
+  </data>
+  <data name="Main_CreateInstanceNavMenu" xml:space="preserve">
+    <value>インスタンスの作成</value>
+  </data>
+  <data name="Main_InstanceManagerNavMenu" xml:space="preserve">
+    <value>インスタンス管理</value>
+  </data>
+  <data name="Main_ResDownloadNavMenu" xml:space="preserve">
+    <value>リソースのダウンロード</value>
+  </data>
+  <data name="Main_HelpCenterNavMenu" xml:space="preserve">
+    <value>ヘルプセンター</value>
+  </data>
+  <data name="Main_NotificationCenterNavMenu" xml:space="preserve">
+    <value>通知センター</value>
+  </data>
+  <data name="Main_DebugNavMenu" xml:space="preserve">
+    <value>デバッグページ</value>
+  </data>
+  <data name="Main_SettingsNavMenu" xml:space="preserve">
+    <value>プログラム設定</value>
+  </data>
+  <data name="Tip" xml:space="preserve">
+    <value>ヒント</value>
+  </data>
+  <data name="NotAllowedMultipleProcess" xml:space="preserve">
+    <value>MCServerLauncher WinUI は複数起動をサポートしていません。</value>
+  </data>
+  <data name="DownloadModule_FastMirrorProxyType" xml:space="preserve">
+    <value>プロキシ</value>
+  </data>
+  <data name="DownloadModule_FastMirrorVanillaType" xml:space="preserve">
+    <value>バニラ</value>
+  </data>
+  <data name="DownloadModule_FastMirrorPureType" xml:space="preserve">
+    <value>ピュア</value>
+  </data>
+  <data name="DownloadModule_FastMirrorModType" xml:space="preserve">
+    <value>モッド</value>
+  </data>
+  <data name="DownloadModule_FastMirrorBedrockType" xml:space="preserve">
+    <value>統合版</value>
+  </data>
+  <data name="DownloadModule_MSLAPIGetCoreDescriptionFailed" xml:space="preserve">
+    <value>コアの説明の取得に失敗しました！</value>
+  </data>
+  <data name="CreateInstance_MinecraftBedrockArchive_Title" xml:space="preserve">
+    <value>Minecraft 統合版アーカイブ</value>
+  </data>
+  <data name="CreateInstance_Archive_Description" xml:space="preserve">
+    <value>ダウンロードしたアーカイブをここにインポートしてください。ダウンロード場所がわからない場合は、右側のボタンをクリックしてジャンプできます。</value>
+  </data>
+  <data name="Archive" xml:space="preserve">
+    <value>アーカイブ</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>参照</value>
+  </data>
+  <data name="CreateInstance_MinecraftJavaCore_Title" xml:space="preserve">
+    <value>Minecraft サーバーコア</value>
+  </data>
+  <data name="CreateInstance_MinecraftJavaCore_Description" xml:space="preserve">
+    <value>このサーバーが使用するコアファイルを選択してください。ダウンロード場所がわからない場合は、右側のボタンをクリックしてジャンプできます。</value>
+  </data>
+  <data name="MinecraftCoreFileName" xml:space="preserve">
+    <value>コアファイル名</value>
+  </data>
+  <data name="CreateInstance_MinecraftJavaJvm_Title" xml:space="preserve">
+    <value>Java ランタイム</value>
+  </data>
+  <data name="CreateInstance_MinecraftJavaJvm_Description" xml:space="preserve">
+    <value>Java ランタイムは Minecraft Java サーバーの必須環境です。起動の失敗を防ぐため、必ず適切なバージョンを選択してください。</value>
+  </data>
+  <data name="JavaPath" xml:space="preserve">
+    <value>Java パス</value>
+  </data>
+  <data name="SelectFromResult" xml:space="preserve">
+    <value>既存の結果から選択</value>
+  </data>
+  <data name="MinecraftJavaRequirementTip" xml:space="preserve">
+    <value>1.12+ は Java 8 が必要です
+1.17+ は Java 16 が必要です
+1.18+ は Java 17 が必要です
+1.20.5+ は Java 21 が必要です
+26.1+ は Java 25 が必要です</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>ファイル名</value>
+  </data>
+  <data name="CreateInstance_OtherExecutableInstanceDependency_Description" xml:space="preserve">
+    <value>このインスタンスに必要なファイル/フォルダー/アーカイブを選択してください。アーカイブは ZIP 形式のみサポートしています。</value>
+  </data>
+  <data name="CreateInstance_OtherExecutableInstanceDependency_Title" xml:space="preserve">
+    <value>デプロイの依存関係</value>
+  </data>
+  <data name="CreateInstance_OtherExecutableInstanceRunCommand_Title" xml:space="preserve">
+    <value>実行コマンド</value>
+  </data>
+  <data name="CreateInstance_OtherExecutableInstanceRunCommand_Description" xml:space="preserve">
+    <value>ここに実行コマンドを入力してください。</value>
+  </data>
+  <data name="RunCommandArgumentTip" xml:space="preserve">
+    <value>引数が必要な場合は、
+そのまま後ろに追加してください。</value>
+  </data>
+  <data name="CreateInstance_InstanceName_Description" xml:space="preserve">
+    <value>特殊記号を含めたり、不正な名前を使用したりしないでください。</value>
+  </data>
+  <data name="CreateInstance_InstanceName_Title" xml:space="preserve">
+    <value>インスタンス名</value>
+  </data>
+  <data name="CreateInstance_MinecraftJavaJvmArgument_Description" xml:space="preserve">
+    <value>(オプション) ここに他の JVM 引数を追加できます。1行に1つずつ入力してください。</value>
+  </data>
+  <data name="CreateInstance_MinecraftJavaJvmArgument_AddArgument" xml:space="preserve">
+    <value>引数を追加</value>
+  </data>
+  <data name="CreateInstance_MinecraftJavaJvmArgument_Title" xml:space="preserve">
+    <value>JVM 引数</value>
+  </data>
+  <data name="MaximumMemory" xml:space="preserve">
+    <value>最大メモリ</value>
+  </data>
+  <data name="MinimumMemory" xml:space="preserve">
+    <value>最小メモリ</value>
+  </data>
+  <data name="CreateInstance_MinecraftJvmRam_Description" xml:space="preserve">
+    <value>これにより、Minecraft Java サーバーが使用できるメモリ量が決定されます。</value>
+  </data>
+  <data name="CreateInstance_MinecraftJvmRam_Title" xml:space="preserve">
+    <value>JVM メモリヒープ</value>
+  </data>
+  <data name="CreateInstance_MinecraftJvmRam_Tip" xml:space="preserve">
+    <value>最小メモリ ≤ 最大メモリ であれば十分です</value>
+  </data>
+  <data name="CopyUrl" xml:space="preserve">
+    <value>リンクをコピー</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>一時停止</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="FileSize" xml:space="preserve">
+    <value>ファイルサイズ</value>
+  </data>
+  <data name="MinecraftVersion" xml:space="preserve">
+    <value>Minecraft バージョン</value>
+  </data>
+  <data name="BuildVersion" xml:space="preserve">
+    <value>ビルドバージョン</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>オフ</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>オン</value>
+  </data>
+  <data name="CreateTime" xml:space="preserve">
+    <value>作成時間</value>
+  </data>
+  <data name="InstanceType" xml:space="preserve">
+    <value>インスタンスタイプ</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>バージョン</value>
+  </data>
+  <data name="More" xml:space="preserve">
+    <value>詳細</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>起動</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>戻る</value>
+  </data>
+  <data name="PreFinishCreateInstanceTip" xml:space="preserve">
+    <value>以下の設定が完了したら、「続けます」をクリックしてください。</value>
+  </data>
+  <data name="CreateInstance_MinecraftVersionTip" xml:space="preserve">
+    <value>このサーバーが実行する Minecraft バージョンを選択してください。</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="CreateInstance_BmclapiMayBeFailedTip" xml:space="preserve">
+    <value>読み込めない場合は、後でもう一度お試しください。
+ミラーサービスは BMCLAPI によって提供されています</value>
+  </data>
+  <data name="ForgeVersion" xml:space="preserve">
+    <value>Forge バージョン</value>
+  </data>
+  <data name="NeoForgeVersion" xml:space="preserve">
+    <value>NeoForge バージョン</value>
+  </data>
+  <data name="FabricVersion" xml:space="preserve">
+    <value>Fabric バージョン</value>
+  </data>
+  <data name="QuiltVersion" xml:space="preserve">
+    <value>Quilt バージョン</value>
+  </data>
+  <data name="CreateInstance_ForgeVersion_Description" xml:space="preserve">
+    <value>このサーバーが実行する Forge ローダーのバージョンを選択してください。</value>
+  </data>
+  <data name="CreateInstance_NeoForgeVersion_Description" xml:space="preserve">
+    <value>このサーバーが実行する NeoForge ローダーのバージョンを選択してください。</value>
+  </data>
+  <data name="CreateInstance_FabricVersion_Description" xml:space="preserve">
+    <value>このサーバーが実行する Fabric ローダーのバージョンを選択してください。</value>
+  </data>
+  <data name="CreateInstance_QuiltVersion_Description" xml:space="preserve">
+    <value>このサーバーが実行する Quilt ローダーのバージョンを選択してください。</value>
+  </data>
+  <data name="OnlyShowReleaseVersion" xml:space="preserve">
+    <value>正式版のみ表示</value>
+  </data>
+  <data name="ResDownload_InstanceCore" xml:space="preserve">
+    <value>サーバーコア</value>
+  </data>
+  <data name="ResDownload_OpenHomePage" xml:space="preserve">
+    <value>公式サイトを開く</value>
+  </data>
+  <data name="FirstSetup_SetupFinishedWelcome" xml:space="preserve">
+    <value>ようこそ</value>
+  </data>
+  <data name="TempSkip" xml:space="preserve">
+    <value>一時的にスキップ</value>
+  </data>
+  <data name="Agree" xml:space="preserve">
+    <value>同意する</value>
+  </data>
+  <data name="Disagree" xml:space="preserve">
+    <value>拒否する</value>
+  </data>
+  <data name="Eula1" xml:space="preserve">
+    <value>MCSL開発チームが提供する MCServerLauncher（以下「本ソフトウェア」）のソフトウェアおよびサービスをご利用いただきありがとうございます。ユーザーの権利を保護するため、本ソフトウェアを使用する前に、本契約のすべての内容をよくお読みください。本契約は随時更新される可能性があり、公開された時点で元のユーザー契約書に代わって有効となります。
+以下の内容をよくお読みください。本ソフトウェアを使用した場合、本契約のすべての内容を詳細に読み、同意し、本契約の規定を遵守することに同意したものとみなされます。</value>
+  </data>
+  <data name="Eula2" xml:space="preserve">
+    <value>使用上の注意</value>
+  </data>
+  <data name="Eula3" xml:space="preserve">
+    <value>ユーザーは、本ソフトウェアおよび本ソフトウェアの機能（インスタンスの作成などを含みますが、これに限定されません）に必要なハードウェアおよびソフトウェアの構成を自ら準備する必要があります。
+ユーザーは、インターネット接続に必要な電話料金、ブロードバンド使用料金などを自ら負担する必要があります。
+ユーザーは、本ソフトウェアの使用によって生じた行為、イベント、結果について法的責任を負う必要があります。
+ユーザーと他の許可されていない非公式の個人との間で発生したいかなる取引や紛争についても、開発者は一切関係ありません。
+ユーザーは、中華人民共和国の関連する法律および法規を遵守する必要があります（ユーザーが中華人民共和国以外のユーザーである場合は、所属する国または地域の法律および法規も遵守する必要があります）。
+ユーザーは、本ソフトウェア（または本ソフトウェアの一部の機能）を使用して違法行為を行ってはならず、本ソフトウェアに関連するプロセスおよびサービスを使用して違法行為を行ってはなりません。その行為によって生じたいかなる結果についても、開発者は一切関係ありません。
+ユーザーは、自らが公開した情報内容に関連する法的責任を自ら負う必要があります。ユーザーは、本ソフトウェア内、本ソフトウェアが実行する関連プロセスおよびサービス内で、以下のいかなる内容も入力、公開、および伝播してはならず、いかなる形式でも以下の内容を公開してはなりません：
+
+中華人民共和国憲法が定める基本原則に反対するもの；
+国家の安全を脅かし、国家機密を漏洩し、国家政権を転覆し、国家の統一を破壊するもの；
+国家の栄誉および利益を損なうもの；
+民族の憎悪、民族差別を扇動し、民族の団結を破壊するもの；
+国家の宗教政策を破壊し、邪教および封建的迷信を宣伝するもの；
+デマを流布し、社会秩序を乱し、社会の安定を破壊するもの；
+わいせつ、ポルノ、賭博、暴力、殺人、テロ、または犯罪を教唆するものを流布するもの；
+他人を侮辱または誹謗し、他人の合法的権益を侵害するもの；
+中華人民共和国の法律、行政法規が禁止するその他の内容を含むもの。
+法律で許可されている場合、または開発者の書面による許可がある場合を除き、ユーザーは以下のいかなる行為も行ってはなりません：
+本ソフトウェアおよびサービスを違法または不適切に使用すること；
+本ソフトウェアのシステムまたはウェブサイトの正常な動作を破壊し、コンピューターウイルスなどの破壊的なプログラムを意図的に伝播すること；
+本ソフトウェアのネットワークサービスに影響を与える可能性のある異常な使用行為（サーバーへの損害、攻撃、またはサーバーへの過負荷などを含みますが、これらに限定されません）を行うこと；
+本ソフトウェアおよびそのコピーから著作権に関する情報を削除すること。
+
+ユーザーが違法、規則違反、または本契約の規定に違反する行為を行った場合、開発者はその深刻度に応じて、本契約および法律法規に基づき、サービスの終了などを含みますがこれに限定されない措置をユーザーに対して講じる権利を有します。状況が深刻な場合は、関連する行政管理機関に移送して行政処罰を受けさせるか、またはその刑事責任を追及します。</value>
+  </data>
+  <data name="Eula4" xml:space="preserve">
+    <value>データの収集と使用</value>
+  </data>
+  <data name="Eula5" xml:space="preserve">
+    <value>本使用契約に同意し、本ソフトウェアのオンラインサービスを使用する場合、以下の情報を収集します：
+本ソフトウェアが実行されているデバイスのIPアドレス（正しいアドレスではない可能性があります）；
+本ソフトウェアが実行されているデバイスの一部のシステム情報；
+本ソフトウェアがクラッシュした場合、ユーザーの同意を得た上で、問題の解決とソフトウェアの改善に役立てるため、システムで実行されているソフトウェアのログ（一部のシステム情報を含む）をアップロードする場合があります；
+その他、ユーザーの同意を得た上でアップロードされる一部の情報（ソフトウェア内で具体的に説明されます）。</value>
+  </data>
+  <data name="Eula6" xml:space="preserve">
+    <value>ユーザーサポートとフィードバック</value>
+  </data>
+  <data name="Eula7" xml:space="preserve">
+    <value>使用中に問題が発生した場合、ユーザーは公式メールまたは本ソフトウェアのソースコードリポジトリでIssueを送信することでフィードバックを行うことができます。サービスを改善するため、ユーザーのフィードバックを真摯に検討します。</value>
+  </data>
+  <data name="Eula8" xml:space="preserve">
+    <value>サービスの変更または中止</value>
+  </data>
+  <data name="Eula9" xml:space="preserve">
+    <value>1. ユーザーに対するサービスの中止および終了
+
+ユーザーが違法な情報を公開したり、社会道徳に著しく違反したり、その他法律の禁止規定に違反する行為を行った場合、開発者はユーザーへのサービスの提供を終了する必要があります；
+ユーザーが本ソフトウェアのサービスを受ける際に不正行為を行った場合、開発者はユーザーへのサービスの提供を終了する権利を有します（この不正行為の具体的な状況は本契約で明確に規定されています）；
+ユーザーが本ソフトウェアのサードパーティによる変更バージョンを使用する場合、ユーザーは自らリスクと法的責任を負う必要があります。
+
+2. 本ソフトウェアおよびサービスの中断、中止、および終了：
+
+以下のいずれかの状況が発生した場合、開発者は本ソフトウェアの全部または一部のサービスを終了または中断する権利を有し、それによって生じた不便および損害について、開発者はユーザーまたは第三者に対していかなる責任も負いません：
+
+a. 本ソフトウェアおよびサービス自体の必要性による場合；
+b. サーバーが損害を受け、正常に動作できない場合；
+c. 突発的なハードウェアおよびソフトウェア機器、電子通信機器の故障による場合；
+d. ネットワークプロバイダーの回線またはその他の故障による場合；
+e. 政策的要因による場合；
+f. サードパーティの原因またはその他の不可抗力の状況による場合。
+
+開発者は、必要と判断した場合に本ソフトウェアおよびサービスを終了または部分的に終了する権利を留保し、開発者はユーザーに通知するために公告の形式をとることができますが、開発者はユーザーに生じたいかなる損失についても責任を負いません。</value>
+  </data>
+  <data name="Eula10" xml:space="preserve">
+    <value>免責事項</value>
+  </data>
+  <data name="Eula11" xml:space="preserve">
+    <value>ユーザーは、法律で許可される範囲内で、開発者が本ソフトウェアに対していかなる保証も提供しないことを理解し、同意します。本ソフトウェアの使用によって生じたリスクはすべてユーザーが自ら負担するものとします。
+ユーザーは、開発者が本ソフトウェアおよびサービスが必ずユーザーのニーズを満たすことを保証せず、サービスが中断されないことを保証せず、本ソフトウェアおよびサービスの正確性、安全性などについていかなる保証も提供しないことを理解し、同意します。
+ユーザーは、開発者が本ソフトウェアのオンラインサービスからダウンロードされたサードパーティのファイルの正確性、安全性、合法性を完全に保証できないこと、また本ソフトウェア内に存在するサードパーティのサービス（リソースのダウンロードなどのサービスを含みますが、これらに限定されません）の正確性、安全性、合法性などについて責任を負わないことを理解し、同意します。したがって、前述の内容は開発者および本ソフトウェアとは関係がなく、開発者および本ソフトウェアの立場を代表するものではありません。関連する紛争は、サードパーティのサービスプロバイダーが負担する必要があります。
+ユーザーは、誤った方法または違法な手段で本ソフトウェアのオンラインサービスおよび本ソフトウェアからダウンロードされた関連ファイルを使用した場合、その結果はユーザーが自ら負担することを理解し、同意します。財産の損害、著作権または知的財産権の侵害などの問題が発生した場合、開発者は一切責任を負わず、いかなる法的責任も負うことはできません。
+ユーザーは、本ソフトウェアがサードパーティのサービス内容について保証を提供しないことを理解し、同意します。ユーザーがサードパーティのサービスを使用した結果、財産の損害、著作権または知的財産権の侵害などの問題が発生した場合、開発者は一切責任を負わず、いかなる法的責任も負うことはできません。
+ユーザーは、開発者が本ソフトウェアの機能に対していかなる保証および法的サポートも提供しないことを理解し、同意します。ユーザーが本ソフトウェアの機能を使用して違法犯罪またはその他の不正行為を行った場合、生じたリスクおよび法的結果はすべてユーザーが自ら負担するものとします。</value>
+  </data>
+  <data name="Eula12" xml:space="preserve">
+    <value>知的財産権</value>
+  </data>
+  <data name="Eula13" xml:space="preserve">
+    <value>本ソフトウェアの著作権、特許権、およびその他の知的財産権は、すべて開発者または指定された著作権者に帰属します。
+
+本ソフトウェアが使用するサードパーティのサービスは、関連する著作権者に帰属します。これには以下が含まれますが、これらに限定されません：
+本ソフトウェアは、Minecraft（その最終的な解釈権は Microsoft 社および Mojang AB に帰属します）のサーバー管理およびゲームマルチプレイツールです。ユーザーは、そのエンドユーザー使用許諾契約（EULA）および中国地域の代理店である網易が中国本土で実施している関連ポリシーを遵守する必要があり、ゲーム本体のコンテンツを商業目的で使用したり、エンドユーザー使用許諾契約で禁止されているその他の行為を行ったりしてはなりません。
+本ソフトウェアは、Terraria（その最終的な解釈権は Re-Logic およびそのパブリッシャーに帰属します）のサーバー管理およびゲームマルチプレイツールです。ユーザーは、そのエンドユーザー使用許諾契約（EULA）および関連ポリシーを遵守する必要があります。ユーザーは、ゲーム本体のコンテンツを許可なく商業目的で使用したり、エンドユーザー使用許諾契約で禁止されているその他の行為を行ったりしてはなりません。
+本ソフトウェアが提供する一部のオンラインファイルリソース（サーバーコア、ゲーム/サーバーモッド、プラグインなどのコンテンツ）のダウンロードサービスは、対応する公式/サードパーティなどによって提供され、著作権はサードパーティのプラットフォームの規定に従って処理されます。
+本ソフトウェアが使用するその他のサードパーティのサービスは、著作権がサービスプロバイダーに帰属します。
+本ソフトウェアはオープンソースソフトウェアであり、ユーザーまたは本ソフトウェア以外のソフトウェア開発者は、本ソフトウェアのオープンソースライセンスを遵守する必要があります。
+ユーザーは、ユーザーが作成したリソースを除き、本ソフトウェアが提供するすべてのオンラインサービスデータが開発者に帰属することを理解し、同意します。開発者は、サーバー上の全部または一部のデータを保持するかどうかを決定する権利を有します。</value>
+  </data>
+  <data name="Eula14" xml:space="preserve">
+    <value>条項の変更</value>
+  </data>
+  <data name="Eula15" xml:space="preserve">
+    <value>開発者は、必要な場合に本契約を変更する権利を有します。本契約に変更があった場合、開発者は重要なページに変更内容を表示します。ユーザーが本契約の改訂または更新に同意しない場合、本ソフトウェアおよびサービスの使用を自発的に停止することができます。本契約の改訂後もユーザーが引き続き本ソフトウェアおよびサービスを使用する場合、ユーザーは本契約に加えられたすべての改訂または更新に同意したものとみなされます。本契約の改訂後、ユーザーが変更に精通していないことによって生じた損失について、開発者はいかなる責任も負いません。</value>
+  </data>
+  <data name="Eula16" xml:space="preserve">
+    <value>その他の規定</value>
+  </data>
+  <data name="Eula17" xml:space="preserve">
+    <value>本契約は中華人民共和国の法律に適用され、すべての抵触法の規定の適用を排除します；
+開発者が本契約または法律の規定に従って有する権利を行使しない、適時に行使しない、または十分に行使しないことは、当該権利の行使を放棄したとはみなされず、開発者が将来当該権利を行使することに影響を与えてはなりません；
+法律で許可される範囲内で、開発者は本契約の条項に対する解釈権を有します；
+ユーザーは、電子メールを通じて各種の違法および規則違反行為を苦情・報告することができます。メールは services@mcsl.com.cn 宛てに送信してください。</value>
+  </data>
+  <data name="Eula18" xml:space="preserve">
+    <value>条項の分離可能性</value>
+  </data>
+  <data name="Eula19" xml:space="preserve">
+    <value>本契約のいずれかの条項が無効、または執行不能と判断された場合でも、残りの条項は引き続き完全に有効であるものとします。</value>
+  </data>
+  <data name="PreCreateInstanceTip" xml:space="preserve">
+    <value>操作するモードを選択してください：</value>
+  </data>
+  <data name="CreateUniversalMinecraftJavaInstance" xml:space="preserve">
+    <value>汎用 Minecraft Java 版サーバー</value>
+  </data>
+  <data name="CreateMinecraftForgeInstance" xml:space="preserve">
+    <value>Minecraft Forge サーバー</value>
+  </data>
+  <data name="CreateMinecraftNeoForgeInstance" xml:space="preserve">
+    <value>Minecraft NeoForge サーバー</value>
+  </data>
+  <data name="CreateMinecraftFabricInstance" xml:space="preserve">
+    <value>Minecraft Fabric サーバー</value>
+  </data>
+  <data name="CreateMinecraftQuiltInstance" xml:space="preserve">
+    <value>Minecraft Quilt サーバー</value>
+  </data>
+  <data name="CreateMinecraftBedrockInstance" xml:space="preserve">
+    <value>Minecraft 統合版サーバー</value>
+  </data>
+  <data name="CreateMinecraftGeyserStandaloneInstance" xml:space="preserve">
+    <value>Minecraft Geyser 相互接続スタンドアロン</value>
+  </data>
+  <data name="CreateMinecraftBungeeCordInstance" xml:space="preserve">
+    <value>Minecraft BungeeCord プロキシ</value>
+  </data>
+  <data name="CreateMinecraftWaterfallInstance" xml:space="preserve">
+    <value>Minecraft Waterfall プロキシ</value>
+  </data>
+  <data name="CreateMinecraftVelocityInstance" xml:space="preserve">
+    <value>Minecraft Velocity プロキシ</value>
+  </data>
+  <data name="CreateMinecraftTravertineInstance" xml:space="preserve">
+    <value>Minecraft Travertine プロキシ</value>
+  </data>
+  <data name="CreateUniversalFastReverseProxyClientInstance" xml:space="preserve">
+    <value>汎用 Frp クライアントプログラム (Frpc)</value>
+  </data>
+  <data name="CreateTerrariaServerInstance" xml:space="preserve">
+    <value>Terraria ゲームサーバー</value>
+  </data>
+  <data name="CreateOtherExecutableInstance" xml:space="preserve">
+    <value>その他のコンソールプログラム</value>
+  </data>
+  <data name="ImportExistsInstance" xml:space="preserve">
+    <value>既存のインスタンスをインポート</value>
+  </data>
+  <data name="HomeTip" xml:space="preserve">
+    <value>新しい旅、新しい体験。</value>
+  </data>
+  <data name="InstanceManagerTip" xml:space="preserve">
+    <value>全体を見渡し、世界を観る。</value>
+  </data>
+  <data name="Main_DownloadHistoryNavMenu" xml:space="preserve">
+    <value>ダウンロード履歴</value>
+  </data>
+  <data name="ResDownloadTipPrefix" xml:space="preserve">
+    <value>あなたが欲しいものは、すべてここにあります。 (現在使用中</value>
+  </data>
+  <data name="HelpCenterTip" xml:space="preserve">
+    <value>できる限りのことをし、質問に答えます。</value>
+  </data>
+  <data name="SettingsTip" xml:space="preserve">
+    <value>あなたの MCSL、あなたの選択。</value>
+  </data>
+  <data name="Settings_ActionWhenDownloadError_Stop" xml:space="preserve">
+    <value>直接ダウンロードを停止する</value>
+  </data>
+  <data name="Settings_ActionWhenDownloadError_Retry1" xml:space="preserve">
+    <value>ダウンロードを 1 回再試行する</value>
+  </data>
+  <data name="Settings_ActionWhenDownloadError_Retry3" xml:space="preserve">
+    <value>ダウンロードを 3 回再試行する</value>
+  </data>
+  <data name="Settings_ActionWhenDeleteConfirm_TypeName" xml:space="preserve">
+    <value>インスタンス名の入力検証</value>
+  </data>
+  <data name="Settings_ActionWhenDeleteConfirm_TypeKey" xml:space="preserve">
+    <value>リモートホストキーの検証</value>
+  </data>
+  <data name="Settings_AppTheme_Auto" xml:space="preserve">
+    <value>システムに従う</value>
+  </data>
+  <data name="Settings_AppTheme_Light" xml:space="preserve">
+    <value>ライト</value>
+  </data>
+  <data name="Settings_AppTheme_Dark" xml:space="preserve">
+    <value>ダーク</value>
+  </data>
+  <data name="Settings_AutoAcceptMinecraftJavaEula_Title" xml:space="preserve">
+    <value>EULA に自動同意する (Minecraft Java 版サーバーインスタンス)</value>
+  </data>
+  <data name="Settings_AutoAcceptMinecraftJavaEula_Description" xml:space="preserve">
+    <value>自動同意は、Minecraft エンドユーザー使用許諾契約を遵守し、MCSL がいかなる連帯責任も負わないことに同意することを意味します。</value>
+  </data>
+  <data name="Settings_AutoDisableMinecraftJavaOnlineMode_Title" xml:space="preserve">
+    <value>オンラインモードを自動的に無効にする (Minecraft Java 版サーバーインスタンス)</value>
+  </data>
+  <data name="Settings_AutoDisableMinecraftJavaOnlineMode_Description" xml:space="preserve">
+    <value>このオプションを有効にすると、このタイプのインスタンスは Mojang/Microsoft からの認証を自動的に無効にし、非正規の Minecraft Java 版クライアントがサーバーに接続できるようになります。</value>
+  </data>
+  <data name="Settings_AutoDisableMinecraftBedrockOnlineMode_Description" xml:space="preserve">
+    <value>このオプションを有効にすると、このタイプのインスタンスは Mojang/Microsoft からの認証を自動的に無効にし、非正規の Minecraft 統合版クライアントがサーバーに接続できるようになります。</value>
+  </data>
+  <data name="Settings_AutoDisableMinecraftBedrockOnlineMode_Title" xml:space="preserve">
+    <value>オンラインモードを自動的に無効にする (Minecraft 統合版サーバーインスタンス)</value>
+  </data>
+  <data name="Settings_UseMirrorForMinecraftForgeInstall_Title" xml:space="preserve">
+    <value>ミラーソースを使用してデプロイする (Minecraft Forge サーバーインスタンス)</value>
+  </data>
+  <data name="Settings_UseMirrorForMinecraftNeoForgeInstall_Title" xml:space="preserve">
+    <value>ミラーソースを使用してデプロイする (Minecraft NeoForge サーバーインスタンス)</value>
+  </data>
+  <data name="Settings_UseMirrorForMinecraftFabricInstall_Title" xml:space="preserve">
+    <value>ミラーソースを使用してデプロイする (Minecraft Fabric サーバーインスタンス)</value>
+  </data>
+  <data name="Settings_UseMirrorForMinecraftQuiltInstall_Title" xml:space="preserve">
+    <value>ミラーソースを使用してデプロイする (Minecraft Quilt サーバーインスタンス)</value>
+  </data>
+  <data name="Settings_UseMirrorForMinecraftLoadersInstall_Description" xml:space="preserve">
+    <value>有効にすると、リソースのダウンロードに BMCLAPI が使用されます。中国のユーザーは有効にすることをお勧めします。</value>
+  </data>
+  <data name="Settings_ResDownloadProvider_Title" xml:space="preserve">
+    <value>ダウンロードソース</value>
+  </data>
+  <data name="Settings_ResDownloadProvider_Description" xml:space="preserve">
+    <value>「リソースのダウンロード」ページで使用するダウンロードプロバイダーを選択します。</value>
+  </data>
+  <data name="Settings_FastMirrorName" xml:space="preserve">
+    <value>FastMirror (物语云计算提供)</value>
+  </data>
+  <data name="Settings_PolarsMirrorName" xml:space="preserve">
+    <value>PolarsMirror (极星网络提供)</value>
+  </data>
+  <data name="Settings_RainYunName" xml:space="preserve">
+    <value>RainYun ミラーサイト</value>
+  </data>
+  <data name="Settings_MSLAPIName" xml:space="preserve">
+    <value>MSL ダウンロードソース (MSL サーバーランチャー提供)</value>
+  </data>
+  <data name="Settings_MCSLSyncName" xml:space="preserve">
+    <value>MCSL-Sync 同期ミラー</value>
+  </data>
+  <data name="Settings_DownloadThreadCnt_Title" xml:space="preserve">
+    <value>ダウンロードエンジンのスレッド数</value>
+  </data>
+  <data name="Settings_DownloadThreadCnt_Description" xml:space="preserve">
+    <value>コンピューターのパフォーマンスが十分な場合、スレッド数が多いほど、ファイルの理論上のダウンロード速度が速くなります。一般的に、16 スレッドに設定すれば要件を満たすことができます。</value>
+  </data>
+  <data name="Settings_ActionWhenDownloadError_Title" xml:space="preserve">
+    <value>ダウンロード失敗時の処理方法</value>
+  </data>
+  <data name="Settings_ActionWhenDownloadError_Description" xml:space="preserve">
+    <value>ファイルのダウンロードに失敗した場合に実行する操作。</value>
+  </data>
+  <data name="Settings_ActionWhenDeleteConfirm_Title" xml:space="preserve">
+    <value>インスタンス削除の確認方法</value>
+  </data>
+  <data name="Settings_ActionWhenDeleteConfirm_Description" xml:space="preserve">
+    <value>この機能は、誤操作によるインスタンスの削除を防ぐことができます。</value>
+  </data>
+  <data name="Settings_AppTheme_Title" xml:space="preserve">
+    <value>アプリのテーマ</value>
+  </data>
+  <data name="Settings_AppTheme_Description" xml:space="preserve">
+    <value>デフォルトではシステムの変化に従いますが、自分で設定することもできます。</value>
+  </data>
+  <data name="Settings_FollowStartupForLauncher_Title" xml:space="preserve">
+    <value>起動時に自動実行 (MCServerLauncher.WinUI)</value>
+  </data>
+  <data name="Settings_FollowStartupForLauncher_Description" xml:space="preserve">
+    <value>システム起動時に、このグラフィカルプログラムを自動的に起動します。有効にすると、システムの機密操作に触れる可能性があるため、ウイルス対策ソフトウェアで許可してください。</value>
+  </data>
+  <data name="Settings_CheckUpdateForLauncher_Title" xml:space="preserve">
+    <value>更新を確認する (MCServerLauncher.WinUI)</value>
+  </data>
+  <data name="Settings_CheckUpdateForLauncher_Description" xml:space="preserve">
+    <value>このグラフィカルプログラムの更新を確認します。</value>
+  </data>
+  <data name="CheckUpdate" xml:space="preserve">
+    <value>更新を確認する</value>
+  </data>
+  <data name="Settings_AutoCheckUpdateForLauncher_Description" xml:space="preserve">
+    <value>起動するたびに、このグラフィカルプログラムの更新を確認します。</value>
+  </data>
+  <data name="Settings_AutoCheckUpdateForLauncher_Title" xml:space="preserve">
+    <value>更新を自動的に確認する (MCServerLauncher.WinUI)</value>
+  </data>
+  <data name="Settings_CheckUpdateForDaemon_Title" xml:space="preserve">
+    <value>更新を確認する (MCServerLauncher.Daemon)</value>
+  </data>
+  <data name="Settings_CheckUpdateForDaemon_Description" xml:space="preserve">
+    <value>リモートホストの更新を確認します。</value>
+  </data>
+  <data name="Settings_About_Title" xml:space="preserve">
+    <value>MCServerLauncher Future (WinUI) について</value>
+  </data>
+  <data name="Settings_About_LegalProtected" xml:space="preserve">
+    <value>このプロジェクトは「中華人民共和国著作権法」および国際条約によって保護されています。許可なくこのプログラムまたはその一部をコピーまたは配布した場合、厳しい民事および刑事制裁を受け、法律で許可される最大限の範囲で起訴されます。</value>
+  </data>
+  <data name="Settings_About_OpenSourceLicenseProtected" xml:space="preserve">
+    <value>このプロジェクトはオープンソースライセンス GNU General Public License Version 3.0 によって保護されており、ソースコードは以下でホストされています</value>
+  </data>
+  <data name="PeriodSymbol" xml:space="preserve">
+    <value>。</value>
+  </data>
+  <data name="Settings_About_CertProtected" xml:space="preserve">
+    <value>MCServerLauncher Future が使用するデジタル署名証明書は、プログラムが偽造または改ざんされていないことを保証します。シリアル番号：59cbf9b5207eeabb45417d148120ac9a。異なる場合は使用せず、services@mcsl.com.cn にフィードバックしてください。</value>
+  </data>
+  <data name="ResDownloadPage_ProviderName_FastMirror" xml:space="preserve">
+    <value>FastMirror</value>
+  </data>
+  <data name="ResDownloadPage_ProviderName_PolarsMirror" xml:space="preserve">
+    <value>PolarsMirror</value>
+  </data>
+  <data name="ResDownloadPage_ProviderName_MCSLSync" xml:space="preserve">
+    <value>MCSL-Sync 同期ミラー</value>
+  </data>
+  <data name="Announcement" xml:space="preserve">
+    <value>お知らせ</value>
+  </data>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>本当によろしいですか？</value>
+  </data>
+  <data name="FirstSetup_EulaDisagreeTip" xml:space="preserve">
+    <value>ユーザー同意書を拒否した場合、本ソフトウェアは終了します。</value>
+  </data>
+  <data name="FirstSetup_FakeEulaAgreeTip" xml:space="preserve">
+    <value>同意する前に、最後までお読みください。少なくとも一番下までスクロールしてください。</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="NotNow" xml:space="preserve">
+    <value>今はしない</value>
+  </data>
+  <data name="FirstSetup_EulaAgreeTip" xml:space="preserve">
+    <value>これは、本契約のすべての内容に同意することを意味します。</value>
+  </data>
+  <data name="ResDownloadTipSuffix" xml:space="preserve">
+    <value>ダウンロードソース）</value>
+  </data>
+  <data name="Settings_AppLanguage_Description" xml:space="preserve">
+    <value>このプログラムで使用する言語を選択します。</value>
+  </data>
+  <data name="FirstSetup_SkipConnectDaemonTip" xml:space="preserve">
+    <value>リモートホストを接続しない場合、本ソフトウェアのほとんどの機能が制限されます。
+後でリモートホストを接続することもできます。</value>
+  </data>
+  <data name="ConnectDaemon" xml:space="preserve">
+    <value>新しい接続</value>
+  </data>
+  <data name="EditDaemon" xml:space="preserve">
+    <value>接続を編集</value>
+  </data>
+  <data name="FirstSetup_ConnectDaemonTip" xml:space="preserve">
+    <value>MCServerLauncher のすべてのインスタンスはリモートホストに引き継がれて管理されます。ここにデプロイ済みのリモートホストを接続してください。</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>編集</value>
+  </data>
+  <data name="Daemon_RemoteUri" xml:space="preserve">
+    <value>リモートアドレス:</value>
+  </data>
+  <data name="Daemon_ConnectionStatus" xml:space="preserve">
+    <value>接続状態:</value>
+  </data>
+  <data name="Status_OK" xml:space="preserve">
+    <value>正常</value>
+  </data>
+  <data name="Status_Error" xml:space="preserve">
+    <value>異常</value>
+  </data>
+  <data name="Status_NotLoaded" xml:space="preserve">
+    <value>未読み込み</value>
+  </data>
+  <data name="Status_LoadFailed" xml:space="preserve">
+    <value>読み込み失敗</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>切断</value>
+  </data>
+  <data name="Connect" xml:space="preserve">
+    <value>接続</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>再試行</value>
+  </data>
+  <data name="Settings_Components_Title" xml:space="preserve">
+    <value>オープンソースプロジェクトの参照リスト</value>
+  </data>
+  <data name="Settings_Components_Description" xml:space="preserve">
+    <value>彼らの貢献に心から感謝します。MCSL Future の前進に継続的な動力を提供してくれました。</value>
+  </data>
+  <data name="Settings_Acknowledgments_Title" xml:space="preserve">
+    <value>謝辞リスト</value>
+  </data>
+  <data name="Settings_Acknowledgments_Description" xml:space="preserve">
+    <value>MCSL に多大な貢献をしてくれました！</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>スポンサーになる</value>
+  </data>
+  <data name="Settings_Acknowledgments_BMCLAPI_Description" xml:space="preserve">
+    <value>強力なパフォーマンスの BMCLAPI ミラーを提供してくれました！</value>
+  </data>
+  <data name="Settings_Acknowledgments_PCL2_Description" xml:space="preserve">
+    <value>Minecraft ローダーの取得アイデアを提供してくれました！</value>
+  </data>
+  <data name="Settings_Acknowledgments_BakaXL_Description" xml:space="preserve">
+    <value>Quilt ローダーのデプロイアイデアを提供してくれました！</value>
+  </data>
+  <data name="Settings_Acknowledgments_iNKORE_Description" xml:space="preserve">
+    <value>開発プロセス中に多大な技術サポートを提供してくれました！</value>
+  </data>
+  <data name="Settings_Acknowledgments_MCSLQQ_Title" xml:space="preserve">
+    <value>MCSL QQ 交流グループの皆様</value>
+  </data>
+  <data name="Settings_Acknowledgments_MCSLQQ_Description" xml:space="preserve">
+    <value>いつも私たちと一緒にいて、たくさんのアドバイスをくれました！</value>
+  </data>
+  <data name="JoinGroup" xml:space="preserve">
+    <value>グループに参加する</value>
+  </data>
+  <data name="DaemonWsAddress" xml:space="preserve">
+    <value>リモートホスト WebSocket アドレス</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>パスワード</value>
+  </data>
+  <data name="Connecting" xml:space="preserve">
+    <value>接続中</value>
+  </data>
+  <data name="ConsoleBoard_Universal_RAM" xml:space="preserve">
+    <value>汎用：インスタンス RAM 使用量</value>
+  </data>
+  <data name="ConsoleBoard_Universal_CPU" xml:space="preserve">
+    <value>汎用：インスタンス CPU 使用量</value>
+  </data>
+  <data name="ConsoleBoard_Universal_WebSocketLatency" xml:space="preserve">
+    <value>汎用：現在の WebSocket 遅延</value>
+  </data>
+  <data name="ConsoleCommand_FeedbackTip" xml:space="preserve">
+    <value>エラーをフィードバックする際は、詳細なエラーログを添付してください。そうしないと、目隠しで運転するのと同じです。</value>
+  </data>
+  <data name="ConsoleCommand_EnterFullScreenConsole" xml:space="preserve">
+    <value>全画面ターミナルに入る</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="Kill" xml:space="preserve">
+    <value>強制的に閉じる</value>
+  </data>
+  <data name="Restart" xml:space="preserve">
+    <value>再起動</value>
+  </data>
+  <data name="Mods" xml:space="preserve">
+    <value>モッド</value>
+  </data>
+  <data name="Plugins" xml:space="preserve">
+    <value>プラグイン</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>追加</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Trigger" xml:space="preserve">
+    <value>トリガー</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Event" xml:space="preserve">
+    <value>イベント</value>
+  </data>
+  <data name="ClickToView" xml:space="preserve">
+    <value>クリックして表示</value>
+  </data>
+  <data name="ViewIPAddress" xml:space="preserve">
+    <value>IP アドレスを表示</value>
+  </data>
+  <data name="ConsoleBoard_Minecraft_ServerIP_Title" xml:space="preserve">
+    <value>Minecraft サーバー：接続アドレス</value>
+  </data>
+  <data name="ConsoleBoard_Minecraft_ServerPlayersList_Title" xml:space="preserve">
+    <value>Minecraft サーバー：オンラインプレイヤーリスト</value>
+  </data>
+  <data name="ConsoleTitle" xml:space="preserve">
+    <value>コンソール</value>
+  </data>
+  <data name="InstanceConsole_InstanceTitlePart" xml:space="preserve">
+    <value>インスタンス [{0}]</value>
+  </data>
+  <data name="InstanceConsole_NodeTitlePart" xml:space="preserve">
+    <value>ノード [{0}]</value>
+  </data>
+  <data name="Console_BoardNavMenu" xml:space="preserve">
+    <value>インスタンスボード</value>
+  </data>
+  <data name="Console_CommandNavMenu" xml:space="preserve">
+    <value>リアルタイムターミナル</value>
+  </data>
+  <data name="Console_FileManagerNavMenu" xml:space="preserve">
+    <value>ファイル管理</value>
+  </data>
+  <data name="Console_EventTriggerNavMenu" xml:space="preserve">
+    <value>イベントトリガー</value>
+  </data>
+  <data name="Console_ComponentManagerNavMenu" xml:space="preserve">
+    <value>コンポーネント管理</value>
+  </data>
+  <data name="Console_OthersNavMenu" xml:space="preserve">
+    <value>その他の機能</value>
+  </data>
+  <data name="Console_InstanceSettingsNavMenu" xml:space="preserve">
+    <value>インスタンス設定</value>
+  </data>
+  <data name="CreateMinecraftInstanceCategory" xml:space="preserve">
+    <value>Minecraft サーバー</value>
+  </data>
+  <data name="CreateFrpcInstanceCategory" xml:space="preserve">
+    <value>高速リバースプロキシクライアント Frpc</value>
+  </data>
+  <data name="CreateInstance_TerrariaArchive_Title" xml:space="preserve">
+    <value>Terraria サーバーアーカイブ</value>
+  </data>
+  <data name="Thread" xml:space="preserve">
+    <value>スレッド</value>
+  </data>
+  <data name="DownloadFinished" xml:space="preserve">
+    <value>ダウンロード完了</value>
+  </data>
+  <data name="DownloadFailed" xml:space="preserve">
+    <value>ダウンロード失敗</value>
+  </data>
+  <data name="DownloadCancelled" xml:space="preserve">
+    <value>ダウンロードキャンセル</value>
+  </data>
+  <data name="ClickToHide" xml:space="preserve">
+    <value>クリックして非表示</value>
+  </data>
+  <data name="ErrorDialogTip" xml:space="preserve">
+    <value>予期しない例外が発生しましたが、以下の重要なエラー情報を取得しました。このプログラムの実行を継続するか、再起動、アプリの終了などの操作を選択できます。</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>終了</value>
+  </data>
+  <data name="FeedbackViaGitHub" xml:space="preserve">
+    <value>GitHub でフィードバックする</value>
+  </data>
+  <data name="DaemonFriendlyName" xml:space="preserve">
+    <value>備考名</value>
+  </data>
+  <data name="Main_DaemonManagerNavMenu" xml:space="preserve">
+    <value>リモートホスト</value>
+  </data>
+  <data name="DaemonManagerTip" xml:space="preserve">
+    <value>安全なエスコート、あなたの手のひらに。</value>
+  </data>
+  <data name="Port" xml:space="preserve">
+    <value>ポート</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>ユーザー名</value>
+  </data>
+  <data name="ConnectDaemonFailedTip" xml:space="preserve">
+    <value>リモートホストに接続できません。設定を確認してください</value>
+  </data>
+  <data name="Token" xml:space="preserve">
+    <value>アクセストークン</value>
+  </data>
+  <data name="JvmArgHelper" xml:space="preserve">
+    <value>引数ヘルパー</value>
+  </data>
+  <data name="Insert" xml:space="preserve">
+    <value>挿入</value>
+  </data>
+  <data name="NoJarFileJvmArgument" xml:space="preserve">
+    <value>コア起動引数（-jar xxx.jar）はプログラムによって生成されます。ここには書き込まないでください。</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="Encoding" xml:space="preserve">
+    <value>エンコード</value>
+  </data>
+  <data name="Decoding" xml:space="preserve">
+    <value>デコード</value>
+  </data>
+  <data name="PreventGarbageTextTip" xml:space="preserve">
+    <value>このオプションは文字化けを防ぐことができます。状況に応じて指定してください。</value>
+  </data>
+  <data name="Codecs" xml:space="preserve">
+    <value>コーデック</value>
+  </data>
+  <data name="Optimization" xml:space="preserve">
+    <value>最適化</value>
+  </data>
+  <data name="JvmOptimizationArgsTip" xml:space="preserve">
+    <value>以下は Minecraft サーバー用に最適化されたプリセット引数です。いずれかを選択して適用できます。</value>
+  </data>
+  <data name="DeadProcessTip" xml:space="preserve">
+    <value>予期しない例外が発生しましたが、重要なエラー情報をクリップボードにコピーしました。プログラムは実行を継続できず、まもなく終了します。</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>インストール</value>
+  </data>
+  <data name="ScanJavaAtDaemon" xml:space="preserve">
+    <value>自動検索</value>
+  </data>
+  <data name="GoBackLostTip" xml:space="preserve">
+    <value>今戻ると、すべての変更が失われます。慎重に行ってください。</value>
+  </data>
+  <data name="SelectMinecraftJavaCore" xml:space="preserve">
+    <value>Minecraft Java 版コアを選択</value>
+  </data>
+  <data name="SelectMinecraftJavaCoreGoResDownloadMessage" xml:space="preserve">
+    <value>ダウンロードが完了したら、下のボタンをクリックして戻ることができます。</value>
+  </data>
+  <data name="JvmArgTemplateSameMemTip" xml:space="preserve">
+    <value>以下のテンプレートを選択する場合は、上の JVM メモリヒープ値を同じに設定してください。そうしないと、インスタンスが起動しない可能性があります。</value>
+  </data>
+  <data name="JvmArgBasicTemplate" xml:space="preserve">
+    <value>基本（Java 11 以下のみ）</value>
+  </data>
+  <data name="JvmArgAdvancedTemplate" xml:space="preserve">
+    <value>Aikar Flag（メモリヒープを 20 G より高く設定しないでください）</value>
+  </data>
+  <data name="Unused" xml:space="preserve">
+    <value>使用しない</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="Jump" xml:space="preserve">
+    <value>ジャンプ</value>
+  </data>
+  <data name="ShowRealtimeLog" xml:space="preserve">
+    <value>リアルタイムログを表示</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>検索</value>
+  </data>
+  <data name="AllDaemon" xml:space="preserve">
+    <value>すべてのリモートホスト</value>
+  </data>
+  <data name="Running" xml:space="preserve">
+    <value>実行中</value>
+  </data>
+  <data name="AllRunningStatus" xml:space="preserve">
+    <value>すべての状態</value>
+  </data>
+  <data name="Stopped" xml:space="preserve">
+    <value>停止済み</value>
+  </data>
+  <data name="Crashed" xml:space="preserve">
+    <value>クラッシュ</value>
+  </data>
+  <data name="Stopping" xml:space="preserve">
+    <value>停止中</value>
+  </data>
+  <data name="Starting" xml:space="preserve">
+    <value>起動中</value>
+  </data>
+  <data name="ResDownloadPage_ProviderName_RainYun" xml:space="preserve">
+    <value>RainYun ミラーサイト</value>
+  </data>
+  <data name="PleaseSelectDaemon" xml:space="preserve">
+    <value>このインスタンスを実行するリモートホストを選択してください。</value>
+  </data>
+  <data name="PleaseSelectJvm" xml:space="preserve">
+    <value>使用する Java ランタイムを選択してください。</value>
+  </data>
+  <data name="PleaseWait" xml:space="preserve">
+    <value>お待ちください</value>
+  </data>
+  <data name="SearchingJvmTip" xml:space="preserve">
+    <value>Java ランタイムを検索しています…</value>
+  </data>
+  <data name="ConnectDaemonFailedSubTip" xml:space="preserve">
+    <value>ネットワークを確認して再試行してください。コンピューターのネットワークが正常な場合、リモートホストに異常が発生しているか、リモートファイアウォールで許可されていない可能性が高いです。</value>
+  </data>
+  <data name="SelectOtherDaemon" xml:space="preserve">
+    <value>その他を選択……</value>
+  </data>
+  <data name="NothingHere" xml:space="preserve">
+    <value>ここは空っぽです</value>
+  </data>
+  <data name="TryAddSomething" xml:space="preserve">
+    <value>ここに何か追加してみてください</value>
+  </data>
+  <data name="ConsoleCommand_ExitFullScreenConsole" xml:space="preserve">
+    <value>全画面ターミナルを終了</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>すべて選択</value>
+  </data>
+  <data name="Players" xml:space="preserve">
+    <value>プレイヤー</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>表示</value>
+  </data>
+  <data name="ConsoleCommand_EnterCommandTip" xml:space="preserve">
+    <value>ここにコマンドを入力...</value>
+  </data>
+  <data name="FuncDisabled" xml:space="preserve">
+    <value>機能が無効です</value>
+  </data>
+  <data name="FuncDisabledReason_NoDaemon" xml:space="preserve">
+    <value>リモートホストが接続されていないため、この機能は無効になっています</value>
+  </data>
+  <data name="SelectedCount" xml:space="preserve">
+    <value>{0} 個のインスタンスを選択しました</value>
+  </data>
+  <data name="BatchStartConfirmTitle" xml:space="preserve">
+    <value>一括起動の確認</value>
+  </data>
+  <data name="BatchStartConfirmContent" xml:space="preserve">
+    <value>これら {0} 個のインスタンスを起動してもよろしいですか？</value>
+  </data>
+  <data name="BatchStopConfirmTitle" xml:space="preserve">
+    <value>一括停止の確認</value>
+  </data>
+  <data name="BatchStopConfirmContent" xml:space="preserve">
+    <value>これら {0} 個のインスタンスを停止してもよろしいですか？</value>
+  </data>
+  <data name="BatchDeleteConfirmTitle" xml:space="preserve">
+    <value>一括削除の確認</value>
+  </data>
+  <data name="BatchDeleteConfirmContent" xml:space="preserve">
+    <value>これら {0} 個のインスタンスを削除してもよろしいですか？
+この操作は元に戻せません！</value>
+  </data>
+  <data name="BatchStartComplete" xml:space="preserve">
+    <value>一括起動完了</value>
+  </data>
+  <data name="BatchStopComplete" xml:space="preserve">
+    <value>一括停止完了</value>
+  </data>
+  <data name="BatchDeleteComplete" xml:space="preserve">
+    <value>一括削除完了</value>
+  </data>
+  <data name="BatchOperationResult" xml:space="preserve">
+    <value>成功：{0}、失敗：{1}</value>
+  </data>
+  <data name="InstanceCard_NoDaemonConfig" xml:space="preserve">
+    <value>このインスタンスのリモートホスト設定がありません</value>
+  </data>
+  <data name="InstanceCard_StartingInstance" xml:space="preserve">
+    <value>インスタンスを起動しています：{0}</value>
+  </data>
+  <data name="InstanceCard_StartConfirmTitle" xml:space="preserve">
+    <value>インスタンスを起動</value>
+  </data>
+  <data name="InstanceCard_StartConfirmContent" xml:space="preserve">
+    <value>インスタンス "{0}" を起動しますか？</value>
+  </data>
+  <data name="InstanceCard_StartUnavailable" xml:space="preserve">
+    <value>インスタンス "{0}" は現在の状態では起動できません。</value>
+  </data>
+  <data name="InstanceCard_StopUnavailable" xml:space="preserve">
+    <value>インスタンス "{0}" は現在の状態では停止できません。</value>
+  </data>
+  <data name="InstanceCard_RestartUnavailable" xml:space="preserve">
+    <value>インスタンス "{0}" は現在の状態では再起動できません。</value>
+  </data>
+  <data name="InstanceCard_KillUnavailable" xml:space="preserve">
+    <value>インスタンス "{0}" は現在の状態では強制的に閉じられません。</value>
+  </data>
+  <data name="InstanceCard_DeleteUnavailable" xml:space="preserve">
+    <value>インスタンス "{0}" は停止中の場合のみ削除できます。</value>
+  </data>
+  <data name="InstanceCard_StoppingInstance" xml:space="preserve">
+    <value>インスタンスを停止しています：{0}</value>
+  </data>
+  <data name="InstanceCard_RestartingInstance" xml:space="preserve">
+    <value>インスタンスを再起動しています：{0}</value>
+  </data>
+  <data name="InstanceCard_KillingInstance" xml:space="preserve">
+    <value>インスタンスを強制的に閉じました：{0}</value>
+  </data>
+  <data name="InstanceCard_DeletedInstance" xml:space="preserve">
+    <value>インスタンスを削除しました：{0}</value>
+  </data>
+  <data name="InstanceCard_DeleteConfirmTitle" xml:space="preserve">
+    <value>削除の確認</value>
+  </data>
+  <data name="InstanceCard_DeleteConfirmContent" xml:space="preserve">
+    <value>インスタンス「{0}」を削除してもよろしいですか？
+この操作は元に戻せません。</value>
+  </data>
+  <data name="InstanceCard_StartFailed" xml:space="preserve">
+    <value>インスタンスの起動に失敗しました：{0}</value>
+  </data>
+  <data name="InstanceCard_StopFailed" xml:space="preserve">
+    <value>インスタンスの停止に失敗しました：{0}</value>
+  </data>
+  <data name="InstanceCard_RestartFailed" xml:space="preserve">
+    <value>インスタンスの再起動に失敗しました：{0}</value>
+  </data>
+  <data name="InstanceCard_KillFailed" xml:space="preserve">
+    <value>インスタンスを強制的に閉じられませんでした：{0}</value>
+  </data>
+  <data name="InstanceCard_DeleteFailed" xml:space="preserve">
+    <value>インスタンスの削除に失敗しました：{0}</value>
+  </data>
+  <data name="Universal" xml:space="preserve">
+    <value>汎用</value>
+  </data>
+  <data name="SteamServer" xml:space="preserve">
+    <value>Steam ゲームサーバー</value>
+  </data>
+  <data name="MCJava" xml:space="preserve">
+    <value>Minecraft Java 版</value>
+  </data>
+  <data name="MCFabric" xml:space="preserve">
+    <value>Minecraft Fabric</value>
+  </data>
+  <data name="MCForge" xml:space="preserve">
+    <value>Minecraft Forge</value>
+  </data>
+  <data name="MCNeoForge" xml:space="preserve">
+    <value>Minecraft NeoForge</value>
+  </data>
+  <data name="MCQuilt" xml:space="preserve">
+    <value>Minecraft Quilt</value>
+  </data>
+  <data name="MCCleanroom" xml:space="preserve">
+    <value>Minecraft Cleanroom</value>
+  </data>
+  <data name="MCSpongeVanilla" xml:space="preserve">
+    <value>Minecraft SpongeVanilla</value>
+  </data>
+  <data name="MCSpongeForge" xml:space="preserve">
+    <value>Minecraft SpongeForge</value>
+  </data>
+  <data name="MCVanilla" xml:space="preserve">
+    <value>Minecraft バニラ</value>
+  </data>
+  <data name="MCCraftBukkit" xml:space="preserve">
+    <value>Minecraft CraftBukkit</value>
+  </data>
+  <data name="MCSpigot" xml:space="preserve">
+    <value>Minecraft Spigot</value>
+  </data>
+  <data name="MCPaper" xml:space="preserve">
+    <value>Minecraft Paper</value>
+  </data>
+  <data name="MCLeaf" xml:space="preserve">
+    <value>Minecraft Leaf</value>
+  </data>
+  <data name="MCLeaves" xml:space="preserve">
+    <value>Minecraft Leaves</value>
+  </data>
+  <data name="MCFolia" xml:space="preserve">
+    <value>Minecraft Folia</value>
+  </data>
+  <data name="MCPufferfish" xml:space="preserve">
+    <value>Minecraft Pufferfish</value>
+  </data>
+  <data name="MCPurpur" xml:space="preserve">
+    <value>Minecraft Purpur</value>
+  </data>
+  <data name="MCMohist" xml:space="preserve">
+    <value>Minecraft Mohist</value>
+  </data>
+  <data name="MCBanner" xml:space="preserve">
+    <value>Minecraft Banner</value>
+  </data>
+  <data name="MCYouer" xml:space="preserve">
+    <value>Minecraft Youer</value>
+  </data>
+  <data name="MCThermos" xml:space="preserve">
+    <value>Minecraft Thermos</value>
+  </data>
+  <data name="MCCrucible" xml:space="preserve">
+    <value>Minecraft Crucible</value>
+  </data>
+  <data name="MCTaiyitist" xml:space="preserve">
+    <value>Minecraft Taiyitist</value>
+  </data>
+  <data name="MCCatServer" xml:space="preserve">
+    <value>Minecraft CatServer</value>
+  </data>
+  <data name="MCArclight" xml:space="preserve">
+    <value>Minecraft Arclight</value>
+  </data>
+  <data name="MCBungeeCord" xml:space="preserve">
+    <value>Minecraft BungeeCord</value>
+  </data>
+  <data name="MCVelocity" xml:space="preserve">
+    <value>Minecraft Velocity</value>
+  </data>
+  <data name="MCWaterfall" xml:space="preserve">
+    <value>Minecraft Waterfall</value>
+  </data>
+  <data name="MCTravertine" xml:space="preserve">
+    <value>Minecraft Travertine</value>
+  </data>
+  <data name="MCViaVersion" xml:space="preserve">
+    <value>Minecraft ViaVersion</value>
+  </data>
+  <data name="MCGeyser" xml:space="preserve">
+    <value>Minecraft Geyser</value>
+  </data>
+  <data name="MCDReforged" xml:space="preserve">
+    <value>Minecraft MCDReforged</value>
+  </data>
+  <data name="MCBedrock" xml:space="preserve">
+    <value>Minecraft 統合版</value>
+  </data>
+  <data name="MCNukkit" xml:space="preserve">
+    <value>Minecraft Nukkit</value>
+  </data>
+  <data name="MCBDS" xml:space="preserve">
+    <value>Minecraft BDS</value>
+  </data>
+  <data name="MCCloudburst" xml:space="preserve">
+    <value>Minecraft Cloudburst</value>
+  </data>
+  <data name="MCPocketMine" xml:space="preserve">
+    <value>Minecraft PocketMine</value>
+  </data>
+  <data name="Terraria" xml:space="preserve">
+    <value>Terraria</value>
+  </data>
+  <data name="TShock" xml:space="preserve">
+    <value>Terraria TShock</value>
+  </data>
+  <data name="TDSM" xml:space="preserve">
+    <value>Terraria TDSM</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>削除の確認</value>
+  </data>
+  <data name="ConfirmDeleteDaemonMessage" xml:space="preserve">
+    <value>リモートホスト「{0}」を削除してもよろしいですか？</value>
+  </data>
+  <data name="Daemon_ResourceUsage" xml:space="preserve">
+    <value>リソース使用率</value>
+  </data>
+  <data name="Daemon_CpuUsage" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Daemon_MemoryUsage" xml:space="preserve">
+    <value>メモリ</value>
+  </data>
+  <data name="Daemon_DriveUsage" xml:space="preserve">
+    <value>ドライブ</value>
+  </data>
+  <data name="DaemonDeleted" xml:space="preserve">
+    <value>リモートホストを削除しました</value>
+  </data>
+  <data name="DaemonDeleteFailed" xml:space="preserve">
+    <value>リモートホストの削除に失敗しました: {0}</value>
+  </data>
+  <data name="Daemon_AutoRefresh" xml:space="preserve">
+    <value>自動更新</value>
+  </data>
+  <data name="AutoRefresh_On" xml:space="preserve">
+    <value>自動更新: オン</value>
+  </data>
+  <data name="AutoRefresh_Off" xml:space="preserve">
+    <value>自動更新: オフ</value>
+  </data>
+  <data name="RefreshInterval_5Seconds" xml:space="preserve">
+    <value>5 秒</value>
+  </data>
+  <data name="RefreshInterval_20Seconds" xml:space="preserve">
+    <value>20 秒</value>
+  </data>
+  <data name="RefreshInterval_30Seconds" xml:space="preserve">
+    <value>30 秒</value>
+  </data>
+  <data name="RefreshInterval_45Seconds" xml:space="preserve">
+    <value>45 秒</value>
+  </data>
+  <data name="RefreshInterval_1Minute" xml:space="preserve">
+    <value>1 分</value>
+  </data>
+  <data name="Daemon_SystemVersion" xml:space="preserve">
+    <value>システム:</value>
+  </data>
+  <data name="Daemon_DaemonVersion" xml:space="preserve">
+    <value>ノードバージョン:</value>
+  </data>
+  <data name="InstanceCard_StopConfirmTitle" xml:space="preserve">
+    <value>停止の確認</value>
+  </data>
+  <data name="InstanceCard_StopConfirmContent" xml:space="preserve">
+    <value>インスタンス「{0}」を停止してもよろしいですか？</value>
+  </data>
+  <data name="InstanceCard_RestartConfirmTitle" xml:space="preserve">
+    <value>再起動の確認</value>
+  </data>
+  <data name="InstanceCard_RestartConfirmContent" xml:space="preserve">
+    <value>インスタンス「{0}」を再起動してもよろしいですか？</value>
+  </data>
+  <data name="InstanceCard_KillConfirmTitle" xml:space="preserve">
+    <value>インスタンスを強制的に閉じる</value>
+  </data>
+  <data name="InstanceCard_KillConfirmContent" xml:space="preserve">
+    <value>インスタンス「{0}」を強制的に閉じてもよろしいですか？</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_ConsoleOutputTrigger" xml:space="preserve">
+    <value>Console Output Trigger</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_SendNotification" xml:space="preserve">
+    <value>Send Notification</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_IsRegex" xml:space="preserve">
+    <value>Is Regex</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_ChangeInstanceStatus" xml:space="preserve">
+    <value>Change Instance Status</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_SendCommandAction" xml:space="preserve">
+    <value>Send Command Action</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_InstanceStatus" xml:space="preserve">
+    <value>Instance Status</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_ConsoleOutput" xml:space="preserve">
+    <value>Console Output</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_SendCommand" xml:space="preserve">
+    <value>Send Command</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Condition" xml:space="preserve">
+    <value>Condition:</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_SendNotificationAction" xml:space="preserve">
+    <value>Send Notification Action</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Schedule" xml:space="preserve">
+    <value>Schedule</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Any" xml:space="preserve">
+    <value>Any</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_CronExpression" xml:space="preserve">
+    <value>Cron Expression</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_TargetStatus" xml:space="preserve">
+    <value>Target Status</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Pattern" xml:space="preserve">
+    <value>Pattern</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Severity" xml:space="preserve">
+    <value>Severity</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Command" xml:space="preserve">
+    <value>Command</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_ChangeInstanceStatusAction" xml:space="preserve">
+    <value>Change Instance Status Action</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_InstanceStatusTrigger" xml:space="preserve">
+    <value>Instance Status Trigger</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_ScheduleTrigger" xml:space="preserve">
+    <value>Schedule Trigger</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>描述</value>
+  </data>
+  <data name="Status_Running" xml:space="preserve">
+    <value>运行中</value>
+  </data>
+  <data name="Status_Stopped" xml:space="preserve">
+    <value>已停止</value>
+  </data>
+  <data name="Status_Crashed" xml:space="preserve">
+    <value>已崩溃</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>エラー</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="EventTrigger_LoadRulesFailed" xml:space="preserve">
+    <value>イベントルールの読み込みに失敗しました：{0}</value>
+  </data>
+  <data name="EventTrigger_SaveRulesSuccess" xml:space="preserve">
+    <value>イベントルールが正常に保存されました</value>
+  </data>
+  <data name="EventTrigger_SaveRulesFailed" xml:space="preserve">
+    <value>イベントルールの保存に失敗しました：{0}</value>
+  </data>
+  <data name="EventTrigger_NewRuleName" xml:space="preserve">
+    <value>新しいルール</value>
+  </data>
+  <data name="EventTrigger_NewRuleDescription" xml:space="preserve">
+    <value>新しいルールの説明</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>コピー</value>
+  </data>
+  <data name="Settings_Instance_AutoRefreshInterval" xml:space="preserve">
+    <value>インスタンス状態の自動更新間隔</value>
+  </data>
+  <data name="Settings_Instance_AutoRefreshInterval_Description" xml:space="preserve">
+    <value>インスタンス状態を自動更新する間隔（秒）。0に設定すると無効になります。</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick" xml:space="preserve">
+    <value>インスタンスカードのダブルクリック時の動作</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_Description" xml:space="preserve">
+    <value>インスタンスカードをダブルクリックしたときに実行する動作。</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_Console" xml:space="preserve">
+    <value>コンソールを開く</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_Start" xml:space="preserve">
+    <value>インスタンスを起動</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_Stop" xml:space="preserve">
+    <value>インスタンスを停止</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_Restart" xml:space="preserve">
+    <value>インスタンスを再起動</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_Kill" xml:space="preserve">
+    <value>インスタンスを強制的に閉じる</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_Settings" xml:space="preserve">
+    <value>設定を開く</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_None" xml:space="preserve">
+    <value>なし</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>選択</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>インポート</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>エクスポート</value>
+  </data>
+  <data name="ModifiedDate" xml:space="preserve">
+    <value>更新日時</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>種類</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>サイズ</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>開く</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>ダウンロード</value>
+  </data>
+  <data name="UploadFile" xml:space="preserve">
+    <value>ファイルをアップロード</value>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>名前を変更</value>
+  </data>
+  <data name="CreateDirectory" xml:space="preserve">
+    <value>新しいフォルダー</value>
+  </data>
+  <data name="MultiSelectTip" xml:space="preserve">
+    <value>Ctrlキーを押しながらクリックで複数選択、Shiftキーを押しながらクリックで範囲選択できます。</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>はい</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>いいえ</value>
+  </data>
+  <data name="StartCommandSentSuccess" xml:space="preserve">
+    <value>起動コマンドが正常に送信されました</value>
+  </data>
+  <data name="StopCommandSentSuccess" xml:space="preserve">
+    <value>停止コマンドが正常に送信されました</value>
+  </data>
+  <data name="KillCommandSentSuccess" xml:space="preserve">
+    <value>閉じるコマンドが正常に送信されました</value>
+  </data>
+  <data name="RestartCommandSentSuccess" xml:space="preserve">
+    <value>再起動コマンドが正常に送信されました</value>
+  </data>
+  <data name="SendCommandFailed" xml:space="preserve">
+    <value>コマンドの送信に失敗しました：{0}</value>
+  </data>
+  <data name="ConsoleCommand_SendUnavailable" xml:space="preserve">
+    <value>現在の状態ではインスタンス {0} にコマンドを送信できません。</value>
+  </data>
+  <data name="FileEditor" xml:space="preserve">
+    <value>ファイルエディタ</value>
+  </data>
+  <data name="SaveWithShortcut" xml:space="preserve">
+    <value>保存 (Ctrl+S)</value>
+  </data>
+  <data name="SyntaxHighlighting" xml:space="preserve">
+    <value>シンタックスハイライト:</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>読み込み中...</value>
+  </data>
+  <data name="Ready" xml:space="preserve">
+    <value>準備完了</value>
+  </data>
+  <data name="Modified" xml:space="preserve">
+    <value>変更あり</value>
+  </data>
+  <data name="FileModifiedSavePrompt" xml:space="preserve">
+    <value>ファイルが変更されています。保存しますか？</value>
+  </data>
+  <data name="Prompt" xml:space="preserve">
+    <value>確認</value>
+  </data>
+  <data name="LargeFileWarningPrompt" xml:space="preserve">
+    <value>ファイルサイズが大きい ({0} MB) ため、読み込みに時間がかかり、メモリを大量に消費する可能性があります。続行しますか？</value>
+  </data>
+  <data name="LargeFileWarning" xml:space="preserve">
+    <value>大きなファイルの警告</value>
+  </data>
+  <data name="DownloadingFile" xml:space="preserve">
+    <value>ファイルをダウンロード中...</value>
+  </data>
+  <data name="ReadingFile" xml:space="preserve">
+    <value>ファイルを読み込み中...</value>
+  </data>
+  <data name="LoadFileFailed" xml:space="preserve">
+    <value>ファイルの読み込みに失敗しました</value>
+  </data>
+  <data name="LoadFailed" xml:space="preserve">
+    <value>読み込み失敗</value>
+  </data>
+  <data name="SavingFile" xml:space="preserve">
+    <value>ファイルを保存中...</value>
+  </data>
+  <data name="Saving" xml:space="preserve">
+    <value>保存中...</value>
+  </data>
+  <data name="Saved" xml:space="preserve">
+    <value>保存しました</value>
+  </data>
+  <data name="SaveFileFailed" xml:space="preserve">
+    <value>ファイルの保存に失敗しました</value>
+  </data>
+  <data name="SaveFailed" xml:space="preserve">
+    <value>保存失敗</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>ファイル</value>
+  </data>
+  <data name="Format" xml:space="preserve">
+    <value>書式</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>ヘルプ</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>元に戻す</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>やり直し</value>
+  </data>
+  <data name="Cut" xml:space="preserve">
+    <value>切り取り</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>貼り付け</value>
+  </data>
+  <data name="TimeDate" xml:space="preserve">
+    <value>時刻/日付</value>
+  </data>
+  <data name="WordWrap" xml:space="preserve">
+    <value>右端で折り返す</value>
+  </data>
+  <data name="Font" xml:space="preserve">
+    <value>フォント</value>
+  </data>
+  <data name="Zoom" xml:space="preserve">
+    <value>ズーム</value>
+  </data>
+  <data name="ZoomIn" xml:space="preserve">
+    <value>拡大</value>
+  </data>
+  <data name="ZoomOut" xml:space="preserve">
+    <value>縮小</value>
+  </data>
+  <data name="RestoreDefaultZoom" xml:space="preserve">
+    <value>既定の倍率に戻す</value>
+  </data>
+  <data name="StatusBar" xml:space="preserve">
+    <value>ステータスバー</value>
+  </data>
+  <data name="ShowLineNumbers" xml:space="preserve">
+    <value>行番号を表示</value>
+  </data>
+  <data name="Reload" xml:space="preserve">
+    <value>再読み込み</value>
+  </data>
+  <data name="CreateInstanceMissingDataError" xml:space="preserve">
+    <value>必須データが不足しています</value>
+  </data>
+  <data name="CreateInstanceConfirmationMessage" xml:space="preserve">
+    <value>以下のインスタンスを作成してもよろしいですか？</value>
+  </data>
+  <data name="CorePath" xml:space="preserve">
+    <value>コアパス</value>
+  </data>
+  <data name="JvmArguments" xml:space="preserve">
+    <value>JVM引数</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>なし</value>
+  </data>
+  <data name="CreateInstanceConfirmationTitle" xml:space="preserve">
+    <value>インスタンス作成の確認</value>
+  </data>
+  <data name="DaemonConnectionError" xml:space="preserve">
+    <value>デーモンへの接続に失敗しました</value>
+  </data>
+  <data name="CreatingInstance" xml:space="preserve">
+    <value>インスタンスを作成中...</value>
+  </data>
+  <data name="InstanceCreatedSuccess" xml:space="preserve">
+    <value>インスタンスが正常に作成されました</value>
+  </data>
+  <data name="CreateInstanceError" xml:space="preserve">
+    <value>インスタンスの作成に失敗しました</value>
+  </data>
+  <data name="NoJavaFound" xml:space="preserve">
+    <value>Javaランタイムが見つかりません</value>
+  </data>
+  <data name="SearchJavaError" xml:space="preserve">
+    <value>Javaの検索に失敗しました</value>
+  </data>
+  <data name="InstanceName" xml:space="preserve">
+    <value>インスタンス名</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>情報</value>
+  </data>
+  <data name="UploadingFile" xml:space="preserve">
+    <value>ファイルをアップロード中</value>
+  </data>
+  <data name="FileUploadFailed" xml:space="preserve">
+    <value>ファイルのアップロードに失敗しました</value>
+  </data>
+  <data name="ComponentManager_Add" xml:space="preserve">
+    <value>コンポーネントを追加</value>
+  </data>
+  <data name="ComponentManager_Enable" xml:space="preserve">
+    <value>有効にする</value>
+  </data>
+  <data name="ComponentManager_Disable" xml:space="preserve">
+    <value>無効にする</value>
+  </data>
+  <data name="ComponentManager_Locate" xml:space="preserve">
+    <value>ファイルの場所を開く</value>
+  </data>
+  <data name="ComponentManager_Enabled" xml:space="preserve">
+    <value>コンポーネントが有効になりました</value>
+  </data>
+  <data name="ComponentManager_Disabled" xml:space="preserve">
+    <value>コンポーネントが無効になりました</value>
+  </data>
+  <data name="ComponentManager_Deleted" xml:space="preserve">
+    <value>コンポーネントが削除されました</value>
+  </data>
+  <data name="ComponentManager_ConfirmDeleteMessage" xml:space="preserve">
+    <value>「{0}」を削除してもよろしいですか？</value>
+  </data>
+  <data name="ComponentManager_PathCopied" xml:space="preserve">
+    <value>パスをコピーしました</value>
+  </data>
+  <data name="ComponentManager_DaemonUnavailable" xml:space="preserve">
+    <value>デーモン接続が利用できません</value>
+  </data>
+  <data name="ComponentManager_NoTargetFolder" xml:space="preserve">
+    <value>対象フォルダがありません</value>
+  </data>
+  <data name="ComponentManager_NoJarFiles" xml:space="preserve">
+    <value>ドロップされたアイテムにJARファイルが見つかりません</value>
+  </data>
+  <data name="ComponentManager_AddedCount" xml:space="preserve">
+    <value>{0}/{1} 個のコンポーネントが正常に追加されました</value>
+  </data>
+  <data name="SettingsSaveSuccess" xml:space="preserve">
+    <value>設定を保存しました</value>
+  </data>
+  <data name="Replace" xml:space="preserve">
+    <value>置き換え</value>
+  </data>
+  <data name="Installer" xml:space="preserve">
+    <value>インストーラー</value>
+  </data>
+  <data name="ForceRerunInstaller" xml:space="preserve">
+    <value>インストーラーを強制再実行</value>
+  </data>
+  <data name="InstanceSettingsInstallerNotice" xml:space="preserve">
+    <value>コアを置き換えると古いファイルを保持したまま、対応する種類では以前の生成物を削除して起動ターゲットを再構築します。</value>
+  </data>
+  <data name="InstanceSettingsBasicModeNotice" xml:space="preserve">
+    <value>現在のインスタンスタイプでは基本情報のみ編集可能です。高度なランタイム設定とコア置換は Java 系インスタンスでのみ利用できます。</value>
+  </data>
+  <data name="ComponentManager_ClientSideModBlocked" xml:space="preserve">
+    <value>クライアント専用 mod をブロックしました: {0}</value>
+  </data>
+  <data name="ComponentManager_ClientSideBadge" xml:space="preserve">
+    <value>クライアント</value>
+  </data>
+  <data name="MinecraftVersionLabel" xml:space="preserve">
+    <value>Minecraft</value>
+  </data>
+  <data name="ForgeVersionLabel" xml:space="preserve">
+    <value>Forge</value>
+  </data>
+  <data name="FabricLoaderVersionLabel" xml:space="preserve">
+    <value>Fabric Loader</value>
+  </data>
+  <data name="NeoForgeVersionLabel" xml:space="preserve">
+    <value>NeoForge</value>
+  </data>
+  <data name="InstanceType_MCForge" xml:space="preserve">
+    <value>Minecraft Forge</value>
+  </data>
+  <data name="InstanceType_MCFabric" xml:space="preserve">
+    <value>Minecraft Fabric</value>
+  </data>
+  <data name="InstanceType_MCNeoForge" xml:space="preserve">
+    <value>Minecraft NeoForge</value>
+  </data>
+  <data name="DebugCopyConfig" xml:space="preserve">
+    <value>デバッグ: 設定をコピー</value>
+  </data>
+  <data name="InstanceConfigCopied" xml:space="preserve">
+    <value>インスタンス設定をクリップボードにコピーしました</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_ActionExecutionMode" xml:space="preserve">
+    <value>実行モード</value>
+  </data>
+  <data name="FeatureNotReadyTip" xml:space="preserve">
+    <value>この機能はまだ準備中です。</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_ParallelSeparator" xml:space="preserve">
+    <value>同時に</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_SequentialSeparator" xml:space="preserve">
+    <value>次に</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_AlwaysFalseRuleset" xml:space="preserve">
+    <value>常に偽</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_RulesetConditionHint" xml:space="preserve">
+    <value>次の条件を満たしたときにアクションを実行します</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_AlwaysTrueRulesetDescription" xml:space="preserve">
+    <value>このルールセットは常に真を返します。</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Parallel" xml:space="preserve">
+    <value>並列</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_AlwaysFalseRulesetDescription" xml:space="preserve">
+    <value>このルールセットは常に偽を返します。</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Sequential" xml:space="preserve">
+    <value>順番</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Ruleset" xml:space="preserve">
+    <value>ルールセット</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_AlwaysTrueRuleset" xml:space="preserve">
+    <value>常に真</value>
+  </data>
+  <data name="ComponentManager_AddMod" xml:space="preserve">
+    <value>Mod を追加</value>
+  </data>
+  <data name="ComponentManager_AddPlugin" xml:space="preserve">
+    <value>プラグインを追加</value>
+  </data>
+  <data name="ComponentManager_EmptyMods" xml:space="preserve">
+    <value>このインスタンスにはまだ Mod がありません。</value>
+  </data>
+  <data name="ComponentManager_EmptyPlugins" xml:space="preserve">
+    <value>このインスタンスにはまだプラグインがありません。</value>
+  </data>
+  <data name="ComponentManager_Unsupported" xml:space="preserve">
+    <value>コンポーネント管理を使用する前に、Mod またはプラグイン対応のローダーを導入してください。</value>
+  </data>
+  <data name="ComponentManager_ClientSideModsFound" xml:space="preserve">
+    <value>クライアント専用 Mod を検出</value>
+  </data>
+  <data name="ComponentManager_ClientSideModsWarning" xml:space="preserve">
+    <value>有効なクライアント専用 Mod が {0} 個見つかりました。通常サーバーでは動作せず、起動失敗の原因になる可能性があります。今すぐ無効化するか、この警告を無視できます。</value>
+  </data>
+  <data name="ComponentManager_DisableClientSideMods" xml:space="preserve">
+    <value>無効化</value>
+  </data>
+  <data name="ComponentManager_DisabledClientSideMods" xml:space="preserve">
+    <value>{0} 個のクライアント専用 Mod を無効化しました。</value>
+  </data>
+  <data name="EventTrigger_EmptyRules" xml:space="preserve">
+    <value>このインスタンスにはまだトリガールールがありません。</value>
+  </data>
+  <data name="Ignore" xml:space="preserve">
+    <value>無視</value>
+  </data>
+  <data name="FirstSetup_EulaOnlineTip" xml:space="preserve">
+    <value>ブラウザーで MCSL Future のユーザー契約を確認してください。開いて内容を確認できるよう、続行するには 15 秒待つ必要があります。</value>
+  </data>
+  <data name="FirstSetup_EulaOpenInBrowser" xml:space="preserve">
+    <value>ユーザー契約を開く</value>
+  </data>
+  <data name="FirstSetup_EulaContinueCountdown" xml:space="preserve">
+    <value>同意（{0}s）</value>
+  </data>
+  <data name="FirstSetup_EulaUrlLabel" xml:space="preserve">
+    <value>契約 URL</value>
+  </data>
+  <data name="FirstSetup_DaemonRemoteHost" xml:space="preserve">
+    <value>リモートホスト</value>
+  </data>
+  <data name="FirstSetup_DaemonLocalHost" xml:space="preserve">
+    <value>ローカルで実行</value>
+  </data>
+  <data name="FirstSetup_DaemonLocalQuestion" xml:space="preserve">
+    <value>このコンピューターでデーモンを実行しますか？</value>
+  </data>
+  <data name="FirstSetup_DaemonLocalQuestionTip" xml:space="preserve">
+    <value>このコンピューターでインスタンスを直接ホストする場合はローカル実行を選択してください。それ以外の場合はリモートノードを追加します。</value>
+  </data>
+  <data name="FirstSetup_DaemonUseLocal" xml:space="preserve">
+    <value>このコンピューターで実行</value>
+  </data>
+  <data name="FirstSetup_DaemonSkipLocalUseRemote" xml:space="preserve">
+    <value>リモートノードを追加</value>
+  </data>
+  <data name="FirstSetup_DaemonLocalDownload" xml:space="preserve">
+    <value>デーモンをダウンロード</value>
+  </data>
+  <data name="FirstSetup_DaemonLocalDownloadUnavailable" xml:space="preserve">
+    <value>ローカルデーモンのダウンロード URL はまだ設定されていません。今はリモートホストを追加するか、後で直接リンクを設定して再試行してください。</value>
+  </data>
+  <data name="FirstSetup_DaemonAddAnotherHostTitle" xml:space="preserve">
+    <value>別のホストを追加しますか？</value>
+  </data>
+  <data name="FirstSetup_DaemonAddAnotherHostTip" xml:space="preserve">
+    <value>現在のホストが追加されました。別のホストを追加するか、初回設定を完了できます。</value>
+  </data>
+  <data name="FirstSetup_DaemonAddAnotherHost" xml:space="preserve">
+    <value>続けて追加</value>
+  </data>
+  <data name="FirstSetup_DaemonFinishAdding" xml:space="preserve">
+    <value>完了</value>
+  </data>
+</root>

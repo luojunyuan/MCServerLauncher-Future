@@ -1,6 +1,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using MCServerLauncher.WinUI.Core.Localization;
+using Serilog;
 
 namespace MCServerLauncher.WinUI.Core.Services;
 
@@ -27,14 +28,20 @@ public sealed class DialogService : IDialogService
             CloseButtonText = closeButton,
             DefaultButton = ContentDialogButton.Primary
         };
-        if (isDestructive
-            && Application.Current.Resources.TryGetValue("AccentButtonStyle", out var style)
-            && style is Style accentButtonStyle)
-        {
-            dialog.PrimaryButtonStyle = accentButtonStyle;
-        }
+        ApplyAccentPrimaryStyle(dialog, isDestructive);
 
-        return await dialog.ShowAsync() == ContentDialogResult.Primary;
+        try
+        {
+            return await dialog.ShowAsync() == ContentDialogResult.Primary;
+        }
+        catch (Exception ex)
+        {
+            // ShowAsync can fail when the app is closing, the XamlRoot is
+            // disconnected, or another dialog is already open. Never let that
+            // crash an async-void caller: fall back to the safe default.
+            Log.Warning(ex, "[WinUI] ContentDialog ShowAsync failed (Confirm)");
+            return false;
+        }
     }
 
     public async Task ShowErrorAsync(XamlRoot root, string title, string content)
@@ -47,7 +54,14 @@ public sealed class DialogService : IDialogService
             CloseButtonText = _localization.Get("OK"),
             DefaultButton = ContentDialogButton.Close
         };
-        await dialog.ShowAsync();
+        try
+        {
+            await dialog.ShowAsync();
+        }
+        catch (Exception ex)
+        {
+            Log.Warning(ex, "[WinUI] ContentDialog ShowAsync failed (Error)");
+        }
     }
 
     public async Task<bool> ConfirmCountdownAsync(
@@ -70,16 +84,20 @@ public sealed class DialogService : IDialogService
             DefaultButton = ContentDialogButton.Close,
             IsPrimaryButtonEnabled = false
         };
-        if (isDestructive
-            && Application.Current.Resources.TryGetValue("AccentButtonStyle", out var style)
-            && style is Style accentButtonStyle)
-        {
-            dialog.PrimaryButtonStyle = accentButtonStyle;
-        }
+        ApplyAccentPrimaryStyle(dialog, isDestructive);
 
+        var dismissed = false;
         var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
         timer.Tick += (_, _) =>
         {
+            // A tick can be queued just before the dialog is dismissed; ignore it
+            // instead of mutating a dialog that is already closing.
+            if (dismissed || remaining <= 0)
+            {
+                timer.Stop();
+                return;
+            }
+
             remaining--;
             if (remaining > 0)
             {
@@ -97,9 +115,25 @@ public sealed class DialogService : IDialogService
         {
             return await dialog.ShowAsync() == ContentDialogResult.Primary;
         }
+        catch (Exception ex)
+        {
+            Log.Warning(ex, "[WinUI] ContentDialog ShowAsync failed (Countdown)");
+            return false;
+        }
         finally
         {
+            dismissed = true;
             timer.Stop();
+        }
+    }
+
+    private static void ApplyAccentPrimaryStyle(ContentDialog dialog, bool isDestructive)
+    {
+        if (isDestructive
+            && Application.Current.Resources.TryGetValue("AccentButtonStyle", out var style)
+            && style is Style accentButtonStyle)
+        {
+            dialog.PrimaryButtonStyle = accentButtonStyle;
         }
     }
 }

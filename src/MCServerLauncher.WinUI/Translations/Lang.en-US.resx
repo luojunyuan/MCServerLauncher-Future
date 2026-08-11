@@ -1,0 +1,1834 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:schema id="root">
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ErrorDialogTitle" xml:space="preserve">
+    <value>MCServerLauncher WinUI encountered an error</value>
+  </data>
+  <data name="OnlyForWindows" xml:space="preserve">
+    <value>WinUI (Only for Windows)</value>
+  </data>
+  <data name="FirstSetup_TimeLanguageMenu" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="FirstSetup_EulaMenu" xml:space="preserve">
+    <value>Eula</value>
+  </data>
+  <data name="FirstSetup_ConnectDaemonMenu" xml:space="preserve">
+    <value>Connect to Remote Host</value>
+  </data>
+  <data name="FirstSetup_WelcomeMenu" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="FirstSetup_SetLanguageHint" xml:space="preserve">
+    <value> Language</value>
+  </data>
+  <data name="FirstSetup_SetLanguageHintReverse" xml:space="preserve">
+    <value> Language</value>
+  </data>
+  <data name="Main_HomeNavMenu" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Main_CreateInstanceNavMenu" xml:space="preserve">
+    <value>Create Instance</value>
+  </data>
+  <data name="Main_InstanceManagerNavMenu" xml:space="preserve">
+    <value>Instance Manager</value>
+  </data>
+  <data name="Main_ResDownloadNavMenu" xml:space="preserve">
+    <value>Resource Download</value>
+  </data>
+  <data name="Main_HelpCenterNavMenu" xml:space="preserve">
+    <value>Help Center</value>
+  </data>
+  <data name="Main_NotificationCenterNavMenu" xml:space="preserve">
+    <value>Nofitications</value>
+  </data>
+  <data name="Main_DebugNavMenu" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="Main_SettingsNavMenu" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Tip" xml:space="preserve">
+    <value>Tip</value>
+  </data>
+  <data name="NotAllowedMultipleProcess" xml:space="preserve">
+    <value>Please do not run MCServerLauncher WinUI repeatedly.</value>
+  </data>
+  <data name="DownloadModule_FastMirrorProxyType" xml:space="preserve">
+    <value>Proxy</value>
+  </data>
+  <data name="DownloadModule_FastMirrorVanillaType" xml:space="preserve">
+    <value>Vanilla</value>
+  </data>
+  <data name="DownloadModule_FastMirrorPureType" xml:space="preserve">
+    <value>Purity</value>
+  </data>
+  <data name="DownloadModule_FastMirrorModType" xml:space="preserve">
+    <value>Mods</value>
+  </data>
+  <data name="DownloadModule_FastMirrorBedrockType" xml:space="preserve">
+    <value>Bedrock</value>
+  </data>
+  <data name="DownloadModule_MSLAPIGetCoreDescriptionFailed" xml:space="preserve">
+    <value>Failed to fetch the core description!</value>
+  </data>
+  <data name="CreateInstance_MinecraftBedrockArchive_Title" xml:space="preserve">
+    <value>Compressed package for Minecraft Bedrock Edition</value>
+  </data>
+  <data name="CreateInstance_Archive_Description" xml:space="preserve">
+    <value>Please import the downloaded zip file here. If you don't know where to download, click the button on the right to jump.</value>
+  </data>
+  <data name="Archive" xml:space="preserve">
+    <value>Archive</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="CreateInstance_MinecraftJavaCore_Title" xml:space="preserve">
+    <value>Minecraft Server Core</value>
+  </data>
+  <data name="CreateInstance_MinecraftJavaCore_Description" xml:space="preserve">
+    <value>Please select the core file that this server will use. If you don't know where to download it, click the button on the right to jump.</value>
+  </data>
+  <data name="MinecraftCoreFileName" xml:space="preserve">
+    <value>Core file name</value>
+  </data>
+  <data name="CreateInstance_MinecraftJavaJvm_Title" xml:space="preserve">
+    <value>Java Runtime</value>
+  </data>
+  <data name="CreateInstance_MinecraftJavaJvm_Description" xml:space="preserve">
+    <value>The Java runtime is required for the Minecraft Java server. Be sure to select the appropriate version to prevent startup failures.</value>
+  </data>
+  <data name="JavaPath" xml:space="preserve">
+    <value>Java Path</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>Install</value>
+  </data>
+  <data name="ScanJavaAtDaemon" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SelectFromResult" xml:space="preserve">
+    <value>Select from existing results</value>
+  </data>
+  <data name="MinecraftJavaRequirementTip" xml:space="preserve">
+    <value>1.12+ requires Java 8\n1.17+ requires Java 16\n1.18+ requires Java 17\n1.20.5+ requires Java 21</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>File name</value>
+  </data>
+  <data name="CreateInstance_OtherExecutableInstanceDependency_Description" xml:space="preserve">
+    <value>Please select the file/folder/compressed package required for this new instance. The compressed package only supports ZIP format.</value>
+  </data>
+  <data name="CreateInstance_OtherExecutableInstanceDependency_Title" xml:space="preserve">
+    <value>Dependency</value>
+  </data>
+  <data name="CreateInstance_OtherExecutableInstanceRunCommand_Title" xml:space="preserve">
+    <value>Run Command</value>
+  </data>
+  <data name="CreateInstance_OtherExecutableInstanceRunCommand_Description" xml:space="preserve">
+    <value>Enter the run command here.</value>
+  </data>
+  <data name="RunCommandArgumentTip" xml:space="preserve">
+    <value>If additional arguments are required, \nsimply append them to the end.</value>
+  </data>
+  <data name="CreateInstance_InstanceName_Description" xml:space="preserve">
+    <value>Do not include special symbols or use illegal names.</value>
+  </data>
+  <data name="CreateInstance_InstanceName_Title" xml:space="preserve">
+    <value>Instance Name</value>
+  </data>
+  <data name="CreateInstance_MinecraftJavaJvmArgument_Description" xml:space="preserve">
+    <value>(Optional) You can add additional JVM arguments here, one per line.</value>
+  </data>
+  <data name="CreateInstance_MinecraftJavaJvmArgument_AddArgument" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="CreateInstance_MinecraftJavaJvmArgument_Title" xml:space="preserve">
+    <value>JVM Arguments</value>
+  </data>
+  <data name="MaximumMemory" xml:space="preserve">
+    <value>Maximum memory</value>
+  </data>
+  <data name="MinimumMemory" xml:space="preserve">
+    <value>Minimum Memory</value>
+  </data>
+  <data name="CreateInstance_MinecraftJvmRam_Description" xml:space="preserve">
+    <value>This determines how much memory your Minecraft Java Edition server will be able to use.</value>
+  </data>
+  <data name="CreateInstance_MinecraftJvmRam_Title" xml:space="preserve">
+    <value>JVM Memory Heap</value>
+  </data>
+  <data name="CreateInstance_MinecraftJvmRam_Tip" xml:space="preserve">
+    <value>Minimum memory should always be smaller than maximum memory</value>
+  </data>
+  <data name="CopyUrl" xml:space="preserve">
+    <value>Copy URL</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="FileSize" xml:space="preserve">
+    <value>File size</value>
+  </data>
+  <data name="MinecraftVersion" xml:space="preserve">
+    <value>Minecraft Version</value>
+  </data>
+  <data name="BuildVersion" xml:space="preserve">
+    <value>Build Version</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="CreateTime" xml:space="preserve">
+    <value>Creation time</value>
+  </data>
+  <data name="InstanceType" xml:space="preserve">
+    <value>Instance Type</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="More" xml:space="preserve">
+    <value>More</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="PreFinishCreateInstanceTip" xml:space="preserve">
+    <value>After completing the following configuration, click "Continue".</value>
+  </data>
+  <data name="CreateInstance_MinecraftVersionTip" xml:space="preserve">
+    <value>Please select the version of Minecraft that this server will run.</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="CreateInstance_BmclapiMayBeFailedTip" xml:space="preserve">
+    <value>If it doesn't load, please try again later. \nMirror service powered by BMCLAPI</value>
+  </data>
+  <data name="ForgeVersion" xml:space="preserve">
+    <value>Forge Version</value>
+  </data>
+  <data name="NeoForgeVersion" xml:space="preserve">
+    <value>NeoForge Version</value>
+  </data>
+  <data name="FabricVersion" xml:space="preserve">
+    <value>Fabric Version</value>
+  </data>
+  <data name="QuiltVersion" xml:space="preserve">
+    <value>Quilt Version</value>
+  </data>
+  <data name="CreateInstance_ForgeVersion_Description" xml:space="preserve">
+    <value>Please select the Forge Loader version of the server.</value>
+  </data>
+  <data name="CreateInstance_NeoForgeVersion_Description" xml:space="preserve">
+    <value>Please select the NeoForge Loader version of the server.</value>
+  </data>
+  <data name="CreateInstance_FabricVersion_Description" xml:space="preserve">
+    <value>Please select the Fabric Loader version of the server.</value>
+  </data>
+  <data name="CreateInstance_QuiltVersion_Description" xml:space="preserve">
+    <value>Please select the Quilt Loader version of the server.</value>
+  </data>
+  <data name="OnlyShowReleaseVersion" xml:space="preserve">
+    <value>Releases Only</value>
+  </data>
+  <data name="ResDownload_InstanceCore" xml:space="preserve">
+    <value>Server Core</value>
+  </data>
+  <data name="ResDownload_OpenHomePage" xml:space="preserve">
+    <value>Official website</value>
+  </data>
+  <data name="FirstSetup_SetupFinishedWelcome" xml:space="preserve">
+    <value>Welcome to</value>
+  </data>
+  <data name="TempSkip" xml:space="preserve">
+    <value>Skip temporarily</value>
+  </data>
+  <data name="Agree" xml:space="preserve">
+    <value>Agree</value>
+  </data>
+  <data name="Disagree" xml:space="preserve">
+    <value>Disagree</value>
+  </data>
+  <data name="Eula1" xml:space="preserve">
+    <value>Welcome to MCServerLauncher by MCSLTeam.\nThank you for choosing the software and services provided by MCSLTeam (hereinafter referred to as "the software"). To protect user rights and interests, please carefully read all contents of this agreement before using the software. We reserve the right to update this agreement at any time, and upon publication, the updated agreement will supersede any previous versions.\nBy using this software, you acknowledge that you have read and understood all terms and conditions of this agreement and agree to be bound by them.</value>
+  </data>
+  <data name="Eula2" xml:space="preserve">
+    <value>Instructions for Use</value>
+  </data>
+  <data name="Eula3" xml:space="preserve">
+    <value>Users shall provide the necessary hardware and software configurations required for this software and its functionalities (including but not limited to creating new instances).\nUsers shall bear any costs associated with connecting to the Internet, such as telephone and broadband usage fees.\nUsers shall be solely responsible for all actions, events, and consequences arising from their use of this software.\nAny transactions and disputes between users and unauthorized non-official individuals are not the responsibility of the developers.\nUsers must comply with the laws and regulations of the PRC (if the user is outside the PRC, they must also comply with the laws and regulations of their country or region).\nUsers may not use this Software (or any of its features) to engage in illegal activities or use any related processes and services in an unlawful manner. The developers are not liable for any consequences resulting from such behavior.\nUsers are solely responsible for the legal consequences of any information they publish. Users must not input, post, or disseminate any of the following content within this Software or any related processes and services:\n\nContent opposing the fundamental principles established by the Constitution of the PRC.\nContent endangering national security, disclosing state secrets, subverting state power, or undermining national unity.\nContent damaging the national honor and interests.\nContent inciting ethnic hatred or discrimination and disrupting ethnic unity.\nContent undermining national religious policies, promoting cults, or feudal superstitions.\nRumors that disrupt social order or undermine social stability.\nObscene, pornographic, gambling-related, violent, murderous, or terrorist content, or content inciting criminal activities.\nContent defaming others or infringing on the legal rights and interests of others.\nAny other content prohibited by the laws and administrative regulations of the PRC.\nUnless permitted by law or granted written permission by the developers, users shall not engage in any of the following behaviors:\nUsing this software and its services in an illegal or improper manner.\nDamaging the normal operation of this software system or website by deliberately spreading malicious software, such as computer viruses.\nEngaging in any non-normal usage of the network services that could affect this software (including but not limited to damaging or overloading servers).\nRemoving copyright notices from this software or its copies.\n\nIf a user engages in any unlawful or breach-of-agreement conduct, the developers reserve the right to take appropriate measures based on the severity of the violation, including but not limited to terminating service. In cases of severe violations, the matter will be referred to relevant administrative authorities for administrative penalties or criminal prosecution.</value>
+  </data>
+  <data name="Eula4" xml:space="preserve">
+    <value>Data Collection and Utilization</value>
+  </data>
+  <data name="Eula5" xml:space="preserve">
+    <value>If you agree to this agreement and use the online services provided by this software, we may collect the following information:\nThe IP address of the device on which this software is running (note that this may not always be accurate). \nCertain system information about the device on which this software is running. \nIn the event of a software crash, with your consent, we may upload system logs (containing some system information) to help diagnose and resolve issues and improve the software. \nOther information may be uploaded with your consent (specific details will be provided within the software).</value>
+  </data>
+  <data name="Eula6" xml:space="preserve">
+    <value>User Support and Feedback</value>
+  </data>
+  <data name="Eula7" xml:space="preserve">
+    <value>If users encounter any issues during use, they can provide feedback via official email or by submitting an Issue in the software's GitHub repository. We will carefully consider user feedback to improve our services.</value>
+  </data>
+  <data name="Eula8" xml:space="preserve">
+    <value>Change or Suspension of Services</value>
+  </data>
+  <data name="Eula9" xml:space="preserve">
+    <value>1. Termination and Suspension of User Services\n\nIf a user engages in illegal activities, seriously violates social morals, or other actions prohibited by law, the developers shall terminate the provision of services to the user;\nIf a user engages in improper behavior while using the software, the developers has the right to terminate the provision of services to the user (specific cases of improper behavior are clearly defined in this EULA);\nIf a user uses a third-party modified version of the software, the user shall bear the risk and legal responsibility themselves.\n\n2. Interruption, Suspension, and Termination of the Software and Services\n\nIn any of the following circumstances, the developers has the right to terminate or interrupt all or part of the software services, and the developers shall not be liable for any inconvenience or damages caused to users or third parties:\n\na. Due to the needs of the software and services themselves;\nb. Due to damage to the server or inability to operate normally;\nc. Due to sudden hardware or software device and electronic communication equipment failures;\nd. Due to network provider line issues or other faults;\ne. Due to policy factors;\nf. Due to third-party reasons or other force majeure circumstances.\n\nThe developers reserves the right to terminate or partially terminate the software and services when deemed necessary. The developers may notify users via announcements, but will not be liable for any losses incurred by users.</value>
+  </data>
+  <data name="Eula10" xml:space="preserve">
+    <value>Disclaimers</value>
+  </data>
+  <data name="Eula11" xml:space="preserve">
+    <value>The user understands and agrees that, to the extent permitted by law, the developer makes no warranties regarding this software. The risks arising from the use of this software are entirely borne by the user.\n The user understands and agrees that the developer does not guarantee that this software and services will meet the user's needs, nor does it guarantee that the service will not be interrupted, and it provides no warranties regarding the accuracy, security, or other aspects of this software and services.\n The user understands and agrees that the developer cannot fully guarantee the accuracy, security, or legality of third-party files downloaded from the online services of this Software, nor does it take responsibility for the accuracy, security, legality, etc., of third-party services within the software (including but not limited to resource downloads, etc.). Therefore, the aforementioned content is unrelated to the developer and this software and does not represent the position of the developer or this software. Relevant disputes should be borne by the third-party service provider.\n The user understands and agrees that if the software online services or related files downloaded by this software are used in erroneous or illegal ways, the consequences are borne by the user. If it leads to property damage, copyright, or intellectual property infringement, the developer will not be responsible and will not undertake any legal liability.\n The user understands and agrees that this software does not provide any guarantee for third-party service content. If the use of third-party services leads to property damage, copyright, or intellectual property infringement, the developer will not be responsible and will not undertake any legal liability.\n The user understands and agrees that the developer provides no guarantees or legal support for the functionality of this software. If the user engages in illegal activities or other improper behavior using the software's functionality, the risks and legal consequences are entirely borne by the user.</value>
+  </data>
+  <data name="Eula12" xml:space="preserve">
+    <value>Intellectual Property</value>
+  </data>
+  <data name="Eula13" xml:space="preserve">
+    <value>The copyright, patent rights, and other intellectual property rights of this software are owned by the developer or designated copyright holders.\n\n The third-party services used by this Software are owned by the relevant copyright holders, including but not limited to:\n this software is a server management and online gaming tool for Minecraft (the final interpretation rights belong to Microsoft and Mojang AB). Users must comply with its End User License Agreement (EULA) and the relevant policies implemented by NetEase in Mainland China, and must not use the game content for commercial purposes or engage in other activities prohibited by the EULA.\n This software is a server management and online gaming tool for Terraria (the final interpretation rights belong to Re-Logic and its publisher). Users must comply with its End User License Agreement (EULA) and related policies. Users must not use the game content for unauthorized commercial purposes or engage in other activities prohibited by the EULA.\n Some online file resources (such as server cores, game/server mods, and plugins) provided by this software are downloaded from official/third-party sources, and copyright is handled according to third-party platform regulations.\n Other third-party services used by this software have their copyrights owned by the service providers.\n This software is open-source, and users or other software developers not associated with this software must comply with its open-source license.\n The user understands and agrees that, except for resources created by the user, all online service data provided by this software are owned by the developer. The developer has the right to decide whether to retain all or part of the data on the server.</value>
+  </data>
+  <data name="Eula14" xml:space="preserve">
+    <value>Change of Terms</value>
+  </data>
+  <data name="Eula15" xml:space="preserve">
+    <value>The developer has the right to modify this EULA when necessary. If there are changes to this EULA, the developer will display the modifications on important pages. If the user does not agree with the revisions or updates to this EULA, they are able to choose to stop using the software and services. If the user continues to use the software and services after the EULA has been revised, it signifies the user's acceptance of all the changes or updates to the EULA. The developer will not be liable for any losses incurred by the user due to unfamiliarity with the changes after the EULA has been revised.</value>
+  </data>
+  <data name="Eula16" xml:space="preserve">
+    <value>Other Terms</value>
+  </data>
+  <data name="Eula17" xml:space="preserve">
+    <value>This EULA is governed by the laws of the People's Republic of China and excludes the application of any conflicting legal provisions; \nThe developer's failure or delay in exercising or fully exercising any rights under this EULA or as provided by law shall not be deemed a waiver of those rights, nor shall it affect the developer's ability to exercise such rights in the future; \nTo the extent permitted by law, the developer has the right to interpret the terms of this EULA; \nUsers can file complaints or report various illegal activities by email to services@mcsl.com.cn.</value>
+  </data>
+  <data name="Eula18" xml:space="preserve">
+    <value>Terms Separability</value>
+  </data>
+  <data name="Eula19" xml:space="preserve">
+    <value>If any provision of this EULA is regarded as invalid or unenforceable, the remaining provisions should still remain in full force and effect.</value>
+  </data>
+  <data name="PreCreateInstanceTip" xml:space="preserve">
+    <value>Please select the instance type that you want to create:</value>
+  </data>
+  <data name="CreateUniversalMinecraftJavaInstance" xml:space="preserve">
+    <value>Universal Minecraft Java Edition Server</value>
+  </data>
+  <data name="CreateMinecraftForgeInstance" xml:space="preserve">
+    <value>Minecraft Forge Server</value>
+  </data>
+  <data name="CreateMinecraftNeoForgeInstance" xml:space="preserve">
+    <value>Minecraft NeoForge Server</value>
+  </data>
+  <data name="CreateMinecraftFabricInstance" xml:space="preserve">
+    <value>Minecraft Fabric Server</value>
+  </data>
+  <data name="CreateMinecraftQuiltInstance" xml:space="preserve">
+    <value>Minecraft Quilt Server</value>
+  </data>
+  <data name="CreateMinecraftBedrockInstance" xml:space="preserve">
+    <value>Minecraft Bedrock Edition Server</value>
+  </data>
+  <data name="CreateMinecraftGeyserStandaloneInstance" xml:space="preserve">
+    <value>Minecraft Geyser Standalone Server</value>
+  </data>
+  <data name="CreateMinecraftBungeeCordInstance" xml:space="preserve">
+    <value>Minecraft BungeeCord Proxy Server</value>
+  </data>
+  <data name="CreateMinecraftWaterfallInstance" xml:space="preserve">
+    <value>Minecraft Waterfall Proxy Server</value>
+  </data>
+  <data name="CreateMinecraftVelocityInstance" xml:space="preserve">
+    <value>Minecraft Velocity Proxy Server</value>
+  </data>
+  <data name="CreateMinecraftTravertineInstance" xml:space="preserve">
+    <value>Minecraft Travertine Proxy Server</value>
+  </data>
+  <data name="CreateUniversalFastReverseProxyClientInstance" xml:space="preserve">
+    <value>Universal Frp Client (Frpc)</value>
+  </data>
+  <data name="CreateTerrariaServerInstance" xml:space="preserve">
+    <value>Terraria Server</value>
+  </data>
+  <data name="CreateOtherExecutableInstance" xml:space="preserve">
+    <value>Other Executable Programs</value>
+  </data>
+  <data name="ImportExistsInstance" xml:space="preserve">
+    <value>Import Existing Instance</value>
+  </data>
+  <data name="HomeTip" xml:space="preserve">
+    <value>A new journey, a new experience.</value>
+  </data>
+  <data name="InstanceManagerTip" xml:space="preserve">
+    <value>Panoramic view, all within your rule.</value>
+  </data>
+  <data name="Main_DownloadHistoryNavMenu" xml:space="preserve">
+    <value>Downloads</value>
+  </data>
+  <data name="ResDownloadTipPrefix" xml:space="preserve">
+    <value>Whatever you want, is here to be found. (Currently using</value>
+  </data>
+  <data name="HelpCenterTip" xml:space="preserve">
+    <value>Striving our utmost, answering every question.</value>
+  </data>
+  <data name="SettingsTip" xml:space="preserve">
+    <value>Your MCSL, also your style.</value>
+  </data>
+  <data name="Settings_ActionWhenDownloadError_Stop" xml:space="preserve">
+    <value>Stop Downloading</value>
+  </data>
+  <data name="Settings_ActionWhenDownloadError_Retry1" xml:space="preserve">
+    <value>Retry Once</value>
+  </data>
+  <data name="Settings_ActionWhenDownloadError_Retry3" xml:space="preserve">
+    <value>Retry 3 Times</value>
+  </data>
+  <data name="Settings_ActionWhenDeleteConfirm_TypeName" xml:space="preserve">
+    <value>Instance Name Input</value>
+  </data>
+  <data name="Settings_ActionWhenDeleteConfirm_TypeKey" xml:space="preserve">
+    <value>Remote Host Secret</value>
+  </data>
+  <data name="Settings_Instance_AutoRefreshInterval" xml:space="preserve">
+    <value>Instance Status Auto-Refresh Interval</value>
+  </data>
+  <data name="Settings_Instance_AutoRefreshInterval_Description" xml:space="preserve">
+    <value>The interval in seconds to automatically refresh the instance status. Set to 0 to disable.</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick" xml:space="preserve">
+    <value>Action on Double-Clicking Instance Card</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_Description" xml:space="preserve">
+    <value>The action to perform when double-clicking an instance card.</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_Console" xml:space="preserve">
+    <value>Open Console</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_Start" xml:space="preserve">
+    <value>Start Instance</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_Stop" xml:space="preserve">
+    <value>Stop Instance</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_Restart" xml:space="preserve">
+    <value>Restart Instance</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_Kill" xml:space="preserve">
+    <value>Force Close Instance</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_Settings" xml:space="preserve">
+    <value>Open Settings</value>
+  </data>
+  <data name="Settings_Instance_ActionOnDoubleClick_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="Settings_AppTheme_Auto" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Settings_AppTheme_Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Settings_AppTheme_Dark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="Settings_AutoAcceptMinecraftJavaEula_Title" xml:space="preserve">
+    <value>Auto Accept Minecraft's EULA (Minecraft Java Edition Server Instance)</value>
+  </data>
+  <data name="Settings_AutoAcceptMinecraftJavaEula_Description" xml:space="preserve">
+    <value>Automatically agree the EULA means you comply with the Minecraft EULA and acknowledge that MCSL assumes no joint liability.</value>
+  </data>
+  <data name="Settings_AutoDisableMinecraftJavaOnlineMode_Title" xml:space="preserve">
+    <value>Automatically Disable Online Authentication (Minecraft Java Edition Instance)</value>
+  </data>
+  <data name="Settings_AutoDisableMinecraftJavaOnlineMode_Description" xml:space="preserve">
+    <value>After enabling this option, the instances of this type will automatically disable authentication from Mojang/Microsoft, and allow offline-mode Minecraft Clients to connect to the server.</value>
+  </data>
+  <data name="Settings_AutoDisableMinecraftBedrockOnlineMode_Description" xml:space="preserve">
+    <value>After enabling this option, the instances of this type will automatically disable authentication from Mojang/Microsoft, and allow offline-mode Minecraft Clients to connect to the server.</value>
+  </data>
+  <data name="Settings_AutoDisableMinecraftBedrockOnlineMode_Title" xml:space="preserve">
+    <value>Automatically Disable Online Authentication (Minecraft Bedrock Edition Instance)</value>
+  </data>
+  <data name="Settings_UseMirrorForMinecraftForgeInstall_Title" xml:space="preserve">
+    <value>Use Mirror for Installation (Minecraft Forge Server Instance)</value>
+  </data>
+  <data name="Settings_UseMirrorForMinecraftNeoForgeInstall_Title" xml:space="preserve">
+    <value>Use Mirror for Installation (Minecraft NeoForge Server Instance)</value>
+  </data>
+  <data name="Settings_UseMirrorForMinecraftFabricInstall_Title" xml:space="preserve">
+    <value>Use Mirror for Installation (Minecraft Fabric Server Instance)</value>
+  </data>
+  <data name="Settings_UseMirrorForMinecraftQuiltInstall_Title" xml:space="preserve">
+    <value>Use Mirror for Installation (Minecraft Quilt Server Instance)</value>
+  </data>
+  <data name="Settings_UseMirrorForMinecraftLoadersInstall_Description" xml:space="preserve">
+    <value>After enabling this option, resources will be downloaded using BMCLAPI. Recommended for Chinese users.</value>
+  </data>
+  <data name="Settings_ResDownloadProvider_Title" xml:space="preserve">
+    <value>Download Source</value>
+  </data>
+  <data name="Settings_ResDownloadProvider_Description" xml:space="preserve">
+    <value>Choose the resource provider in "Resource Download" page.</value>
+  </data>
+  <data name="Settings_FastMirrorName" xml:space="preserve">
+    <value>FastMirror (Provided by 物语云计算)</value>
+  </data>
+  <data name="Settings_PolarsMirrorName" xml:space="preserve">
+    <value>PolarsMirror (Provided by 极星网络)</value>
+  </data>
+  <data name="Settings_RainYunName" xml:space="preserve">
+    <value>RainYun Mirror</value>
+  </data>
+  <data name="Settings_MSLAPIName" xml:space="preserve">
+    <value>MSLAPI (Provided by Minecraft-Server-Launcher)</value>
+  </data>
+  <data name="Settings_MCSLSyncName" xml:space="preserve">
+    <value>MCSL-Sync</value>
+  </data>
+  <data name="Settings_DownloadThreadCnt_Title" xml:space="preserve">
+    <value>Download Thread Count</value>
+  </data>
+  <data name="Settings_DownloadThreadCnt_Description" xml:space="preserve">
+    <value>With sufficient computer performance, higher number of threads means faster download speed, Generally, setting it to 16 threads should be sufficient to meet the needs.</value>
+  </data>
+  <data name="Settings_ActionWhenDownloadError_Title" xml:space="preserve">
+    <value>Download Failures Handle Method</value>
+  </data>
+  <data name="Settings_ActionWhenDownloadError_Description" xml:space="preserve">
+    <value>Action should perform when download failed.</value>
+  </data>
+  <data name="Settings_ActionWhenDeleteConfirm_Title" xml:space="preserve">
+    <value>Instance Deletion Confirmation Method</value>
+  </data>
+  <data name="Settings_ActionWhenDeleteConfirm_Description" xml:space="preserve">
+    <value>This can prevent instances from being deleted due to accidental operations.</value>
+  </data>
+  <data name="Settings_AppTheme_Title" xml:space="preserve">
+    <value>App Theme</value>
+  </data>
+  <data name="Settings_AppTheme_Description" xml:space="preserve">
+    <value>Following system changes by default, also you can set by yourself.</value>
+  </data>
+  <data name="Settings_FollowStartupForLauncher_Title" xml:space="preserve">
+    <value>Launch at System Startup (MCServerLauncher.WinUI)</value>
+  </data>
+  <data name="Settings_FollowStartupForLauncher_Description" xml:space="preserve">
+    <value>Automatically launch this WinUI app at system startup. It may cause system-sensitive operations, please add to the whitelist of the antivirus software.</value>
+  </data>
+  <data name="Settings_CheckUpdateForLauncher_Title" xml:space="preserve">
+    <value>Check Update (MCServerLauncher.WinUI)</value>
+  </data>
+  <data name="Settings_CheckUpdateForLauncher_Description" xml:space="preserve">
+    <value>Check update for this WinUI app.</value>
+  </data>
+  <data name="CheckUpdate" xml:space="preserve">
+    <value>Check Update</value>
+  </data>
+  <data name="Settings_AutoCheckUpdateForLauncher_Description" xml:space="preserve">
+    <value>Auto check update for this WinUI application on launch.</value>
+  </data>
+  <data name="Settings_AutoCheckUpdateForLauncher_Title" xml:space="preserve">
+    <value>Auto Check Update (MCServerLauncher.WinUI)</value>
+  </data>
+  <data name="Settings_CheckUpdateForDaemon_Title" xml:space="preserve">
+    <value>Check Update (MCServerLauncher.Daemon)</value>
+  </data>
+  <data name="Settings_CheckUpdateForDaemon_Description" xml:space="preserve">
+    <value>Check update for MCSL Remote Host.</value>
+  </data>
+  <data name="Settings_About_Title" xml:space="preserve">
+    <value>About MCServerLauncher Future (WinUI)</value>
+  </data>
+  <data name="Settings_About_LegalProtected" xml:space="preserve">
+    <value>This project is protected by the Copyright Law of the People's Republic of China and international treaties. Unauthorized copying or distribution of this program (or any part thereof) will be subject to severe civil and criminal penalties, and will be prosecuted to the fullest extent permitted by law.</value>
+  </data>
+  <data name="Settings_About_OpenSourceLicenseProtected" xml:space="preserve">
+    <value>This project is published under GNU General Public License Version 3.0, with source code at</value>
+  </data>
+  <data name="PeriodSymbol" xml:space="preserve">
+    <value>.</value>
+  </data>
+  <data name="Settings_About_CertProtected" xml:space="preserve">
+    <value>MCServerLauncher Future uses a certificate to ensure that the program has not been counterfeited or tampered with. Serial Number: 59cbf9b5207eeabb45417d148120ac9a. If there are any differences, please do not use it and report to services@mcsl.com.cn.</value>
+  </data>
+  <data name="ResDownloadPage_ProviderName_FastMirror" xml:space="preserve">
+    <value>FastMirror</value>
+  </data>
+  <data name="ResDownloadPage_ProviderName_PolarsMirror" xml:space="preserve">
+    <value>PolarsMirror</value>
+  </data>
+  <data name="ResDownloadPage_ProviderName_MCSLSync" xml:space="preserve">
+    <value>MCSL-Sync</value>
+  </data>
+  <data name="Announcement" xml:space="preserve">
+    <value>Announcement</value>
+  </data>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="FirstSetup_EulaDisagreeTip" xml:space="preserve">
+    <value>If you refuse the EULA, the application will exit.</value>
+  </data>
+  <data name="FirstSetup_FakeEulaAgreeTip" xml:space="preserve">
+    <value>Please make sure you have read the entire agreement before clicking Agree. You should at least scroll the agreement to the bottom.</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="NotNow" xml:space="preserve">
+    <value>Not now</value>
+  </data>
+  <data name="FirstSetup_EulaAgreeTip" xml:space="preserve">
+    <value>This signifies that you have acknowledged all the contents of this agreement.</value>
+  </data>
+  <data name="ResDownloadTipSuffix" xml:space="preserve">
+    <value>Download Source)</value>
+  </data>
+  <data name="Settings_AppLanguage_Description" xml:space="preserve">
+    <value>Select the language used in this program.</value>
+  </data>
+  <data name="FirstSetup_SkipConnectDaemonTip" xml:space="preserve">
+    <value>If you do not add any MCSL Remote Hosts, most of the functions of the software will be limited.\nYou can still connect to MCSL Remote Hosts later in the settings.</value>
+  </data>
+  <data name="ConnectDaemon" xml:space="preserve">
+    <value>New Connection</value>
+  </data>
+  <data name="EditDaemon" xml:space="preserve">
+    <value>Edit Connection</value>
+  </data>
+  <data name="FirstSetup_ConnectDaemonTip" xml:space="preserve">
+    <value>All MCServerLauncher instances are handed over to remote host management. Please link remote hosts here.</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Daemon_RemoteUri" xml:space="preserve">
+    <value>Remote Address:</value>
+  </data>
+  <data name="Daemon_ConnectionStatus" xml:space="preserve">
+    <value>Connection Status:</value>
+  </data>
+  <data name="Status_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Status_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Status_NotLoaded" xml:space="preserve">
+    <value>Not loaded</value>
+  </data>
+  <data name="Status_LoadFailed" xml:space="preserve">
+    <value>Load failed</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
+  <data name="Connect" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Retry</value>
+  </data>
+  <data name="Settings_Components_Title" xml:space="preserve">
+    <value>Open Source Project References</value>
+  </data>
+  <data name="Settings_Components_Description" xml:space="preserve">
+    <value>Thank them sincerely for their contribution, which has provided sustained impetus to the MCSL Future.</value>
+  </data>
+  <data name="Settings_Acknowledgments_Title" xml:space="preserve">
+    <value>Credits</value>
+  </data>
+  <data name="Settings_Acknowledgments_Description" xml:space="preserve">
+    <value>Significant contribution to MCSL!</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Donate</value>
+  </data>
+  <data name="Settings_Acknowledgments_BMCLAPI_Description" xml:space="preserve">
+    <value>Provides the powerful BMCLAPI mirror system!</value>
+  </data>
+  <data name="Settings_Acknowledgments_PCL2_Description" xml:space="preserve">
+    <value>Provides the thought to get Minecraft Loader!</value>
+  </data>
+  <data name="Settings_Acknowledgments_BakaXL_Description" xml:space="preserve">
+    <value>Provides the thought to get Minecraft Quilt Loader!</value>
+  </data>
+  <data name="Settings_Acknowledgments_iNKORE_Description" xml:space="preserve">
+    <value>A lot of technical support was given in the development process!</value>
+  </data>
+  <data name="Settings_Acknowledgments_MCSLQQ_Title" xml:space="preserve">
+    <value>Friends of the MCSL QQ Group</value>
+  </data>
+  <data name="Settings_Acknowledgments_MCSLQQ_Description" xml:space="preserve">
+    <value>They're always accompanying us and have given us a lot of suggestions!</value>
+  </data>
+  <data name="JoinGroup" xml:space="preserve">
+    <value>Join Group Chat</value>
+  </data>
+  <data name="DaemonWsAddress" xml:space="preserve">
+    <value>Remote Host WebSocket Address</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Connecting" xml:space="preserve">
+    <value>Connecting</value>
+  </data>
+  <data name="ConsoleBoard_Universal_RAM" xml:space="preserve">
+    <value>General: Instance RAM Usage</value>
+  </data>
+  <data name="ConsoleBoard_Universal_CPU" xml:space="preserve">
+    <value>General: Instance CPU Usage</value>
+  </data>
+  <data name="ConsoleBoard_Universal_WebSocketLatency" xml:space="preserve">
+    <value>General: Instance WebSocket Delay</value>
+  </data>
+  <data name="ConsoleCommand_FeedbackTip" xml:space="preserve">
+    <value>Please bring a detailed error log when asking questions, otherwise everything is tantamount to driving with your eyes closed.</value>
+  </data>
+  <data name="ConsoleCommand_EnterFullScreenConsole" xml:space="preserve">
+    <value>Enter Fullscreen</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="Kill" xml:space="preserve">
+    <value>Force Close</value>
+  </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Restart</value>
+  </data>
+  <data name="Mods" xml:space="preserve">
+    <value>Mods</value>
+  </data>
+  <data name="Plugins" xml:space="preserve">
+    <value>Plugins</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Trigger" xml:space="preserve">
+    <value>Triggers</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Event" xml:space="preserve">
+    <value>Events</value>
+  </data>
+  <data name="ClickToView" xml:space="preserve">
+    <value>Tap to view</value>
+  </data>
+  <data name="ViewIPAddress" xml:space="preserve">
+    <value>View IP Address</value>
+  </data>
+  <data name="ConsoleBoard_Minecraft_ServerIP_Title" xml:space="preserve">
+    <value>Minecraft Server: Connection Address</value>
+  </data>
+  <data name="ConsoleBoard_Minecraft_ServerPlayersList_Title" xml:space="preserve">
+    <value>Minecraft Server: Online Players</value>
+  </data>
+  <data name="ConsoleTitle" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="InstanceConsole_InstanceTitlePart" xml:space="preserve">
+    <value>Instance [{0}]</value>
+  </data>
+  <data name="InstanceConsole_NodeTitlePart" xml:space="preserve">
+    <value>Node [{0}]</value>
+  </data>
+  <data name="Console_BoardNavMenu" xml:space="preserve">
+    <value>Board</value>
+  </data>
+  <data name="Console_CommandNavMenu" xml:space="preserve">
+    <value>Console</value>
+  </data>
+  <data name="Console_FileManagerNavMenu" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="Console_EventTriggerNavMenu" xml:space="preserve">
+    <value>Events System</value>
+  </data>
+  <data name="Console_ComponentManagerNavMenu" xml:space="preserve">
+    <value>Components</value>
+  </data>
+  <data name="Console_OthersNavMenu" xml:space="preserve">
+    <value>Others</value>
+  </data>
+  <data name="Console_InstanceSettingsNavMenu" xml:space="preserve">
+    <value>Instance Settings</value>
+  </data>
+  <data name="CreateMinecraftInstanceCategory" xml:space="preserve">
+    <value>Minecraft Server</value>
+  </data>
+  <data name="CreateFrpcInstanceCategory" xml:space="preserve">
+    <value>Fast Reverse Proxy Client (Frpc)</value>
+  </data>
+  <data name="CreateInstance_TerrariaArchive_Title" xml:space="preserve">
+    <value>Terraria Server Archive</value>
+  </data>
+  <data name="Thread" xml:space="preserve">
+    <value>Thread</value>
+  </data>
+  <data name="DownloadFinished" xml:space="preserve">
+    <value>Download complete</value>
+  </data>
+  <data name="DownloadFailed" xml:space="preserve">
+    <value>Download failed</value>
+  </data>
+  <data name="DownloadCancelled" xml:space="preserve">
+    <value>Download cancelled</value>
+  </data>
+  <data name="ClickToHide" xml:space="preserve">
+    <value>Click to hide</value>
+  </data>
+  <data name="ErrorDialogTip" xml:space="preserve">
+    <value>We encountered an unexpected exception, but got the following critical error message. You can continue to run the program, or restart, or close the application.</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Quit</value>
+  </data>
+  <data name="FeedbackViaGitHub" xml:space="preserve">
+    <value>Feedback via GitHub</value>
+  </data>
+  <data name="DaemonFriendlyName" xml:space="preserve">
+    <value>Comment Name</value>
+  </data>
+  <data name="Main_DaemonManagerNavMenu" xml:space="preserve">
+    <value>Remote Host</value>
+  </data>
+  <data name="DaemonManagerTip" xml:space="preserve">
+    <value>Secure escort, in the palm of your hand.</value>
+  </data>
+  <data name="Port" xml:space="preserve">
+    <value>Port</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="ConnectDaemonFailedTip" xml:space="preserve">
+    <value>Could not connect to remote host, please re-check your configurations.</value>
+  </data>
+  <data name="Token" xml:space="preserve">
+    <value>Token</value>
+  </data>
+  <data name="JvmArgHelper" xml:space="preserve">
+    <value>Parameter Helper</value>
+  </data>
+  <data name="Insert" xml:space="preserve">
+    <value>Insert</value>
+  </data>
+  <data name="NoJarFileJvmArgument" xml:space="preserve">
+    <value>The core startup parameters (-jar xxx.jar) will be automatically generated, do not write here.</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="Encoding" xml:space="preserve">
+    <value>Encoding</value>
+  </data>
+  <data name="Decoding" xml:space="preserve">
+    <value>Decoding</value>
+  </data>
+  <data name="PreventGarbageTextTip" xml:space="preserve">
+    <value>This option prevents garbled characters from being generated, so please specify them on a case-by-case basis.</value>
+  </data>
+  <data name="Codecs" xml:space="preserve">
+    <value>Codecs</value>
+  </data>
+  <data name="Optimization" xml:space="preserve">
+    <value>Optimize</value>
+  </data>
+  <data name="JvmOptimizationArgsTip" xml:space="preserve">
+    <value>Preset parameters optimized for Minecraft Servers. You can choose one to apply.</value>
+  </data>
+  <data name="DeadProcessTip" xml:space="preserve">
+    <value>We encountered an unexpected exception, but the key error information has been copied to the clipboard. The program can no longer continue running and will close shortly.</value>
+  </data>
+  <data name="GoBackLostTip" xml:space="preserve">
+    <value>If you return now, all modifications will be lost. Please proceed with caution.</value>
+  </data>
+  <data name="SelectMinecraftJavaCore" xml:space="preserve">
+    <value>Select the Minecraft Java Edition core</value>
+  </data>
+  <data name="SelectMinecraftJavaCoreGoResDownloadMessage" xml:space="preserve">
+    <value>After the download is complete, click the button below to return.</value>
+  </data>
+  <data name="JvmArgTemplateSameMemTip" xml:space="preserve">
+    <value>When using the template below, please set the JVM memory heap value above to the same value; otherwise, the instance may fail to start..</value>
+  </data>
+  <data name="JvmArgBasicTemplate" xml:space="preserve">
+    <value>Basic (only applicable to Java 11 and below)</value>
+  </data>
+  <data name="JvmArgAdvancedTemplate" xml:space="preserve">
+    <value>Aikar Flag (Do not set the memory heap higher than 20 G)</value>
+  </data>
+  <data name="Unused" xml:space="preserve">
+    <value>Not use</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Jump" xml:space="preserve">
+    <value>Jump</value>
+  </data>
+  <data name="ShowRealtimeLog" xml:space="preserve">
+    <value>Show Real-time Log</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="AllDaemon" xml:space="preserve">
+    <value>All Remote Hosts</value>
+  </data>
+  <data name="Running" xml:space="preserve">
+    <value>Running</value>
+  </data>
+  <data name="AllRunningStatus" xml:space="preserve">
+    <value>All Statuses</value>
+  </data>
+  <data name="Stopped" xml:space="preserve">
+    <value>Stopped</value>
+  </data>
+  <data name="Crashed" xml:space="preserve">
+    <value>Crashed</value>
+  </data>
+  <data name="Stopping" xml:space="preserve">
+    <value>Stopping</value>
+  </data>
+  <data name="Starting" xml:space="preserve">
+    <value>Starting</value>
+  </data>
+  <data name="ResDownloadPage_ProviderName_RainYun" xml:space="preserve">
+    <value>RainYun Mirror</value>
+  </data>
+  <data name="PleaseSelectDaemon" xml:space="preserve">
+    <value>Please select the remote host that you will serve the instance.</value>
+  </data>
+  <data name="PleaseSelectJvm" xml:space="preserve">
+    <value>Please select the Java runtime to use.</value>
+  </data>
+  <data name="PleaseWait" xml:space="preserve">
+    <value>Please wait</value>
+  </data>
+  <data name="SearchingJvmTip" xml:space="preserve">
+    <value>Searching for Java runtime...</value>
+  </data>
+  <data name="ConnectDaemonFailedSubTip" xml:space="preserve">
+    <value>Please check your network and try again. If your network is fine, the remote host might be down or the firewall is blocking the connection.</value>
+  </data>
+  <data name="SelectOtherDaemon" xml:space="preserve">
+    <value>Select other...</value>
+  </data>
+  <data name="NothingHere" xml:space="preserve">
+    <value>Nothing here yet</value>
+  </data>
+  <data name="TryAddSomething" xml:space="preserve">
+    <value>Try to add something interesting here.</value>
+  </data>
+  <data name="ConsoleCommand_ExitFullScreenConsole" xml:space="preserve">
+    <value>Exit Fullscreen</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Select All</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="Players" xml:space="preserve">
+    <value>Players</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="ConsoleCommand_EnterCommandTip" xml:space="preserve">
+    <value>Type command here...</value>
+  </data>
+  <data name="FuncDisabled" xml:space="preserve">
+    <value>Function disabled</value>
+  </data>
+  <data name="FuncDisabledReason_NoDaemon" xml:space="preserve">
+    <value>This function is disabled because no remote host is connected.</value>
+  </data>
+  <data name="SelectedCount" xml:space="preserve">
+    <value>{0} instances selected</value>
+  </data>
+  <data name="BatchStartConfirmTitle" xml:space="preserve">
+    <value>Confirm Batch Start</value>
+  </data>
+  <data name="BatchStartConfirmContent" xml:space="preserve">
+    <value>Are you sure you want to start these {0} instances?</value>
+  </data>
+  <data name="BatchStopConfirmTitle" xml:space="preserve">
+    <value>Confirm Batch Stop</value>
+  </data>
+  <data name="BatchStopConfirmContent" xml:space="preserve">
+    <value>Are you sure you want to stop these {0} instances?</value>
+  </data>
+  <data name="BatchDeleteConfirmTitle" xml:space="preserve">
+    <value>Confirm Batch Delete</value>
+  </data>
+  <data name="BatchDeleteConfirmContent" xml:space="preserve">
+    <value>Are you sure you want to delete these {0} instances?\nThis action CANNOT be undone!</value>
+  </data>
+  <data name="BatchStartComplete" xml:space="preserve">
+    <value>Batch Start Complete</value>
+  </data>
+  <data name="BatchStopComplete" xml:space="preserve">
+    <value>Batch Stop Complete</value>
+  </data>
+  <data name="BatchDeleteComplete" xml:space="preserve">
+    <value>Batch Delete Complete</value>
+  </data>
+  <data name="BatchOperationResult" xml:space="preserve">
+    <value>Success: {0}, Failed: {1}</value>
+  </data>
+  <data name="InstanceCard_NoDaemonConfig" xml:space="preserve">
+    <value>Remote host configuration not set for this instance</value>
+  </data>
+  <data name="InstanceCard_StartingInstance" xml:space="preserve">
+    <value>Starting instance: {0}</value>
+  </data>
+  <data name="InstanceCard_StartConfirmTitle" xml:space="preserve">
+    <value>Start Instance</value>
+  </data>
+  <data name="InstanceCard_StartConfirmContent" xml:space="preserve">
+    <value>Are you sure you want to start instance "{0}"?</value>
+  </data>
+  <data name="InstanceCard_StartUnavailable" xml:space="preserve">
+    <value>Instance "{0}" cannot be started in its current state.</value>
+  </data>
+  <data name="InstanceCard_StopUnavailable" xml:space="preserve">
+    <value>Instance "{0}" cannot be stopped in its current state.</value>
+  </data>
+  <data name="InstanceCard_RestartUnavailable" xml:space="preserve">
+    <value>Instance "{0}" cannot be restarted in its current state.</value>
+  </data>
+  <data name="InstanceCard_KillUnavailable" xml:space="preserve">
+    <value>Instance "{0}" cannot be forcibly closed in its current state.</value>
+  </data>
+  <data name="InstanceCard_DeleteUnavailable" xml:space="preserve">
+    <value>Instance "{0}" can only be deleted when it is stopped.</value>
+  </data>
+  <data name="InstanceCard_StoppingInstance" xml:space="preserve">
+    <value>Stopping instance: {0}</value>
+  </data>
+  <data name="InstanceCard_RestartingInstance" xml:space="preserve">
+    <value>Restarting instance: {0}</value>
+  </data>
+  <data name="InstanceCard_KillingInstance" xml:space="preserve">
+    <value>Force closed instance: {0}</value>
+  </data>
+  <data name="InstanceCard_DeletedInstance" xml:space="preserve">
+    <value>Deleted instance: {0}</value>
+  </data>
+  <data name="InstanceCard_DeleteConfirmTitle" xml:space="preserve">
+    <value>Delete Instance</value>
+  </data>
+  <data name="InstanceCard_StopConfirmTitle" xml:space="preserve">
+    <value>Stop Instance</value>
+  </data>
+  <data name="InstanceCard_StopConfirmContent" xml:space="preserve">
+    <value>Are you sure you want to stop the instance "{0}"?</value>
+  </data>
+  <data name="InstanceCard_RestartConfirmTitle" xml:space="preserve">
+    <value>Restart Instance</value>
+  </data>
+  <data name="InstanceCard_RestartConfirmContent" xml:space="preserve">
+    <value>Are you sure you want to restart the instance "{0}"?</value>
+  </data>
+  <data name="InstanceCard_KillConfirmTitle" xml:space="preserve">
+    <value>Force Close Instance</value>
+  </data>
+  <data name="InstanceCard_KillConfirmContent" xml:space="preserve">
+    <value>Are you sure you want to forcibly close the instance "{0}"? This may cause data loss.</value>
+  </data>
+  <data name="InstanceCard_DeleteConfirmContent" xml:space="preserve">
+    <value>Are you sure you want to delete instance "{0}"?
+This action cannot be undone.</value>
+  </data>
+  <data name="InstanceCard_StartFailed" xml:space="preserve">
+    <value>Failed to start instance: {0}</value>
+  </data>
+  <data name="InstanceCard_StopFailed" xml:space="preserve">
+    <value>Failed to stop instance: {0}</value>
+  </data>
+  <data name="InstanceCard_RestartFailed" xml:space="preserve">
+    <value>Failed to restart instance: {0}</value>
+  </data>
+  <data name="InstanceCard_KillFailed" xml:space="preserve">
+    <value>Failed to force close instance: {0}</value>
+  </data>
+  <data name="InstanceCard_DeleteFailed" xml:space="preserve">
+    <value>Failed to delete instance: {0}</value>
+  </data>
+  <data name="Universal" xml:space="preserve">
+    <value>Universal</value>
+  </data>
+  <data name="SteamServer" xml:space="preserve">
+    <value>Steam Game Server</value>
+  </data>
+  <data name="MCJava" xml:space="preserve">
+    <value>Minecraft Java Edition</value>
+  </data>
+  <data name="MCFabric" xml:space="preserve">
+    <value>Minecraft Fabric</value>
+  </data>
+  <data name="MCForge" xml:space="preserve">
+    <value>Minecraft Forge</value>
+  </data>
+  <data name="MCNeoForge" xml:space="preserve">
+    <value>Minecraft NeoForge</value>
+  </data>
+  <data name="MCQuilt" xml:space="preserve">
+    <value>Minecraft Quilt</value>
+  </data>
+  <data name="MCCleanroom" xml:space="preserve">
+    <value>Minecraft Cleanroom</value>
+  </data>
+  <data name="MCSpongeVanilla" xml:space="preserve">
+    <value>Minecraft SpongeVanilla</value>
+  </data>
+  <data name="MCSpongeForge" xml:space="preserve">
+    <value>Minecraft SpongeForge</value>
+  </data>
+  <data name="MCVanilla" xml:space="preserve">
+    <value>Minecraft Vanilla</value>
+  </data>
+  <data name="MCCraftBukkit" xml:space="preserve">
+    <value>Minecraft CraftBukkit</value>
+  </data>
+  <data name="MCSpigot" xml:space="preserve">
+    <value>Minecraft Spigot</value>
+  </data>
+  <data name="MCPaper" xml:space="preserve">
+    <value>Minecraft Paper</value>
+  </data>
+  <data name="MCLeaf" xml:space="preserve">
+    <value>Minecraft Leaf</value>
+  </data>
+  <data name="MCLeaves" xml:space="preserve">
+    <value>Minecraft Leaves</value>
+  </data>
+  <data name="MCFolia" xml:space="preserve">
+    <value>Minecraft Folia</value>
+  </data>
+  <data name="MCPufferfish" xml:space="preserve">
+    <value>Minecraft Pufferfish</value>
+  </data>
+  <data name="MCPurpur" xml:space="preserve">
+    <value>Minecraft Purpur</value>
+  </data>
+  <data name="MCMohist" xml:space="preserve">
+    <value>Minecraft Mohist</value>
+  </data>
+  <data name="MCBanner" xml:space="preserve">
+    <value>Minecraft Banner</value>
+  </data>
+  <data name="MCYouer" xml:space="preserve">
+    <value>Minecraft Youer</value>
+  </data>
+  <data name="MCThermos" xml:space="preserve">
+    <value>Minecraft Thermos</value>
+  </data>
+  <data name="MCCrucible" xml:space="preserve">
+    <value>Minecraft Crucible</value>
+  </data>
+  <data name="MCTaiyitist" xml:space="preserve">
+    <value>Minecraft Taiyitist</value>
+  </data>
+  <data name="MCCatServer" xml:space="preserve">
+    <value>Minecraft CatServer</value>
+  </data>
+  <data name="MCArclight" xml:space="preserve">
+    <value>Minecraft Arclight</value>
+  </data>
+  <data name="MCBungeeCord" xml:space="preserve">
+    <value>Minecraft BungeeCord</value>
+  </data>
+  <data name="MCVelocity" xml:space="preserve">
+    <value>Minecraft Velocity</value>
+  </data>
+  <data name="MCWaterfall" xml:space="preserve">
+    <value>Minecraft Waterfall</value>
+  </data>
+  <data name="MCTravertine" xml:space="preserve">
+    <value>Minecraft Travertine</value>
+  </data>
+  <data name="MCViaVersion" xml:space="preserve">
+    <value>Minecraft ViaVersion</value>
+  </data>
+  <data name="MCGeyser" xml:space="preserve">
+    <value>Minecraft Geyser</value>
+  </data>
+  <data name="MCDReforged" xml:space="preserve">
+    <value>Minecraft MCDReforged</value>
+  </data>
+  <data name="MCBedrock" xml:space="preserve">
+    <value>Minecraft Bedrock Edition</value>
+  </data>
+  <data name="MCNukkit" xml:space="preserve">
+    <value>Minecraft Nukkit</value>
+  </data>
+  <data name="MCBDS" xml:space="preserve">
+    <value>Minecraft BDS</value>
+  </data>
+  <data name="MCCloudburst" xml:space="preserve">
+    <value>Minecraft Cloudburst</value>
+  </data>
+  <data name="MCPocketMine" xml:space="preserve">
+    <value>Minecraft PocketMine</value>
+  </data>
+  <data name="Terraria" xml:space="preserve">
+    <value>Terraria</value>
+  </data>
+  <data name="TShock" xml:space="preserve">
+    <value>Terraria TShock</value>
+  </data>
+  <data name="TDSM" xml:space="preserve">
+    <value>Terraria TDSM</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Confirm Delete</value>
+  </data>
+  <data name="ConfirmDeleteDaemonMessage" xml:space="preserve">
+    <value>Are you sure you want to delete remote host '{0}'?</value>
+  </data>
+  <data name="Daemon_ResourceUsage" xml:space="preserve">
+    <value>Resource Usage</value>
+  </data>
+  <data name="Daemon_CpuUsage" xml:space="preserve">
+    <value>CPU</value>
+  </data>
+  <data name="Daemon_MemoryUsage" xml:space="preserve">
+    <value>Memory</value>
+  </data>
+  <data name="Daemon_DriveUsage" xml:space="preserve">
+    <value>Drive</value>
+  </data>
+  <data name="DaemonDeleted" xml:space="preserve">
+    <value>Remote host deleted</value>
+  </data>
+  <data name="DaemonDeleteFailed" xml:space="preserve">
+    <value>Failed to delete remote host: {0}</value>
+  </data>
+  <data name="Daemon_AutoRefresh" xml:space="preserve">
+    <value>Auto Refresh</value>
+  </data>
+  <data name="AutoRefresh_On" xml:space="preserve">
+    <value>Auto refresh: On</value>
+  </data>
+  <data name="AutoRefresh_Off" xml:space="preserve">
+    <value>Auto refresh: Off</value>
+  </data>
+  <data name="RefreshInterval_5Seconds" xml:space="preserve">
+    <value>5 seconds</value>
+  </data>
+  <data name="RefreshInterval_20Seconds" xml:space="preserve">
+    <value>20 seconds</value>
+  </data>
+  <data name="RefreshInterval_30Seconds" xml:space="preserve">
+    <value>30 seconds</value>
+  </data>
+  <data name="RefreshInterval_45Seconds" xml:space="preserve">
+    <value>45 seconds</value>
+  </data>
+  <data name="RefreshInterval_1Minute" xml:space="preserve">
+    <value>1 minute</value>
+  </data>
+  <data name="Daemon_SystemVersion" xml:space="preserve">
+    <value>System:</value>
+  </data>
+  <data name="Daemon_DaemonVersion" xml:space="preserve">
+    <value>Node version:</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_ConsoleOutputTrigger" xml:space="preserve">
+    <value>Console Output Trigger</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_SendNotification" xml:space="preserve">
+    <value>Send Notification</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_IsRegex" xml:space="preserve">
+    <value>Is Regex</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_ChangeInstanceStatus" xml:space="preserve">
+    <value>Change Instance Status</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_SendCommandAction" xml:space="preserve">
+    <value>Send Command Action</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_InstanceStatus" xml:space="preserve">
+    <value>Instance Status</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_ConsoleOutput" xml:space="preserve">
+    <value>Console Output</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_SendCommand" xml:space="preserve">
+    <value>Send Command</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Condition" xml:space="preserve">
+    <value>Condition:</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_SendNotificationAction" xml:space="preserve">
+    <value>Send Notification Action</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Schedule" xml:space="preserve">
+    <value>Schedule</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Any" xml:space="preserve">
+    <value>Any</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_CronExpression" xml:space="preserve">
+    <value>Cron Expression</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_TargetStatus" xml:space="preserve">
+    <value>Target Status</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Pattern" xml:space="preserve">
+    <value>Pattern</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Severity" xml:space="preserve">
+    <value>Severity</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Command" xml:space="preserve">
+    <value>Command</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_ChangeInstanceStatusAction" xml:space="preserve">
+    <value>Change Instance Status Action</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_InstanceStatusTrigger" xml:space="preserve">
+    <value>Instance Status Trigger</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_ScheduleTrigger" xml:space="preserve">
+    <value>Schedule Trigger</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Status_Running" xml:space="preserve">
+    <value>运行中</value>
+  </data>
+  <data name="Status_Stopped" xml:space="preserve">
+    <value>已停止</value>
+  </data>
+  <data name="Status_Crashed" xml:space="preserve">
+    <value>已崩溃</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="EventTrigger_LoadRulesFailed" xml:space="preserve">
+    <value>Failed to load event rules: {0}</value>
+  </data>
+  <data name="EventTrigger_SaveRulesSuccess" xml:space="preserve">
+    <value>Event rules saved successfully</value>
+  </data>
+  <data name="EventTrigger_SaveRulesFailed" xml:space="preserve">
+    <value>Failed to save event rules: {0}</value>
+  </data>
+  <data name="EventTrigger_NewRuleName" xml:space="preserve">
+    <value>New Rule</value>
+  </data>
+  <data name="EventTrigger_NewRuleDescription" xml:space="preserve">
+    <value>Description for the new rule</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="ModifiedDate" xml:space="preserve">
+    <value>Date Modified</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="UploadFile" xml:space="preserve">
+    <value>Upload File</value>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="CreateDirectory" xml:space="preserve">
+    <value>New Folder</value>
+  </data>
+  <data name="MultiSelectTip" xml:space="preserve">
+    <value>Hold Ctrl to select multiple items, hold Shift to select a range.</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="FileEditor" xml:space="preserve">
+    <value>File Editor</value>
+  </data>
+  <data name="SaveWithShortcut" xml:space="preserve">
+    <value>Save (Ctrl+S)</value>
+  </data>
+  <data name="SyntaxHighlighting" xml:space="preserve">
+    <value>Syntax Highlighting:</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="Ready" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="Modified" xml:space="preserve">
+    <value>Modified</value>
+  </data>
+  <data name="FileModifiedSavePrompt" xml:space="preserve">
+    <value>File has been modified, do you want to save?</value>
+  </data>
+  <data name="Prompt" xml:space="preserve">
+    <value>Prompt</value>
+  </data>
+  <data name="LargeFileWarningPrompt" xml:space="preserve">
+    <value>The file is large ({0} MB), loading may take a long time and consume a lot of memory. Do you want to continue?</value>
+  </data>
+  <data name="LargeFileWarning" xml:space="preserve">
+    <value>Large File Warning</value>
+  </data>
+  <data name="DownloadingFile" xml:space="preserve">
+    <value>Downloading file...</value>
+  </data>
+  <data name="ReadingFile" xml:space="preserve">
+    <value>Reading file...</value>
+  </data>
+  <data name="LoadFileFailed" xml:space="preserve">
+    <value>Failed to load file</value>
+  </data>
+  <data name="LoadFailed" xml:space="preserve">
+    <value>Load failed</value>
+  </data>
+  <data name="SavingFile" xml:space="preserve">
+    <value>Saving file...</value>
+  </data>
+  <data name="Saving" xml:space="preserve">
+    <value>Saving...</value>
+  </data>
+  <data name="Saved" xml:space="preserve">
+    <value>Saved</value>
+  </data>
+  <data name="SaveFileFailed" xml:space="preserve">
+    <value>Failed to save file</value>
+  </data>
+  <data name="SaveFailed" xml:space="preserve">
+    <value>Save failed</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="StartCommandSentSuccess" xml:space="preserve">
+    <value>Start command sent successfully</value>
+  </data>
+  <data name="StopCommandSentSuccess" xml:space="preserve">
+    <value>Stop command sent successfully</value>
+  </data>
+  <data name="KillCommandSentSuccess" xml:space="preserve">
+    <value>Close command sent successfully</value>
+  </data>
+  <data name="RestartCommandSentSuccess" xml:space="preserve">
+    <value>Restart command sent successfully</value>
+  </data>
+  <data name="SendCommandFailed" xml:space="preserve">
+    <value>Failed to send command: {0}</value>
+  </data>
+  <data name="ConsoleCommand_SendUnavailable" xml:space="preserve">
+    <value>Cannot send commands to instance {0} in the current status.</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="Format" xml:space="preserve">
+    <value>Format</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="Cut" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="TimeDate" xml:space="preserve">
+    <value>Time/Date</value>
+  </data>
+  <data name="WordWrap" xml:space="preserve">
+    <value>Word Wrap</value>
+  </data>
+  <data name="Font" xml:space="preserve">
+    <value>Font</value>
+  </data>
+  <data name="Zoom" xml:space="preserve">
+    <value>Zoom</value>
+  </data>
+  <data name="ZoomIn" xml:space="preserve">
+    <value>Zoom In</value>
+  </data>
+  <data name="ZoomOut" xml:space="preserve">
+    <value>Zoom Out</value>
+  </data>
+  <data name="RestoreDefaultZoom" xml:space="preserve">
+    <value>Restore Default Zoom</value>
+  </data>
+  <data name="StatusBar" xml:space="preserve">
+    <value>Status Bar</value>
+  </data>
+  <data name="ShowLineNumbers" xml:space="preserve">
+    <value>Show Line Numbers</value>
+  </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Reload</value>
+  </data>
+  <data name="CreateInstanceMissingDataError" xml:space="preserve">
+    <value>Missing required data</value>
+  </data>
+  <data name="CreateInstanceConfirmationMessage" xml:space="preserve">
+    <value>Are you sure you want to create the following instance?</value>
+  </data>
+  <data name="CorePath" xml:space="preserve">
+    <value>Core Path</value>
+  </data>
+  <data name="JvmArguments" xml:space="preserve">
+    <value>JVM Arguments</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="CreateInstanceConfirmationTitle" xml:space="preserve">
+    <value>Confirm Instance Creation</value>
+  </data>
+  <data name="DaemonConnectionError" xml:space="preserve">
+    <value>Failed to connect to daemon</value>
+  </data>
+  <data name="CreatingInstance" xml:space="preserve">
+    <value>Creating instance...</value>
+  </data>
+  <data name="InstanceCreatedSuccess" xml:space="preserve">
+    <value>Instance created successfully</value>
+  </data>
+  <data name="CreateInstanceError" xml:space="preserve">
+    <value>Failed to create instance</value>
+  </data>
+  <data name="NoJavaFound" xml:space="preserve">
+    <value>No Java runtime found</value>
+  </data>
+  <data name="SearchJavaError" xml:space="preserve">
+    <value>Failed to search Java</value>
+  </data>
+  <data name="InstanceName" xml:space="preserve">
+    <value>Instance Name</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="UploadingFile" xml:space="preserve">
+    <value>Uploading file</value>
+  </data>
+  <data name="FileUploadFailed" xml:space="preserve">
+    <value>Failed to upload file</value>
+  </data>
+  <data name="ComponentManager_Add" xml:space="preserve">
+    <value>Add Component</value>
+  </data>
+  <data name="ComponentManager_Enable" xml:space="preserve">
+    <value>Enable</value>
+  </data>
+  <data name="ComponentManager_Disable" xml:space="preserve">
+    <value>Disable</value>
+  </data>
+  <data name="ComponentManager_Locate" xml:space="preserve">
+    <value>Locate File</value>
+  </data>
+  <data name="ComponentManager_Enabled" xml:space="preserve">
+    <value>Component enabled</value>
+  </data>
+  <data name="ComponentManager_Disabled" xml:space="preserve">
+    <value>Component disabled</value>
+  </data>
+  <data name="ComponentManager_Deleted" xml:space="preserve">
+    <value>Component deleted</value>
+  </data>
+  <data name="ComponentManager_ConfirmDeleteMessage" xml:space="preserve">
+    <value>Are you sure you want to delete "{0}"?</value>
+  </data>
+  <data name="ComponentManager_PathCopied" xml:space="preserve">
+    <value>Path copied</value>
+  </data>
+  <data name="ComponentManager_DaemonUnavailable" xml:space="preserve">
+    <value>Daemon connection unavailable</value>
+  </data>
+  <data name="ComponentManager_NoTargetFolder" xml:space="preserve">
+    <value>No target folder available</value>
+  </data>
+  <data name="ComponentManager_NoJarFiles" xml:space="preserve">
+    <value>No JAR files found in dropped items</value>
+  </data>
+  <data name="ComponentManager_AddedCount" xml:space="preserve">
+    <value>{0}/{1} components added successfully</value>
+  </data>
+  <data name="MinecraftVersionLabel" xml:space="preserve">
+    <value>Minecraft</value>
+  </data>
+  <data name="ForgeVersionLabel" xml:space="preserve">
+    <value>Forge</value>
+  </data>
+  <data name="FabricLoaderVersionLabel" xml:space="preserve">
+    <value>Fabric Loader</value>
+  </data>
+  <data name="NeoForgeVersionLabel" xml:space="preserve">
+    <value>NeoForge</value>
+  </data>
+  <data name="InstanceType_MCForge" xml:space="preserve">
+    <value>Minecraft Forge</value>
+  </data>
+  <data name="InstanceType_MCFabric" xml:space="preserve">
+    <value>Minecraft Fabric</value>
+  </data>
+  <data name="InstanceType_MCNeoForge" xml:space="preserve">
+    <value>Minecraft NeoForge</value>
+  </data>
+  <data name="DebugCopyConfig" xml:space="preserve">
+    <value>Debug: Copy Config</value>
+  </data>
+  <data name="InstanceConfigCopied" xml:space="preserve">
+    <value>Instance config copied to clipboard</value>
+  </data>
+  <data name="SettingsSaveSuccess" xml:space="preserve">
+    <value>Settings saved successfully</value>
+  </data>
+  <data name="Replace" xml:space="preserve">
+    <value>Replace</value>
+  </data>
+  <data name="Installer" xml:space="preserve">
+    <value>Installer</value>
+  </data>
+  <data name="ForceRerunInstaller" xml:space="preserve">
+    <value>Force rerun installer</value>
+  </data>
+  <data name="InstanceSettingsInstallerNotice" xml:space="preserve">
+    <value>Replacing the core will preserve the old file, clean previous generated installer outputs, and rebuild the launch target where supported.</value>
+  </data>
+  <data name="InstanceSettingsBasicModeNotice" xml:space="preserve">
+    <value>This instance type currently only supports basic information editing; advanced runtime settings and core replacement are only available for Java-family instances.</value>
+  </data>
+  <data name="ComponentManager_ClientSideModBlocked" xml:space="preserve">
+    <value>Blocked client-side-only mod: {0}</value>
+  </data>
+  <data name="ComponentManager_ClientSideBadge" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_ActionExecutionMode" xml:space="preserve">
+    <value>Execution mode</value>
+  </data>
+  <data name="FeatureNotReadyTip" xml:space="preserve">
+    <value>This feature is not ready yet.</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_ParallelSeparator" xml:space="preserve">
+    <value>At the same time</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_SequentialSeparator" xml:space="preserve">
+    <value>Then</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_AlwaysFalseRuleset" xml:space="preserve">
+    <value>Always false</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_RulesetConditionHint" xml:space="preserve">
+    <value>Run actions when the following conditions are met</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_AlwaysTrueRulesetDescription" xml:space="preserve">
+    <value>This ruleset always returns true.</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Parallel" xml:space="preserve">
+    <value>Parallel</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_AlwaysFalseRulesetDescription" xml:space="preserve">
+    <value>This ruleset always returns false.</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Sequential" xml:space="preserve">
+    <value>Sequential</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_Ruleset" xml:space="preserve">
+    <value>Rulesets</value>
+  </data>
+  <data name="ConsoleCommand_EventTrigger_AlwaysTrueRuleset" xml:space="preserve">
+    <value>Always true</value>
+  </data>
+  <data name="ComponentManager_AddMod" xml:space="preserve">
+    <value>Add Mod</value>
+  </data>
+  <data name="ComponentManager_AddPlugin" xml:space="preserve">
+    <value>Add Plugin</value>
+  </data>
+  <data name="ComponentManager_EmptyMods" xml:space="preserve">
+    <value>No mods are installed in this instance yet.</value>
+  </data>
+  <data name="ComponentManager_EmptyPlugins" xml:space="preserve">
+    <value>No plugins are installed in this instance yet.</value>
+  </data>
+  <data name="ComponentManager_Unsupported" xml:space="preserve">
+    <value>Install or switch to a mod/plugin loader before using component management.</value>
+  </data>
+  <data name="ComponentManager_ClientSideModsFound" xml:space="preserve">
+    <value>Client-side mods detected</value>
+  </data>
+  <data name="ComponentManager_ClientSideModsWarning" xml:space="preserve">
+    <value>Detected {0} enabled client-side-only mod(s). These usually cannot run on a server and may prevent the instance from starting. Disable them now or ignore this warning.</value>
+  </data>
+  <data name="ComponentManager_DisableClientSideMods" xml:space="preserve">
+    <value>Disable</value>
+  </data>
+  <data name="ComponentManager_DisabledClientSideMods" xml:space="preserve">
+    <value>Disabled {0} client-side mod(s).</value>
+  </data>
+  <data name="EventTrigger_EmptyRules" xml:space="preserve">
+    <value>No trigger rules are configured for this instance yet.</value>
+  </data>
+  <data name="Ignore" xml:space="preserve">
+    <value>Ignore</value>
+  </data>
+  <data name="FirstSetup_EulaOnlineTip" xml:space="preserve">
+    <value>Read the MCSL Future user agreement in your browser. You need to wait 15 seconds before continuing so there is time to open and review it.</value>
+  </data>
+  <data name="FirstSetup_EulaOpenInBrowser" xml:space="preserve">
+    <value>Open user agreement</value>
+  </data>
+  <data name="FirstSetup_EulaContinueCountdown" xml:space="preserve">
+    <value>Agree ({0}s)</value>
+  </data>
+  <data name="FirstSetup_EulaUrlLabel" xml:space="preserve">
+    <value>Agreement URL</value>
+  </data>
+  <data name="FirstSetup_DaemonRemoteHost" xml:space="preserve">
+    <value>Remote host</value>
+  </data>
+  <data name="FirstSetup_DaemonLocalHost" xml:space="preserve">
+    <value>Run locally</value>
+  </data>
+  <data name="FirstSetup_DaemonLocalQuestion" xml:space="preserve">
+    <value>Do you want to run the daemon on this computer?</value>
+  </data>
+  <data name="FirstSetup_DaemonLocalQuestionTip" xml:space="preserve">
+    <value>Choose local mode if this computer will host instances directly. Otherwise, add a remote node.</value>
+  </data>
+  <data name="FirstSetup_DaemonUseLocal" xml:space="preserve">
+    <value>Run on this computer</value>
+  </data>
+  <data name="FirstSetup_DaemonSkipLocalUseRemote" xml:space="preserve">
+    <value>Add a remote node</value>
+  </data>
+  <data name="FirstSetup_DaemonLocalDownload" xml:space="preserve">
+    <value>Download daemon</value>
+  </data>
+  <data name="FirstSetup_DaemonLocalDownloadUnavailable" xml:space="preserve">
+    <value>The local daemon download URL is not configured yet. Add a remote host for now, or configure a direct link here later and try again.</value>
+  </data>
+  <data name="FirstSetup_DaemonAddAnotherHostTitle" xml:space="preserve">
+    <value>Add another host?</value>
+  </data>
+  <data name="FirstSetup_DaemonAddAnotherHostTip" xml:space="preserve">
+    <value>The current host has been added. You can add another host or finish first setup.</value>
+  </data>
+  <data name="FirstSetup_DaemonAddAnotherHost" xml:space="preserve">
+    <value>Add another</value>
+  </data>
+  <data name="FirstSetup_DaemonFinishAdding" xml:space="preserve">
+    <value>Finish</value>
+  </data>
+</root>

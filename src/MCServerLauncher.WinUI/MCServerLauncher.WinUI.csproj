@@ -39,9 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="..\MCServerLauncher.WPF\Translations\Lang.*.resx"
-                      Link="Translations\%(Filename)%(Extension)" />
-    <EmbeddedResource Include="..\MCServerLauncher.WPF\Resources\BuildInfo"
+    <EmbeddedResource Include="..\MCServerLauncher.WinUI\Resources\BuildInfo"
                       Link="Resources\BuildInfo">
       <LogicalName>MCServerLauncher.WinUI.Resources.BuildInfo</LogicalName>
     </EmbeddedResource>
