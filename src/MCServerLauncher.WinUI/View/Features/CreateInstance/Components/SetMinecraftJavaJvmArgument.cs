@@ -1,5 +1,6 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using MCServerLauncher.WinUI.Core;
 using MCServerLauncher.WinUI.View.Features.CreateInstance.Models;
 
 namespace MCServerLauncher.WinUI.View.Features.CreateInstance.Components;
@@ -29,14 +30,14 @@ public sealed class SetMinecraftJavaJvmArgument : CreateStepControl
         Fields.Children.Add(_newArgument);
         Fields.Children.Add(buttons);
         Fields.Children.Add(_argumentPanel);
-        App.Services.Localization.LanguageChanged += (_, _) =>
+        RegisterLanguageChangedHandler((_, _) =>
         {
             warning.Text = Texts["NoJarFileJvmArgument"];
             _newArgument.PlaceholderText = Texts["CreateInstance_MinecraftJavaJvmArgument_Title"];
             _addButton.Content = Texts["CreateInstance_MinecraftJavaJvmArgument_AddArgument"];
             _helperButton.Content = Texts["JvmArgHelper"];
             RebuildArguments();
-        };
+        });
         IsFinished = true;
     }
 
@@ -75,7 +76,10 @@ public sealed class SetMinecraftJavaJvmArgument : CreateStepControl
         }
     }
 
-    private async void ShowHelperAsync(object sender, RoutedEventArgs e)
+    private void ShowHelperAsync(object sender, RoutedEventArgs e) =>
+        ShowHelperAsyncCore().FireAndForget("SetMinecraftJavaJvmArgument.ShowHelperAsync");
+
+    private async Task ShowHelperAsyncCore()
     {
         var arguments = await JvmArgumentHelperDialog.ShowAsync(XamlRoot, Texts);
         if (arguments is null) return;

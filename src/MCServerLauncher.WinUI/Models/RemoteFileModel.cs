@@ -32,16 +32,5 @@ public partial class RemoteFileModel : ObservableObject
     partial void OnSizeBytesChanged(long value) => OnPropertyChanged(nameof(SizeText));
     partial void OnModifiedTimeChanged(long value) => OnPropertyChanged(nameof(ModifiedText));
 
-    private static string FormatSize(long bytes)
-    {
-        var value = Math.Max(0, (double)bytes);
-        var units = new[] { "B", "KB", "MB", "GB", "TB" };
-        var index = 0;
-        while (value >= 1024 && index < units.Length - 1)
-        {
-            value /= 1024;
-            index++;
-        }
-        return $"{value:0.##} {units[index]}";
-    }
+    private static string FormatSize(long bytes) => Core.Format.FormatSize(bytes, "0.##");
 }

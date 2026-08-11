@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Automation;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
+using MCServerLauncher.WinUI.Core;
 using MCServerLauncher.WinUI.Core.Localization;
 using MCServerLauncher.WinUI.Core.Services;
 using MCServerLauncher.WinUI.Models;
@@ -23,6 +24,8 @@ public sealed partial class MainPage : Page
     private bool _themeInitialized;
     private bool _viewInitialized;
     private bool _notificationsSubscribed;
+    private bool _dimmed;
+    private bool _pointerOver;
 
     public MainPage(Exception? startupError = null)
     {
@@ -34,14 +37,49 @@ public sealed partial class MainPage : Page
             App.Services.Localization,
             App.Services.Notifications);
         InitializeComponent();
+
+        // Dim the download-history button's foreground when the window is unfocused;
+        // pointer-over and theme changes re-evaluate the effective colour.
+        DownloadHistoryButton.PointerEntered += (_, _) => { _pointerOver = true; UpdateDownloadHistoryButtonForeground(); };
+        DownloadHistoryButton.PointerExited += (_, _) => { _pointerOver = false; UpdateDownloadHistoryButtonForeground(); };
+        DownloadHistoryButton.ActualThemeChanged += (_, _) => UpdateDownloadHistoryButtonForeground();
+
         Loaded += OnLoaded;
         Unloaded += OnUnloaded;
     }
 
-    public string ProductName => "MCServerLauncher Future";
+    public string ProductName => Core.AppInfo.ProductName;
     public LocalizedStrings Texts => App.Services.Localization.Texts;
     public ResourceDownloadViewModel DownloadHistoryViewModel { get; }
     public FrameworkElement TitleBarElement => AppTitleText;
+
+    public void SetDownloadHistoryButtonDimmed(bool dimmed)
+    {
+        _dimmed = dimmed;
+        UpdateDownloadHistoryButtonForeground();
+    }
+
+    private void UpdateDownloadHistoryButtonForeground()
+    {
+        // Pointer-over takes priority: restore the normal foreground so hovering the
+        // button is unaffected while the window is unfocused.
+        if (_pointerOver)
+        {
+            DownloadHistoryButton.ClearValue(Control.ForegroundProperty);
+            return;
+        }
+
+        if (_dimmed)
+        {
+            var isLight = DownloadHistoryButton.ActualTheme == ElementTheme.Light;
+            var value = (byte)(isLight ? 143 : 109);
+            DownloadHistoryButton.Foreground = new SolidColorBrush(Color.FromArgb(255, value, value, value));
+        }
+        else
+        {
+            DownloadHistoryButton.ClearValue(Control.ForegroundProperty);
+        }
+    }
 
     public bool IsDebugItemVisible => DebugItem.Visibility == Visibility.Visible;
 
@@ -74,7 +112,6 @@ public sealed partial class MainPage : Page
             await AnimateOpacityAsync(FullScreenFrame, 1, 0, 200);
         }
 
-        NavView.Opacity = 0;
         ShowShell();
         NavView.Opacity = 0;
         await AnimateOpacityAsync(NavView, 0, 1, 200);
@@ -108,7 +145,10 @@ public sealed partial class MainPage : Page
 
     public void ShowDebugItem() => DebugItem.Visibility = Visibility.Visible;
 
-    private async void OnLoaded(object sender, RoutedEventArgs e)
+    private void OnLoaded(object sender, RoutedEventArgs e) =>
+        OnLoadedCore().FireAndForget("MainPage.OnLoaded");
+
+    private async Task OnLoadedCore()
     {
         if (!_themeInitialized)
         {
@@ -121,6 +161,8 @@ public sealed partial class MainPage : Page
             App.Services.Notifications.NotificationRaised += OnNotificationRaised;
             _notificationsSubscribed = true;
         }
+
+        DownloadHistoryViewModel.Attach();
 
         if (_viewInitialized) return;
         _viewInitialized = true;
@@ -148,7 +190,54 @@ public sealed partial class MainPage : Page
     private void DownloadHistoryButton_Click(object sender, RoutedEventArgs e) =>
         DownloadHistoryViewModel.ReloadHistory();
 
-    private async void RetryDownload_Click(object sender, RoutedEventArgs e)
+    private void DownloadHistoryFlyout_Opened(object sender, object e)
+    {
+        // The flyout presenter renders in a separate popup root that does not inherit
+        // the root's RequestedTheme (microsoft-ui-xaml#6622), and Flyout.PresenterStyle
+        // is not exposed in the WinUIIslands projection. Theme the content directly and
+        // re-theme the open presenter through FrameworkElement.RequestedTheme.
+        var theme = GetCurrentElementTheme();
+
+        var contentThemed = false;
+        if (DownloadHistoryFlyout.Content is FrameworkElement content)
+        {
+            content.RequestedTheme = theme;
+            contentThemed = true;
+        }
+
+        var presenterCount = 0;
+        var xamlRoots = new[] { DownloadHistoryFlyout.XamlRoot, App.Window.RootPage.XamlRoot }
+            .Where(root => root is not null)
+            .Distinct();
+        foreach (var xamlRoot in xamlRoots)
+        {
+            foreach (var popup in Windows.UI.Xaml.Media.VisualTreeHelper.GetOpenPopupsForXamlRoot(xamlRoot))
+            {
+                if (popup.Child is FrameworkElement presenter)
+                {
+                    presenter.RequestedTheme = theme;
+                    presenterCount++;
+                }
+            }
+        }
+
+        Serilog.Log.Debug(
+            "[WinUI] Download flyout themed: content={Content}, presenters={Presenters}",
+            contentThemed,
+            presenterCount);
+    }
+
+    private static ElementTheme GetCurrentElementTheme() => App.Services.Settings.Current.App.Theme switch
+    {
+        "light" => ElementTheme.Light,
+        "dark" => ElementTheme.Dark,
+        _ => ElementTheme.Default
+    };
+
+    private void RetryDownload_Click(object sender, RoutedEventArgs e) =>
+        RetryDownload_ClickCore(sender).FireAndForget("MainPage.RetryDownload_Click");
+
+    private async Task RetryDownload_ClickCore(object sender)
     {
         if ((sender as FrameworkElement)?.Tag is DownloadHistoryItem item)
             await DownloadHistoryViewModel.RetryCommand.ExecuteAsync(item);
@@ -182,6 +271,7 @@ public sealed partial class MainPage : Page
             App.Services.Notifications.NotificationRaised -= OnNotificationRaised;
             _notificationsSubscribed = false;
         }
+        DownloadHistoryViewModel.Detach();
         _notificationTimer?.Stop();
         foreach (var timer in _toastTimers)
         {

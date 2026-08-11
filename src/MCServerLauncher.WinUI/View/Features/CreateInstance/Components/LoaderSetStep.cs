@@ -1,6 +1,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using MCServerLauncher.Common.Minecraft;
+using MCServerLauncher.WinUI.Core;
 using MCServerLauncher.WinUI.Core.Storage;
 using MCServerLauncher.WinUI.View.Features.CreateInstance.Models;
 
@@ -23,7 +24,7 @@ public abstract class LoaderSetStep : CreateStepControl
         var minecraftRow = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
         MinecraftVersionBox = new ComboBox { MinWidth = 390, HorizontalAlignment = HorizontalAlignment.Stretch };
         RefreshMinecraftButton = new Button { Content = Texts["Refresh"] };
-        RefreshMinecraftButton.Click += async (_, _) => await RefreshMinecraftAsync();
+        RefreshMinecraftButton.Click += (_, _) => RefreshMinecraftAsync().FireAndForget("LoaderSetStep.RefreshMinecraft");
         minecraftRow.Children.Add(MinecraftVersionBox);
         minecraftRow.Children.Add(RefreshMinecraftButton);
         minecraftPanel.Children.Add(minecraftRow);
@@ -44,7 +45,7 @@ public abstract class LoaderSetStep : CreateStepControl
         var loaderRow = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
         LoaderVersionBox = new ComboBox { MinWidth = 390, IsEnabled = false };
         RefreshLoaderButton = new Button { Content = Texts["Refresh"], IsEnabled = false };
-        RefreshLoaderButton.Click += async (_, _) => await RefreshLoaderAsync();
+        RefreshLoaderButton.Click += (_, _) => RefreshLoaderAsync().FireAndForget("LoaderSetStep.RefreshLoader");
         loaderRow.Children.Add(LoaderVersionBox);
         loaderRow.Children.Add(RefreshLoaderButton);
         loaderPanel.Children.Add(loaderRow);
@@ -57,27 +58,29 @@ public abstract class LoaderSetStep : CreateStepControl
             StableLoaderBox = stableLoader;
         }
 
-        MinecraftVersionBox.SelectionChanged += async (_, _) =>
+        MinecraftVersionBox.SelectionChanged += (_, _) =>
         {
             UpdateFinished();
-            await MinecraftVersionChangedAsync();
+            MinecraftVersionChangedAsync().FireAndForget("LoaderSetStep.MinecraftVersionChanged");
         };
         LoaderVersionBox.SelectionChanged += (_, _) => UpdateFinished();
         Fields.Children.Add(minecraftPanel);
         Fields.Children.Add(loaderPanel);
-        Loaded += async (_, _) =>
-        {
-            if (_loaded) return;
-            _loaded = true;
-            await RefreshMinecraftAsync();
-            await RefreshLoaderAsync();
-        };
-        App.Services.Localization.LanguageChanged += (_, _) =>
+        Loaded += (_, _) => LoadedCore().FireAndForget("LoaderSetStep.Loaded");
+        RegisterLanguageChangedHandler((_, _) =>
         {
             RefreshLocalizedText();
             RefreshMinecraftButton.Content = Texts["Refresh"];
             RefreshLoaderButton.Content = Texts["Refresh"];
-        };
+        });
+    }
+
+    private async Task LoadedCore()
+    {
+        if (_loaded) return;
+        _loaded = true;
+        await RefreshMinecraftAsync();
+        await RefreshLoaderAsync();
     }
 
     protected CheckBox? StableLoaderBox { get; private set; }

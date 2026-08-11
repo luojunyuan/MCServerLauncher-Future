@@ -24,6 +24,7 @@ public partial class ResourceDownloadViewModel : ObservableObject
     private readonly ILocalizationService _localization;
     private readonly INotificationService _notifications;
     private CancellationTokenSource? _downloadCancellation;
+    private bool _attached;
 
     public ResourceDownloadViewModel(
         StoragePaths paths,
@@ -50,7 +51,20 @@ public partial class ResourceDownloadViewModel : ObservableObject
             item.RetryCommand = RetryCommand;
             History.Add(item);
         }
+    }
+
+    public void Attach()
+    {
+        if (_attached) return;
         _localization.LanguageChanged += Localization_LanguageChanged;
+        _attached = true;
+    }
+
+    public void Detach()
+    {
+        if (!_attached) return;
+        _localization.LanguageChanged -= Localization_LanguageChanged;
+        _attached = false;
     }
 
     private static readonly string[] ProviderKeys = ["FastMirror", "PolarsMirror", "RainYun", "MSLAPI", "MCSLSync"];
@@ -196,7 +210,7 @@ public partial class ResourceDownloadViewModel : ObservableObject
                 })) MinecraftVersions.Add(version);
             }
 
-            // Like WPF, auto-select the first (latest) Minecraft version.
+            // Like WinUI, auto-select the first (latest) Minecraft version.
             if (MinecraftVersions.Count > 0)
                 await SelectVersionAsync(MinecraftVersions[0]);
         }
@@ -432,8 +446,14 @@ public partial class ResourceDownloadViewModel : ObservableObject
         };
         using var download = new DownloadService(configuration);
         entry.Service = download;
+        var lastUiUpdate = 0L;
+        DownloadProgressChangedEventArgs? lastArgs = null;
         download.DownloadProgressChanged += (_, args) =>
         {
+            lastArgs = args;
+            var now = Environment.TickCount64;
+            if (now - lastUiUpdate < 150) return;
+            lastUiUpdate = now;
             App.DispatcherQueue.TryEnqueue(() =>
             {
                 entry.UpdateProgress(args);
@@ -444,6 +464,17 @@ public partial class ResourceDownloadViewModel : ObservableObject
         try
         {
             await download.DownloadFileTaskAsync(url, path, entry.Cts?.Token ?? CancellationToken.None);
+            // Always surface the final progress value on completion, even if the
+            // last progress event was throttled.
+            if (lastArgs is not null)
+            {
+                App.DispatcherQueue.TryEnqueue(() =>
+                {
+                    entry.UpdateProgress(lastArgs);
+                    Progress = entry.Progress;
+                    StatusText = entry.SizeText;
+                });
+            }
         }
         catch (OperationCanceledException)
         {
@@ -527,14 +558,7 @@ public partial class ResourceDownloadViewModel : ObservableObject
         McVersionSequencer.Sequence((versions ?? []).Where(value => !string.IsNullOrWhiteSpace(value)).Select(value => value!).ToList())
             .Where(value => !string.IsNullOrWhiteSpace(value)).Select(value => value!).ToList();
 
-    private static string FormatSize(long bytes)
-    {
-        var value = Math.Max(0, (double)bytes);
-        var units = new[] { "B", "KB", "MB", "GB", "TB" };
-        var index = 0;
-        while (value >= 1024 && index < units.Length - 1) { value /= 1024; index++; }
-        return $"{value:F1} {units[index]}";
-    }
+    private static string FormatSize(long bytes) => Core.Format.FormatSize(bytes);
 
     private sealed record DestinationChoice(bool SaveLocal, IReadOnlyList<DaemonConfigModel> Daemons);
 }
@@ -600,12 +624,5 @@ public sealed partial class DownloadProgressEntry : ObservableObject
         try { Service?.CancelAsync(); } catch { }
     }
 
-    private static string FormatSize(long bytes)
-    {
-        var value = Math.Max(0, (double)bytes);
-        var units = new[] { "B", "KB", "MB", "GB", "TB" };
-        var index = 0;
-        while (value >= 1024 && index < units.Length - 1) { value /= 1024; index++; }
-        return $"{value:F1} {units[index]}";
-    }
+    private static string FormatSize(long bytes) => Core.Format.FormatSize(bytes);
 }

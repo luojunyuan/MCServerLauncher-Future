@@ -1,4 +1,5 @@
 using Windows.UI.Xaml.Controls;
+using MCServerLauncher.WinUI.Core;
 using MCServerLauncher.WinUI.View.Features.CreateInstance.Models;
 
 namespace MCServerLauncher.WinUI.View.Features.CreateInstance.Components;
@@ -26,18 +27,21 @@ public class SelectLocalFileStep : CreateStepControl
         row.Children.Add(_pathBox);
         row.Children.Add(browse);
         Fields.Children.Add(row);
-        App.Services.Localization.LanguageChanged += (_, _) =>
+        RegisterLanguageChangedHandler((_, _) =>
         {
             _pathBox.PlaceholderText = Texts[_placeholderKey];
             browse.Content = Texts["Browse"];
-        };
+        });
     }
 
     public string Path => _pathBox.Text;
 
     public override object Data => new CreateInstanceData(CreateInstanceDataType.Path, Path);
 
-    private async void BrowseAsync(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+    private void BrowseAsync(object sender, Windows.UI.Xaml.RoutedEventArgs e) =>
+        BrowseAsyncCore().FireAndForget("SelectLocalFileStep.BrowseAsync");
+
+    private async Task BrowseAsyncCore()
     {
         var file = await App.Services.Files.PickFileAsync(App.WindowHandle);
         if (file is null) return;

@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using MCServerLauncher.WinUI.Core;
 using MCServerLauncher.WinUI.Core.Localization;
 using MCServerLauncher.WinUI.Models;
 using MCServerLauncher.WinUI.Views.Components.DaemonManager;
@@ -118,7 +119,7 @@ public sealed partial class FirstSetupPage : Page, INotifyPropertyChanged
         var language = App.Services.Localization.LanguageCodes[LanguageIndex];
         App.Services.Settings.Current.App.Language = language;
         App.Services.Localization.ChangeLanguage(language);
-        _ = App.Services.Settings.SaveAsync();
+        App.Services.Settings.SaveAsync().FireAndForget("LanguageChanged");
         RefreshEulaUrl();
     }
 
@@ -140,7 +141,7 @@ public sealed partial class FirstSetupPage : Page, INotifyPropertyChanged
         }
     }
 
-    private async void Continue_Click(object sender, RoutedEventArgs e)
+    private void Continue_Click(object sender, RoutedEventArgs e)
     {
         switch (_step)
         {
@@ -151,7 +152,7 @@ public sealed partial class FirstSetupPage : Page, INotifyPropertyChanged
                 GoWelcomeSetup();
                 break;
             case 3:
-                await CompleteSetupAsync();
+                CompleteSetupAsync().FireAndForget("Continue_Click");
                 break;
         }
     }
@@ -204,7 +205,7 @@ public sealed partial class FirstSetupPage : Page, INotifyPropertyChanged
         }
 
         if (step == 2 && RemoteSetupPanel.Visibility == Visibility.Visible)
-            _ = LoadExistingDaemonsAsync();
+            LoadExistingDaemonsAsync().FireAndForget("NavigateToStep");
     }
 
     private void RefreshEulaUrl() => EulaUrlTextBlock.Text = CurrentEulaUrl;
@@ -232,13 +233,19 @@ public sealed partial class FirstSetupPage : Page, INotifyPropertyChanged
         AcceptButtonText = string.Format(CultureInfo.CurrentCulture, Texts["FirstSetup_EulaContinueCountdown"], _acceptCountdownRemaining);
     }
 
-    private async void OpenEulaInBrowser(object sender, RoutedEventArgs e)
+    private void OpenEulaInBrowser(object sender, RoutedEventArgs e)
+        => OpenEulaInBrowserCoreAsync().FireAndForget("OpenEulaInBrowser");
+
+    private async Task OpenEulaInBrowserCoreAsync()
     {
         try { await global::Windows.System.Launcher.LaunchUriAsync(new Uri(CurrentEulaUrl)); }
         catch (Exception ex) { DaemonError = ex.Message; }
     }
 
-    private async void RefuseEula(object sender, RoutedEventArgs e)
+    private void RefuseEula(object sender, RoutedEventArgs e)
+        => RefuseEulaCoreAsync().FireAndForget("RefuseEula");
+
+    private async Task RefuseEulaCoreAsync()
     {
         var dialog = CreateDialog(
             Texts["AreYouSure"],
@@ -253,7 +260,10 @@ public sealed partial class FirstSetupPage : Page, INotifyPropertyChanged
         catch { }
     }
 
-    private async void AcceptEula(object sender, RoutedEventArgs e)
+    private void AcceptEula(object sender, RoutedEventArgs e)
+        => AcceptEulaCoreAsync().FireAndForget("AcceptEula");
+
+    private async Task AcceptEulaCoreAsync()
     {
         var dialog = CreateDialog(
             Texts["AreYouSure"],
@@ -268,7 +278,10 @@ public sealed partial class FirstSetupPage : Page, INotifyPropertyChanged
         catch { }
     }
 
-    private async void UseLocalDaemon(object sender, RoutedEventArgs e)
+    private void UseLocalDaemon(object sender, RoutedEventArgs e)
+        => UseLocalDaemonCoreAsync().FireAndForget("UseLocalDaemon");
+
+    private async Task UseLocalDaemonCoreAsync()
     {
         var dialog = CreateDialog(
             Texts["FirstSetup_DaemonLocalDownload"],
@@ -279,7 +292,7 @@ public sealed partial class FirstSetupPage : Page, INotifyPropertyChanged
         await AskAddRemoteHostAfterLocalAsync();
     }
 
-    private async void UseRemoteDaemon(object sender, RoutedEventArgs e) => await ShowRemoteSetupAsync();
+    private void UseRemoteDaemon(object sender, RoutedEventArgs e) => ShowRemoteSetupAsync().FireAndForget("UseRemoteDaemon");
 
     private async Task ShowRemoteSetupAsync()
     {
@@ -288,12 +301,13 @@ public sealed partial class FirstSetupPage : Page, INotifyPropertyChanged
         await LoadExistingDaemonsAsync();
     }
 
-    private async void AddDaemonConnection(object sender, RoutedEventArgs e) => await AddRemoteDaemonConnectionAsync(null);
+    private void AddDaemonConnection(object sender, RoutedEventArgs e)
+        => AddRemoteDaemonConnectionAsync(null).FireAndForget("AddDaemonConnection");
 
-    private async void EditDaemonConnection(object sender, RoutedEventArgs e)
+    private void EditDaemonConnection(object sender, RoutedEventArgs e)
     {
         if ((sender as Button)?.Tag is DaemonConfigModel config)
-            await AddRemoteDaemonConnectionAsync(config);
+            AddRemoteDaemonConnectionAsync(config).FireAndForget("EditDaemonConnection");
     }
 
     private async Task AddRemoteDaemonConnectionAsync(DaemonConfigModel? existing)
@@ -362,7 +376,10 @@ public sealed partial class FirstSetupPage : Page, INotifyPropertyChanged
         return Task.CompletedTask;
     }
 
-    private async void SkipDaemon(object sender, RoutedEventArgs e)
+    private void SkipDaemon(object sender, RoutedEventArgs e)
+        => SkipDaemonCoreAsync().FireAndForget("SkipDaemon");
+
+    private async Task SkipDaemonCoreAsync()
     {
         var dialog = CreateDialog(
             Texts["AreYouSure"],
@@ -416,7 +433,7 @@ public sealed partial class FirstSetupPage : Page, INotifyPropertyChanged
         if (!_isDebugSession)
         {
             App.Services.Settings.Current.App.IsAppEulaAccepted = true;
-            _ = App.Services.Settings.SaveAsync();
+            App.Services.Settings.SaveAsync().FireAndForget("GoDaemonSetup");
         }
 
         RefreshNavMenu(2);
@@ -432,7 +449,7 @@ public sealed partial class FirstSetupPage : Page, INotifyPropertyChanged
             await App.Services.Settings.SaveAsync();
         }
 
-        _ = App.Services.ConnectConfiguredDaemonsAsync();
+        App.Services.ConnectConfiguredDaemonsAsync().FireAndForget("CompleteSetupAsync");
         await App.Window.RootPage.CompleteFirstSetupAsync();
     }
 

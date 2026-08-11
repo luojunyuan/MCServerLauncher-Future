@@ -1,5 +1,6 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using MCServerLauncher.WinUI.Core;
 using MCServerLauncher.WinUI.Core.Localization;
 using MCServerLauncher.WinUI.View.Features.CreateInstance.Providers;
 using MCServerLauncher.WinUI.Views.Pages;
@@ -18,12 +19,14 @@ public sealed partial class PreCreateInstance : UserControl
 
     public LocalizedStrings Texts => App.Services.Localization.Texts;
 
-    private async void Minecraft_Click(object sender, RoutedEventArgs e) =>
-        await _owner.ShowMinecraftTypesAsync();
+    private void Minecraft_Click(object sender, RoutedEventArgs e) =>
+        _owner.ShowMinecraftTypesAsync().FireAndForget("PreCreateInstance.Minecraft_Click");
 
-    private async void Terraria_Click(object sender, RoutedEventArgs e) =>
-        await _owner.OpenProviderAsync((session) => new CreateTerrariaInstanceProvider(_owner, session));
+    private void Terraria_Click(object sender, RoutedEventArgs e) =>
+        _owner.OpenProviderAsync((session) => new CreateTerrariaInstanceProvider(_owner, session))
+            .FireAndForget("PreCreateInstance.Terraria_Click");
 
-    private async void Other_Click(object sender, RoutedEventArgs e) =>
-        await _owner.OpenProviderAsync((session) => new CreateOtherExecutableInstanceProvider(_owner, session));
+    private void Other_Click(object sender, RoutedEventArgs e) =>
+        _owner.OpenProviderAsync((session) => new CreateOtherExecutableInstanceProvider(_owner, session))
+            .FireAndForget("PreCreateInstance.Other_Click");
 }

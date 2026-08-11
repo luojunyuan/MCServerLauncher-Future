@@ -76,16 +76,5 @@ public partial class InstanceCardModel : ObservableObject
         OnPropertyChanged(nameof(MemoryUsageText));
     }
 
-    private static string FormatSize(double bytes)
-    {
-        var units = new[] { "B", "KB", "MB", "GB", "TB" };
-        var value = Math.Max(0, bytes);
-        var index = 0;
-        while (value >= 1024 && index < units.Length - 1)
-        {
-            value /= 1024;
-            index++;
-        }
-        return $"{value:F2} {units[index]}";
-    }
+    private static string FormatSize(double bytes) => Core.Format.FormatSize(bytes, "F2");
 }

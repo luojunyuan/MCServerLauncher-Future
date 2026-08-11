@@ -22,14 +22,56 @@
                     <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
                     <TextBlock Text="{x:Bind Texts['ResDownload_InstanceCore'], Mode=OneWay}" Style="{StaticResource SectionHeaderTextBlockStyle}" />
                     <ListView Grid.Row="1" x:Name="CoreList" ItemsSource="{x:Bind ViewModel.CoreItems, Mode=OneWay}" SelectionChanged="Core_SelectionChanged">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Padding" Value="0" />
+                                <Setter Property="MinHeight" Value="0" />
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="models:ResourceCoreItem">
-                                <Grid Padding="8,4" ColumnSpacing="8">
-                                    <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
-                                    <TextBlock Text="{x:Bind Name, Mode=OneTime}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
-                                    <Border Grid.Column="1" Background="{ThemeResource SystemAccentColor}" CornerRadius="4" Padding="6,1" VerticalAlignment="Center" Visibility="{x:Bind local:ResourceDownloadPage.StringToVisibility(Tag), Mode=OneTime}">
-                                        <TextBlock Text="{x:Bind Tag, Mode=OneTime}" Foreground="White" FontSize="11" />
-                                    </Border>
+                                <Grid Height="40" Margin="0,0,0,6">
+                                    <Border
+                                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="4" />
+                                    <Border
+                                        Background="{x:Bind local:ResourceDownloadPage.RecommendBackground(Recommend), Mode=OneTime}"
+                                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="4"
+                                        Visibility="{x:Bind local:ResourceDownloadPage.RecommendVisibility(Recommend), Mode=OneTime}" />
+                                    <Grid Padding="10,0,5,0" ColumnSpacing="5">
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0">
+                                            <TextBlock
+                                                Text="{x:Bind Name, Mode=OneTime}"
+                                                TextAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                TextTrimming="CharacterEllipsis"
+                                                Foreground="{ThemeResource TextFillColorPrimaryBrush}" />
+                                            <TextBlock
+                                                Text="{x:Bind Name, Mode=OneTime}"
+                                                TextAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                TextTrimming="CharacterEllipsis"
+                                                Foreground="White"
+                                                Visibility="{x:Bind local:ResourceDownloadPage.RecommendVisibility(Recommend), Mode=OneTime}" />
+                                        </Grid>
+                                        <Border
+                                            Grid.Column="1"
+                                            Background="{ThemeResource SystemAccentColor}"
+                                            CornerRadius="4"
+                                            Height="25"
+                                            Padding="5,2"
+                                            Margin="5,0,10,0"
+                                            VerticalAlignment="Center"
+                                            Visibility="{x:Bind local:ResourceDownloadPage.StringToVisibility(Tag), Mode=OneTime}">
+                                            <TextBlock Text="{x:Bind Tag, Mode=OneTime}" Foreground="White" FontSize="12" TextAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                    </Grid>
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>

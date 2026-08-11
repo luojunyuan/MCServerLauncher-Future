@@ -3,9 +3,11 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using CommunityToolkit.Mvvm.ComponentModel;
+using MCServerLauncher.WinUI.Core;
 using MCServerLauncher.WinUI.Core.Localization;
 using MCServerLauncher.WinUI.Core.Storage;
 using MCServerLauncher.WinUI.ViewModels.Models;
+using Windows.System;
 
 namespace MCServerLauncher.WinUI.ViewModels;
 
@@ -47,6 +49,8 @@ public partial class SettingsViewModel : ObservableObject
 
     private readonly SettingsStore _settings;
     private readonly ILocalizationService _localization;
+    private DispatcherQueueTimer? _saveDebounceTimer;
+    private Action<SettingsDocument>? _pendingSave;
     private bool _initializing = true;
     private bool _attached;
 
@@ -120,6 +124,8 @@ public partial class SettingsViewModel : ObservableObject
     {
         if (!_attached) return;
         _localization.LanguageChanged -= Localization_LanguageChanged;
+        _saveDebounceTimer?.Stop();
+        _pendingSave = null;
         _attached = false;
     }
 
@@ -159,7 +165,9 @@ public partial class SettingsViewModel : ObservableObject
             return;
         }
 
-        Save(setting => setting.Download.ThreadCnt = normalized);
+        // Keep the live property updated for the UI but only persist after the
+        // value has been stable for 1s (avoids a JSON write on every slider tick).
+        ScheduleSave(setting => setting.Download.ThreadCnt = normalized);
     }
 
     partial void OnActionWhenDownloadErrorIndexChanged(int value)
@@ -177,7 +185,7 @@ public partial class SettingsViewModel : ObservableObject
             return;
         }
 
-        Save(setting => setting.Instance.AutoRefreshInterval = normalized);
+        ScheduleSave(setting => setting.Instance.AutoRefreshInterval = normalized);
     }
 
     partial void OnActionOnDoubleClickIndexChanged(int value)
@@ -201,7 +209,7 @@ public partial class SettingsViewModel : ObservableObject
         var language = _localization.LanguageCodes[value];
         _settings.Current.App.Language = language;
         _localization.ChangeLanguage(language);
-        _ = _settings.SaveAsync();
+        _settings.SaveAsync().FireAndForget("SettingsViewModel.OnLauncherLanguageIndexChanged");
     }
 
     partial void OnFollowStartupChanged(bool value) =>
@@ -210,11 +218,32 @@ public partial class SettingsViewModel : ObservableObject
     partial void OnAutoCheckUpdateChanged(bool value) =>
         Save(setting => setting.App.AutoCheckUpdate = value);
 
+    private void ScheduleSave(Action<SettingsDocument> update)
+    {
+        if (_initializing) return;
+        _pendingSave = update;
+        _saveDebounceTimer ??= App.DispatcherQueue.CreateTimer();
+        _saveDebounceTimer.Stop();
+        _saveDebounceTimer.Interval = TimeSpan.FromSeconds(1);
+        _saveDebounceTimer.IsRepeating = false;
+        _saveDebounceTimer.Tick -= SaveDebounceTimer_Tick;
+        _saveDebounceTimer.Tick += SaveDebounceTimer_Tick;
+        _saveDebounceTimer.Start();
+    }
+
+    private void SaveDebounceTimer_Tick(DispatcherQueueTimer sender, object args)
+    {
+        if (_pendingSave is null) return;
+        var update = _pendingSave;
+        _pendingSave = null;
+        Save(update);
+    }
+
     private void Save(Action<SettingsDocument> update)
     {
         if (_initializing) return;
         update(_settings.Current);
-        _ = _settings.SaveAsync();
+        _settings.SaveAsync().FireAndForget("SettingsViewModel.Save");
     }
 
     private void Localization_LanguageChanged(object? sender, EventArgs e) => RefreshLocalizedItems();

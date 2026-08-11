@@ -6,7 +6,7 @@ namespace MCServerLauncher.WinUI.Views.Components.Generic;
 
 /// <summary>
 /// OS logo (Windows / Linux / Darwin) shown on daemon cards.
-/// WinUI parity of the WPF daemon card logo: the logo is selected from
+/// WinUI parity of the WinUI daemon card logo: the logo is selected from
 /// <see cref="SystemType"/> and rendered at 24x24 via a Viewbox.
 /// </summary>
 public sealed partial class OsLogo : UserControl
@@ -44,7 +44,7 @@ public sealed partial class OsLogo : UserControl
         LinuxLogo.Visibility = isLinux ? Visibility.Visible : Visibility.Collapsed;
         DarwinLogo.Visibility = isDarwin ? Visibility.Visible : Visibility.Collapsed;
 
-        // WPF shows no logo when SystemType is unknown; collapse the whole slot to match.
+        // WinUI shows no logo when SystemType is unknown; collapse the whole slot to match.
         LogoViewbox.Visibility = isWindows || isLinux || isDarwin
             ? Visibility.Visible
             : Visibility.Collapsed;

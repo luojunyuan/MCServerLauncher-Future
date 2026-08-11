@@ -3,12 +3,14 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MCServerLauncher.Common.ProtoType.Status;
 using MCServerLauncher.DaemonClient;
+using MCServerLauncher.WinUI.Core;
 using MCServerLauncher.WinUI.Core.Localization;
 using MCServerLauncher.WinUI.Core.Services;
 using MCServerLauncher.WinUI.Core.Storage;
 using MCServerLauncher.WinUI.Models;
 using MCServerLauncher.WinUI.ViewModels.Models;
 using Serilog;
+using Windows.System;
 
 namespace MCServerLauncher.WinUI.ViewModels;
 
@@ -28,6 +30,8 @@ public partial class DaemonManagerViewModel : ObservableObject
     private readonly IDaemonConnectionService _connections;
     private readonly INotificationService _notifications;
     private readonly ILocalizationService _localization;
+    private DispatcherQueueTimer? _searchDebounceTimer;
+    private long _refreshInFlight;
     private bool _attached;
 
     public DaemonManagerViewModel(
@@ -68,6 +72,7 @@ public partial class DaemonManagerViewModel : ObservableObject
     {
         if (!_attached) return;
         _localization.LanguageChanged -= Localization_LanguageChanged;
+        _searchDebounceTimer?.Stop();
         _attached = false;
     }
 
@@ -94,8 +99,16 @@ public partial class DaemonManagerViewModel : ObservableObject
     public async Task AutoRefreshAsync()
     {
         if (Daemons.Count == 0) return;
-        await Task.WhenAll(Daemons.Select(LoadCardAsync));
-        ApplyFilters();
+        if (Interlocked.Exchange(ref _refreshInFlight, 1) == 1) return;
+        try
+        {
+            await Task.WhenAll(Daemons.Select(LoadCardAsync));
+            ApplyFilters();
+        }
+        finally
+        {
+            Interlocked.Exchange(ref _refreshInFlight, 0);
+        }
     }
 
     public async Task<string?> AddConnectionAsync(DaemonConfigModel config)
@@ -156,12 +169,23 @@ public partial class DaemonManagerViewModel : ObservableObject
         }
     }
 
-    partial void OnSearchTextChanged(string value) => ApplyFilters();
+    partial void OnSearchTextChanged(string value)
+    {
+        _searchDebounceTimer ??= App.DispatcherQueue.CreateTimer();
+        _searchDebounceTimer.Stop();
+        _searchDebounceTimer.Interval = TimeSpan.FromMilliseconds(300);
+        _searchDebounceTimer.IsRepeating = false;
+        _searchDebounceTimer.Tick -= SearchDebounceTimer_Tick;
+        _searchDebounceTimer.Tick += SearchDebounceTimer_Tick;
+        _searchDebounceTimer.Start();
+    }
+
+    private void SearchDebounceTimer_Tick(DispatcherQueueTimer sender, object args) => ApplyFilters();
 
     partial void OnAutoRefreshEnabledChanged(bool value)
     {
         _settings.Current.Instance.AutoRefreshInterval = value ? RefreshIntervalSeconds : 0;
-        _ = _settings.SaveAsync();
+        _settings.SaveAsync().FireAndForget("DaemonManagerViewModel.OnAutoRefreshEnabledChanged");
     }
 
     partial void OnRefreshIntervalSecondsChanged(int value)
@@ -175,7 +199,7 @@ public partial class DaemonManagerViewModel : ObservableObject
 
         if (!AutoRefreshEnabled) return;
         _settings.Current.Instance.AutoRefreshInterval = normalized;
-        _ = _settings.SaveAsync();
+        _settings.SaveAsync().FireAndForget("DaemonManagerViewModel.OnRefreshIntervalSecondsChanged");
     }
 
     private DaemonCardModel CreateModel(DaemonConfigModel config) => new()
@@ -333,18 +357,7 @@ public partial class DaemonManagerViewModel : ObservableObject
     private static double Clamp(double value) =>
         double.IsFinite(value) ? Math.Clamp(value, 0, 100) : 0;
 
-    private static string FormatSize(double bytes)
-    {
-        var units = new[] { "B", "KB", "MB", "GB", "TB" };
-        var value = Math.Max(0, bytes);
-        var index = 0;
-        while (value >= 1024 && index < units.Length - 1)
-        {
-            value /= 1024;
-            index++;
-        }
-        return $"{value:F2} {units[index]}";
-    }
+    private static string FormatSize(double bytes) => Core.Format.FormatSize(bytes, "F2");
 
     private static string FormatDriveUsage(DriveInformation drive)
     {

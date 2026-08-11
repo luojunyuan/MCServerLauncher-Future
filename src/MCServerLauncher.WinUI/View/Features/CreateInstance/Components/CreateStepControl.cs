@@ -15,6 +15,7 @@ public abstract class CreateStepControl : UserControl, ICreateInstanceStep
     private readonly TextBlock _status;
     protected readonly StackPanel Fields;
     protected readonly TextBlock ErrorText;
+    private readonly List<EventHandler> _languageChangedHandlers = [];
     private bool _isFinished;
 
     protected CreateStepControl(string titleKey, string descriptionKey)
@@ -96,9 +97,17 @@ public abstract class CreateStepControl : UserControl, ICreateInstanceStep
         label.Tag = key;
         label.Text = Texts[key];
         Fields.Children.Add(label);
-        App.Services.Localization.LanguageChanged += (_, _) => label.Text = Texts[key];
+        RegisterLanguageChangedHandler((_, _) => label.Text = Texts[key]);
         return label;
     }
+
+    /// <summary>
+    ///     Registers a handler that is subscribed to the localization LanguageChanged
+    ///     event only while the control is loaded (and unsubscribed on Unloaded), so
+    ///     controls never leak a global event subscription after they are removed
+    ///     from the visual tree.
+    /// </summary>
+    protected void RegisterLanguageChangedHandler(EventHandler handler) => _languageChangedHandlers.Add(handler);
 
     protected void RefreshLocalizedText()
     {
@@ -112,9 +121,19 @@ public abstract class CreateStepControl : UserControl, ICreateInstanceStep
     {
         App.Services.Localization.LanguageChanged -= OnLanguageChanged;
         App.Services.Localization.LanguageChanged += OnLanguageChanged;
+        foreach (var handler in _languageChangedHandlers)
+        {
+            App.Services.Localization.LanguageChanged -= handler;
+            App.Services.Localization.LanguageChanged += handler;
+            handler(this, EventArgs.Empty);
+        }
         RefreshLocalizedText();
     }
 
-    private void OnUnloaded(object sender, RoutedEventArgs e) =>
+    private void OnUnloaded(object sender, RoutedEventArgs e)
+    {
         App.Services.Localization.LanguageChanged -= OnLanguageChanged;
+        foreach (var handler in _languageChangedHandlers)
+            App.Services.Localization.LanguageChanged -= handler;
+    }
 }

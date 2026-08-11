@@ -3,10 +3,12 @@ using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using MCServerLauncher.WinUI.Core;
 using MCServerLauncher.WinUI.Core.Localization;
 using MCServerLauncher.WinUI.Models;
 using MCServerLauncher.WinUI.ViewModels;
 using MCServerLauncher.WinUI.Views.Components.DaemonManager;
+using Serilog;
 
 namespace MCServerLauncher.WinUI.Views.Pages;
 
@@ -49,7 +51,10 @@ public sealed partial class DaemonManagerPage : Page
             StringComparison.Ordinal);
     }
 
-    private async void OnLoaded(object sender, RoutedEventArgs e)
+    private void OnLoaded(object sender, RoutedEventArgs e) =>
+        OnLoadedCore().FireAndForget("DaemonManagerPage.OnLoaded");
+
+    private async Task OnLoadedCore()
     {
         _isPageLoaded = true;
         ViewModel.Attach();
@@ -97,19 +102,25 @@ public sealed partial class DaemonManagerPage : Page
 
     private void StopAutoRefresh() => _refreshTimer?.Stop();
 
-    private async void RefreshTimer_Tick(DispatcherQueueTimer sender, object args) =>
-        await ViewModel.AutoRefreshAsync();
+    private void RefreshTimer_Tick(DispatcherQueueTimer sender, object args) =>
+        ViewModel.AutoRefreshAsync().FireAndForget("DaemonManagerPage.RefreshTimer_Tick");
 
-    private async void AddConnection_Click(object sender, RoutedEventArgs e) =>
-        await ShowConnectionDialogAsync(null);
+    private void AddConnection_Click(object sender, RoutedEventArgs e) =>
+        ShowConnectionDialogAsync(null).FireAndForget("DaemonManagerPage.AddConnection_Click");
 
-    private async void EditDaemon_Click(object sender, RoutedEventArgs e)
+    private void EditDaemon_Click(object sender, RoutedEventArgs e) =>
+        EditDaemon_ClickCore(sender).FireAndForget("DaemonManagerPage.EditDaemon_Click");
+
+    private async Task EditDaemon_ClickCore(object sender)
     {
         if ((sender as FrameworkElement)?.Tag is DaemonCardModel card)
             await ShowConnectionDialogAsync(card);
     }
 
-    private async void DeleteDaemon_Click(object sender, RoutedEventArgs e)
+    private void DeleteDaemon_Click(object sender, RoutedEventArgs e) =>
+        DeleteDaemon_ClickCore(sender).FireAndForget("DaemonManagerPage.DeleteDaemon_Click");
+
+    private async Task DeleteDaemon_ClickCore(object sender)
     {
         if ((sender as FrameworkElement)?.Tag is not DaemonCardModel card || XamlRoot is null) return;
         var confirmed = await App.Services.Dialogs.ConfirmCountdownAsync(
@@ -122,7 +133,10 @@ public sealed partial class DaemonManagerPage : Page
         if (confirmed) await ViewModel.DeleteConnectionAsync(card);
     }
 
-    private async void ShowDaemonError_Click(object sender, RoutedEventArgs e)
+    private void ShowDaemonError_Click(object sender, RoutedEventArgs e) =>
+        ShowDaemonError_ClickCore(sender).FireAndForget("DaemonManagerPage.ShowDaemonError_Click");
+
+    private async Task ShowDaemonError_ClickCore(object sender)
     {
         if ((sender as FrameworkElement)?.Tag is not DaemonCardModel card || XamlRoot is null) return;
         await App.Services.Dialogs.ShowErrorAsync(
@@ -148,33 +162,50 @@ public sealed partial class DaemonManagerPage : Page
             CloseButtonText = Texts["Cancel"],
             DefaultButton = ContentDialogButton.Primary
         };
-        dialog.PrimaryButtonClick += async (_, args) =>
+        dialog.PrimaryButtonClick += (_, args) =>
         {
             var deferral = args.GetDeferral();
-            try
-            {
-                if (!input.TryCreateConfig(out var config))
+            ValidateAndSaveConnectionAsync(input, existing, args).ContinueWith(
+                static (completed, state) =>
                 {
-                    args.Cancel = true;
-                    return;
-                }
-
-                var error = existing is null
-                    ? await ViewModel.AddConnectionAsync(config)
-                    : await ViewModel.EditConnectionAsync(existing, config);
-                if (!string.IsNullOrWhiteSpace(error))
-                {
-                    input.ShowConnectionError(error);
-                    args.Cancel = true;
-                }
-            }
-            finally
-            {
-                deferral.Complete();
-            }
+                    if (completed.IsFaulted && completed.Exception is { } ex)
+                        Log.Error(ex, "[WinUI] Failed to save daemon connection");
+                    ((ContentDialogButtonClickDeferral)state!).Complete();
+                },
+                deferral,
+                TaskContinuationOptions.ExecuteSynchronously);
         };
 
         try { await dialog.ShowAsync(); }
         catch { }
+    }
+
+    private async Task ValidateAndSaveConnectionAsync(
+        NewDaemonConnectionInput input,
+        DaemonCardModel? existing,
+        ContentDialogButtonClickEventArgs args)
+    {
+        if (!input.TryCreateConfig(out var config))
+        {
+            args.Cancel = true;
+            return;
+        }
+
+        try
+        {
+            var error = existing is null
+                ? await ViewModel.AddConnectionAsync(config)
+                : await ViewModel.EditConnectionAsync(existing, config);
+            if (!string.IsNullOrWhiteSpace(error))
+            {
+                input.ShowConnectionError(error);
+                args.Cancel = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "[WinUI] Failed to save daemon connection");
+            args.Cancel = true;
+        }
     }
 }

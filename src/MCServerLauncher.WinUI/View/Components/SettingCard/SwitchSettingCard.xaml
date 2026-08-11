@@ -28,7 +28,10 @@
                        Margin="0,2,20,5" Opacity="0.615" FontSize="12" TextTrimming="CharacterEllipsis"
                        TextWrapping="Wrap" Text="{x:Bind SettingDescription, Mode=OneWay}" />
             <ToggleSwitch x:Name="SettingSwitch" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center"
+                          HorizontalAlignment="Right"
                           MinWidth="0"
+                          Width="70"
+                          Margin="0"
                           IsOn="{x:Bind SettingSwitchChecked, Mode=TwoWay}"
                           IsEnabled="{x:Bind SettingSwitchEnabled, Mode=OneWay}"
                           OnContent="{x:Bind SettingSwitchOnContent, Mode=OneWay}"

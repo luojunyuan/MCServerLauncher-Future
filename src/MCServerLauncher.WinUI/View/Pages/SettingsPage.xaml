@@ -6,6 +6,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:vmModels="using:MCServerLauncher.WinUI.ViewModels.Models"
+    xmlns:local="using:MCServerLauncher.WinUI.Views.Pages"
     xmlns:sc="using:MCServerLauncher.WinUI.Views.Components.SettingCard">
   <ScrollViewer>
     <StackPanel Padding="32" Spacing="12">
@@ -91,9 +92,9 @@
           Style="{StaticResource SectionHeaderTextBlockStyle}"
           Margin="0,12,0,0" />
 
-      <muxc:Expander IsExpanded="True">
+      <muxc:Expander IsExpanded="True" HorizontalAlignment="Stretch" VerticalAlignment="Top" HorizontalContentAlignment="Stretch">
         <muxc:Expander.Header>
-          <StackPanel Orientation="Horizontal" Spacing="16">
+          <StackPanel Orientation="Horizontal" Spacing="16" Margin="0,10,0,10">
             <FontIcon Glyph="&#xE835;" FontSize="20" />
             <StackPanel Spacing="4">
               <TextBlock Text="{x:Bind Texts['Settings_ResDownloadProvider_Title'], Mode=OneWay}" FontWeight="SemiBold" TextWrapping="Wrap" />
@@ -101,7 +102,7 @@
             </StackPanel>
           </StackPanel>
         </muxc:Expander.Header>
-        <muxc:RadioButtons ItemsSource="{x:Bind ViewModel.DownloadSourceItems, Mode=OneWay}" SelectedIndex="{x:Bind ViewModel.DownloadSourceIndex, Mode=TwoWay}" AutomationProperties.AutomationId="DownloadSourceRadioButtons" Margin="0,8,0,0" />
+        <muxc:RadioButtons ItemsSource="{x:Bind ViewModel.DownloadSourceItems, Mode=OneWay}" SelectedIndex="{x:Bind ViewModel.DownloadSourceIndex, Mode=TwoWay}" AutomationProperties.AutomationId="DownloadSourceRadioButtons" />
       </muxc:Expander>
 
       <sc:RangeSettingCard
@@ -200,86 +201,95 @@
           SettingButtonIsAccent="True"
           Opacity="0.62" />
 
-      <muxc:Expander Margin="0,12,0,0">
+      <muxc:Expander Margin="0,12,0,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalAlignment="Top">
         <muxc:Expander.Header>
-          <StackPanel Orientation="Horizontal" Spacing="16">
-            <FontIcon Glyph="&#xE946;" FontSize="20" />
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Spacing="16" Margin="0,10,0,10">
+              <FontIcon Glyph="&#xE946;" FontSize="20" />
+              <StackPanel Spacing="4">
+                <TextBlock Text="{x:Bind Texts['Settings_About_Title'], Mode=OneWay}" FontWeight="SemiBold" />
+                <TextBlock Text="{x:Bind CopyrightText, Mode=OneTime}" Opacity="0.62" />
+              </StackPanel>
+            </StackPanel>
+            <TextBlock
+                Grid.Column="1"
+                Text="{x:Bind ViewModel.VersionText, Mode=OneWay}"
+                Opacity="0.62"
+                VerticalAlignment="Center"
+                Margin="12,10,0,10" />
+          </Grid>
+        </muxc:Expander.Header>
+        <StackPanel Spacing="10" Margin="0,8,0,0">
+          <TextBlock Text="{x:Bind Texts['Settings_About_LegalProtected'], Mode=OneWay}" TextWrapping="Wrap" />
+          <StackPanel Orientation="Horizontal" Spacing="4">
+            <TextBlock Text="{x:Bind Texts['Settings_About_OpenSourceLicenseProtected'], Mode=OneWay}" TextWrapping="Wrap" />
+            <HyperlinkButton Content="{x:Bind GitHubLabel, Mode=OneTime}" Tag="https://github.com/MCSLTeam/MCServerLauncher-Future" Click="OpenUri_Click" Padding="0" AutomationProperties.AutomationId="ProjectGitHubLink" />
+            <TextBlock Text="{x:Bind Texts['PeriodSymbol'], Mode=OneWay}" />
+          </StackPanel>
+          <TextBlock Text="{x:Bind Texts['Settings_About_CertProtected'], Mode=OneWay}" TextWrapping="Wrap" />
+          <TextBlock Text="{x:Bind ViewModel.BuildInfoText, Mode=OneWay}" TextWrapping="Wrap" Opacity="0.72" />
+        </StackPanel>
+      </muxc:Expander>
+
+      <muxc:Expander Margin="0,4,0,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalAlignment="Top">
+        <muxc:Expander.Header>
+          <StackPanel Orientation="Horizontal" Spacing="16" Margin="0,10,0,10">
+            <FontIcon Glyph="&#xEB51;" FontSize="20" />
             <StackPanel Spacing="4">
-              <TextBlock Text="{x:Bind Texts['Settings_About_Title'], Mode=OneWay}" FontWeight="SemiBold" />
-              <TextBlock Text="{x:Bind CopyrightText, Mode=OneTime}" Opacity="0.62" />
-              <TextBlock Text="{x:Bind ViewModel.VersionText, Mode=OneWay}" Opacity="0.62" />
+              <TextBlock Text="{x:Bind Texts['Settings_Acknowledgments_Title'], Mode=OneWay}" FontWeight="SemiBold" />
+              <TextBlock Text="{x:Bind Texts['Settings_Acknowledgments_Description'], Mode=OneWay}" Opacity="0.62" TextWrapping="Wrap" />
             </StackPanel>
           </StackPanel>
         </muxc:Expander.Header>
-        <Border Style="{StaticResource CardBorderStyle}" Margin="0,8,0,0">
-          <StackPanel Spacing="10">
-            <TextBlock Text="{x:Bind Texts['Settings_About_LegalProtected'], Mode=OneWay}" TextWrapping="Wrap" />
-            <StackPanel Orientation="Horizontal" Spacing="4">
-              <TextBlock Text="{x:Bind Texts['Settings_About_OpenSourceLicenseProtected'], Mode=OneWay}" TextWrapping="Wrap" />
-              <HyperlinkButton Content="{x:Bind GitHubLabel, Mode=OneTime}" Tag="https://github.com/MCSLTeam/MCServerLauncher-Future" Click="OpenUri_Click" Padding="0" AutomationProperties.AutomationId="ProjectGitHubLink" />
-              <TextBlock Text="{x:Bind Texts['PeriodSymbol'], Mode=OneWay}" />
+        <ItemsControl ItemsSource="{x:Bind ViewModel.Acknowledgments, Mode=OneWay}" HorizontalContentAlignment="Stretch" Margin="0,8,0,0">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="vmModels:SettingsLinkItem">
+              <Grid Padding="0,10" ColumnSpacing="16" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Spacing="4">
+                  <StackPanel Orientation="Horizontal" Spacing="10">
+                    <Border Width="40" Height="40" CornerRadius="8" VerticalAlignment="Center" Visibility="{x:Bind ImageVisibility, Mode=OneTime}">
+                      <Image Source="{x:Bind local:SettingsPage.ToImageSource(ImageSource), Mode=OneTime}" Stretch="UniformToFill" />
+                    </Border>
+                    <TextBlock Text="{x:Bind Title, Mode=OneTime}" FontWeight="SemiBold" VerticalAlignment="Center" />
+                  </StackPanel>
+                  <TextBlock Text="{x:Bind Description, Mode=OneTime}" Opacity="0.62" TextWrapping="Wrap" />
+                </StackPanel>
+                <Button Grid.Column="1" Content="{x:Bind ActionText, Mode=OneTime}" Tag="{x:Bind Uri, Mode=OneTime}" Click="OpenUri_Click" VerticalAlignment="Center" />
+              </Grid>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </muxc:Expander>
+
+      <muxc:Expander Margin="0,4,0,32" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalAlignment="Top">
+        <muxc:Expander.Header>
+          <StackPanel Orientation="Horizontal" Spacing="16" Margin="0,10,0,10">
+            <FontIcon Glyph="&#xE950;" FontSize="20" />
+            <StackPanel Spacing="4">
+              <TextBlock Text="{x:Bind Texts['Settings_Components_Title'], Mode=OneWay}" FontWeight="SemiBold" />
+              <TextBlock Text="{x:Bind Texts['Settings_Components_Description'], Mode=OneWay}" Opacity="0.62" TextWrapping="Wrap" />
             </StackPanel>
-            <TextBlock Text="{x:Bind Texts['Settings_About_CertProtected'], Mode=OneWay}" TextWrapping="Wrap" />
-            <TextBlock Text="{x:Bind ViewModel.BuildInfoText, Mode=OneWay}" TextWrapping="Wrap" Opacity="0.72" />
-          </StackPanel>
-        </Border>
-      </muxc:Expander>
-
-      <muxc:Expander Margin="0,4,0,0">
-        <muxc:Expander.Header>
-          <StackPanel Spacing="4">
-            <TextBlock Text="{x:Bind Texts['Settings_Acknowledgments_Title'], Mode=OneWay}" FontWeight="SemiBold" />
-            <TextBlock Text="{x:Bind Texts['Settings_Acknowledgments_Description'], Mode=OneWay}" Opacity="0.62" TextWrapping="Wrap" />
           </StackPanel>
         </muxc:Expander.Header>
-        <muxc:ItemsRepeater ItemsSource="{x:Bind ViewModel.Acknowledgments, Mode=OneWay}" Margin="0,8,0,0">
-          <muxc:ItemsRepeater.Layout><muxc:StackLayout Spacing="8" /></muxc:ItemsRepeater.Layout>
-          <muxc:ItemsRepeater.ItemTemplate>
+        <ItemsControl ItemsSource="{x:Bind ViewModel.Components, Mode=OneWay}" HorizontalContentAlignment="Stretch" Margin="0,8,0,0">
+          <ItemsControl.ItemTemplate>
             <DataTemplate x:DataType="vmModels:SettingsLinkItem">
-              <Border Style="{StaticResource CardBorderStyle}">
-                <Grid ColumnSpacing="16">
-                  <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
-                  <StackPanel Grid.Column="0" Spacing="4">
-                    <StackPanel Orientation="Horizontal" Spacing="10">
-                      <Border Width="40" Height="40" CornerRadius="8" VerticalAlignment="Center" Visibility="{x:Bind ImageVisibility, Mode=OneTime}">
-                        <Image Source="{x:Bind ImageSource, Mode=OneTime}" Stretch="UniformToFill" />
-                      </Border>
-                      <TextBlock Text="{x:Bind Title, Mode=OneTime}" FontWeight="SemiBold" VerticalAlignment="Center" />
-                    </StackPanel>
-                    <TextBlock Text="{x:Bind Description, Mode=OneTime}" Opacity="0.62" TextWrapping="Wrap" />
-                  </StackPanel>
-                  <Button Grid.Column="1" Content="{x:Bind ActionText, Mode=OneTime}" Tag="{x:Bind Uri, Mode=OneTime}" Click="OpenUri_Click" />
-                </Grid>
-              </Border>
+              <Grid Padding="0,10" ColumnSpacing="16" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Spacing="4">
+                  <TextBlock Text="{x:Bind Title, Mode=OneTime}" FontWeight="SemiBold" />
+                  <TextBlock Text="{x:Bind Description, Mode=OneTime}" Opacity="0.62" TextWrapping="Wrap" />
+                </StackPanel>
+                <Button Grid.Column="1" Content="{x:Bind ActionText, Mode=OneTime}" Tag="{x:Bind Uri, Mode=OneTime}" Click="OpenUri_Click" VerticalAlignment="Center" />
+              </Grid>
             </DataTemplate>
-          </muxc:ItemsRepeater.ItemTemplate>
-        </muxc:ItemsRepeater>
-      </muxc:Expander>
-
-      <muxc:Expander Margin="0,4,0,32">
-        <muxc:Expander.Header>
-          <StackPanel Spacing="4">
-            <TextBlock Text="{x:Bind Texts['Settings_Components_Title'], Mode=OneWay}" FontWeight="SemiBold" />
-            <TextBlock Text="{x:Bind Texts['Settings_Components_Description'], Mode=OneWay}" Opacity="0.62" TextWrapping="Wrap" />
-          </StackPanel>
-        </muxc:Expander.Header>
-        <muxc:ItemsRepeater ItemsSource="{x:Bind ViewModel.Components, Mode=OneWay}" Margin="0,8,0,0">
-          <muxc:ItemsRepeater.Layout><muxc:StackLayout Spacing="8" /></muxc:ItemsRepeater.Layout>
-          <muxc:ItemsRepeater.ItemTemplate>
-            <DataTemplate x:DataType="vmModels:SettingsLinkItem">
-              <Border Style="{StaticResource CardBorderStyle}">
-                <Grid ColumnSpacing="16">
-                  <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
-                  <StackPanel Spacing="4">
-                    <TextBlock Text="{x:Bind Title, Mode=OneTime}" FontWeight="SemiBold" />
-                    <TextBlock Text="{x:Bind Description, Mode=OneTime}" Opacity="0.62" TextWrapping="Wrap" />
-                  </StackPanel>
-                  <Button Grid.Column="1" Content="{x:Bind ActionText, Mode=OneTime}" Tag="{x:Bind Uri, Mode=OneTime}" Click="OpenUri_Click" />
-                </Grid>
-              </Border>
-            </DataTemplate>
-          </muxc:ItemsRepeater.ItemTemplate>
-        </muxc:ItemsRepeater>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
       </muxc:Expander>
     </StackPanel>
   </ScrollViewer>

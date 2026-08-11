@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using MCServerLauncher.WinUI.Core;
 using MCServerLauncher.WinUI.Core.Localization;
 using MCServerLauncher.WinUI.Models;
 using MCServerLauncher.WinUI.ViewModels;
@@ -36,7 +37,10 @@ public sealed partial class InstanceManagerPage : Page
     public Visibility BoolToVisibility(bool value) =>
         value ? Visibility.Visible : Visibility.Collapsed;
 
-    private async void OnLoaded(object sender, RoutedEventArgs e)
+    private void OnLoaded(object sender, RoutedEventArgs e) =>
+        OnLoadedCore().FireAndForget("InstanceManagerPage.OnLoaded");
+
+    private async Task OnLoadedCore()
     {
         _isPageLoaded = true;
         ViewModel.Attach();
@@ -86,10 +90,13 @@ public sealed partial class InstanceManagerPage : Page
 
     private void StopAutoRefresh() => _refreshTimer?.Stop();
 
-    private async void RefreshTimer_Tick(DispatcherQueueTimer sender, object args) =>
-        await ViewModel.AutoRefreshAsync();
+    private void RefreshTimer_Tick(DispatcherQueueTimer sender, object args) =>
+        ViewModel.AutoRefreshAsync().FireAndForget("InstanceManagerPage.RefreshTimer_Tick");
 
-    private async void DaemonFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void DaemonFilter_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
+        DaemonFilter_SelectionChangedCore().FireAndForget("InstanceManagerPage.DaemonFilter_SelectionChanged");
+
+    private async Task DaemonFilter_SelectionChangedCore()
     {
         if (_isPageLoaded) await ViewModel.RefreshAsync();
     }
@@ -100,28 +107,40 @@ public sealed partial class InstanceManagerPage : Page
             ViewModel.OpenConsole(card);
     }
 
-    private async void StartInstance_Click(object sender, RoutedEventArgs e)
+    private void StartInstance_Click(object sender, RoutedEventArgs e) =>
+        StartInstance_ClickCore(sender).FireAndForget("InstanceManagerPage.StartInstance_Click");
+
+    private async Task StartInstance_ClickCore(object sender)
     {
         if ((sender as FrameworkElement)?.Tag is not InstanceCardModel card) return;
         if (await ConfirmAsync(card, "InstanceCard_StartConfirmTitle", "InstanceCard_StartConfirmContent", "Start"))
             await ViewModel.StartInstanceAsync(card);
     }
 
-    private async void StopInstance_Click(object sender, RoutedEventArgs e)
+    private void StopInstance_Click(object sender, RoutedEventArgs e) =>
+        StopInstance_ClickCore(sender).FireAndForget("InstanceManagerPage.StopInstance_Click");
+
+    private async Task StopInstance_ClickCore(object sender)
     {
         if ((sender as FrameworkElement)?.Tag is not InstanceCardModel card) return;
         if (await ConfirmAsync(card, "InstanceCard_StopConfirmTitle", "InstanceCard_StopConfirmContent", "Stop"))
             await ViewModel.StopInstanceAsync(card);
     }
 
-    private async void RestartInstance_Click(object sender, RoutedEventArgs e)
+    private void RestartInstance_Click(object sender, RoutedEventArgs e) =>
+        RestartInstance_ClickCore(sender).FireAndForget("InstanceManagerPage.RestartInstance_Click");
+
+    private async Task RestartInstance_ClickCore(object sender)
     {
         if ((sender as FrameworkElement)?.Tag is not InstanceCardModel card) return;
         if (await ConfirmAsync(card, "InstanceCard_RestartConfirmTitle", "InstanceCard_RestartConfirmContent", "Restart"))
             await ViewModel.RestartInstanceAsync(card);
     }
 
-    private async void KillInstance_Click(object sender, RoutedEventArgs e)
+    private void KillInstance_Click(object sender, RoutedEventArgs e) =>
+        KillInstance_ClickCore(sender).FireAndForget("InstanceManagerPage.KillInstance_Click");
+
+    private async Task KillInstance_ClickCore(object sender)
     {
         if ((sender as FrameworkElement)?.Tag is not InstanceCardModel card || XamlRoot is null) return;
         var confirmed = await App.Services.Dialogs.ConfirmCountdownAsync(
@@ -134,7 +153,10 @@ public sealed partial class InstanceManagerPage : Page
         if (confirmed) await ViewModel.KillInstanceAsync(card);
     }
 
-    private async void DeleteInstance_Click(object sender, RoutedEventArgs e)
+    private void DeleteInstance_Click(object sender, RoutedEventArgs e) =>
+        DeleteInstance_ClickCore(sender).FireAndForget("InstanceManagerPage.DeleteInstance_Click");
+
+    private async Task DeleteInstance_ClickCore(object sender)
     {
         if ((sender as FrameworkElement)?.Tag is not InstanceCardModel card) return;
         if (await ConfirmAsync(card, "InstanceCard_DeleteConfirmTitle", "InstanceCard_DeleteConfirmContent", "Delete", isDestructive: true))
