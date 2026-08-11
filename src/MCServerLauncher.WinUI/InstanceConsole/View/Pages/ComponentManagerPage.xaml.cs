@@ -6,6 +6,7 @@ using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using MCServerLauncher.WinUI.Core;
 using MCServerLauncher.WinUI.Core.Localization;
 using MCServerLauncher.WinUI.Models;
 
@@ -157,10 +158,15 @@ public sealed partial class ComponentManagerPage : UserControl, INotifyPropertyC
         e.Handled = true;
     }
 
-    private async void Page_Drop(object sender, DragEventArgs e)
+    private void Page_Drop(object sender, DragEventArgs e)
     {
         if (!e.DataView.Contains(StandardDataFormats.StorageItems)) return;
-        var items = await e.DataView.GetStorageItemsAsync();
+        PageDropCoreAsync(e.DataView).FireAndForget("Page_Drop");
+    }
+
+    private async Task PageDropCoreAsync(DataPackageView dataView)
+    {
+        var items = await dataView.GetStorageItemsAsync();
         var files = items.OfType<StorageFile>().ToArray();
         if (files.Length > 0) FilesDropped?.Invoke(this, files);
     }

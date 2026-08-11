@@ -5,9 +5,12 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using CommunityToolkit.Mvvm.Input;
+using MCServerLauncher.WinUI.Core;
 using MCServerLauncher.WinUI.Core.Localization;
 using MCServerLauncher.WinUI.InstanceConsole.Editing;
+using MCServerLauncher.WinUI.InstanceConsole.Modules;
 using MCServerLauncher.WinUI.Models;
+using Serilog;
 using WinUIEditor;
 using MuxControls = Microsoft.UI.Xaml.Controls;
 
@@ -84,13 +87,16 @@ public sealed partial class FileManagerPage : UserControl
     private void MultiSelectTipBar_Closed(object sender, object e)
     {
         App.Services.Settings.Current.App.HideTips["FileManagerMultiSelect"] = true;
-        _ = App.Services.Settings.SaveAsync();
+        App.Services.Settings.SaveAsync().FireAndForget("MultiSelectTipBar_Closed");
     }
 
     private void LoadFile_Click(object sender, RoutedEventArgs e) => LoadFileRequested?.Invoke(this, EventArgs.Empty);
     private void SaveFile_Click(object sender, RoutedEventArgs e) => SaveFileRequested?.Invoke(this, EventArgs.Empty);
     private void ReloadFile_Click(object sender, RoutedEventArgs e) => ReloadFileRequested?.Invoke(this, EventArgs.Empty);
-    private async void ChangeEncoding_Click(object sender, RoutedEventArgs e)
+    private void ChangeEncoding_Click(object sender, RoutedEventArgs e)
+        => ChangeEncodingCoreAsync().FireAndForget("ChangeEncoding_Click");
+
+    private async Task ChangeEncodingCoreAsync()
     {
         var comboBox = new ComboBox
         {
@@ -115,16 +121,24 @@ public sealed partial class FileManagerPage : UserControl
             CloseButtonText = Texts["Cancel"],
             DefaultButton = ContentDialogButton.Primary
         };
-        if (await dialog.ShowAsync() != ContentDialogResult.Primary
-            || comboBox.SelectedItem is not EncodingInfo selected
-            || selected.CodePage == _selectedEncoding.CodePage)
+        try
         {
-            return;
-        }
+            var result = await dialog.ShowAsync();
+            if (result != ContentDialogResult.Primary
+                || comboBox.SelectedItem is not EncodingInfo selected
+                || selected.CodePage == _selectedEncoding.CodePage)
+            {
+                return;
+            }
 
-        _selectedEncoding = selected;
-        EncodingButton.Content = selected.DisplayName;
-        EncodingChanged?.Invoke(this, EventArgs.Empty);
+            _selectedEncoding = selected;
+            EncodingButton.Content = selected.DisplayName;
+            EncodingChanged?.Invoke(this, EventArgs.Empty);
+        }
+        catch (Exception ex)
+        {
+            Log.Warning(ex, "[WinUI] Encoding picker dialog failed");
+        }
     }
     private void SearchTextBox_KeyDown(object sender, KeyRoutedEventArgs e) { if (e.Key == Windows.System.VirtualKey.Enter) { e.Handled = true; SearchRequested?.Invoke(this, EventArgs.Empty); } }
     private void FindNext_Click(object sender, RoutedEventArgs e) => SearchRequested?.Invoke(this, EventArgs.Empty);
@@ -214,12 +228,7 @@ public sealed partial class FileManagerPage : UserControl
         RemoteFilesList.Visibility = Visibility.Collapsed;
     }
 
-    private static string NormalizeVirtualPath(string path)
-    {
-        if (string.IsNullOrWhiteSpace(path)) return "/";
-        var parts = path.Replace('\\', '/').Split('/', StringSplitOptions.RemoveEmptyEntries);
-        return parts.Length == 0 ? "/" : "/" + string.Join('/', parts);
-    }
+    private static string NormalizeVirtualPath(string path) => VirtualPath.Normalize(path);
 }
 
 public sealed class DirectoryNode

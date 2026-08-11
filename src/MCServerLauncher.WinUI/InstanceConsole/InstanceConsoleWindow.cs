@@ -24,7 +24,7 @@ public sealed class InstanceConsoleWindow : WinUIIslands.Window
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(view.TitleBarElement);
         SystemBackdrop = new WinUIIslands.MicaBackdrop();
-        Title = "MCServerLauncher Future";
+        Title = Core.AppInfo.ProductName;
         if (AppWindow is { } appWindow)
         {
             appWindow.Resize(new Windows.Graphics.SizeInt32(1000, 700));
