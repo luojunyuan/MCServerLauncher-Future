@@ -158,6 +158,7 @@ public sealed partial class InstanceSettingsPage : UserControl
     }
     private void Save_Click(object sender, RoutedEventArgs e) => SaveRequested?.Invoke(this, EventArgs.Empty);
     private void Reload_Click(object sender, RoutedEventArgs e) => ReloadRequested?.Invoke(this, EventArgs.Empty);
+    private void Refresh_Click(object sender, RoutedEventArgs e) => ReloadRequested?.Invoke(this, EventArgs.Empty);
 
     private void InputChanged(object sender, RoutedEventArgs e) => UpdateSaveState();
     private void InputChanged(object sender, TextChangedEventArgs e) => UpdateSaveState();

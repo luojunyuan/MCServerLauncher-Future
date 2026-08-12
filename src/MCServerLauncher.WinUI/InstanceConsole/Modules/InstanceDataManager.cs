@@ -18,20 +18,24 @@ public sealed class InstanceDataManager : IAsyncDisposable
     private readonly CancellationTokenSource _dispose = new();
     private IDaemon? _daemon;
     private Task? _refreshLoop;
+    private volatile bool _pollingPaused;
     private bool _disposed;
 
     public InstanceDataManager(
         IDaemonConnectionService connections,
         DaemonConfigModel config,
-        Guid instanceId)
+        Guid instanceId,
+        string logsRoot)
     {
         _connections = connections;
         _config = config;
         _instanceId = instanceId;
+        LogStore = new ConsoleLogStore(instanceId, logsRoot);
     }
 
     public Guid InstanceId => _instanceId;
     public IDaemon? Daemon => _daemon;
+    public ConsoleLogStore LogStore { get; }
     public InstanceReport? CurrentReport { get; private set; }
     public bool IsConnected => _daemon?.Online == true;
     public event EventHandler<InstanceReport?>? ReportUpdated;
@@ -47,9 +51,20 @@ public sealed class InstanceDataManager : IAsyncDisposable
         await _daemon.SubscribeEvent(
             EventType.InstanceLog,
             new InstanceLogEventMeta { InstanceId = _instanceId });
+        try
+        {
+            LogStore.SeedHistory(await GetLogHistoryAsync());
+        }
+        catch (Exception ex)
+        {
+            Log.Warning(ex, "[WinUI] Failed to seed console log history {InstanceId}", _instanceId);
+        }
         await RefreshAsync();
         _refreshLoop = RefreshLoopAsync(_dispose.Token);
     }
+
+    /// <summary>Pauses or resumes the periodic report poll (e.g. while the console window is deactivated).</summary>
+    public void SetPollingPaused(bool paused) => _pollingPaused = paused;
 
     public async Task RefreshAsync()
     {
@@ -100,6 +115,9 @@ public sealed class InstanceDataManager : IAsyncDisposable
             try { await _refreshLoop; } catch (OperationCanceledException) { }
         }
 
+        // Persist any log lines still staged in the in-memory write buffer.
+        LogStore.Flush();
+
         if (_daemon is not null)
         {
             _daemon.InstanceLogEvent -= OnInstanceLog;
@@ -125,7 +143,10 @@ public sealed class InstanceDataManager : IAsyncDisposable
         try
         {
             while (await timer.WaitForNextTickAsync(cancellationToken))
+            {
+                if (_pollingPaused) continue;
                 await RefreshAsync();
+            }
         }
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { }
     }

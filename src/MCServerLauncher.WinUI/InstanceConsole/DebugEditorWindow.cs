@@ -12,6 +12,10 @@ public sealed class DebugEditorWindow : WinUIIslands.Window
         SetTitleBar(view.TitleBarElement);
         SystemBackdrop = new WinUIIslands.MicaBackdrop();
         Title = fileName;
+        if (AppWindow is { } appWindow)
+        {
+            appWindow.Resize(new Windows.Graphics.SizeInt32(800, 600));
+        }
         Closed += (_, _) => App.UnregisterSecondaryWindow(this);
     }
 }

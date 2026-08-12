@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MCServerLauncher.Common.ProtoType.Instance;
 using MCServerLauncher.DaemonClient;
+using MCServerLauncher.WinUI.Core;
 using MCServerLauncher.WinUI.Core.Localization;
 using MCServerLauncher.WinUI.Core.Services;
 using MCServerLauncher.WinUI.Core.Storage;
@@ -10,6 +11,7 @@ using MCServerLauncher.WinUI.InstanceConsole;
 using MCServerLauncher.WinUI.Models;
 using MCServerLauncher.WinUI.ViewModels.Models;
 using Serilog;
+using Windows.System;
 
 namespace MCServerLauncher.WinUI.ViewModels;
 
@@ -29,6 +31,9 @@ public partial class InstanceManagerViewModel : ObservableObject
     private readonly IDaemonConnectionService _connections;
     private readonly INotificationService _notifications;
     private readonly ILocalizationService _localization;
+    private DispatcherQueueTimer? _searchDebounceTimer;
+    private long _refreshInFlight;
+    private ulong? _cachedMemoryTotal;
     private bool _attached;
 
     public InstanceManagerViewModel(
@@ -73,6 +78,7 @@ public partial class InstanceManagerViewModel : ObservableObject
     {
         if (!_attached) return;
         _localization.LanguageChanged -= Localization_LanguageChanged;
+        _searchDebounceTimer?.Stop();
         _attached = false;
     }
 
@@ -105,8 +111,16 @@ public partial class InstanceManagerViewModel : ObservableObject
     [RelayCommand]
     public async Task AutoRefreshAsync()
     {
-        await LoadDaemonInstancesAsync(isAutoRefresh: true);
-        ApplyFilters();
+        if (Interlocked.Exchange(ref _refreshInFlight, 1) == 1) return;
+        try
+        {
+            await LoadDaemonInstancesAsync(isAutoRefresh: true);
+            ApplyFilters();
+        }
+        finally
+        {
+            Interlocked.Exchange(ref _refreshInFlight, 0);
+        }
     }
 
     public async Task StartInstanceAsync(InstanceCardModel card)
@@ -232,13 +246,25 @@ public partial class InstanceManagerViewModel : ObservableObject
         SyncFiltered(filtered.ToList());
     }
 
-    partial void OnSearchTextChanged(string value) => ApplyFilters();
+    partial void OnSearchTextChanged(string value)
+    {
+        _searchDebounceTimer ??= App.DispatcherQueue.CreateTimer();
+        _searchDebounceTimer.Stop();
+        _searchDebounceTimer.Interval = TimeSpan.FromMilliseconds(300);
+        _searchDebounceTimer.IsRepeating = false;
+        _searchDebounceTimer.Tick -= SearchDebounceTimer_Tick;
+        _searchDebounceTimer.Tick += SearchDebounceTimer_Tick;
+        _searchDebounceTimer.Start();
+    }
+
+    private void SearchDebounceTimer_Tick(DispatcherQueueTimer sender, object args) => ApplyFilters();
+
     partial void OnSelectedStatusFilterChanged(string value) => ApplyFilters();
 
     partial void OnAutoRefreshEnabledChanged(bool value)
     {
         _settings.Current.Instance.AutoRefreshInterval = value ? RefreshIntervalSeconds : 0;
-        _ = _settings.SaveAsync();
+        _settings.SaveAsync().FireAndForget("InstanceManagerViewModel.OnAutoRefreshEnabledChanged");
     }
 
     partial void OnRefreshIntervalSecondsChanged(int value)
@@ -251,7 +277,7 @@ public partial class InstanceManagerViewModel : ObservableObject
         }
         if (!AutoRefreshEnabled) return;
         _settings.Current.Instance.AutoRefreshInterval = normalized;
-        _ = _settings.SaveAsync();
+        _settings.SaveAsync().FireAndForget("InstanceManagerViewModel.OnRefreshIntervalSecondsChanged");
     }
 
     private async Task LoadDaemonInstancesAsync(bool isAutoRefresh)
@@ -269,7 +295,12 @@ public partial class InstanceManagerViewModel : ObservableObject
         {
             var daemon = await _connections.GetAsync(config)
                 ?? throw new InvalidOperationException(_localization.Get("ConnectDaemonFailedTip"));
-            var memoryTotal = await GetMemoryTotalAsync(daemon, config);
+            // Total memory is expensive to fetch (an extra RPC); only query it on
+            // full/manual refreshes and reuse the cached value during auto-refresh.
+            var memoryTotal = isAutoRefresh
+                ? _cachedMemoryTotal ??= await GetMemoryTotalAsync(daemon, config)
+                : await GetMemoryTotalAsync(daemon, config);
+            if (!isAutoRefresh && memoryTotal is not null) _cachedMemoryTotal = memoryTotal;
             var reports = await daemon.GetAllReportsAsync();
             if (reports.Count == 0)
             {

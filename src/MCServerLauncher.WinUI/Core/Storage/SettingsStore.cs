@@ -44,6 +44,10 @@ public sealed class AppSettings
     public bool FollowStartup { get; set; }
     public bool AutoCheckUpdate { get; set; } = true;
     public bool IsFontInstalled { get; set; }
+    // Opt-in for ElevationHelper.RelaunchAsAdministrator. Default-off: unlike WPF's
+    // Initializer, WinUI never auto-elevates at startup. The settings page can
+    // surface this toggle; nothing here consumes it automatically.
+    public bool IsRunAsAdmin { get; set; }
     public bool IsAppEulaAccepted { get; set; }
     public bool IsFirstSetupFinished { get; set; }
     public Dictionary<string, bool> HideTips { get; set; } = [];

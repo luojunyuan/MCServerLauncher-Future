@@ -1,5 +1,6 @@
 using System.Reflection;
 using Windows.ApplicationModel.Activation;
+using MCServerLauncher.WinUI.Core;
 using MCServerLauncher.WinUI.Core.Services;
 using Serilog;
 
@@ -37,10 +38,15 @@ public sealed partial class App : WinUIIslands.Application
     internal static void UnregisterSecondaryWindow(WinUIIslands.Window window)
     {
         lock (SecondaryWindows) SecondaryWindows.Remove(window);
-        _ = DisposeServicesIfReadyAsync();
+        DisposeServicesIfReadyAsync().FireAndForget("App.UnregisterSecondaryWindow");
     }
 
-    protected override async void OnIslandLaunched(LaunchActivatedEventArgs e)
+    protected override void OnIslandLaunched(LaunchActivatedEventArgs e)
+    {
+        LaunchAsync(e).FireAndForget("App.OnIslandLaunched");
+    }
+
+    private async Task LaunchAsync(LaunchActivatedEventArgs e)
     {
         DispatcherQueue = global::Windows.System.DispatcherQueue.GetForCurrentThread();
         var servicesCreated = false;
@@ -75,9 +81,10 @@ public sealed partial class App : WinUIIslands.Application
         Window.Closed += (_, _) =>
         {
             lock (SecondaryWindows) _mainWindowClosed = true;
-            _ = DisposeServicesIfReadyAsync();
+            DisposeServicesIfReadyAsync().FireAndForget("App.MainWindow.Closed");
         };
         Window.Activate();
+        MCServerLauncher.WinUI.MainWindow.ApplyWindowSetup(App.Window);
     }
 
     private static void OnUnhandledException(object sender, System.UnhandledExceptionEventArgs args)

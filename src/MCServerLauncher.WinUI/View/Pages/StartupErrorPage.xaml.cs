@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using MCServerLauncher.WinUI.Core;
 using MCServerLauncher.WinUI.Core.Localization;
 
 namespace MCServerLauncher.WinUI.Views.Pages;
@@ -17,7 +18,7 @@ public sealed partial class StartupErrorPage : Page
     }
 
     public string ErrorText { get; }
-    public string ProductName => "MCServerLauncher Future";
+    public string ProductName => Core.AppInfo.ProductName;
     public LocalizedStrings Texts => App.Services.Localization.Texts;
 
     private void Exit_Click(object sender, RoutedEventArgs e) => Environment.Exit(1);
@@ -39,7 +40,10 @@ public sealed partial class StartupErrorPage : Page
         Environment.Exit(0);
     }
 
-    private async void Feedback_Click(object sender, RoutedEventArgs e)
+    private void Feedback_Click(object sender, RoutedEventArgs e) =>
+        Feedback_ClickCore().FireAndForget("StartupErrorPage.Feedback_Click");
+
+    private async Task Feedback_ClickCore()
     {
         await Windows.System.Launcher.LaunchUriAsync(
             new Uri("https://github.com/MCSLTeam/MCServerLauncher-Future/issues/new"));

@@ -30,6 +30,12 @@ public partial class DaemonCardModel : ObservableObject
         _ => Texts["Connecting"]
     };
     public bool HasError => Status == "err";
+    public string StatusGlyph => Status switch
+    {
+        "ok" => "",
+        "err" => "",
+        _ => ""
+    };
 
     public void MarkResourceLoadFailed(string message)
     {
@@ -51,6 +57,7 @@ public partial class DaemonCardModel : ObservableObject
     {
         OnPropertyChanged(nameof(StatusText));
         OnPropertyChanged(nameof(HasError));
+        OnPropertyChanged(nameof(StatusGlyph));
     }
 
     partial void OnStatusChanged(string value) => RefreshLocalizedText();

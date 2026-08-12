@@ -1,9 +1,12 @@
 using System.Collections.ObjectModel;
 using System.Text.Json;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using MCServerLauncher.Common.ProtoType.EventTrigger;
 using MCServerLauncher.DaemonClient.Serialization;
+using MCServerLauncher.WinUI.Core;
 using MCServerLauncher.WinUI.Core.Localization;
 using MCServerLauncher.WinUI.Core.Services;
 using MCServerLauncher.WinUI.Models;
@@ -45,7 +48,7 @@ public sealed partial class EventTriggerPage : UserControl
     private void MultiSelectTipBar_Closed(object sender, object e)
     {
         App.Services.Settings.Current.App.HideTips["EventTriggerMultiSelect"] = true;
-        _ = App.Services.Settings.SaveAsync();
+        App.Services.Settings.SaveAsync().FireAndForget("MultiSelectTipBar_Closed");
     }
 
     public void SetRules(IEnumerable<EventRule> rules)
@@ -57,7 +60,10 @@ public sealed partial class EventTriggerPage : UserControl
 
     public List<EventRule> GetRules() => Rules.Select(item => item.Rule).ToList();
 
-    private void Add_Click(object sender, RoutedEventArgs e)
+    private RelayCommand? _addRuleCommand;
+    public ICommand AddRuleCommand => _addRuleCommand ??= new RelayCommand(AddRule);
+
+    private void AddRule()
     {
         Rules.Add(new EventRuleModel(new EventRule
         {
@@ -66,9 +72,17 @@ public sealed partial class EventTriggerPage : UserControl
         }));
     }
 
-    private async void Edit_Click(object sender, RoutedEventArgs e)
+    private void Add_Click(object sender, RoutedEventArgs e) => AddRule();
+
+    private void Edit_Click(object sender, RoutedEventArgs e)
     {
-        if ((sender as FrameworkElement)?.Tag is not EventRuleModel item || XamlRoot is null) return;
+        if ((sender as FrameworkElement)?.Tag is not EventRuleModel item) return;
+        EditRuleCoreAsync(item).FireAndForget("Edit_Click");
+    }
+
+    private async Task EditRuleCoreAsync(EventRuleModel item)
+    {
+        if (XamlRoot is null) return;
         if (await EventRuleEditorDialog.ShowAsync(XamlRoot, item.Rule, Texts)) item.Refresh();
     }
 
@@ -100,7 +114,10 @@ public sealed partial class EventTriggerPage : UserControl
             Rules.Remove(item);
     }
 
-    private async void Import_Click(object sender, RoutedEventArgs e)
+    private void Import_Click(object sender, RoutedEventArgs e)
+        => ImportCoreAsync().FireAndForget("Import_Click");
+
+    private async Task ImportCoreAsync()
     {
         var file = await App.Services.Files.PickFileAsync(App.WindowHandle);
         if (file is null) return;
@@ -127,7 +144,10 @@ public sealed partial class EventTriggerPage : UserControl
         }
     }
 
-    private async void Export_Click(object sender, RoutedEventArgs e)
+    private void Export_Click(object sender, RoutedEventArgs e)
+        => ExportCoreAsync().FireAndForget("Export_Click");
+
+    private async Task ExportCoreAsync()
     {
         var file = await App.Services.Files.PickSaveFileAsync(App.WindowHandle, "EventRules.json");
         if (file is null) return;

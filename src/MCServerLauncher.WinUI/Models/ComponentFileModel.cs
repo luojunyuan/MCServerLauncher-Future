@@ -59,17 +59,5 @@ public partial class ComponentFileModel : ObservableObject
         OnPropertyChanged(nameof(ClientWarningText));
     }
 
-    private static string FormatSize(long bytes)
-    {
-        var value = Math.Max(0, (double)bytes);
-        var units = new[] { "B", "KB", "MB", "GB", "TB" };
-        var index = 0;
-        while (value >= 1024 && index < units.Length - 1)
-        {
-            value /= 1024;
-            index++;
-        }
-
-        return $"{value:F1} {units[index]}";
-    }
+    private static string FormatSize(long bytes) => Core.Format.FormatSize(bytes);
 }

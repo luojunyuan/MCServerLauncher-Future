@@ -10,6 +10,7 @@ using MCServerLauncher.Common.ProtoType.Action;
 using MCServerLauncher.Common.ProtoType.Event;
 using MCServerLauncher.Common.ProtoType.Instance;
 using MCServerLauncher.DaemonClient;
+using MCServerLauncher.WinUI.Core;
 using MCServerLauncher.WinUI.Core.Localization;
 using MCServerLauncher.WinUI.Core.Services;
 using MCServerLauncher.WinUI.InstanceConsole.Editing;
@@ -51,6 +52,7 @@ public sealed partial class InstanceConsoleView : UserControl
     private GCHandle _closeHookHandle;
     private nuint _closeHookId;
     private nint _normalWindowStyle;
+    private bool _closed;
 
     public InstanceConsoleView(
         InstanceConsoleWindow hostWindow,
@@ -62,20 +64,21 @@ public sealed partial class InstanceConsoleView : UserControl
         _daemonConfig = daemonConfig;
         _instanceId = instanceId;
         _isDebugMode = isDebugMode;
-        _dataManager = new InstanceDataManager(App.Services.DaemonConnections, daemonConfig, instanceId);
+        _dataManager = new InstanceDataManager(App.Services.DaemonConnections, daemonConfig, instanceId, App.Services.Paths.LogsRoot);
         InitializeComponent();
+        CommandPageControl.BindLogStore(_dataManager.LogStore);
         _editor = new WinUIEditAdapter(EditorControl);
         _editor.Modified += (_, _) => UpdateEditorState();
-        CommandPageControl.SendCommandRequested += (_, _) => _ = SendCommandAsync(CommandTabTextBox.Text);
-        CommandPageControl.StartRequested += (_, _) => _ = StartInstanceAsync();
-        CommandPageControl.StopRequested += (_, _) => _ = StopInstanceAsync();
-        CommandPageControl.RestartRequested += (_, _) => _ = RestartInstanceAsync();
-        CommandPageControl.KillRequested += (_, _) => _ = KillInstanceAsync();
+        CommandPageControl.SendCommandRequested += (_, _) => SendCommandAsync(CommandTabTextBox.Text).FireAndForget("SendCommand");
+        CommandPageControl.StartRequested += (_, _) => StartInstanceAsync().FireAndForget("StartInstance");
+        CommandPageControl.StopRequested += (_, _) => StopInstanceAsync().FireAndForget("StopInstance");
+        CommandPageControl.RestartRequested += (_, _) => RestartInstanceAsync().FireAndForget("RestartInstance");
+        CommandPageControl.KillRequested += (_, _) => KillInstanceAsync().FireAndForget("KillInstance");
         CommandPageControl.FullscreenRequested += (_, _) => ToggleFullscreen();
-        FileManagerPageControl.LoadFileRequested += (_, _) => _ = LoadFileFromPageAsync();
-        FileManagerPageControl.SaveFileRequested += (_, _) => _ = SaveFileAsync();
-        FileManagerPageControl.ReloadFileRequested += (_, _) => _ = ReloadFileFromPageAsync();
-        FileManagerPageControl.EncodingChanged += (_, _) => _ = UpdateEncodingSelectionAsync();
+        FileManagerPageControl.LoadFileRequested += (_, _) => LoadFileFromPageAsync().FireAndForget("LoadFileFromPage");
+        FileManagerPageControl.SaveFileRequested += (_, _) => SaveFileAsync().FireAndForget("SaveFile");
+        FileManagerPageControl.ReloadFileRequested += (_, _) => ReloadFileFromPageAsync().FireAndForget("ReloadFileFromPage");
+        FileManagerPageControl.EncodingChanged += (_, _) => UpdateEncodingSelectionAsync().FireAndForget("UpdateEncodingSelection");
         FileManagerPageControl.SearchRequested += (_, _) => FindNext_Click(this, new RoutedEventArgs());
         FileManagerPageControl.UndoRequested += (_, _) => Undo_Click(this, new RoutedEventArgs());
         FileManagerPageControl.RedoRequested += (_, _) => Redo_Click(this, new RoutedEventArgs());
@@ -84,30 +87,30 @@ public sealed partial class InstanceConsoleView : UserControl
         FileManagerPageControl.SelectAllRequested += (_, _) => SelectAll_Click(this, new RoutedEventArgs());
         FileManagerPageControl.ZoomOutRequested += (_, _) => ZoomOut_Click(this, new RoutedEventArgs());
         FileManagerPageControl.ZoomInRequested += (_, _) => ZoomIn_Click(this, new RoutedEventArgs());
-        FileManagerPageControl.RefreshDirectoryRequested += (_, _) => _ = RefreshDirectoryAsync();
-        FileManagerPageControl.OpenItemRequested += (_, _) => _ = OpenSelectedItemAsync();
-        FileManagerPageControl.DownloadRequested += (_, _) => _ = DownloadSelectedFileAsync();
-        FileManagerPageControl.UploadRequested += (_, _) => _ = UploadFileAsync();
-        FileManagerPageControl.RenameRequested += (_, _) => _ = RenameSelectedFileAsync();
-        FileManagerPageControl.DeleteFileRequested += (_, _) => _ = DeleteSelectedFileAsync();
-        FileManagerPageControl.CreateDirectoryRequested += (_, _) => _ = CreateDirectoryAsync();
-        FileManagerPageControl.NavigateUpRequested += (_, _) => _ = NavigateUpAsync();
-        FileManagerPageControl.NavigateBackRequested += (_, _) => _ = NavigateBackAsync();
-        FileManagerPageControl.NavigateForwardRequested += (_, _) => _ = NavigateForwardAsync();
-        ComponentManagerPageControl.LoadRequested += (_, _) => _ = LoadComponentsAsync();
+        FileManagerPageControl.RefreshDirectoryRequested += (_, _) => RefreshDirectoryAsync().FireAndForget("RefreshDirectory");
+        FileManagerPageControl.OpenItemRequested += (_, _) => OpenSelectedItemAsync().FireAndForget("OpenSelectedItem");
+        FileManagerPageControl.DownloadRequested += (_, _) => DownloadSelectedFileAsync().FireAndForget("DownloadSelectedFile");
+        FileManagerPageControl.UploadRequested += (_, _) => UploadFileAsync().FireAndForget("UploadFile");
+        FileManagerPageControl.RenameRequested += (_, _) => RenameSelectedFileAsync().FireAndForget("RenameSelectedFile");
+        FileManagerPageControl.DeleteFileRequested += (_, _) => DeleteSelectedFileAsync().FireAndForget("DeleteSelectedFile");
+        FileManagerPageControl.CreateDirectoryRequested += (_, _) => CreateDirectoryAsync().FireAndForget("CreateDirectory");
+        FileManagerPageControl.NavigateUpRequested += (_, _) => NavigateUpAsync().FireAndForget("NavigateUp");
+        FileManagerPageControl.NavigateBackRequested += (_, _) => NavigateBackAsync().FireAndForget("NavigateBack");
+        FileManagerPageControl.NavigateForwardRequested += (_, _) => NavigateForwardAsync().FireAndForget("NavigateForward");
+        ComponentManagerPageControl.LoadRequested += (_, _) => LoadComponentsAsync().FireAndForget("LoadComponents");
         ComponentManagerPageControl.AddRequested += (_, _) => AddComponent_Click(this, new RoutedEventArgs());
         ComponentManagerPageControl.ToggleRequested += ToggleComponent_Click;
         ComponentManagerPageControl.LocateRequested += LocateComponent_Click;
         ComponentManagerPageControl.DeleteRequested += DeleteComponent_Click;
         ComponentManagerPageControl.FilesDropped += ComponentManagerPageControl_FilesDropped;
         InstanceSettingsPageControl.SaveRequested += (_, _) => SaveInstanceSettings_Click(this, new RoutedEventArgs());
-        InstanceSettingsPageControl.ReloadRequested += (_, _) => _ = LoadInstanceSettingsAsync();
-        InstanceSettingsPageControl.ScanJavaRequested += (_, _) => _ = ScanJavaAsync();
-        InstanceSettingsPageControl.SelectReplacementCoreRequested += (_, _) => _ = SelectReplacementCoreAsync();
+        InstanceSettingsPageControl.ReloadRequested += (_, _) => LoadInstanceSettingsAsync().FireAndForget("LoadInstanceSettings");
+        InstanceSettingsPageControl.ScanJavaRequested += (_, _) => ScanJavaAsync().FireAndForget("ScanJava");
+        InstanceSettingsPageControl.SelectReplacementCoreRequested += (_, _) => SelectReplacementCoreAsync().FireAndForget("SelectReplacementCore");
         InstanceSettingsPageControl.ClearReplacementCoreRequested += (_, _) => InstanceSettingsPageControl.SetReplacementCore(string.Empty);
-        InstanceSettingsPageControl.HelperRequested += (_, _) => _ = ShowJvmArgumentHelperAsync();
+        InstanceSettingsPageControl.HelperRequested += (_, _) => ShowJvmArgumentHelperAsync().FireAndForget("ShowJvmArgumentHelper");
         EventTriggerPageControl.SaveRequested += (_, _) => SaveEventRules_Click(this, new RoutedEventArgs());
-        EventTriggerPageControl.ReloadRequested += (_, _) => _ = LoadEventRulesAsync();
+        EventTriggerPageControl.ReloadRequested += (_, _) => LoadEventRulesAsync().FireAndForget("LoadEventRules");
         App.Services.Localization.LanguageChanged += Localization_LanguageChanged;
         _dataManager.LogReceived += OnDataLogReceived;
         _dataManager.ReportUpdated += OnReportUpdated;
@@ -117,7 +120,7 @@ public sealed partial class InstanceConsoleView : UserControl
     }
 
     public LocalizedStrings Texts => App.Services.Localization.Texts;
-    public string WindowTitle { get; private set; } = "MCServerLauncher Future";
+    public string WindowTitle { get; private set; } = Core.AppInfo.ProductName;
     public UIElement TitleBarElement => TitleBarHost;
 
     private TextBox CommandTabTextBox => CommandPageControl.Input;
@@ -132,10 +135,22 @@ public sealed partial class InstanceConsoleView : UserControl
     private TextBlock InstanceSettingsStateText => InstanceSettingsPageControl.StateText;
     private Button SaveInstanceSettingsButton => InstanceSettingsPageControl.SaveButton;
 
-    private async void OnActivated(object sender, WindowActivatedEventArgs e)
+    private void OnActivated(object sender, WindowActivatedEventArgs e)
     {
-        if (_initialized) return;
-        _initialized = true;
+        if (!_initialized)
+        {
+            _initialized = true;
+            InitializeConsoleAsync().FireAndForget("InitializeConsoleAsync");
+            return;
+        }
+
+        // Pause the 2s report poll while the window is in the background so the
+        // console stops spending network round-trips and layout time it does not need.
+        _dataManager.SetPollingPaused(!e.IsActive);
+    }
+
+    private async Task InitializeConsoleAsync()
+    {
         if (_isDebugMode)
         {
             SetWindowTitle(Texts["ConsoleTitle"]);
@@ -148,8 +163,6 @@ public sealed partial class InstanceConsoleView : UserControl
             await _dataManager.InitializeAsync();
             _daemon = _dataManager.Daemon;
             if (_daemon is null) throw new InvalidOperationException(Texts["ConnectDaemonFailedTip"]);
-            var history = await _dataManager.GetLogHistoryAsync();
-            foreach (var line in history) CommandPageControl.AppendLog(line);
             var report = await _daemon.GetInstanceReportAsync(_instanceId);
             _instanceType = report.Config.InstanceType;
             _instanceStatus = report.Status;
@@ -180,7 +193,12 @@ public sealed partial class InstanceConsoleView : UserControl
 
     private void OnDataLogReceived(object? sender, string text)
     {
-        App.DispatcherQueue.TryEnqueue(() => CommandPageControl.AppendLog(text));
+        if (_closed) return;
+        App.DispatcherQueue.TryEnqueue(() =>
+        {
+            if (_closed) return;
+            CommandPageControl.AppendLog(text);
+        });
     }
 
     private void OnReportUpdated(object? sender, MCServerLauncher.Common.ProtoType.Instance.InstanceReport? report)
@@ -188,6 +206,7 @@ public sealed partial class InstanceConsoleView : UserControl
         if (report is null) return;
         App.DispatcherQueue.TryEnqueue(() =>
         {
+            if (_closed) return;
             _instanceType = report.Config.InstanceType;
             _instanceStatus = report.Status;
             _instanceName = report.Config.Name;
@@ -361,13 +380,13 @@ public sealed partial class InstanceConsoleView : UserControl
             _normalWindowStyle = GetWindowLongPtr(handle, GwlStyle);
             SetWindowLongPtr(handle, GwlStyle, WsPopup | WsVisible);
             ShowWindow(handle, SwMaximize);
-            SetWindowPos(handle, HwndTopmost, 0, 0, 0, 0, SwpNoMove | SwpNoSize | SwpFrameChanged | SwpShowWindow);
+            SetWindowPos(handle, HwndTopmost, 0, 0, 0, 0, SwpNoMove | SwpNoSize | SWinUIrameChanged | SwpShowWindow);
             _isFullscreen = true;
         }
         else
         {
             SetWindowLongPtr(handle, GwlStyle, _normalWindowStyle);
-            SetWindowPos(handle, HwndNotTopmost, 0, 0, 0, 0, SwpNoMove | SwpNoSize | SwpFrameChanged | SwpShowWindow);
+            SetWindowPos(handle, HwndNotTopmost, 0, 0, 0, 0, SwpNoMove | SwpNoSize | SWinUIrameChanged | SwpShowWindow);
             ShowWindow(handle, SwRestore);
             _isFullscreen = false;
         }
@@ -375,7 +394,7 @@ public sealed partial class InstanceConsoleView : UserControl
         CommandPageControl.SetFullscreen(_isFullscreen);
     }
 
-    private async void LoadFile_Click(object sender, RoutedEventArgs e) => await LoadFileFromPageAsync();
+    private void LoadFile_Click(object sender, RoutedEventArgs e) => LoadFileFromPageAsync().FireAndForget("LoadFile_Click");
 
     private async Task LoadFileFromPageAsync()
     {
@@ -384,7 +403,7 @@ public sealed partial class InstanceConsoleView : UserControl
         await LoadFileAsync();
     }
 
-    private async void ReloadFile_Click(object sender, RoutedEventArgs e) => await ReloadFileFromPageAsync();
+    private void ReloadFile_Click(object sender, RoutedEventArgs e) => ReloadFileFromPageAsync().FireAndForget("ReloadFile_Click");
 
     private async Task ReloadFileFromPageAsync()
     {
@@ -440,7 +459,7 @@ public sealed partial class InstanceConsoleView : UserControl
         }
     }
 
-    private async void SaveFile_Click(object sender, RoutedEventArgs e) => await SaveFileAsync();
+    private void SaveFile_Click(object sender, RoutedEventArgs e) => SaveFileAsync().FireAndForget("SaveFile_Click");
 
     private async Task<bool> SaveFileAsync()
     {
@@ -527,12 +546,20 @@ public sealed partial class InstanceConsoleView : UserControl
             CloseButtonText = Texts["Cancel"],
             DefaultButton = ContentDialogButton.Primary
         };
-        return (await dialog.ShowAsync()) switch
+        try
         {
-            ContentDialogResult.Primary => await SaveFileAsync(),
-            ContentDialogResult.Secondary => true,
-            _ => false
-        };
+            return (await dialog.ShowAsync()) switch
+            {
+                ContentDialogResult.Primary => await SaveFileAsync(),
+                ContentDialogResult.Secondary => true,
+                _ => false
+            };
+        }
+        catch (Exception ex)
+        {
+            Log.Warning(ex, "[WinUI] Discard-confirmation dialog failed");
+            return false;
+        }
     }
 
     private unsafe void InstallCloseHook()
@@ -549,14 +576,24 @@ public sealed partial class InstanceConsoleView : UserControl
     {
         if (_closePromptPending) return;
         _closePromptPending = true;
-        _ = ConfirmCloseAsync();
+        ConfirmCloseAsync().FireAndForget("ConfirmCloseAsync");
     }
 
     private async Task ConfirmCloseAsync()
     {
         try
         {
-            if (!await ConfirmDiscardAsync()) return;
+            if (await ConfirmDiscardAsync())
+            {
+                _closeAllowed = true;
+                _hostWindow.Close();
+            }
+        }
+        catch (Exception ex)
+        {
+            // A confirmation dialog that throws (app closing, XamlRoot gone) must never
+            // trap the console window behind its WM_CLOSE guard.
+            Log.Warning(ex, "[WinUI] Console close confirmation failed; closing anyway");
             _closeAllowed = true;
             _hostWindow.Close();
         }
@@ -779,26 +816,21 @@ public sealed partial class InstanceConsoleView : UserControl
             CloseButtonText = Texts["Cancel"],
             DefaultButton = ContentDialogButton.Primary
         };
-        return await dialog.ShowAsync() == ContentDialogResult.Primary ? input.Text : null;
+        try
+        {
+            return await dialog.ShowAsync() == ContentDialogResult.Primary ? input.Text : null;
+        }
+        catch (Exception ex)
+        {
+            Log.Warning(ex, "[WinUI] Text input dialog failed");
+            return null;
+        }
     }
 
     private string ToDaemonPath(string virtualPath) =>
         $"/instances/{_instanceId}{(virtualPath == "/" ? string.Empty : NormalizeVirtualPath(virtualPath))}";
 
-    private static string NormalizeVirtualPath(string path)
-    {
-        var stack = new Stack<string>();
-        foreach (var part in (path ?? string.Empty).Replace('\\', '/').Split('/', StringSplitOptions.RemoveEmptyEntries))
-        {
-            if (part == ".") continue;
-            if (part == "..") { if (stack.Count > 0) stack.Pop(); continue; }
-            stack.Push(part);
-        }
-        if (stack.Count == 0) return "/";
-        var values = stack.ToArray();
-        Array.Reverse(values);
-        return "/" + string.Join('/', values);
-    }
+    private static string NormalizeVirtualPath(string path) => VirtualPath.Normalize(path);
 
     private static string ParentPath(string path)
     {
@@ -835,11 +867,11 @@ public sealed partial class InstanceConsoleView : UserControl
         }
     }
 
-    private async void LoadComponents_Click(object sender, RoutedEventArgs e) => await LoadComponentsAsync();
+    private void LoadComponents_Click(object sender, RoutedEventArgs e) => LoadComponentsAsync().FireAndForget("LoadComponents_Click");
 
-    private async void ComponentKind_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void ComponentKind_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (_initialized) await LoadComponentsAsync();
+        if (_initialized) LoadComponentsAsync().FireAndForget("ComponentKind_SelectionChanged");
     }
 
     private async Task LoadComponentsAsync()
@@ -922,7 +954,10 @@ public sealed partial class InstanceConsoleView : UserControl
         }
     }
 
-    private async void LatencyTimer_Tick(DispatcherQueueTimer sender, object args)
+    private void LatencyTimer_Tick(DispatcherQueueTimer sender, object args)
+        => UpdateLatencyAsync().FireAndForget("LatencyTimer_Tick");
+
+    private async Task UpdateLatencyAsync()
     {
         try
         {
@@ -934,15 +969,18 @@ public sealed partial class InstanceConsoleView : UserControl
         }
     }
 
-    private async void AddComponent_Click(object sender, RoutedEventArgs e)
+    private void AddComponent_Click(object sender, RoutedEventArgs e)
+        => AddComponentCoreAsync().FireAndForget("AddComponent_Click");
+
+    private async Task AddComponentCoreAsync()
     {
         if (_daemon is null) return;
         var files = await App.Services.Files.PickFilesAsync(WinUIIslands.Windowing.WindowNative.GetWindowHandle(_hostWindow));
         await UploadComponentsAsync(files);
     }
 
-    private async void ComponentManagerPageControl_FilesDropped(object? sender, IReadOnlyList<Windows.Storage.StorageFile> files) =>
-        await UploadComponentsAsync(files);
+    private void ComponentManagerPageControl_FilesDropped(object? sender, IReadOnlyList<Windows.Storage.StorageFile> files)
+        => UploadComponentsAsync(files).FireAndForget("ComponentManagerPageControl_FilesDropped");
 
     private async Task UploadComponentsAsync(IEnumerable<Windows.Storage.StorageFile> files)
     {
@@ -1004,7 +1042,10 @@ public sealed partial class InstanceConsoleView : UserControl
         await LoadComponentsAsync();
     }
 
-    private async void ToggleComponent_Click(object sender, RoutedEventArgs e)
+    private void ToggleComponent_Click(object sender, RoutedEventArgs e)
+        => ToggleComponentCoreAsync(sender).FireAndForget("ToggleComponent_Click");
+
+    private async Task ToggleComponentCoreAsync(object sender)
     {
         if (_daemon is null || (sender as Button)?.Tag is not ComponentFileModel item) return;
         try
@@ -1036,7 +1077,10 @@ public sealed partial class InstanceConsoleView : UserControl
         }
     }
 
-    private async void DeleteComponent_Click(object sender, RoutedEventArgs e)
+    private void DeleteComponent_Click(object sender, RoutedEventArgs e)
+        => DeleteComponentCoreAsync(sender).FireAndForget("DeleteComponent_Click");
+
+    private async Task DeleteComponentCoreAsync(object sender)
     {
         if (_daemon is null || (sender as Button)?.Tag is not ComponentFileModel item || ComponentManagerPageControl.XamlRoot is null) return;
         var confirmed = await App.Services.Dialogs.ConfirmAsync(
@@ -1066,7 +1110,7 @@ public sealed partial class InstanceConsoleView : UserControl
 
     private string ComponentFolder => ComponentManagerPageControl.SelectedFolder;
 
-    private async void LoadInstanceSettings_Click(object sender, RoutedEventArgs e) => await LoadInstanceSettingsAsync();
+    private void LoadInstanceSettings_Click(object sender, RoutedEventArgs e) => LoadInstanceSettingsAsync().FireAndForget("LoadInstanceSettings_Click");
 
     private async Task LoadInstanceSettingsAsync()
     {
@@ -1107,7 +1151,10 @@ public sealed partial class InstanceConsoleView : UserControl
         }
     }
 
-    private async void SaveInstanceSettings_Click(object sender, RoutedEventArgs e)
+    private void SaveInstanceSettings_Click(object sender, RoutedEventArgs e)
+        => SaveInstanceSettingsCoreAsync().FireAndForget("SaveInstanceSettings_Click");
+
+    private async Task SaveInstanceSettingsCoreAsync()
     {
         if (_daemon is null || !SaveInstanceSettingsButton.IsEnabled) return;
         InstanceSettingsStateText.Text = Texts["PleaseWait"];
@@ -1257,8 +1304,10 @@ public sealed partial class InstanceConsoleView : UserControl
         foreach (var argument in arguments)
             InstanceSettingsPageControl.AddArgument(argument);
     }
+    private void SaveEventRules_Click(object sender, RoutedEventArgs e)
+        => SaveEventRulesCoreAsync().FireAndForget("SaveEventRules_Click");
 
-    private async void SaveEventRules_Click(object sender, RoutedEventArgs e)
+    private async Task SaveEventRulesCoreAsync()
     {
         if (_daemon is null)
         {
@@ -1314,8 +1363,13 @@ public sealed partial class InstanceConsoleView : UserControl
         WindowTitleText.Text = title;
         _hostWindow.Title = title;
     }
+    private void OnClosed(object sender, WindowEventArgs args)
+    {
+        _closed = true;
+        DisposeConsoleAsync().FireAndForget("OnClosed");
+    }
 
-    private async void OnClosed(object sender, WindowEventArgs args)
+    private async Task DisposeConsoleAsync()
     {
         try
         {
@@ -1363,7 +1417,7 @@ public sealed partial class InstanceConsoleView : UserControl
     private const uint SwpNoSize = 0x0001;
     private const uint SwpNoMove = 0x0002;
     private const uint SwpShowWindow = 0x0040;
-    private const uint SwpFrameChanged = 0x0020;
+    private const uint SWinUIrameChanged = 0x0020;
     private static readonly nint WsPopup = unchecked((nint)0x80000000);
     private const nint WsVisible = 0x10000000;
 

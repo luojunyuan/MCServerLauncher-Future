@@ -5,9 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:editor="using:WinUIEditor"
-    xmlns:models="using:MCServerLauncher.WinUI.Models">
+    xmlns:models="using:MCServerLauncher.WinUI.Models"
+    xmlns:pages="using:MCServerLauncher.WinUI.InstanceConsole.View.Pages"
+    xmlns:components="using:MCServerLauncher.WinUI.Views.Components.Generic">
     <Grid Padding="16" RowSpacing="10">
-        <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="220" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+        <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
         <muxc:InfoBar x:Name="MultiSelectTipBar" Grid.Row="0" IsOpen="True" IsClosable="True" Severity="Informational" Message="{x:Bind Texts['MultiSelectTip'], Mode=OneWay}" Closed="MultiSelectTipBar_Closed" />
         <Grid Grid.Row="1" ColumnSpacing="8">
             <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
@@ -27,19 +29,93 @@
                 <Button Content="{x:Bind Texts['Delete'], Mode=OneWay}" Click="DeleteFile_Click" />
             </StackPanel>
         </Grid>
-        <ListView Grid.Row="2" x:Name="RemoteFilesList" ItemsSource="{x:Bind Files, Mode=OneWay}" SelectionMode="Extended" DoubleTapped="FilesList_DoubleTapped">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="models:RemoteFileModel">
-                    <Grid Padding="6" ColumnSpacing="12">
-                        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="*" /><ColumnDefinition Width="120" /><ColumnDefinition Width="180" /></Grid.ColumnDefinitions>
-                        <FontIcon Glyph="{x:Bind IconGlyph, Mode=OneWay}" />
-                        <TextBlock Grid.Column="1" Text="{x:Bind Name, Mode=OneWay}" TextTrimming="CharacterEllipsis" />
-                        <TextBlock Grid.Column="2" Text="{x:Bind SizeText, Mode=OneWay}" Opacity="0.72" />
-                        <TextBlock Grid.Column="3" Text="{x:Bind ModifiedText, Mode=OneWay}" Opacity="0.72" />
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <muxc:TreeView x:Name="DirectoryTree"
+                           Grid.Column="0"
+                           ItemsSource="{x:Bind DirectoryTreeItems, Mode=OneWay}"
+                           ItemInvoked="DirectoryTree_ItemInvoked"
+                           SelectionMode="Single"
+                           Margin="0,0,8,0">
+                <muxc:TreeView.ItemTemplate>
+                    <DataTemplate x:DataType="pages:DirectoryNode">
+                        <muxc:TreeViewItem ItemsSource="{x:Bind Children}" IsExpanded="{x:Bind IsExpanded}">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <FontIcon Glyph="&#xE8B7;" FontSize="14" />
+                                <TextBlock Text="{x:Bind Name}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </muxc:TreeViewItem>
+                    </DataTemplate>
+                </muxc:TreeView.ItemTemplate>
+            </muxc:TreeView>
+
+            <Border Grid.Column="1"
+                    Width="1"
+                    Background="{ThemeResource CardStrokeColorDefaultBrush}" />
+
+            <Grid Grid.Column="2" Margin="8,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid x:Name="FileListHeader" Grid.Row="0" Padding="6,0,6,4" ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="180" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{x:Bind Texts['Name'], Mode=OneWay}" FontWeight="SemiBold" Opacity="0.6" />
+                    <TextBlock Grid.Column="1" Text="{x:Bind Texts['Size'], Mode=OneWay}" FontWeight="SemiBold" Opacity="0.6" />
+                    <TextBlock Grid.Column="2" Text="{x:Bind Texts['ModifiedDate'], Mode=OneWay}" FontWeight="SemiBold" Opacity="0.6" />
+                </Grid>
+
+                <ListView Grid.Row="1"
+                          x:Name="RemoteFilesList"
+                          ItemsSource="{x:Bind Files, Mode=OneWay}"
+                          SelectionMode="Extended"
+                          DoubleTapped="FilesList_DoubleTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="models:RemoteFileModel">
+                            <Grid Padding="6" ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="120" />
+                                    <ColumnDefinition Width="180" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <FontIcon Glyph="{x:Bind IconGlyph, Mode=OneWay}" />
+                                    <TextBlock Text="{x:Bind Name, Mode=OneWay}" TextTrimming="CharacterEllipsis" />
+                                </StackPanel>
+                                <TextBlock Grid.Column="1" Text="{x:Bind SizeText, Mode=OneWay}" Opacity="0.72" />
+                                <TextBlock Grid.Column="2" Text="{x:Bind ModifiedText, Mode=OneWay}" Opacity="0.72" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ContextFlyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Text="{x:Bind Texts['Open'], Mode=OneWay}" Click="OpenItem_Click" />
+                            <MenuFlyoutSeparator />
+                            <MenuFlyoutItem Text="{x:Bind Texts['Download'], Mode=OneWay}" Click="Download_Click" />
+                            <MenuFlyoutItem Text="{x:Bind Texts['UploadFile'], Mode=OneWay}" Click="Upload_Click" />
+                            <MenuFlyoutSeparator />
+                            <MenuFlyoutItem Text="{x:Bind Texts['Rename'], Mode=OneWay}" Click="Rename_Click" />
+                            <MenuFlyoutItem Text="{x:Bind Texts['Delete'], Mode=OneWay}" Click="DeleteFile_Click" />
+                            <MenuFlyoutSeparator />
+                            <MenuFlyoutItem Text="{x:Bind Texts['CreateDirectory'], Mode=OneWay}" Click="CreateDirectory_Click" />
+                            <MenuFlyoutItem Text="{x:Bind Texts['Refresh'], Mode=OneWay}" Click="RefreshDirectory_Click" />
+                        </MenuFlyout>
+                    </ListView.ContextFlyout>
+                </ListView>
+
+                <components:StopTipLayer x:Name="EmptyStateLayer" Grid.RowSpan="2" Visibility="Collapsed" />
+            </Grid>
+        </Grid>
         <Grid Grid.Row="3" RowSpacing="8">
             <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" Spacing="8">

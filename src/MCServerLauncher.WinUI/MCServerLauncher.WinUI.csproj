@@ -12,6 +12,7 @@
     <Copyright>Copyright © 2022-2026 MCSLTeam. All rights reserved.</Copyright>
     <Product>MCServerLauncher Future</Product>
     <Version>0.1.0.1</Version>
+    <ApplicationIcon>Resources\MCServerLauncherFuture.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <UseUwp>true</UseUwp>
     <DefaultLanguage>en-US</DefaultLanguage>
@@ -38,9 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="..\MCServerLauncher.WPF\Translations\Lang.*.resx"
-                      Link="Translations\%(Filename)%(Extension)" />
-    <EmbeddedResource Include="..\MCServerLauncher.WPF\Resources\BuildInfo"
+    <EmbeddedResource Include="..\MCServerLauncher.WinUI\Resources\BuildInfo"
                       Link="Resources\BuildInfo">
       <LogicalName>MCServerLauncher.WinUI.Resources.BuildInfo</LogicalName>
     </EmbeddedResource>

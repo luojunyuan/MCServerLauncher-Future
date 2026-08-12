@@ -3,9 +3,11 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using CommunityToolkit.Mvvm.ComponentModel;
+using MCServerLauncher.WinUI.Core;
 using MCServerLauncher.WinUI.Core.Localization;
 using MCServerLauncher.WinUI.Core.Storage;
 using MCServerLauncher.WinUI.ViewModels.Models;
+using Windows.System;
 
 namespace MCServerLauncher.WinUI.ViewModels;
 
@@ -47,6 +49,8 @@ public partial class SettingsViewModel : ObservableObject
 
     private readonly SettingsStore _settings;
     private readonly ILocalizationService _localization;
+    private DispatcherQueueTimer? _saveDebounceTimer;
+    private Action<SettingsDocument>? _pendingSave;
     private bool _initializing = true;
     private bool _attached;
 
@@ -66,7 +70,7 @@ public partial class SettingsViewModel : ObservableObject
         DownloadSourceIndex = IndexOf(DownloadSourceKeys, current.Download.DownloadSource, "FastMirror");
         DownloadThreadCount = Math.Clamp(current.Download.ThreadCnt, 1, 256);
         ActionWhenDownloadErrorIndex = IndexOf(DownloadErrorKeys, current.Download.ActionWhenDownloadError, "stop");
-        AutoRefreshInterval = Math.Clamp(current.Instance.AutoRefreshInterval, 0, 60);
+        AutoRefreshInterval = Math.Clamp(current.Instance.AutoRefreshInterval, 0, 5);
         ActionOnDoubleClickIndex = IndexOf(DoubleClickKeys, current.Instance.ActionOnDoubleClick, "Console");
         LauncherThemeIndex = IndexOf(ThemeKeys, current.App.Theme, "auto");
         LauncherLanguageIndex = Math.Max(0, IndexOf(
@@ -120,6 +124,8 @@ public partial class SettingsViewModel : ObservableObject
     {
         if (!_attached) return;
         _localization.LanguageChanged -= Localization_LanguageChanged;
+        _saveDebounceTimer?.Stop();
+        _pendingSave = null;
         _attached = false;
     }
 
@@ -159,7 +165,9 @@ public partial class SettingsViewModel : ObservableObject
             return;
         }
 
-        Save(setting => setting.Download.ThreadCnt = normalized);
+        // Keep the live property updated for the UI but only persist after the
+        // value has been stable for 1s (avoids a JSON write on every slider tick).
+        ScheduleSave(setting => setting.Download.ThreadCnt = normalized);
     }
 
     partial void OnActionWhenDownloadErrorIndexChanged(int value)
@@ -170,14 +178,14 @@ public partial class SettingsViewModel : ObservableObject
 
     partial void OnAutoRefreshIntervalChanged(int value)
     {
-        var normalized = Math.Clamp(value, 0, 60);
+        var normalized = Math.Clamp(value, 0, 5);
         if (value != normalized)
         {
             AutoRefreshInterval = normalized;
             return;
         }
 
-        Save(setting => setting.Instance.AutoRefreshInterval = normalized);
+        ScheduleSave(setting => setting.Instance.AutoRefreshInterval = normalized);
     }
 
     partial void OnActionOnDoubleClickIndexChanged(int value)
@@ -201,7 +209,7 @@ public partial class SettingsViewModel : ObservableObject
         var language = _localization.LanguageCodes[value];
         _settings.Current.App.Language = language;
         _localization.ChangeLanguage(language);
-        _ = _settings.SaveAsync();
+        _settings.SaveAsync().FireAndForget("SettingsViewModel.OnLauncherLanguageIndexChanged");
     }
 
     partial void OnFollowStartupChanged(bool value) =>
@@ -210,11 +218,32 @@ public partial class SettingsViewModel : ObservableObject
     partial void OnAutoCheckUpdateChanged(bool value) =>
         Save(setting => setting.App.AutoCheckUpdate = value);
 
+    private void ScheduleSave(Action<SettingsDocument> update)
+    {
+        if (_initializing) return;
+        _pendingSave = update;
+        _saveDebounceTimer ??= App.DispatcherQueue.CreateTimer();
+        _saveDebounceTimer.Stop();
+        _saveDebounceTimer.Interval = TimeSpan.FromSeconds(1);
+        _saveDebounceTimer.IsRepeating = false;
+        _saveDebounceTimer.Tick -= SaveDebounceTimer_Tick;
+        _saveDebounceTimer.Tick += SaveDebounceTimer_Tick;
+        _saveDebounceTimer.Start();
+    }
+
+    private void SaveDebounceTimer_Tick(DispatcherQueueTimer sender, object args)
+    {
+        if (_pendingSave is null) return;
+        var update = _pendingSave;
+        _pendingSave = null;
+        Save(update);
+    }
+
     private void Save(Action<SettingsDocument> update)
     {
         if (_initializing) return;
         update(_settings.Current);
-        _ = _settings.SaveAsync();
+        _settings.SaveAsync().FireAndForget("SettingsViewModel.Save");
     }
 
     private void Localization_LanguageChanged(object? sender, EventArgs e) => RefreshLocalizedItems();
@@ -233,21 +262,24 @@ public partial class SettingsViewModel : ObservableObject
                 Title = "bangbang93",
                 Description = _localization.Get("Settings_Acknowledgments_BMCLAPI_Description"),
                 ActionText = _localization.Get("Donate"),
-                Uri = "https://afdian.com/a/bangbang93/"
+                Uri = "https://afdian.com/a/bangbang93/",
+                ImageSource = "Resources/bangbang93.jpg"
             },
             new SettingsLinkItem
             {
                 Title = "iNKORE Studios",
                 Description = _localization.Get("Settings_Acknowledgments_iNKORE_Description"),
                 ActionText = _localization.Get("Donate"),
-                Uri = "https://inkore.net/"
+                Uri = "https://inkore.net/",
+                ImageSource = "Resources/iNKORE.png"
             },
             new SettingsLinkItem
             {
                 Title = "BakaXL",
                 Description = _localization.Get("Settings_Acknowledgments_BakaXL_Description"),
                 ActionText = _localization.Get("Donate"),
-                Uri = "https://afdian.com/a/TT702/"
+                Uri = "https://afdian.com/a/TT702/",
+                ImageSource = "Resources/BakaXL.png"
             },
             new SettingsLinkItem
             {
@@ -269,6 +301,20 @@ public partial class SettingsViewModel : ObservableObject
             Component("Serilog", "Structured application logging.", "https://serilog.net/", more),
             Component("Downloader", "Multipart download support.", "https://github.com/bezzad/Downloader", more)
         ]);
+
+        // In-place item-text replacement above can reset the selection of the bound
+        // ComboBox / RadioButtons controls: they drop SelectedIndex to -1 and the
+        // TwoWay bindings push that -1 back into the ViewModel, leaving the controls
+        // blank. Re-assert each selected index from the stored settings so the
+        // selection is preserved with the newly localized item text.
+        DownloadSourceIndex = IndexOf(DownloadSourceKeys, _settings.Current.Download.DownloadSource, "FastMirror");
+        ActionWhenDownloadErrorIndex = IndexOf(DownloadErrorKeys, _settings.Current.Download.ActionWhenDownloadError, "stop");
+        ActionOnDoubleClickIndex = IndexOf(DoubleClickKeys, _settings.Current.Instance.ActionOnDoubleClick, "Console");
+        LauncherThemeIndex = IndexOf(ThemeKeys, _settings.Current.App.Theme, "auto");
+        LauncherLanguageIndex = Math.Max(0, IndexOf(
+            _localization.LanguageCodes,
+            _settings.Current.App.Language,
+            "zh-CN"));
     }
 
     private void LoadBuildInfo()
@@ -305,8 +351,14 @@ public partial class SettingsViewModel : ObservableObject
 
     private static void Replace<T>(ObservableCollection<T> target, IEnumerable<T> values)
     {
-        target.Clear();
-        foreach (var value in values) target.Add(value);
+        var list = values.ToList();
+        for (var i = 0; i < target.Count && i < list.Count; i++)
+        {
+            if (!Equals(target[i], list[i])) target[i] = list[i];
+        }
+
+        while (target.Count > list.Count) target.RemoveAt(target.Count - 1);
+        while (target.Count < list.Count) target.Add(list[target.Count]);
     }
 
     private static int IndexOf(IReadOnlyList<string> values, string? selectedValue, string defaultValue)

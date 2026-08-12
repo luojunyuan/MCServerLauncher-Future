@@ -18,7 +18,7 @@ public class TextInputStep : CreateStepControl
         Input.Tag = placeholderKey;
         Input.TextChanged += (_, _) => IsFinished = !string.IsNullOrWhiteSpace(Input.Text);
         Fields.Children.Add(Input);
-        App.Services.Localization.LanguageChanged += (_, _) => Input.PlaceholderText = Texts[placeholderKey];
+        RegisterLanguageChangedHandler((_, _) => Input.PlaceholderText = Texts[placeholderKey]);
     }
 
     public string Value

@@ -2,6 +2,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using MCServerLauncher.Common.ProtoType;
 using MCServerLauncher.DaemonClient;
+using MCServerLauncher.WinUI.Core;
 using MCServerLauncher.WinUI.Core.Services;
 using MCServerLauncher.WinUI.View.Features.CreateInstance.Models;
 
@@ -38,13 +39,13 @@ public sealed class SelectMinecraftJavaJvm : CreateStepControl
         row.Children.Add(_runtimeBox);
         row.Children.Add(_searchButton);
         Fields.Children.Add(row);
-        App.Services.Localization.LanguageChanged += (_, _) =>
+        RegisterLanguageChangedHandler((_, _) =>
         {
             _pathBox.PlaceholderText = Texts["JavaPath"];
             _runtimeBox.PlaceholderText = Texts["PleaseSelectJvm"];
             _searchButton.Content = Texts["Search"];
-        };
-        _ = LoadJavaListAsync();
+        });
+        LoadJavaListAsync().FireAndForget("SelectMinecraftJavaJvm.LoadJavaList");
     }
 
     public string Path => _pathBox.Text;
@@ -91,7 +92,10 @@ public sealed class SelectMinecraftJavaJvm : CreateStepControl
             _runtimeBox.Items.Add($"({java.Version}, {java.Architecture}) {java.Path}");
     }
 
-    private async void SearchAsync(object sender, RoutedEventArgs e)
+    private void SearchAsync(object sender, RoutedEventArgs e) =>
+        SearchAsyncCore().FireAndForget("SelectMinecraftJavaJvm.SearchAsync");
+
+    private async Task SearchAsyncCore()
     {
         _searchButton.IsEnabled = false;
         try

@@ -4,11 +4,12 @@ using Windows.UI.Xaml.Controls;
 using MCServerLauncher.Common.ProtoType.EventTrigger;
 using MCServerLauncher.DaemonClient.Serialization;
 using MCServerLauncher.WinUI.Core.Localization;
+using Serilog;
 
 namespace MCServerLauncher.WinUI.InstanceConsole.View.Dialogs;
 
 /// <summary>
-/// WinUI equivalent of the WPF EventRuleEditorDialog. The editor works on a
+/// WinUI equivalent of the WinUI EventRuleEditorDialog. The editor works on a
 /// deep copy and commits only after the user presses Save.
 /// </summary>
 public static class EventRuleEditorDialog
@@ -78,7 +79,17 @@ public static class EventRuleEditorDialog
             CloseButtonText = texts["Cancel"],
             DefaultButton = ContentDialogButton.Primary
         };
-        if (await dialog.ShowAsync() != ContentDialogResult.Primary) return false;
+        try
+        {
+            if (await dialog.ShowAsync() != ContentDialogResult.Primary) return false;
+        }
+        catch (Exception ex)
+        {
+            // ContentDialog.ShowAsync throws when the app is closing or another dialog
+            // is already open; never let that crash the async-void caller.
+            Log.Warning(ex, "[WinUI] Event-rule editor dialog failed");
+            return false;
+        }
 
         working.Name = name.Text.Trim();
         working.Description = description.Text.Trim();

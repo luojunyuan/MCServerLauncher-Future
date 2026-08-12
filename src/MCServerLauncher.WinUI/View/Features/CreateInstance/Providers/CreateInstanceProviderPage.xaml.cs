@@ -2,6 +2,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using MCServerLauncher.Common.ProtoType.Instance;
 using MCServerLauncher.DaemonClient;
+using MCServerLauncher.WinUI.Core;
 using MCServerLauncher.WinUI.Core.Localization;
 using MCServerLauncher.WinUI.Core.Services;
 using MCServerLauncher.WinUI.View.Features.CreateInstance.Components;
@@ -179,9 +180,13 @@ public partial class CreateInstanceProviderPage : UserControl
 
     private void UpdateFinishButtonState() => FinishButton.IsEnabled = _steps.Count > 0 && _steps.All(step => step.IsFinished);
 
-    private async void Back_Click(object sender, RoutedEventArgs e) => await Owner.GoBackFromProviderAsync(HasInput);
+    private void Back_Click(object sender, RoutedEventArgs e) =>
+        Owner.GoBackFromProviderAsync(HasInput).FireAndForget("CreateInstanceProviderPage.Back_Click");
 
-    private async void Finish_Click(object sender, RoutedEventArgs e)
+    private void Finish_Click(object sender, RoutedEventArgs e) =>
+        Finish_ClickCore().FireAndForget("CreateInstanceProviderPage.Finish_Click");
+
+    private async Task Finish_ClickCore()
     {
         FinishButton.IsEnabled = false;
         try { await FinishAsync(); }

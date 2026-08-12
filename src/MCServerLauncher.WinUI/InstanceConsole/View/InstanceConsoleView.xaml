@@ -16,9 +16,9 @@
             <muxc:TabViewItem Header="{x:Bind Texts['Console_BoardNavMenu'], Mode=OneWay}"><pages:BoardPage x:Name="BoardPageControl" /></muxc:TabViewItem>
             <muxc:TabViewItem Header="{x:Bind Texts['Console_CommandNavMenu'], Mode=OneWay}"><pages:CommandPage x:Name="CommandPageControl" /></muxc:TabViewItem>
             <muxc:TabViewItem Header="{x:Bind Texts['Console_FileManagerNavMenu'], Mode=OneWay}"><pages:FileManagerPage x:Name="FileManagerPageControl" /></muxc:TabViewItem>
+            <muxc:TabViewItem Header="{x:Bind Texts['Console_EventTriggerNavMenu'], Mode=OneWay}"><pages:EventTriggerPage x:Name="EventTriggerPageControl" /></muxc:TabViewItem>
             <muxc:TabViewItem Header="{x:Bind Texts['Console_ComponentManagerNavMenu'], Mode=OneWay}"><pages:ComponentManagerPage x:Name="ComponentManagerPageControl" /></muxc:TabViewItem>
             <muxc:TabViewItem Header="{x:Bind Texts['Console_InstanceSettingsNavMenu'], Mode=OneWay}"><pages:InstanceSettingsPage x:Name="InstanceSettingsPageControl" /></muxc:TabViewItem>
-            <muxc:TabViewItem Header="{x:Bind Texts['Console_EventTriggerNavMenu'], Mode=OneWay}"><pages:EventTriggerPage x:Name="EventTriggerPageControl" /></muxc:TabViewItem>
         </muxc:TabView>
     </Grid>
 </UserControl>
