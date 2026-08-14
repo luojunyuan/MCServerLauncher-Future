@@ -1,3 +1,4 @@
+using MCServerLauncher.Common.DownloadProvider;
 using MCServerLauncher.Common.Network;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,9 @@ namespace MCServerLauncher.Common.Minecraft.InstallSource
                     "https://maven.neoforged.net/api/maven/versions/releases/net/neoforged/forge", true);
             using var legacyDoc = JsonDocument.Parse(await legacyMavenResponse.Content.ReadAsStringAsync());
             var neoForgeVersions =
-                (JsonSerializer.Deserialize<List<string>>(legacyDoc.RootElement.GetProperty("versions").GetRawText())
+                (JsonSerializer.Deserialize(
+                    legacyDoc.RootElement.GetProperty("versions").GetRawText(),
+                    DownloadProviderJsonContext.Default.ListString)
                  ?? throw new InvalidOperationException())
                 .Select(version => version.Replace("1.20.1-", "")).ToList();
             // Bad version 47.1.82 should be removed
@@ -42,7 +45,9 @@ namespace MCServerLauncher.Common.Minecraft.InstallSource
                 await HttpHelper.SendGetRequest(
                     "https://maven.neoforged.net/api/maven/versions/releases/net/neoforged/neoforge", true);
             using var doc = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
-            var mavenData = JsonSerializer.Deserialize<List<string>>(doc.RootElement.GetProperty("versions").GetRawText());
+            var mavenData = JsonSerializer.Deserialize(
+                doc.RootElement.GetProperty("versions").GetRawText(),
+                DownloadProviderJsonContext.Default.ListString);
             if (mavenData != null)
             {
                 neoForgeVersions.AddRange(mavenData);

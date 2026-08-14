@@ -1,6 +1,5 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using Microsoft.Management.Infrastructure;
 using Serilog;
 
 namespace MCServerLauncher.Daemon.Utils.Status;
@@ -28,32 +27,7 @@ public static class ProcessInfo
         try
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                var pid = process.Id;
-                return await Task.Run(() =>
-                {
-                    try
-                    {
-                        using var session = CimSession.Create("localhost");
-                        var query =
-                            $"SELECT WorkingSetPrivate FROM Win32_PerfFormattedData_PerfProc_Process WHERE IDProcess = {pid}";
-                        var instances = session.QueryInstances("root/cimv2", "WQL", query);
-
-                        foreach (var instance in instances)
-                        {
-                            var prop = instance.CimInstanceProperties["WorkingSetPrivate"];
-                            if (prop?.Value != null) return Convert.ToInt64(prop.Value);
-                        }
-
-                        return 0;
-                    }
-                    catch (CimException ex)
-                    {
-                        Log.Warning("Can't get memory info of process(pid={0}): {1}", pid, ex.Message);
-                        return 0;
-                    }
-                });
-            }
+                return process.WorkingSet64;
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {

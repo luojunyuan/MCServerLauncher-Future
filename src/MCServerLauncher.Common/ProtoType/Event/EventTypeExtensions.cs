@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.Json.Serialization.Metadata;
 using MCServerLauncher.Common.ProtoType.Serialization;
 
 namespace MCServerLauncher.Common.ProtoType.Event;
@@ -44,7 +45,10 @@ public static class EventTypeExtensions
     private static T? DeserializeWithStj<T>(JsonPayloadBuffer buffer, JsonSerializerOptions? options)
     {
         var effectiveOptions = options ?? StjResolver.CreateDefaultOptions();
-        return JsonSerializer.Deserialize<T>(buffer.Value, effectiveOptions);
+        var typeInfo = effectiveOptions.GetTypeInfo(typeof(T)) as JsonTypeInfo<T>
+            ?? throw new NotSupportedException(
+                $"No source-generated JSON metadata is registered for {typeof(T).FullName}.");
+        return JsonSerializer.Deserialize(buffer.Value, typeInfo);
     }
 
     private static IEventData? PrivateGetEventData<TEventData>(JsonPayloadBuffer? token, JsonSerializerOptions? options)

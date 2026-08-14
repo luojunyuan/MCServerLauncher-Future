@@ -5,7 +5,7 @@ using MCServerLauncher.WinUI.View.Features.CreateInstance.Models;
 
 namespace MCServerLauncher.WinUI.View.Features.CreateInstance.Components;
 
-public sealed class SetMinecraftJavaJvmArgument : CreateStepControl
+public sealed partial class SetMinecraftJavaJvmArgument : CreateStepControl
 {
     private readonly StackPanel _argumentPanel;
     private readonly TextBox _newArgument;

@@ -3,6 +3,7 @@ namespace MCServerLauncher.Common.ProtoType.Instance;
 using static InstanceCategory;
 using M = InstanceTypeMetadataAttribute;
 
+[System.Text.Json.Serialization.JsonConverter(typeof(Serialization.SnakeCaseEnumConverter<InstanceType>))]
 public enum InstanceType
 {
     [M(Category = Generic, IsGenericFallback = true)]

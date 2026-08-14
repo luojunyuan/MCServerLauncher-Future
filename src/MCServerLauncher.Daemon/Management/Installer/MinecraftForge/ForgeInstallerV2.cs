@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using MCServerLauncher.Common.ProtoType.Instance;
 using MCServerLauncher.Daemon.Management.Installer.MinecraftForge.Json;
 using MCServerLauncher.Daemon.Management.Installer.MinecraftForge.V2Json;
@@ -13,8 +12,6 @@ using Json_Version = Json.Version;
 
 public sealed class ForgeInstallerV2 : ForgeInstallerBase
 {
-    [UnconditionalSuppressMessage("Trimming", "IL2026:RequiresUnreferencedCode",
-        Justification = "Forge v2 construction intentionally loads version metadata through a localized installer boundary.")]
     private ForgeInstallerV2(InstallV1 profile, string installerPath, string? javaPath, InstanceFactoryMirror mirror)
         : base(installerPath, javaPath, mirror)
     {
@@ -26,7 +23,6 @@ public sealed class ForgeInstallerV2 : ForgeInstallerBase
 
     public override InstallV1 Install { get; }
 
-    [RequiresUnreferencedCode(ForgeInstallerTrimMessage)]
     public static ForgeInstallerV2? Create(
         string installerPath,
         string? javaPath = null,
@@ -46,9 +42,8 @@ public sealed class ForgeInstallerV2 : ForgeInstallerBase
         return new ForgeInstallerV2(profile, installerPath, javaPath, mirror);
     }
 
-    [RequiresUnreferencedCode(ForgeInstallerTrimMessage)]
     private static InstallV1 DeserializeInstallerProfile(string content) =>
-        JsonSerializer.Deserialize<InstallV1>(content, InstallProfileJsonSettings.Settings)!;
+        JsonSerializer.Deserialize(content, ForgeInstallerJsonContext.Default.InstallV1)!;
 
     public override async Task<Result<Unit, Error>> Run(InstanceFactorySetting setting, CancellationToken ct = default)
     {

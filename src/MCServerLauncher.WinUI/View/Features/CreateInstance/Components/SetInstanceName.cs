@@ -1,6 +1,6 @@
 namespace MCServerLauncher.WinUI.View.Features.CreateInstance.Components;
 
-public sealed class SetInstanceName : TextInputStep
+public sealed partial class SetInstanceName : TextInputStep
 {
     public SetInstanceName()
         : base(

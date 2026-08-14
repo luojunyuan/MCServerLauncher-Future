@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using MCServerLauncher.Common.ProtoType;
 using MCServerLauncher.Common.ProtoType.Action;
 using MCServerLauncher.Common.ProtoType.Event;
+using MCServerLauncher.Common.ProtoType.Serialization;
 using MCServerLauncher.DaemonClient.Serialization;
 using MCServerLauncher.DaemonClient.WebSocketPlugin;
 using Serilog;
@@ -261,7 +262,10 @@ internal class ClientConnection : DisposableObject
 
     private static JsonElement SerializeRuntimeObjectToTransportElement(object value)
     {
-        return System.Text.Json.JsonSerializer.SerializeToElement(value, value.GetType(), RpcStjOptions);
+        var typeInfo = ActionParametersContext.Default.GetTypeInfo(value.GetType())
+            ?? throw new NotSupportedException(
+                $"No source-generated JSON metadata is registered for {value.GetType().FullName}.");
+        return System.Text.Json.JsonSerializer.SerializeToElement(value, typeInfo);
     }
 
 
@@ -333,7 +337,9 @@ internal class ClientConnection : DisposableObject
             {
                 ActionRequestStatus.Ok => response.Data is null
                     ? null
-                    : System.Text.Json.JsonSerializer.Deserialize<TResult>(response.Data.Value.GetRawText(), RpcStjOptions),
+                    : System.Text.Json.JsonSerializer.Deserialize(
+                        response.Data.Value,
+                        DaemonClientRpcTypeInfoCache<TResult>.TypeInfo),
                 ActionRequestStatus.Error => throw new DaemonRequestException(ActionRetcode.FromCode(response.Retcode),
                     response.Message),
                 _ => throw new NotImplementedException()

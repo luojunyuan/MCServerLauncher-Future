@@ -19,7 +19,9 @@ namespace MCServerLauncher.Common.DownloadProvider
             if (response.IsSuccessStatusCode)
             {
                 using var doc = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
-                return JsonSerializer.Deserialize<List<string>>(doc.RootElement.GetProperty("data").GetProperty("types").GetRawText());
+                return JsonSerializer.Deserialize(
+                    doc.RootElement.GetProperty("data").GetProperty("types").GetRawText(),
+                    DownloadProviderJsonContext.Default.ListString);
             }
             return null;
         }
@@ -50,7 +52,9 @@ namespace MCServerLauncher.Common.DownloadProvider
             var response = await HttpHelper.SendGetRequest($"{_endPoint}/query/available_versions/{core}");
             if (!response.IsSuccessStatusCode) return null;
             using var doc = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
-            return JsonSerializer.Deserialize<List<string>>(doc.RootElement.GetProperty("data").GetProperty("versionList").GetRawText());
+            return JsonSerializer.Deserialize(
+                doc.RootElement.GetProperty("data").GetProperty("versionList").GetRawText(),
+                DownloadProviderJsonContext.Default.ListString);
         }
 
         /// <summary>

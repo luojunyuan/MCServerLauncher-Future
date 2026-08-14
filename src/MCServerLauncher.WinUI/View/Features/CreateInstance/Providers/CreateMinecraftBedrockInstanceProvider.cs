@@ -6,7 +6,7 @@ using MCServerLauncher.WinUI.Views.Pages;
 
 namespace MCServerLauncher.WinUI.View.Features.CreateInstance.Providers;
 
-public sealed class CreateMinecraftBedrockInstanceProvider : CreateInstanceProviderPage
+public sealed partial class CreateMinecraftBedrockInstanceProvider : CreateInstanceProviderPage
 {
     private readonly SelectMinecraftBedrockArchive _archive = new();
     private readonly SetInstanceName _name = new();

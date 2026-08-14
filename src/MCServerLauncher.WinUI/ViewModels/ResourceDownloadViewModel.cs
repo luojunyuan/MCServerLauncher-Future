@@ -532,7 +532,9 @@ public partial class ResourceDownloadViewModel : ObservableObject
         try
         {
             Directory.CreateDirectory(_paths.ConfigurationRoot);
-            File.WriteAllText(Path.Combine(_paths.ConfigurationRoot, "DownloadHistory.json"), JsonSerializer.Serialize(History, new JsonSerializerOptions { WriteIndented = true }));
+            File.WriteAllBytes(
+                Path.Combine(_paths.ConfigurationRoot, "DownloadHistory.json"),
+                JsonSerializer.SerializeToUtf8Bytes(History, WinUiJsonContext.Default.ListDownloadHistoryItem));
         }
         catch (Exception ex) { Log.Warning(ex, "[WinUI] Failed to save download history"); }
     }
@@ -540,7 +542,12 @@ public partial class ResourceDownloadViewModel : ObservableObject
     private IEnumerable<DownloadHistoryItem> LoadHistory()
     {
         var path = Path.Combine(_paths.ConfigurationRoot, "DownloadHistory.json");
-        try { return File.Exists(path) ? JsonSerializer.Deserialize<List<DownloadHistoryItem>>(File.ReadAllText(path)) ?? [] : []; }
+        try
+        {
+            return File.Exists(path)
+                ? JsonSerializer.Deserialize(File.ReadAllBytes(path), WinUiJsonContext.Default.ListDownloadHistoryItem) ?? []
+                : [];
+        }
         catch { return []; }
     }
 

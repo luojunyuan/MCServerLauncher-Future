@@ -5,6 +5,7 @@ using MCServerLauncher.Daemon.Serialization;
 using Microsoft.Extensions.ObjectPool;
 using Serilog;
 using TouchSocket.Core;
+using TouchSocket.Http.WebSockets;
 using JsonElement = System.Text.Json.JsonElement;
 using StjJsonSerializer = System.Text.Json.JsonSerializer;
 
@@ -32,8 +33,7 @@ internal class AnotherActionExecutor : IActionExecutor
         Resolver = resolver;
         Cts = new CancellationTokenSource();
         Instrumentation = instrumentation ?? NoopActionExecutorInstrumentation.Instance;
-        SendAsync = sendAsync ?? ((context, payload, cancellationToken) =>
-            context.GetWebsocket().SendAsync(payload, cancellationToken: cancellationToken));
+        SendAsync = sendAsync ?? DefaultSendAsync;
 
         ActionHandleBlock = new TransformBlock<ActionTask, ActionTask>(async task =>
         {
@@ -120,6 +120,11 @@ internal class AnotherActionExecutor : IActionExecutor
         });
 
         ActionHandleBlock.LinkTo(ActionSendBlock, new DataflowLinkOptions { PropagateCompletion = true });
+    }
+
+    private static async Task DefaultSendAsync(WsContext context, string payload, CancellationToken cancellationToken)
+    {
+        await context.GetWebsocket().SendAsync(payload, cancellationToken: cancellationToken);
     }
 
     private TransformBlock<ActionTask, ActionTask> ActionHandleBlock { get; }

@@ -4,7 +4,7 @@ using MCServerLauncher.WinUI.View.Features.CreateInstance.Models;
 
 namespace MCServerLauncher.WinUI.View.Features.CreateInstance.Components;
 
-public class SelectLocalFileStep : CreateStepControl
+public partial class SelectLocalFileStep : CreateStepControl
 {
     private readonly TextBox _pathBox;
     private readonly string _placeholderKey;
@@ -50,22 +50,22 @@ public class SelectLocalFileStep : CreateStepControl
     }
 }
 
-public sealed class SelectMinecraftJavaCore : SelectLocalFileStep
+public sealed partial class SelectMinecraftJavaCore : SelectLocalFileStep
 {
     public SelectMinecraftJavaCore() : base("SelectMinecraftJavaCore", "CreateInstance_Archive_Description", "CorePath") { }
 }
 
-public sealed class SelectMinecraftBedrockArchive : SelectLocalFileStep
+public sealed partial class SelectMinecraftBedrockArchive : SelectLocalFileStep
 {
     public SelectMinecraftBedrockArchive() : base("CreateInstance_MinecraftBedrockArchive_Title", "CreateInstance_Archive_Description", "Archive") { }
 }
 
-public sealed class SelectTerrariaArchive : SelectLocalFileStep
+public sealed partial class SelectTerrariaArchive : SelectLocalFileStep
 {
     public SelectTerrariaArchive() : base("CreateInstance_TerrariaArchive_Title", "CreateInstance_Archive_Description", "Archive") { }
 }
 
-public sealed class SelectOtherExecutableInstanceDependency : SelectLocalFileStep
+public sealed partial class SelectOtherExecutableInstanceDependency : SelectLocalFileStep
 {
     public SelectOtherExecutableInstanceDependency() : base("CreateInstance_OtherExecutableInstanceDependency_Title", "CreateInstance_OtherExecutableInstanceDependency_Description", "FileName") { }
 }

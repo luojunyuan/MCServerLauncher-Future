@@ -106,8 +106,6 @@ public abstract class ForgeInstallerBase : IInstanceInstaller
 
     #region Download
 
-    [UnconditionalSuppressMessage("Trimming", "IL2026:RequiresUnreferencedCode",
-        Justification = "Forge metadata download selection intentionally enters localized manifest parsing boundaries for third-party installer metadata.")]
     protected async Task<bool> DownloadMinecraft(string targetPath,
         CancellationToken ct = default)
     {

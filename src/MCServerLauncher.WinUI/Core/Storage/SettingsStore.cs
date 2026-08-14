@@ -55,7 +55,6 @@ public sealed class AppSettings
 
 public sealed class SettingsStore
 {
-    private static readonly JsonSerializerOptions JsonOptions = new() { WriteIndented = true };
     private readonly StoragePaths _paths;
     private readonly object _gate = new();
     private readonly SemaphoreSlim _saveGate = new(1, 1);
@@ -76,7 +75,7 @@ public sealed class SettingsStore
             byte[] payload;
             lock (_gate)
             {
-                payload = JsonSerializer.SerializeToUtf8Bytes(Current, JsonOptions);
+                payload = JsonSerializer.SerializeToUtf8Bytes(Current, WinUiJsonContext.Default.SettingsDocument);
             }
 
             await AtomicWriteAsync(_paths.SettingsFile, payload, cancellationToken);
@@ -93,8 +92,8 @@ public sealed class SettingsStore
         {
             if (File.Exists(_paths.SettingsFile))
             {
-                var loaded = JsonSerializer.Deserialize<SettingsDocument>(
-                    File.ReadAllText(_paths.SettingsFile), JsonOptions);
+                var loaded = JsonSerializer.Deserialize(
+                    File.ReadAllBytes(_paths.SettingsFile), WinUiJsonContext.Default.SettingsDocument);
                 if (loaded is not null)
                 {
                     Normalize(loaded);
@@ -112,7 +111,9 @@ public sealed class SettingsStore
         try
         {
             Directory.CreateDirectory(_paths.ConfigurationRoot);
-            AtomicWrite(_paths.SettingsFile, JsonSerializer.SerializeToUtf8Bytes(defaults, JsonOptions));
+            AtomicWrite(
+                _paths.SettingsFile,
+                JsonSerializer.SerializeToUtf8Bytes(defaults, WinUiJsonContext.Default.SettingsDocument));
         }
         catch (Exception ex)
         {

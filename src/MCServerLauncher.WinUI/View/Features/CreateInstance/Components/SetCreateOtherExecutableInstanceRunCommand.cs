@@ -2,7 +2,7 @@ namespace MCServerLauncher.WinUI.View.Features.CreateInstance.Components;
 
 using MCServerLauncher.WinUI.View.Features.CreateInstance.Models;
 
-public sealed class SetCreateOtherExecutableInstanceRunCommand : TextInputStep
+public sealed partial class SetCreateOtherExecutableInstanceRunCommand : TextInputStep
 {
     public SetCreateOtherExecutableInstanceRunCommand()
         : base(

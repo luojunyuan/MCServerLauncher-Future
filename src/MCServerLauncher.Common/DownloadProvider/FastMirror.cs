@@ -28,7 +28,9 @@ namespace MCServerLauncher.Common.DownloadProvider
                     Tag = item.GetProperty("tag").GetString(),
                     HomePage = item.GetProperty("homepage").GetString(),
                     Recommend = item.GetProperty("recommend").GetBoolean(),
-                    MinecraftVersions = JsonSerializer.Deserialize<List<string>>(item.GetProperty("mc_versions").GetRawText())
+                    MinecraftVersions = JsonSerializer.Deserialize(
+                        item.GetProperty("mc_versions").GetRawText(),
+                        DownloadProviderJsonContext.Default.ListString)
                 });
             }
             return results;

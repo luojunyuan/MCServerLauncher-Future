@@ -1,6 +1,7 @@
 namespace MCServerLauncher.WinUI.ViewModels.Models;
 
-public sealed record RefreshIntervalOption(int Seconds, string Display);
+[WinRT.GeneratedBindableCustomProperty]
+public sealed partial record RefreshIntervalOption(int Seconds, string Display);
 
 public static class RefreshIntervalOptions
 {

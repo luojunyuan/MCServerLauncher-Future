@@ -6,7 +6,7 @@ using MCServerLauncher.WinUI.Core.Localization;
 
 namespace MCServerLauncher.WinUI.View.Features.CreateInstance.Components;
 
-public abstract class CreateStepControl : UserControl, ICreateInstanceStep
+public abstract partial class CreateStepControl : UserControl, ICreateInstanceStep
 {
     private readonly string _titleKey;
     private readonly string _descriptionKey;

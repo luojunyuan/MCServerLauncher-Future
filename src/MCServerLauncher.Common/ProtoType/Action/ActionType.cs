@@ -1,5 +1,9 @@
+using System.Text.Json.Serialization;
+using MCServerLauncher.Common.ProtoType.Serialization;
+
 namespace MCServerLauncher.Common.ProtoType.Action;
 
+[JsonConverter(typeof(SnakeCaseEnumConverter<ActionType>))]
 public enum ActionType
 {
     // Event subsystem

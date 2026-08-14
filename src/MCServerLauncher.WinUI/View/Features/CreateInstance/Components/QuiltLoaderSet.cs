@@ -2,7 +2,7 @@ using MCServerLauncher.Common.Minecraft.InstallSource;
 
 namespace MCServerLauncher.WinUI.View.Features.CreateInstance.Components;
 
-public sealed class QuiltLoaderSet : LoaderSetStep
+public sealed partial class QuiltLoaderSet : LoaderSetStep
 {
     private List<Quilt.QuiltMinecraftVersion> _minecraft = [];
 

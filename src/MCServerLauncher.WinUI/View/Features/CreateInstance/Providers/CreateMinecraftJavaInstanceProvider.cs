@@ -5,7 +5,7 @@ using MCServerLauncher.WinUI.Views.Pages;
 
 namespace MCServerLauncher.WinUI.View.Features.CreateInstance.Providers;
 
-public sealed class CreateMinecraftJavaInstanceProvider : CreateInstanceProviderPage
+public sealed partial class CreateMinecraftJavaInstanceProvider : CreateInstanceProviderPage
 {
     private readonly SelectMinecraftJavaCore _core = new();
     private readonly SelectMinecraftJavaJvm _jvm;

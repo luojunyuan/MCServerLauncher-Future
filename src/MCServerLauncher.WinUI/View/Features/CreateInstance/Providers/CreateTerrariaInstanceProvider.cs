@@ -6,7 +6,7 @@ using MCServerLauncher.WinUI.Views.Pages;
 
 namespace MCServerLauncher.WinUI.View.Features.CreateInstance.Providers;
 
-public sealed class CreateTerrariaInstanceProvider : CreateInstanceProviderPage
+public sealed partial class CreateTerrariaInstanceProvider : CreateInstanceProviderPage
 {
     private readonly SelectTerrariaArchive _archive = new();
     private readonly SetInstanceName _name = new();

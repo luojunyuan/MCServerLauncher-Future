@@ -1,16 +1,12 @@
 using System.Runtime.InteropServices;
 using MCServerLauncher.Common.Helpers;
 using MCServerLauncher.Common.ProtoType.Status;
-using Microsoft.Management.Infrastructure;
 using Serilog;
 
 namespace MCServerLauncher.Daemon.Utils.Status;
 
 public static class MemoryInfoHelper
 {
-    private static readonly CimSession? Session =
-        RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? CimSession.Create("localhost") : null;
-
     public static readonly ulong TotalPhysicalMemory;
 
     static MemoryInfoHelper()
@@ -20,27 +16,8 @@ public static class MemoryInfoHelper
 
     private static ulong GetTotalPhysicalMemory()
     {
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && Session != null)
-            try
-            {
-                var instances = Session.QueryInstances(
-                    @"root\cimv2",
-                    "WQL",
-                    "SELECT TotalPhysicalMemory FROM Win32_ComputerSystem"
-                ).ToArray();
-                var instance = instances.FirstOrDefault();
-                var total = instance?.CimInstanceProperties["TotalPhysicalMemory"]?.Value as ulong? ?? 0UL;
-
-                foreach (var queryInstance in instances) queryInstance.Dispose();
-
-                return total / 1024;
-            }
-            catch (CimException ex)
-            {
-                Log.Warning($"CIM query failed: {ex.Message} ({ex.NativeErrorCode})");
-                ex.Dispose();
-                return 0UL;
-            }
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            return TryGetWindowsMemory(out var totalKb, out _) ? totalKb : 0UL;
 
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
@@ -65,34 +42,10 @@ public static class MemoryInfoHelper
 
     public static async Task<MemInfo> GetMemInfo()
     {
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && Session != null)
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
-            var available = await Task.Run(() =>
-            {
-                try
-                {
-                    // 同步获取空闲物理内存KB
-                    var instances = Session.QueryInstances(
-                        @"root\cimv2",
-                        "WQL",
-                        "SELECT FreePhysicalMemory FROM Win32_OperatingSystem"
-                    ).ToArray();
-                    var instance = instances.FirstOrDefault();
-                    var freeKb = instance?.CimInstanceProperties["FreePhysicalMemory"]?.Value as ulong? ?? 0UL;
-
-                    foreach (var queryInstance in instances) queryInstance.Dispose();
-
-                    return freeKb;
-                }
-                catch (CimException ex)
-                {
-                    Log.Warning($"CIM query failed: {ex.Message} ({ex.NativeErrorCode})");
-                    ex.Dispose();
-                    return 0UL;
-                }
-            });
-
-            return new MemInfo(TotalPhysicalMemory, available);
+            TryGetWindowsMemory(out var totalKb, out var availableKb);
+            return new MemInfo(totalKb > 0 ? totalKb : TotalPhysicalMemory, availableKb);
         }
 
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
@@ -128,4 +81,42 @@ public static class MemoryInfoHelper
 
         throw new PlatformNotSupportedException("Unsupported OS");
     }
+
+    private static bool TryGetWindowsMemory(out ulong totalKb, out ulong availableKb)
+    {
+        var status = new MemoryStatusEx
+        {
+            Length = (uint)Marshal.SizeOf<MemoryStatusEx>()
+        };
+
+        if (!GlobalMemoryStatusEx(ref status))
+        {
+            Log.Warning("GlobalMemoryStatusEx failed with error {ErrorCode}", Marshal.GetLastWin32Error());
+            totalKb = 0;
+            availableKb = 0;
+            return false;
+        }
+
+        totalKb = status.TotalPhysical / 1024;
+        availableKb = status.AvailablePhysical / 1024;
+        return true;
+    }
+
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+    private struct MemoryStatusEx
+    {
+        public uint Length;
+        public uint MemoryLoad;
+        public ulong TotalPhysical;
+        public ulong AvailablePhysical;
+        public ulong TotalPageFile;
+        public ulong AvailablePageFile;
+        public ulong TotalVirtual;
+        public ulong AvailableVirtual;
+        public ulong AvailableExtendedVirtual;
+    }
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static extern bool GlobalMemoryStatusEx(ref MemoryStatusEx buffer);
 }

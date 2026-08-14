@@ -6,7 +6,6 @@ namespace MCServerLauncher.WinUI.Core.Storage;
 
 public sealed class DaemonStore
 {
-    private static readonly JsonSerializerOptions JsonOptions = new() { WriteIndented = true };
     private readonly StoragePaths _paths;
     private readonly object _gate = new();
     private List<DaemonConfigModel> _items;
@@ -59,8 +58,8 @@ public sealed class DaemonStore
         {
             if (File.Exists(_paths.DaemonsFile))
             {
-                var loaded = JsonSerializer.Deserialize<List<DaemonConfigModel>>(
-                    File.ReadAllText(_paths.DaemonsFile), JsonOptions);
+                var loaded = JsonSerializer.Deserialize(
+                    File.ReadAllBytes(_paths.DaemonsFile), WinUiJsonContext.Default.ListDaemonConfigModel);
                 if (loaded is not null) return loaded;
             }
         }
@@ -75,7 +74,7 @@ public sealed class DaemonStore
             Directory.CreateDirectory(_paths.ConfigurationRoot);
             AtomicWrite(
                 _paths.DaemonsFile,
-                JsonSerializer.SerializeToUtf8Bytes(defaults, JsonOptions));
+                JsonSerializer.SerializeToUtf8Bytes(defaults, WinUiJsonContext.Default.ListDaemonConfigModel));
         }
         catch (Exception ex)
         {
@@ -92,7 +91,7 @@ public sealed class DaemonStore
             Directory.CreateDirectory(_paths.ConfigurationRoot);
             AtomicWrite(
                 _paths.DaemonsFile,
-                JsonSerializer.SerializeToUtf8Bytes(_items, JsonOptions));
+                JsonSerializer.SerializeToUtf8Bytes(_items, WinUiJsonContext.Default.ListDaemonConfigModel));
         }
         catch (Exception ex)
         {

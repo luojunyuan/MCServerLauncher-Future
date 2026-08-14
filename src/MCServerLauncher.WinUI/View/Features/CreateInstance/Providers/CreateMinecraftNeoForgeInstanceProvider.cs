@@ -5,7 +5,7 @@ using MCServerLauncher.WinUI.Views.Pages;
 
 namespace MCServerLauncher.WinUI.View.Features.CreateInstance.Providers;
 
-public sealed class CreateMinecraftNeoForgeInstanceProvider : CreateInstanceProviderPage
+public sealed partial class CreateMinecraftNeoForgeInstanceProvider : CreateInstanceProviderPage
 {
     private readonly NeoForgeLoaderSet _loader = new();
     private readonly SelectMinecraftJavaJvm _jvm;

@@ -7,7 +7,7 @@ using MCServerLauncher.WinUI.View.Features.CreateInstance.Models;
 
 namespace MCServerLauncher.WinUI.View.Features.CreateInstance.Components;
 
-public abstract class LoaderSetStep : CreateStepControl
+public abstract partial class LoaderSetStep : CreateStepControl
 {
     protected readonly ComboBox MinecraftVersionBox;
     protected readonly ComboBox LoaderVersionBox;

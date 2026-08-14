@@ -1,7 +1,6 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using Microsoft.Management.Infrastructure;
 using Serilog;
 
 namespace MCServerLauncher.Daemon.Utils.Status;
@@ -141,13 +140,8 @@ public static class ProcessTreeHelper
         {
             try
             {
-                using var session = CimSession.Create("localhost");
-                var query = $"SELECT CommandLine FROM Win32_Process WHERE ProcessId = {pid}";
-                foreach (var instance in session.QueryInstances("root\\cimv2", "WQL", query))
-                {
-                    var prop = instance.CimInstanceProperties["CommandLine"];
-                    if (prop?.Value is not null) return prop.Value.ToString() ?? string.Empty;
-                }
+                using var process = Process.GetProcessById(pid);
+                return process.ProcessName;
             }
             catch
             {

@@ -1,17 +1,15 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using MCServerLauncher.Common.Helpers;
 using MCServerLauncher.Common.ProtoType.Status;
-using Microsoft.Management.Infrastructure;
+using Microsoft.Win32;
 
 namespace MCServerLauncher.Daemon.Utils.Status;
 
 public static class CpuInfoHelper
 {
-    private static readonly CimSession? Session =
-        RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? CimSession.Create("localhost") : null;
-
     public static readonly string Vendor;
     public static readonly string Name;
     public static readonly int ProcessorCount = Environment.ProcessorCount;
@@ -30,36 +28,7 @@ public static class CpuInfoHelper
     private static (string Name, string Vendor, int CoreCount, int ThreadCount) GetCpuInfoSnapshot()
     {
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-        {
-            var manufacturer = "Unknown";
-            var name = "Unknown";
-            var coreCount = 0;
-            var threadCount = 0;
-
-            var instances = Session!.QueryInstances(
-                @"root\cimv2",
-                "WQL",
-                "SELECT Manufacturer, Name, NumberOfCores, NumberOfLogicalProcessors FROM Win32_Processor"
-            ).ToArray();
-
-            foreach (var instance in instances)
-            {
-                // 只取第一个 CPU 的制造商和名称（通常多路系统型号相同）
-                if (manufacturer == "Unknown")
-                {
-                    manufacturer = instance.CimInstanceProperties["Manufacturer"]?.Value?.ToString()?.Trim() ??
-                                   "Unknown";
-                    name = instance.CimInstanceProperties["Name"]?.Value?.ToString()?.Trim() ?? "Unknown";
-                }
-
-                coreCount += ReadCimInt(instance, "NumberOfCores");
-                threadCount += ReadCimInt(instance, "NumberOfLogicalProcessors");
-            }
-
-            foreach (var instance in instances) instance.Dispose();
-
-            return (name, manufacturer, NormalizeProcessorCount(coreCount), NormalizeProcessorCount(threadCount));
-        }
+            return GetWindowsCpuInfoSnapshot();
 
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
@@ -130,16 +99,71 @@ public static class CpuInfoHelper
         return new CpuInfo(Vendor, Name, ThreadCount, usage, CoreCount, ThreadCount);
     }
 
-    private static int ReadCimInt(CimInstance instance, string propertyName)
+    [SupportedOSPlatform("windows")]
+    private static (string Name, string Vendor, int CoreCount, int ThreadCount) GetWindowsCpuInfoSnapshot()
     {
-        var value = instance.CimInstanceProperties[propertyName]?.Value;
-        return value switch
+        var name = "Unknown";
+        var vendor = "Unknown";
+
+        try
         {
-            int intValue => intValue,
-            uint uintValue => checked((int)uintValue),
-            ushort ushortValue => ushortValue,
-            _ => int.TryParse(value?.ToString(), out var parsed) ? parsed : 0
-        };
+            using var key = Registry.LocalMachine.OpenSubKey(
+                @"HARDWARE\DESCRIPTION\System\CentralProcessor\0");
+            name = ReadRegistryString(key, "ProcessorNameString") ?? name;
+            vendor = ReadRegistryString(key, "VendorIdentifier") ?? vendor;
+        }
+        catch (Exception)
+        {
+            // Registry access is optional; processor counts still provide useful status data.
+        }
+
+        var threadCount = NormalizeProcessorCount(ProcessorCount);
+        var coreCount = GetWindowsPhysicalCoreCount(threadCount);
+        return (name, vendor, coreCount, threadCount);
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static string? ReadRegistryString(RegistryKey? key, string valueName)
+    {
+        return key?.GetValue(valueName)?.ToString()?.Trim() is { Length: > 0 } value ? value : null;
+    }
+
+    private static int GetWindowsPhysicalCoreCount(int fallback)
+    {
+        uint bufferLength = 0;
+        GetLogicalProcessorInformationEx(
+            LogicalProcessorRelationship.RelationProcessorCore,
+            IntPtr.Zero,
+            ref bufferLength);
+
+        if (bufferLength == 0) return fallback;
+
+        var buffer = Marshal.AllocHGlobal(checked((int)bufferLength));
+        try
+        {
+            if (!GetLogicalProcessorInformationEx(
+                    LogicalProcessorRelationship.RelationProcessorCore,
+                    buffer,
+                    ref bufferLength))
+                return fallback;
+
+            var totalLength = checked((int)bufferLength);
+            var offset = 0;
+            var coreCount = 0;
+            while (offset + sizeof(int) * 2 <= totalLength)
+            {
+                var recordSize = Marshal.ReadInt32(buffer, offset + sizeof(int));
+                if (recordSize < sizeof(int) * 2 || offset + recordSize > totalLength) break;
+                coreCount++;
+                offset += recordSize;
+            }
+
+            return NormalizeProcessorCount(coreCount);
+        }
+        finally
+        {
+            Marshal.FreeHGlobal(buffer);
+        }
     }
 
     private static string? ReadLinuxCpuField(string[] cpuInfo, string fieldName)
@@ -284,4 +308,16 @@ public static class CpuInfoHelper
         public uint dwLowDateTime;
         public uint dwHighDateTime;
     }
+
+    private enum LogicalProcessorRelationship
+    {
+        RelationProcessorCore = 0
+    }
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static extern bool GetLogicalProcessorInformationEx(
+        LogicalProcessorRelationship relationship,
+        IntPtr buffer,
+        ref uint returnedLength);
 }

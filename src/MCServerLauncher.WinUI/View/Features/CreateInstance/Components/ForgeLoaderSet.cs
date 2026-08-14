@@ -2,7 +2,7 @@ using MCServerLauncher.Common.Minecraft.InstallSource;
 
 namespace MCServerLauncher.WinUI.View.Features.CreateInstance.Components;
 
-public sealed class ForgeLoaderSet : LoaderSetStep
+public sealed partial class ForgeLoaderSet : LoaderSetStep
 {
     private List<Forge.ForgeBuild> _builds = [];
 

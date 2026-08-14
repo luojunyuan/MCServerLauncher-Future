@@ -1,8 +1,12 @@
+using System.Text.Json.Serialization;
+using MCServerLauncher.Common.ProtoType.Serialization;
+
 namespace MCServerLauncher.Common.ProtoType.Instance;
 
 /// <summary>
 ///     实例安装设置: 源文件类型
 /// </summary>
+[JsonConverter(typeof(SnakeCaseEnumConverter<SourceType>))]
 public enum SourceType
 {
     /// <summary>

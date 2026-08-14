@@ -8,7 +8,7 @@ using MCServerLauncher.WinUI.View.Features.CreateInstance.Models;
 
 namespace MCServerLauncher.WinUI.View.Features.CreateInstance.Components;
 
-public sealed class SelectMinecraftJavaJvm : CreateStepControl
+public sealed partial class SelectMinecraftJavaJvm : CreateStepControl
 {
     private readonly CreateInstanceSession _session;
     private readonly TextBox _pathBox;

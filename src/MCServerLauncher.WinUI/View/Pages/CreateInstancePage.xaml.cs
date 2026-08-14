@@ -9,7 +9,7 @@ using MCServerLauncher.WinUI.View.Features.CreateInstance.Models;
 using MCServerLauncher.WinUI.View.Features.CreateInstance.PreCreate;
 using MCServerLauncher.WinUI.View.Features.CreateInstance.Providers;
 using MCServerLauncher.Common.ProtoType.Instance;
-using MCServerLauncher.DaemonClient.Serialization;
+using MCServerLauncher.Common.ProtoType.Serialization;
 
 namespace MCServerLauncher.WinUI.Views.Pages;
 
@@ -166,9 +166,7 @@ public sealed partial class CreateInstancePage : Page
             dialog.CloseButtonText = Texts["DebugCopyConfig"];
             dialog.CloseButtonClick += (_, _) =>
             {
-                var json = JsonSerializer.Serialize(
-                    debugSetting,
-                    DaemonClientRpcJsonBoundary.CreateStjOptions(writeIndented: true));
+                var json = JsonSerializer.Serialize(debugSetting, PersistenceContext.Default.InstanceFactorySetting);
                 App.Services.Clipboard.SetText(json);
                 App.Services.Notifications.Push(
                     Texts["Success"],

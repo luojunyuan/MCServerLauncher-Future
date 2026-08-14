@@ -2,7 +2,7 @@ using MCServerLauncher.Common.Minecraft.InstallSource;
 
 namespace MCServerLauncher.WinUI.View.Features.CreateInstance.Components;
 
-public sealed class FabricLoaderSet : LoaderSetStep
+public sealed partial class FabricLoaderSet : LoaderSetStep
 {
     private List<Fabric.FabricUniversalVersion> _minecraft = [];
     private List<Fabric.FabricUniversalVersion> _loaders = [];

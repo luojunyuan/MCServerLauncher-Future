@@ -65,6 +65,7 @@ BenchmarkDotNet.Artifacts/
 project.lock.json
 project.fragment.lock.json
 artifacts/
+mcsl-future-win-x64-aot/
 
 # ASP.NET Scaffolding
 ScaffoldingReadMe.txt

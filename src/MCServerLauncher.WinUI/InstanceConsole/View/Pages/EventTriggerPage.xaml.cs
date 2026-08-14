@@ -5,7 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using MCServerLauncher.Common.ProtoType.EventTrigger;
-using MCServerLauncher.DaemonClient.Serialization;
+using MCServerLauncher.Common.ProtoType.Serialization;
 using MCServerLauncher.WinUI.Core;
 using MCServerLauncher.WinUI.Core.Localization;
 using MCServerLauncher.WinUI.Core.Services;
@@ -89,8 +89,9 @@ public sealed partial class EventTriggerPage : UserControl
     private void Copy_Click(object sender, RoutedEventArgs e)
     {
         if ((sender as FrameworkElement)?.Tag is not EventRuleModel item) return;
-        var options = DaemonClientRpcJsonBoundary.CreateStjOptions();
-        var copy = JsonSerializer.Deserialize<EventRule>(JsonSerializer.Serialize(item.Rule, options), options);
+        var copy = JsonSerializer.Deserialize(
+            JsonSerializer.SerializeToUtf8Bytes(item.Rule, EventRulesContext.Default.EventRule),
+            EventRulesContext.Default.EventRule);
         if (copy is null) return;
         copy.Id = Guid.NewGuid();
         var baseName = item.Name;
@@ -123,8 +124,9 @@ public sealed partial class EventTriggerPage : UserControl
         if (file is null) return;
         try
         {
-            var options = DaemonClientRpcJsonBoundary.CreateStjOptions();
-            var imported = JsonSerializer.Deserialize<List<EventRule>>(await File.ReadAllTextAsync(file.Path), options) ?? [];
+            var imported = JsonSerializer.Deserialize(
+                await File.ReadAllBytesAsync(file.Path),
+                EventRulesContext.Default.ListEventRule) ?? [];
             foreach (var rule in imported)
             {
                 rule.Id = Guid.NewGuid();
@@ -153,13 +155,14 @@ public sealed partial class EventTriggerPage : UserControl
         if (file is null) return;
         try
         {
-            var options = DaemonClientRpcJsonBoundary.CreateStjOptions(writeIndented: true);
             var selected = RulesListView.SelectedItems
                 .OfType<EventRuleModel>()
                 .Select(item => item.Rule)
                 .ToList();
             var rules = selected.Count > 0 ? selected : GetRules();
-            await File.WriteAllTextAsync(file.Path, JsonSerializer.Serialize(rules, options));
+            await File.WriteAllBytesAsync(
+                file.Path,
+                JsonSerializer.SerializeToUtf8Bytes(rules, EventRulesContext.Default.ListEventRule));
             App.Services.Notifications.Push(Texts["Success"], Texts["Success"], NotificationSeverity.Success);
         }
         catch (Exception ex)

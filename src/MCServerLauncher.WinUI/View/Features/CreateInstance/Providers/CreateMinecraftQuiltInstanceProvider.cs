@@ -5,7 +5,7 @@ using MCServerLauncher.WinUI.Views.Pages;
 
 namespace MCServerLauncher.WinUI.View.Features.CreateInstance.Providers;
 
-public sealed class CreateMinecraftQuiltInstanceProvider : CreateInstanceProviderPage
+public sealed partial class CreateMinecraftQuiltInstanceProvider : CreateInstanceProviderPage
 {
     private readonly QuiltLoaderSet _loader = new();
     private readonly SelectMinecraftJavaJvm _jvm;

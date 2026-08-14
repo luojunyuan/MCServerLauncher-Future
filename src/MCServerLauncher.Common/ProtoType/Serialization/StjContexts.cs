@@ -95,6 +95,7 @@ public partial class ActionParametersContext : JsonSerializerContext
 [JsonSerializable(typeof(UpdateInstanceSettingsResult))]
 [JsonSerializable(typeof(GetAllReportsResult))]
 [JsonSerializable(typeof(GetSystemInfoResult))]
+[JsonSerializable(typeof(SystemInfo))]
 [JsonSerializable(typeof(GetEventRulesResult))]
 public partial class ActionResultsContext : JsonSerializerContext
 {

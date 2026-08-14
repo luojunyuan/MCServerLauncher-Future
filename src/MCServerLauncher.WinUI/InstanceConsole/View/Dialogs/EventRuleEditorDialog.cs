@@ -1,4 +1,5 @@
 using System.Text.Json;
+using MCServerLauncher.Common.ProtoType.Serialization;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using MCServerLauncher.Common.ProtoType.EventTrigger;
@@ -369,7 +370,9 @@ public static class EventRuleEditorDialog
     }
 
     private static EventRule Clone(EventRule source) =>
-        JsonSerializer.Deserialize<EventRule>(JsonSerializer.Serialize(source, DaemonClientRpcJsonBoundary.CreateStjOptions()), DaemonClientRpcJsonBoundary.CreateStjOptions())
+        JsonSerializer.Deserialize(
+            JsonSerializer.SerializeToUtf8Bytes(source, EventRulesContext.Default.EventRule),
+            EventRulesContext.Default.EventRule)
         ?? new EventRule();
 
     private static void CopyInto(EventRule target, EventRule source)

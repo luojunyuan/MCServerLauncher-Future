@@ -5,7 +5,7 @@ using MCServerLauncher.WinUI.Views.Pages;
 
 namespace MCServerLauncher.WinUI.View.Features.CreateInstance.Providers;
 
-public sealed class CreateMinecraftForgeInstanceProvider : CreateInstanceProviderPage
+public sealed partial class CreateMinecraftForgeInstanceProvider : CreateInstanceProviderPage
 {
     private readonly ForgeLoaderSet _loader = new();
     private readonly SelectMinecraftJavaJvm _jvm;

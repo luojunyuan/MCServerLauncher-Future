@@ -1,6 +1,10 @@
+using System.Text.Json.Serialization;
+using MCServerLauncher.Common.ProtoType.Serialization;
+
 namespace MCServerLauncher.Common.ProtoType.Instance;
 
 [Flags]
+[JsonConverter(typeof(SnakeCaseEnumConverter<InstanceCategory>))]
 public enum InstanceCategory
 {
     Generic = 0,

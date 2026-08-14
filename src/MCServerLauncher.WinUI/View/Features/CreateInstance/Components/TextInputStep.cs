@@ -4,7 +4,7 @@ using MCServerLauncher.WinUI.View.Features.CreateInstance.Models;
 
 namespace MCServerLauncher.WinUI.View.Features.CreateInstance.Components;
 
-public class TextInputStep : CreateStepControl
+public partial class TextInputStep : CreateStepControl
 {
     protected readonly TextBox Input;
     private readonly CreateInstanceDataType _dataType;

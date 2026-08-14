@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using System.IO.Compression;
 using MCServerLauncher.Daemon.Management.Installer.MinecraftForge.Json;
 using System.Text.Json;
@@ -8,10 +7,6 @@ namespace MCServerLauncher.Daemon.Management.Installer.MinecraftForge.V2Json;
 
 public static class InstallExtensions
 {
-    private const string ForgeInstallerTrimMessage =
-        "Forge installer metadata parsing uses System.Text.Json against third-party installer JSON.";
-
-    [RequiresUnreferencedCode(ForgeInstallerTrimMessage)]
     public static Version LoadVersion(this Install profile, string installerPath)
     {
         using var installer = new ZipArchive(File.OpenRead(installerPath));
@@ -21,7 +16,6 @@ public static class InstallExtensions
         return DeserializeVersion(sr.ReadToEnd())!;
     }
 
-    [RequiresUnreferencedCode(ForgeInstallerTrimMessage)]
     public static async Task<Version.Download?> GetMcDownloadFromBmclApi(this Install profile,
         CancellationToken ct = default)
     {
@@ -35,7 +29,6 @@ public static class InstallExtensions
         return download;
     }
 
-    [RequiresUnreferencedCode(ForgeInstallerTrimMessage)]
     public static async Task<Version.Download?> GetMcDownload(this Install profile, CancellationToken ct = default)
     {
         using var client = new HttpClient();
@@ -48,11 +41,9 @@ public static class InstallExtensions
         return versionObj?.GetDownload("server");
     }
 
-    [RequiresUnreferencedCode(ForgeInstallerTrimMessage)]
     private static Manifest? DeserializeManifest(string content) =>
-        JsonSerializer.Deserialize<Manifest>(content, InstallProfileJsonSettings.Settings);
+        JsonSerializer.Deserialize(content, ForgeInstallerJsonContext.Default.Manifest);
 
-    [RequiresUnreferencedCode(ForgeInstallerTrimMessage)]
     private static Version? DeserializeVersion(string content) =>
-        JsonSerializer.Deserialize<Version>(content, InstallProfileJsonSettings.Settings);
+        JsonSerializer.Deserialize(content, ForgeInstallerJsonContext.Default.Version);
 }

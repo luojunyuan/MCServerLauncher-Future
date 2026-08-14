@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace MCServerLauncher.Daemon.Management.Installer.MinecraftForge.Json;
 
+[JsonConverter(typeof(Artifact.ArtifactConverter))]
 public class Artifact
 {
     private string? _descriptor;

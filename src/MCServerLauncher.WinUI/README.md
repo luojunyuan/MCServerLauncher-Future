@@ -181,21 +181,22 @@ numbers, theme changes, and daemon upload/download.
 From the repository root:
 
 ```powershell
-# Publish self-contained x64 and ARM64 folders
-& scripts\Publish-WinUI.ps1 -Architecture @('x64','ARM64') -Configuration Release
+# Publish the Windows x64 Native AOT package
+& scripts\Publish-WinX64Aot.ps1
+
+# Keep all six language resource folders instead of the default en-US/zh-CN set
+& scripts\Publish-WinX64Aot.ps1 -AllLanguages
 
 # Run the first-setup and shell UI automation against the x64 publish
 & scripts\Test-WinUIFirstSetup.ps1
 ```
 
-> ⚠️ **Not implemented (2026-08-12):** neither `scripts\Publish-WinUI.ps1` nor
-> `scripts\Test-WinUIFirstSetup.ps1` exists in the repository yet. The commands
-> below are aspirational; publish must currently be driven manually with
-> `dotnet publish -p:Platform=x64` (see the Verification checklist note).
-
-The publish script restores each RID, stages the WinUIIslands/WinUI 2 and
-WinUIEdit native runtime, copies the application `resources.pri`, and fails
-if required runtime files are missing or a package manifest is present.
+The publisher creates `mcsl-future-win-x64-aot` with `daemon/` and `winui/`
+subfolders. All three executables are Native AOT and self-contained. The
+WinUI folder is assembled from a whitelist so it does not contain the
+project-reference runtimeconfig, symbol files, or unrelated managed DLLs.
+The default package keeps English and Simplified Chinese resources; use
+`-Languages` to choose a different set or `-AllLanguages` to keep all six.
 
 ## Verification checklist
 
@@ -205,10 +206,10 @@ untouched:
 ```powershell
 dotnet build src\MCServerLauncher.WPF\MCServerLauncher.WPF.csproj /m:1
 dotnet test tests\MCServerLauncher.ProtocolTests\MCServerLauncher.ProtocolTests.csproj -c Release /m:1
-& scripts\Publish-WinUI.ps1 -Architecture @('x64','ARM64') -Configuration Release
+& scripts\Publish-WinX64Aot.ps1 -Configuration Release
 ```
 
-> ⚠️ **Note (2026-08-12):** a plain
+> **Note:** a plain
 > `dotnet build src\MCServerLauncher.WinUI\MCServerLauncher.WinUI.csproj` fails
 > with `MSB1008` / `RuntimeIdentifier 'win-x64' requires Platform and
 > PlatformTarget 'x64'` because `<Platforms>` is `x64;ARM64`. Always pass

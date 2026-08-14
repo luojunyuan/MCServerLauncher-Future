@@ -1,7 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using MCServerLauncher.WinUI.Core;
 using MCServerLauncher.WinUI.Core.Localization;
@@ -331,9 +330,18 @@ public partial class SettingsViewModel : ObservableObject
 
         try
         {
-            var info = JsonSerializer.Deserialize<BuildInfoModel>(stream);
-            if (info is not null)
-                BuildInfoText = $"Build Time: {info.BuildTime}\nBuild Info: {info.Branch}-{App.AppVersion}-{info.CommitHash}";
+            using var document = JsonDocument.Parse(stream);
+            var root = document.RootElement;
+            var buildTime = root.TryGetProperty("buildTime", out var buildTimeElement)
+                ? buildTimeElement.GetString()
+                : null;
+            var branch = root.TryGetProperty("branch", out var branchElement)
+                ? branchElement.GetString()
+                : null;
+            var commitHash = root.TryGetProperty("commitHash", out var commitHashElement)
+                ? commitHashElement.GetString()
+                : null;
+            BuildInfoText = $"Build Time: {buildTime}\nBuild Info: {branch}-{App.AppVersion}-{commitHash}";
         }
         catch
         {
@@ -377,10 +385,4 @@ public partial class SettingsViewModel : ObservableObject
         return 0;
     }
 
-    private sealed class BuildInfoModel
-    {
-        [JsonPropertyName("buildTime")] public string? BuildTime { get; set; }
-        [JsonPropertyName("commitHash")] public string? CommitHash { get; set; }
-        [JsonPropertyName("branch")] public string? Branch { get; set; }
-    }
 }

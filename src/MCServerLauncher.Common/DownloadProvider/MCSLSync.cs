@@ -19,7 +19,9 @@ namespace MCServerLauncher.Common.DownloadProvider
             if (response.IsSuccessStatusCode)
             {
                 using var doc = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
-                return JsonSerializer.Deserialize<List<string>>(doc.RootElement.GetProperty("data").GetRawText());
+                return JsonSerializer.Deserialize(
+                    doc.RootElement.GetProperty("data").GetRawText(),
+                    DownloadProviderJsonContext.Default.ListString);
             }
             return null;
         }
@@ -35,7 +37,9 @@ namespace MCServerLauncher.Common.DownloadProvider
             if (response.IsSuccessStatusCode)
             {
                 using var doc = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
-                return JsonSerializer.Deserialize<List<string>>(doc.RootElement.GetProperty("data").GetProperty("versions").GetRawText());
+                return JsonSerializer.Deserialize(
+                    doc.RootElement.GetProperty("data").GetProperty("versions").GetRawText(),
+                    DownloadProviderJsonContext.Default.ListString);
             }
             return null;
         }
@@ -52,7 +56,9 @@ namespace MCServerLauncher.Common.DownloadProvider
             if (response.IsSuccessStatusCode)
             {
                 using var doc = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
-                return JsonSerializer.Deserialize<List<string>>(doc.RootElement.GetProperty("data").GetProperty("builds").GetRawText());
+                return JsonSerializer.Deserialize(
+                    doc.RootElement.GetProperty("data").GetProperty("builds").GetRawText(),
+                    DownloadProviderJsonContext.Default.ListString);
             }
             return null;
         }

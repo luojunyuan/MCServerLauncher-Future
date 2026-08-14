@@ -293,9 +293,9 @@ public class WsReceivedPlugin : PluginBase, IWebSocketReceivedPlugin
         return eventType switch
         {
             EventType.InstanceLog when metaToken is null || metaToken.Value.IsExplicitJsonNull => null,
-            EventType.InstanceLog => System.Text.Json.JsonSerializer.Deserialize<InstanceLogEventMeta>(
+            EventType.InstanceLog => System.Text.Json.JsonSerializer.Deserialize(
                 metaToken!.Value.Value,
-                DaemonClientRpcJsonBoundary.StjOptions),
+                EventDataContext.Default.InstanceLogEventMeta),
             _ => null
         };
     }
@@ -320,13 +320,13 @@ public class WsReceivedPlugin : PluginBase, IWebSocketReceivedPlugin
         IEventData? data = eventType switch
         {
             EventType.InstanceLog when dataToken is null || dataToken.Value.IsExplicitJsonNull => null,
-            EventType.InstanceLog => System.Text.Json.JsonSerializer.Deserialize<InstanceLogEventData>(
+            EventType.InstanceLog => System.Text.Json.JsonSerializer.Deserialize(
                 dataToken!.Value.Value,
-                DaemonClientRpcJsonBoundary.StjOptions),
+                EventDataContext.Default.InstanceLogEventData),
             EventType.DaemonReport when dataToken is null || dataToken.Value.IsExplicitJsonNull => null,
-            EventType.DaemonReport => System.Text.Json.JsonSerializer.Deserialize<DaemonReportEventData>(
+            EventType.DaemonReport => System.Text.Json.JsonSerializer.Deserialize(
                 dataToken!.Value.Value,
-                DaemonClientRpcJsonBoundary.StjOptions),
+                EventDataContext.Default.DaemonReportEventData),
             _ => null
         };
 
@@ -345,14 +345,13 @@ public class WsReceivedPlugin : PluginBase, IWebSocketReceivedPlugin
         if (!root.TryGetProperty("data", out var dataElement))
             throw new JsonException("Missing required property 'data'.");
 
-        var eventType = eventTypeElement.Deserialize<EventType>(DaemonClientRpcJsonBoundary.StjOptions);
-        var timestamp = root.TryGetProperty("time", out var timeElement)
-            ? timeElement.Deserialize<long>(DaemonClientRpcJsonBoundary.StjOptions)
-            : DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        if (root.TryGetProperty("time", out var timeElement) && !timeElement.TryGetInt64(out timestamp))
+            throw new JsonException("Property 'time' must be an integer timestamp.");
 
         return new EventPacket
         {
-            EventType = eventType,
+            EventType = ParseEventType(eventTypeElement),
             EventMeta = new JsonPayloadBuffer(metaElement.Clone()),
             EventData = new JsonPayloadBuffer(dataElement.Clone()),
             Timestamp = timestamp
@@ -361,7 +360,7 @@ public class WsReceivedPlugin : PluginBase, IWebSocketReceivedPlugin
 
     private static ActionResponse ParseActionResponse(JsonElement root)
     {
-        var response = root.Deserialize<ActionResponse>(DaemonClientRpcJsonBoundary.StjOptions)
+        var response = JsonSerializer.Deserialize(root, DaemonClientRpcTypeInfoCache<ActionResponse>.TypeInfo)
                        ?? throw new JsonException("Received action envelope could not be materialized.");
 
         return response.Data.HasValue
@@ -381,18 +380,31 @@ public class WsReceivedPlugin : PluginBase, IWebSocketReceivedPlugin
 
     private static NotificationPacket ParseNotificationPacket(JsonElement root)
     {
-        return root.Deserialize<NotificationPacket>(DaemonClientRpcJsonBoundary.StjOptions)
+        return JsonSerializer.Deserialize(root, DaemonClientRpcTypeInfoCache<NotificationPacket>.TypeInfo)
                ?? throw new JsonException("Received notification envelope could not be materialized.");
     }
 
     private static RelayPacket ParseRelayPacket(JsonElement root)
     {
-        var packet = root.Deserialize<RelayPacket>(DaemonClientRpcJsonBoundary.StjOptions)
+        var packet = JsonSerializer.Deserialize(root, DaemonClientRpcTypeInfoCache<RelayPacket>.TypeInfo)
                      ?? throw new JsonException("Received relay envelope could not be materialized.");
 
         return packet.Data.HasValue
             ? packet with { Data = packet.Data.Value.Clone() }
             : packet;
+    }
+
+    private static EventType ParseEventType(JsonElement eventTypeElement)
+    {
+        if (eventTypeElement.ValueKind != JsonValueKind.String)
+            throw new JsonException("Property 'event' must be a string.");
+
+        return eventTypeElement.GetString() switch
+        {
+            "instance_log" => EventType.InstanceLog,
+            "daemon_report" => EventType.DaemonReport,
+            _ => throw new JsonException($"Unknown event type '{eventTypeElement.GetString()}'.")
+        };
     }
 
     private async Task DispatchEventAsync(EventPacket packet)

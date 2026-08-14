@@ -5,7 +5,7 @@ using MCServerLauncher.WinUI.Views.Pages;
 
 namespace MCServerLauncher.WinUI.View.Features.CreateInstance.Providers;
 
-public sealed class CreateMinecraftFabricInstanceProvider : CreateInstanceProviderPage
+public sealed partial class CreateMinecraftFabricInstanceProvider : CreateInstanceProviderPage
 {
     private readonly FabricLoaderSet _loader = new();
     private readonly SelectMinecraftJavaJvm _jvm;

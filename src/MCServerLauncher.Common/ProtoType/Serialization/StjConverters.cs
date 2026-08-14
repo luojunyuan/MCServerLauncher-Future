@@ -1,6 +1,8 @@
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MCServerLauncher.Common.ProtoType.Serialization;
 
@@ -83,5 +85,68 @@ public sealed class PlaceHolderStringStjConverter : JsonConverter<PlaceHolderStr
             return;
         }
         writer.WriteStringValue(value.Pattern);
+    }
+}
+
+/// <summary>
+/// A source-generator and Native AOT friendly string enum converter using the
+/// protocol's lower snake-case representation.
+/// </summary>
+public sealed class SnakeCaseEnumConverter<TEnum> : JsonConverter<TEnum>
+    where TEnum : struct, Enum
+{
+    private static readonly JsonNamingPolicy NamingPolicy = JsonNamingPolicy.SnakeCaseLower;
+    private static readonly IReadOnlyDictionary<string, TEnum> Values = CreateValues();
+
+    public override TEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        if (reader.TokenType == JsonTokenType.String)
+        {
+            var text = reader.GetString();
+            if (text is not null && Values.TryGetValue(text, out var value))
+                return value;
+
+            throw new JsonException($"Unknown {typeof(TEnum).Name} value '{text}'.");
+        }
+
+        if (reader.TokenType == JsonTokenType.Number && reader.TryGetInt32(out var numericValue))
+            return (TEnum)(object)numericValue;
+
+        throw new JsonException($"Cannot convert {reader.TokenType} to {typeof(TEnum).Name}.");
+    }
+
+    public override void Write(Utf8JsonWriter writer, TEnum value, JsonSerializerOptions options)
+    {
+        var name = value.ToString();
+        if (name.Contains(", ", StringComparison.Ordinal))
+        {
+            name = string.Join(", ", name
+                .Split(", ", StringSplitOptions.RemoveEmptyEntries)
+                .Select(NamingPolicy.ConvertName));
+        }
+        else if (Enum.IsDefined(value))
+        {
+            name = NamingPolicy.ConvertName(name);
+        }
+        else
+        {
+            writer.WriteNumberValue((int)(object)value);
+            return;
+        }
+
+        writer.WriteStringValue(name);
+    }
+
+    private static IReadOnlyDictionary<string, TEnum> CreateValues()
+    {
+        var values = new Dictionary<string, TEnum>(StringComparer.OrdinalIgnoreCase);
+        foreach (var value in Enum.GetValues<TEnum>())
+        {
+            var name = value.ToString();
+            values[name] = value;
+            values[NamingPolicy.ConvertName(name)] = value;
+        }
+
+        return values;
     }
 }

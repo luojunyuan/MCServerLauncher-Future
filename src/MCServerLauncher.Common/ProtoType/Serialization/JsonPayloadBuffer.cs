@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.Json.Serialization.Metadata;
 
 namespace MCServerLauncher.Common.ProtoType.Serialization;
 
@@ -26,7 +27,10 @@ public readonly record struct JsonPayloadBuffer(JsonElement Value)
         }
 
         var effectiveOptions = options ?? StjResolver.CreateDefaultOptions();
-        var element = System.Text.Json.JsonSerializer.SerializeToElement(value, effectiveOptions);
+        var typeInfo = effectiveOptions.GetTypeInfo(typeof(T)) as JsonTypeInfo<T>
+            ?? throw new NotSupportedException(
+                $"No source-generated JSON metadata is registered for {typeof(T).FullName}.");
+        var element = System.Text.Json.JsonSerializer.SerializeToElement(value, typeInfo);
         return new JsonPayloadBuffer(element);
     }
 }

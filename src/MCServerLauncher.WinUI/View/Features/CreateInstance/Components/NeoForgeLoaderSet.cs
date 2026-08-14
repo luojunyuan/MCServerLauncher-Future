@@ -2,7 +2,7 @@ using MCServerLauncher.Common.Minecraft.InstallSource;
 
 namespace MCServerLauncher.WinUI.View.Features.CreateInstance.Components;
 
-public sealed class NeoForgeLoaderSet : LoaderSetStep
+public sealed partial class NeoForgeLoaderSet : LoaderSetStep
 {
     private List<string> _versions = [];
     private List<string> _minecraft = [];

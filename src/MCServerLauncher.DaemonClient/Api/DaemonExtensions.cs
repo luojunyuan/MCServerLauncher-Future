@@ -13,6 +13,7 @@ using MCServerLauncher.Common.ProtoType.Event;
 using MCServerLauncher.Common.ProtoType.Files;
 using MCServerLauncher.Common.ProtoType.Instance;
 using MCServerLauncher.Common.ProtoType.Status;
+using MCServerLauncher.Common.ProtoType.Serialization;
 using MCServerLauncher.DaemonClient.Serialization;
 using Serilog;
 
@@ -20,8 +21,6 @@ namespace MCServerLauncher.DaemonClient;
 
 public static class DaemonExtensions
 {
-    private static readonly JsonSerializerOptions RpcStjOptions = DaemonClientRpcJsonBoundary.StjOptions;
-
     #region MISC
 
     /// <summary>
@@ -104,7 +103,7 @@ public static class DaemonExtensions
         await daemon.RequestAsync(ActionType.SubscribeEvent, new SubscribeEventParameter
         {
             Type = type,
-            Meta = meta is null ? null : System.Text.Json.JsonSerializer.SerializeToElement(meta, meta.GetType(), RpcStjOptions)
+            Meta = meta is null ? null : SerializeEventMeta(meta)
         }, timeout, ct);
     }
 
@@ -123,8 +122,16 @@ public static class DaemonExtensions
         await daemon.RequestAsync(ActionType.UnsubscribeEvent, new UnsubscribeEventParameter
         {
             Type = type,
-            Meta = meta is null ? null : System.Text.Json.JsonSerializer.SerializeToElement(meta, meta.GetType(), RpcStjOptions)
+            Meta = meta is null ? null : SerializeEventMeta(meta)
         }, timeout, ct);
+    }
+
+    private static JsonElement SerializeEventMeta(IEventMeta meta)
+    {
+        var typeInfo = EventDataContext.Default.GetTypeInfo(meta.GetType())
+            ?? throw new NotSupportedException(
+                $"No source-generated JSON metadata is registered for {meta.GetType().FullName}.");
+        return JsonSerializer.SerializeToElement(meta, typeInfo);
     }
 
     #endregion

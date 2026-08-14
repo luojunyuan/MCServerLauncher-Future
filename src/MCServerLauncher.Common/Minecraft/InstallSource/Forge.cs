@@ -1,4 +1,5 @@
 using MCServerLauncher.Common.Network;
+using MCServerLauncher.Common.DownloadProvider;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,7 +54,9 @@ namespace MCServerLauncher.Common.Minecraft.InstallSource
         private static async Task<List<string>?> FetchMinecraftVersionsByBmclapi()
         {
             var response = await HttpHelper.SendGetRequest("https://bmclapi2.bangbang93.com/forge/minecraft");
-            return JsonSerializer.Deserialize<List<string>>(await response.Content.ReadAsStringAsync());
+            return JsonSerializer.Deserialize(
+                await response.Content.ReadAsStringAsync(),
+                DownloadProviderJsonContext.Default.ListString);
         }
 
         private static async Task<List<ForgeBuild>?> FetchForgeVersionsByOfficial(string mcVersion)

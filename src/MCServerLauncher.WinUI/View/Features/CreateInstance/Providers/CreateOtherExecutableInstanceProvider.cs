@@ -6,7 +6,7 @@ using MCServerLauncher.WinUI.Views.Pages;
 
 namespace MCServerLauncher.WinUI.View.Features.CreateInstance.Providers;
 
-public sealed class CreateOtherExecutableInstanceProvider : CreateInstanceProviderPage
+public sealed partial class CreateOtherExecutableInstanceProvider : CreateInstanceProviderPage
 {
     private readonly SelectOtherExecutableInstanceDependency _dependency = new();
     private readonly SetCreateOtherExecutableInstanceRunCommand _command = new();

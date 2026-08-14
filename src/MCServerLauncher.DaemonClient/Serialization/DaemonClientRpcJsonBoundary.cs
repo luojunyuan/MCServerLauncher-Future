@@ -71,7 +71,6 @@ public static class DaemonClientRpcJsonBoundary
         options.Converters.Add(new GuidStjConverter());
         options.Converters.Add(new EncodingStjConverter());
         options.Converters.Add(new PlaceHolderStringStjConverter());
-        options.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.SnakeCaseLower));
         return options;
     }
 }

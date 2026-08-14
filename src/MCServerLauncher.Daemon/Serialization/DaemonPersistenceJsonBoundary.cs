@@ -60,7 +60,6 @@ public static class DaemonPersistenceJsonBoundary
             WriteIndented = writeIndented
         };
 
-        options.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.SnakeCaseLower));
         options.Converters.Add(new GuidStjConverter());
         options.Converters.Add(new EncodingStjConverter());
         options.Converters.Add(new PlaceHolderStringStjConverter());

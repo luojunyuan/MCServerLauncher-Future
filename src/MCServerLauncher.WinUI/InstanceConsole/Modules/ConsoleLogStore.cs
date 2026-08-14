@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Text.Json;
+using MCServerLauncher.WinUI.Core.Storage;
 using Serilog;
 
 namespace MCServerLauncher.WinUI.InstanceConsole.Modules;
@@ -150,5 +151,6 @@ public sealed class ConsoleLogStore : IDisposable
         }
     }
 
-    private static string Serialize(LogEntry entry) => JsonSerializer.Serialize(entry);
+    private static string Serialize(LogEntry entry) =>
+        JsonSerializer.Serialize(entry, WinUiJsonContext.Default.LogEntry);
 }
